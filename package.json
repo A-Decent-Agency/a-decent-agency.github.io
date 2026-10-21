@@ -1,0 +1,7 @@
+{
+  "name": "decent-agency-planning-office",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test", "sync": "node scripts/export-project.mjs" }
+}
