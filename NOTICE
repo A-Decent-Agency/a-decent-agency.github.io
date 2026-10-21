@@ -1,0 +1,18 @@
+The Decent Agency Planning Office
+Copyright 2026 The Jolly LaMa / A Decent Agency
+
+This product includes software developed by The Jolly LaMa / A Decent Agency.
+Licensed under the Apache License, Version 2.0. See LICENSE for details.
+
+Decent header visual language is adapted from the DecentCanopy family.
+The self-contained header adapter is not a vendored DecentHead release.
+
+Third-party software loaded at runtime (not vendored):
+- Three.js and OrbitControls: Copyright the three.js authors. MIT License.
+  https://github.com/mrdoob/three.js/blob/r169/LICENSE
+- ethers.js: Copyright Richard Moore. MIT License.
+  https://github.com/ethers-io/ethers.js/blob/v6.13.4/LICENSE.md
+- DM Sans and Space Grotesk fonts: SIL Open Font License 1.1.
+  Served optionally by Google Fonts; their respective copyrights apply.
+
+This NOTICE is informational and does not modify the Apache-2.0 license.

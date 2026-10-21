@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100e1d">
+  <meta name="description" content="The Decent Agency Planning Office. An open construction site for a more decent internet. Explore our marathon or build a map of your own. Your data stays yours.">
+  <title>The Planning Office · A Decent Agency</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./js/decent-head/head.css">
+  <link rel="stylesheet" href="./css/office.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
+      "ethers": "https://cdn.jsdelivr.net/npm/ethers@6.13.4/+esm"
+    } }
+  </script>
+  <script type="module" src="./js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to planning board</a>
+  <header class="decent-head">
+    <button id="house-button" class="head-control" title="House your own data"><span class="head-orb">⬡</span><span>IPFS <small>Your data. Your home.</small></span></button>
+    <button id="about-button" class="head-brand"><span class="brand-mark">a<span>↗</span></span><span>A Decent Agency<small>Independently interconnected.</small></span></button>
+    <button id="wallet-button" class="head-control wallet-control"><span>Connect wallet<small>No wallet needed to explore</small></span><span class="head-orb">◇</span></button>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy"><div class="eyebrow"><span class="live-dot"></span> THE DECENT AGENCY PLANNING OFFICE <span class="version">/ V.01</span></div>
+        <h1 id="page-title">Good things.<br><span>Under construction.</span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M10 80 L80 10 M20 10 H80 V70"/></svg></h1>
+        <p>A shared blueprint for a more decent internet.<br>Explore the marathon. Find your crossover. Build your own.</p>
+      </div>
+      <div class="site-note"><span class="note-number">SITE NOTICE / 001</span><p>Not a finished empire.<br><em>A living construction site.</em></p><div class="note-rule"></div><span>Open infrastructure. Human-scale ambition.</span><a href="https://github.com/orgs/A-Decent-Agency/projects/3" target="_blank" rel="noopener noreferrer">Follow the Agency Marathon ↗</a><small>Source project is private · public snapshot below</small></div>
+    </section>
+
+    <section class="office" aria-label="Planning office">
+      <div class="office-topline"><span><span class="live-dot"></span> MARATHON CONTROL ROOM</span><span id="sync-status">Loading public snapshot…</span></div>
+      <nav class="tabs" role="tablist" aria-label="Planning views">
+        <button role="tab" id="tab-board" aria-selected="true" aria-controls="workspace" data-tab="board"><span>01</span> Board</button>
+        <button role="tab" id="tab-roadmap" aria-selected="false" aria-controls="workspace" data-tab="roadmap" tabindex="-1"><span>02</span> Roadmap</button>
+        <button role="tab" id="tab-canopy" aria-selected="false" aria-controls="workspace" data-tab="canopy" tabindex="-1"><span>03</span> Workstreams / Canopy</button>
+        <button role="tab" id="tab-passports" aria-selected="false" aria-controls="workspace" data-tab="passports" tabindex="-1"><span>04</span> Repo passports</button>
+        <button role="tab" id="tab-catalog" aria-selected="false" aria-controls="workspace" data-tab="catalog" tabindex="-1"><span>05</span> Reuse & Standards</button>
+        <button role="tab" id="tab-own" aria-selected="false" aria-controls="workspace" data-tab="own" tabindex="-1" class="own-tab"><span>↗</span> Make your own map</button>
+      </nav>
+      <div class="toolbar">
+        <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a milestone, repo, or a little possibility…" aria-label="Search items"></label>
+        <label class="view-select"><span>PROJECT VIEW</span><select id="project-view" aria-label="Filter by GitHub Project view"><option value="">All items</option></select></label>
+        <button id="mode-button" aria-pressed="false">☷ 2D list</button>
+        <button id="motion-button" aria-pressed="false" title="Reduce animation">◌ Motion on</button>
+      </div>
+      <div class="workspace-heading"><div><h2 id="view-title">The execution board</h2><p id="view-description">Small moves, shared momentum. Pick a card to see what’s behind it.</p></div><span id="item-count" class="count-badge">— ITEMS</span></div>
+      <div id="editor-tools" class="editor-tools" hidden>
+        <button id="add-node" class="accent-button">＋ Add a node</button><button id="link-nodes">⌁ Link nodes</button><button id="export-map">↓ Export JSON</button><label class="file-button">↑ Import JSON<input id="import-map" type="file" accept=".json,application/json"></label><button id="house-map">⬡ House your data</button><span>Saved on this device · drag a node to move it</span>
+      </div>
+      <div id="workspace" role="tabpanel" aria-labelledby="tab-board" tabindex="0">
+        <div id="scene" aria-label="Interactive 3D planning board. Drag to orbit, scroll to zoom; choose 2D list for keyboard-accessible cards."></div>
+        <div class="scene-compass" aria-hidden="true"><span>N</span><div>↗</div><span>DECENT COORDINATES</span></div>
+        <div class="site-stamp" aria-hidden="true">A DECENT<br>WORK IN<br><b>PROGRESS.</b></div>
+        <div id="list-view" hidden></div>
+        <div id="tooltip" role="tooltip" hidden></div>
+        <div id="scene-notice" class="scene-notice" hidden></div>
+      </div>
+      <div class="workspace-footer"><div class="legend"><span><i class="cyan"></i> In Progress</span><span><i class="purple"></i> Todo</span><span><i class="gold"></i> Done</span><span><i class="rose"></i> Blocked</span></div><div class="scene-controls"><button id="prev-page" aria-label="Previous spatial page">←</button><span id="page-label">Scene 1 / 1</span><button id="next-page" aria-label="Next spatial page">→</button><button id="reset-camera">⌖ Reset view</button></div></div>
+      <div class="office-caption"><span>↖ DRAG TO ORBIT · SCROLL TO ZOOM · CLICK TO EXPLORE</span><span>Infrastructure, not a data landlord.</span></div>
+    </section>
+    <section class="bottom-note"><span class="tiny-mark">a↗</span><p>Useful parts. Unlikely connections.<br><strong>Decent Frankensteins welcome.</strong></p><button id="bottom-about">What are we building? ↗</button></section>
+  </main>
+  <footer class="page-footer"><span>© 2026 The Jolly LaMa / A Decent Agency</span><span>Built in the open. <a href="https://github.com/A-Decent-Agency/a-decent-agency.github.io" target="_blank" rel="noopener noreferrer">Apache-2.0 ↗</a></span><span>YOUR DATA IS NOT OUR BUSINESS.</span></footer>
+
+  <dialog id="about-dialog" aria-labelledby="about-title"><button class="dialog-close" aria-label="Close about">×</button><div class="eyebrow">A LITTLE CONTEXT</div><h2 id="about-title">A decent way<br>to build together.</h2><p>A Decent Agency is a steward-led workshop of independent, interconnected projects. We build open infrastructure for creators, communities, and a more human internet.</p><p>The <strong>Agency Marathon</strong> is our living plan: milestones, reusable parts, repository passports, and the standards that let those parts work together. This office is a public, privacy-filtered snapshot of that private GitHub Project, not a live connection.</p><p><strong>Decent Frankensteins</strong> are good things assembled from useful, imperfect parts. We prefer a working crossover over another isolated reinvention. Bring your odd-shaped piece.</p><p>No account or wallet is needed. Our free map editor runs on your device. We release infrastructure, not a claim on your data.</p><a class="text-link" href="https://github.com/A-Decent-Agency" target="_blank" rel="noopener noreferrer">Meet the projects on GitHub ↗</a><details><summary>Project README</summary><div id="project-readme" class="markdown"></div></details></dialog>
+
+  <dialog id="house-dialog" aria-labelledby="house-title"><button class="dialog-close" aria-label="Close data housing">×</button><div class="eyebrow">NO LANDLORD REQUIRED</div><h2 id="house-title">House your own data.</h2><p>Your map lives in this browser. <strong>We never receive it.</strong> Download it, use your own pinning account, or read a public CID. Tokens are sent only to the service you choose, never persisted, and cleared when this panel closes.</p><p class="warning">IPFS is public and immutable: never publish secrets or personal data. Your map and any imported private-project content may become public if you pin or share it. Review before publishing.</p>
+    <div class="house-options"><section><h3>01 / Take it with you</h3><p>A portable JSON file. No account, no network.</p><button id="house-download" class="accent-button">↓ Download my map</button></section>
+      <section><h3>02 / Pin it yourself</h3><p>Kubo / IPFS Desktop at <code>http://127.0.0.1:5001</code>. Allow this site's exact origin in your node's CORS configuration; never use a wildcard or expose the API to the internet. Browser local-network rules may block this.</p><button id="pin-local">Pin to my local node</button><label>Or your own Pinata JWT<input id="pinata-token" type="password" autocomplete="off" placeholder="Session only · never saved"></label><button id="pin-pinata">Pin with my Pinata account</button></section>
+      <section><h3>03 / Open a public map</h3><label>Content ID (CID)<input id="map-cid" placeholder="bafy… or Qm…" autocomplete="off"></label><p>Requests go directly to <code>https://ipfs.io</code>. Opening replaces your current map after confirmation.</p><button id="load-cid">Load from IPFS</button></section>
+      <section><h3>04 / Bring your own GitHub Project</h3><label>Project URL<input id="github-project-url" type="url" placeholder="https://github.com/orgs/your-org/projects/1"></label><label>Your token (read:project)<input id="github-token" type="password" autocomplete="off" placeholder="Session only · sent directly to GitHub"></label><p>Uses the same privacy filter as our exporter. Replaces this browser's map after confirmation; never changes the Agency board.</p><button id="import-github">Import my project</button></section></div><p id="house-status" role="status"></p>
+  </dialog>
+
+  <dialog id="node-dialog" aria-labelledby="node-title"><button class="dialog-close" aria-label="Close node form">×</button><h2 id="node-title">Make a little possibility.</h2><form id="node-form"><label>Title<input name="title" required maxlength="160" placeholder="What should exist?"></label><label>Kind<input name="kind" maxlength="60" value="Idea"></label><label>Color<input name="color" type="color" value="#9f83ff"></label><label>Notes<textarea name="notes" rows="5" maxlength="4000" placeholder="The beginning of a decent Frankenstein…"></textarea></label><button class="accent-button" type="submit">Save node ↗</button></form></dialog>
+  <dialog id="link-dialog" aria-labelledby="link-title"><button class="dialog-close" aria-label="Close link form">×</button><h2 id="link-title">Find a crossover.</h2><form id="link-form"><label>From<select name="from" required></select></label><label>To<select name="to" required></select></label><button type="submit" class="accent-button">Link nodes ↗</button></form></dialog>
+  <aside id="detail-panel" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden><button id="close-detail" aria-label="Close card details">×</button><div id="detail-content"></div></aside>
+  <div id="toast" role="status" hidden></div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+node_modules/
+office-shots/
+.DS_Store
+.env
+.env.*
