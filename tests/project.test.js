@@ -51,3 +51,9 @@ test('the checked-in real snapshot follows the privacy contract',async()=>{
   }
   assert.equal(project.items.find(item=>item.title==='Portfolio: Bean')?.body,undefined);
 });
+
+test('registry card bodies are redacted from public snapshots', () => {
+  const out = sanitizeItem({ id: 'r1', type: 'DRAFT_ISSUE', content: { title: 'Registry: Contributors and collaborators', body: 'secret access review' }, fieldValues: { nodes: [] } });
+  assert.equal(out.bodyRedacted, true);
+  assert.equal(out.body, undefined);
+});

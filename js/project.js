@@ -51,7 +51,9 @@ export function sanitizeItem(item) {
       fields: Object.fromEntries(['Kind', 'Status', 'Start', 'Target'].map(name => [name, fields[name]])) };
   }
   // A draft Portfolio has no linked repository; fail closed for the private inventory.
-  const hideBody = knownPrivate && (!repository || repository.isPrivate !== false);
+  // Registry cards hold people, access reviews and sponsor details; keep them out of public snapshots.
+  const isRegistry = /^Registry:/i.test(content.title) || fields.Kind === 'Registry';
+  const hideBody = isRegistry || (knownPrivate && (!repository || repository.isPrivate !== false));
   return {
     id: item.id, title: content.title,
     type: ({ DRAFT_ISSUE: 'draft', ISSUE: 'issue', PULL_REQUEST: 'PR' })[item.type] || 'draft',
