@@ -11,6 +11,15 @@ const data = JSON.parse(await readFile(new URL('../data/project.json', import.me
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1150 }, deviceScaleFactor: 1 });
 const errors = [];
+await page.addInitScript(() => {
+  const original = CanvasRenderingContext2D.prototype.fillText;
+  CanvasRenderingContext2D.prototype.fillText = function(text, x, y, ...rest) {
+    if (text === 'THE MARATHON / DATES ARE A PLAN, NOT A PROMISE') {
+      window.roadmapBanner = { textWidth: this.measureText(text).width, canvasWidth: this.canvas.width, center: x };
+    }
+    return original.call(this, text, x, y, ...rest);
+  };
+});
 page.on('pageerror', error => errors.push(error.message));
 page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
 page.on('dialog', dialog => dialog.accept());
@@ -28,6 +37,11 @@ try {
     const expected = data.items.filter(item => tabMatches(item, name)).length;
     assert.equal(await count(), `${expected} ITEMS`);
     assert.equal(await page.locator('#scene').isVisible(), true);
+    if (name === 'roadmap') {
+      const banner = await page.evaluate(() => window.roadmapBanner);
+      assert.ok(banner.textWidth + 64 <= banner.canvasWidth, 'Full roadmap banner fits with padding');
+      assert.equal(banner.center, banner.canvasWidth / 2);
+    }
     await shot(`0${index + 1}-${name}`);
     await page.locator('#mode-button').click();
     assert.equal(await page.locator('.list-card').count(), expected);

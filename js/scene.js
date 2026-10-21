@@ -31,7 +31,11 @@ function cardTexture(item, color) {
 }
 function labelTexture(text, color = '#b7a7ce', width = 1024) {
   const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = 90;
-  const ctx = canvas.getContext('2d');ctx.font = '500 46px system-ui';ctx.fillStyle = color;ctx.textAlign = 'center';ctx.fillText(text, width / 2, 56);
+  const ctx = canvas.getContext('2d');
+  const font = '500 46px system-ui';
+  ctx.font = font;
+  canvas.width = Math.max(width, Math.ceil(ctx.measureText(text).width) + 64);
+  ctx.font = font;ctx.fillStyle = color;ctx.textAlign = 'center';ctx.fillText(text, canvas.width / 2, 56);
   const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; return texture;
 }
 
@@ -82,7 +86,8 @@ export class OfficeScene {
     this.group.clear();this.cards=[];
   }
   label(text,x,y,z=0,color='#b7a7ce',width=25) {
-    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({map:labelTexture(text,color),transparent:true,depthTest:false}));sprite.position.set(x,y,z);sprite.scale.set(width,width*90/1024,1);this.group.add(sprite);return sprite;
+    const texture = labelTexture(text,color);
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true,depthTest:false}));sprite.position.set(x,y,z);sprite.scale.set(width,width*texture.image.height/texture.image.width,1);this.group.add(sprite);return sprite;
   }
   line(from,to,color='#71e6d0',dashed=false) {
     const geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...from),new THREE.Vector3(...to)]);
