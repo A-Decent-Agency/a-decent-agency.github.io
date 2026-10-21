@@ -55,7 +55,7 @@ The steward must:
 
 1. Create a **classic personal access token** with **`read:project`**, belonging to an account with read access to the private org project. Authorize it for the org's SSO if required. Access to linked private-repository contents can require additional repository permissions; the exporter still strips their details. Do not grant extra scopes unless needed.
 2. Add it as the repository Actions secret **`PROJECT_READ_TOKEN`**. Never put it in a file, public variable, workflow YAML, browser, or commit. Use an expiry and rotate it.
-3. After reviewing/merging the PR, enable GitHub Pages **Deploy from a branch → `main` → `/ (root)`**. This implementation does not enable Pages or change repository settings. Branch protection that disallows bot pushes may require a different, PR-based sync policy.
+3. GitHub Pages uses **Source: GitHub Actions**. `deploy-pages.yml` publishes on every push to `main` and after each successful project sync, so refreshed snapshots go live (bot pushes alone do not trigger Pages builds). Branch protection that disallows bot pushes may require a different, PR-based sync policy.
 
 ## Make your own map · house your own data
 
