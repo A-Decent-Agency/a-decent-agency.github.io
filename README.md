@@ -54,6 +54,42 @@ stops when inactive/hidden or paused, clears held keys on focus loss, and respec
 reduced motion. Switching back to another office tab deactivates the flight
 renderer. No weapons, scores, rewards, wallet actions, or project writes are added.
 
+### Today's flight: explainable daily route
+
+`js/todays-flight.js` derives a small, read-only route from the privacy-filtered
+snapshot selection. It uses explicit **In Progress** status for active work,
+explicit **Ready for review / Review ready** status (or **Review status: Ready /
+Ready for review**) for review suggestions, and explicit **Blocked** status or
+open **Decision** cards for blockers/decisions. A blocked card does not, by itself,
+establish which decision is needed. A PR link, body prose, Horizon or planning
+date never proves review readiness, deployment, or priority.
+
+A next-task suggestion requires **Todo** and a complete Dependencies field:
+either exactly `None` / `No dependencies` (optional terminal punctuation), or
+an unambiguous list of item IDs, exact titles, exact source URLs or milestone IDs
+such as `M1; M2`, all explicitly **Done**. Optional `Requires:` / `Depends on:`
+prefixes are accepted. Missing records, mixed prose, arrows, ambiguous aliases,
+unfinished prerequisites and withheld dependencies cannot establish eligibility.
+Done is a planning status, not deployment evidence. Unknown dependencies remain
+unknown, including when a prerequisite is outside the current selection.
+
+The pure `todaysFlight(items, { maxPerGroup: 3 })` export returns `groups`, bounded
+`stops`, dependency-unknown/waiting counts, and excluded-duplicate-ID count. Each
+stop includes a stable ID, source `item`, `itemId`, construction `destinationId`,
+`why`, field `evidence`, and dependency assessment. Each group reports its total
+and omitted count. The limit is clamped to 1–5 per group; stable source IDs break
+ties, not inferred importance. No current date, deadline, live GitHub check,
+project status change or GitHub write is invented.
+
+Optional `js/todays-flight-ui.js` exports
+`mount({ container, items, onDestination, onItem, maxPerGroup })`, returning
+`{ update(items), destroy() }`. Load `css/todays-flight.css` and supply an isolated
+container. `onDestination(siteId)` navigates the existing construction route;
+`onItem(item)` opens the existing source-card panel. Call `update` when the
+public snapshot selection changes. The panel uses plain-text DOM rendering,
+keyboard-native buttons, no animation and no network or wallet actions; empty
+groups explain the missing evidence.
+
 ## Snapshot sync and privacy
 
 Node **20+**, no dependencies beyond built-in `fetch`:
