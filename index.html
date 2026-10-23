@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="./js/decent-head/head.css">
   <link rel="stylesheet" href="./css/office.css">
   <link rel="stylesheet" href="./css/construction-flight.css">
+  <link rel="stylesheet" href="./css/todays-flight.css">
+  <link rel="stylesheet" href="./css/site-identities.css">
+  <link rel="stylesheet" href="./css/planning-dock.css">
   <script type="importmap">
     { "imports": {
       "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
@@ -57,6 +60,11 @@
       <div id="editor-tools" class="editor-tools" hidden>
         <button id="add-node" class="accent-button">＋ Add a node</button><button id="link-nodes">⌁ Link nodes</button><button id="export-map">↓ Export JSON</button><label class="file-button">↑ Import JSON<input id="import-map" type="file" accept=".json,application/json"></label><button id="house-map">⬡ House your data</button><span>Saved on this device · drag a node to move it</span>
       </div>
+      <details id="daily-flight-panel" class="daily-flight-panel" hidden>
+        <summary>Today's flight / where attention could help</summary>
+        <div id="daily-flight"></div>
+      </details>
+      <p id="planning-change-summary" class="planning-change-summary" role="status" hidden></p>
       <div id="flight-tools" class="flight-tools" hidden>
         <label>CHART A COURSE<select id="flight-destination" aria-label="Construction site destination"></select></label>
         <button id="flight-previous" aria-label="Previous construction site">← Previous site</button>
@@ -76,7 +84,9 @@
           <h3 id="flight-site-title">Preparing the construction route…</h3>
           <p id="flight-site-dates"></p>
           <p id="flight-site-metrics"></p>
-          <details><summary>What is being built here?</summary><p id="flight-metric-help">Cranes are a visual proxy for planning activity, not effort, budget, people, or deployment progress. Todo-only sites have one foundation crane; active sites have 1 + ceil(√active cards), capped at six. All-Done sites retire their cranes. Site footprint follows card count.</p><div id="flight-site-items"></div></details>
+          <details id="flight-identity-panel"><summary>Project signs / public artwork</summary><div id="flight-site-identity"></div></details>
+          <details id="flight-dock-panel"><summary>Dock / finish line, evidence and dependencies</summary><div id="planning-dock"></div></details>
+          <details id="flight-card-panel"><summary>What is being built here?</summary><p id="flight-metric-help">Cranes are a visual proxy for planning activity, not effort, budget, people, or deployment progress. Todo-only sites have one foundation crane; active sites have 1 + ceil(√active cards), capped at six. All-Done sites retire their cranes. Site footprint follows card count.</p><div id="flight-site-items"></div></details>
         </aside>
       </div>
       <div id="flight-controls" class="flight-controls" role="group" aria-label="Ship controls" hidden>

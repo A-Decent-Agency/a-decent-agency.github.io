@@ -54,7 +54,186 @@ stops when inactive/hidden or paused, clears held keys on focus loss, and respec
 reduced motion. Switching back to another office tab deactivates the flight
 renderer. No weapons, scores, rewards, wallet actions, or project writes are added.
 
+### Today's flight: explainable daily route
+
+`js/todays-flight.js` derives a small, read-only route from the privacy-filtered
+snapshot selection. It uses explicit **In Progress** status for active work,
+explicit **Ready for review / Review ready** status (or **Review status: Ready /
+Ready for review**) for review suggestions, and explicit **Blocked** status or
+open **Decision** cards for blockers/decisions. A blocked card does not, by itself,
+establish which decision is needed. A PR link, body prose, Horizon or planning
+date never proves review readiness, deployment, or priority.
+
+A next-task suggestion requires **Todo** and a complete Dependencies field:
+either exactly `None` / `No dependencies` (optional terminal punctuation), or
+an unambiguous list of item IDs, exact titles, exact source URLs or milestone IDs
+such as `M1; M2`, all explicitly **Done**. Optional `Requires:` / `Depends on:`
+prefixes are accepted. Missing records, mixed prose, arrows, ambiguous aliases,
+unfinished prerequisites and withheld dependencies cannot establish eligibility.
+Done is a planning status, not deployment evidence. Unknown dependencies remain
+unknown, including when a prerequisite is outside the current selection.
+
+The pure `todaysFlight(items, { maxPerGroup: 3 })` export returns `groups`, bounded
+`stops`, dependency-unknown/waiting counts, and excluded-duplicate-ID count. Each
+stop includes a stable ID, source `item`, `itemId`, construction `destinationId`,
+`why`, field `evidence`, and dependency assessment. Each group reports its total
+and omitted count. The limit is clamped to 1–5 per group; stable source IDs break
+ties, not inferred importance. No current date, deadline, live GitHub check,
+project status change or GitHub write is invented.
+
+Optional `js/todays-flight-ui.js` exports
+`mount({ container, items, onDestination, onItem, maxPerGroup })`, returning
+`{ update(items), destroy() }`. Load `css/todays-flight.css` and supply an isolated
+container. `onDestination(siteId)` navigates the existing construction route;
+`onItem(item)` opens the existing source-card panel. Call `update` when the
+public snapshot selection changes. The panel uses plain-text DOM rendering,
+keyboard-native buttons, no animation and no network or wallet actions; empty
+groups explain the missing evidence.
+### Docking and changes since the previous publication
+
+The standalone `js/planning-dock.js` module is ready for the flight controller to
+mount; it does not change the existing page or scene itself. Optionally load
+`css/planning-dock.css` for bounded scrolling, compact disclosure rows and focus
+styles. It uses no dependencies, storage, network requests or project writes.
+
+```js
+import { mountPlanningDock } from './js/planning-dock.js';
+import { compareSnapshots, isPublishedSnapshot } from './js/planning-changes.js';
+
+const dock = mountPlanningDock({
+  container, site, items: current.items, previous, current, onItem: openDetail,
+});
+dock.update({ site: nextSite, items: nextCurrent.items, previous: nextPrevious, current: nextCurrent });
+// When leaving the flight UI permanently:
+dock.destroy();
+```
+
+`site` uses the existing `constructionSites()` shape: `{ id, title, type, items }`.
+Membership is by stable ID, with card content always re-read from `current.items`,
+not stale site objects. `items` is a fallback membership list only when `site.items`
+is absent. `onItem(item)` receives the current source card. `update()` merges
+provided options; pass `previous: null` to reset the comparison. `destroy()`
+removes its click listener, markup and held options. Pure
+`renderPlanningDock(options)` returns the same escaped HTML for testing.
+
+`isPublishedSnapshot(snapshot)` validates schema version 1, a parseable publication
+date, unique nonempty stable IDs, titles and string/string-array field values.
+`compareSnapshots(previous, current)` is pure and returns `kind`:
+`first-observation`, `unavailable`, or `compared`; `changed` is `null` when no
+comparison is possible. Successful comparisons expose sorted `added`, `removed`,
+`updated`, `newlyBlocked`, `completed` ID arrays, `statusChanges` entries
+`{id, from, to}`, and `dateShifts` entries `{id, field, from, to}` for Start/Target.
+`updated` includes every observably modified existing card, including status/date
+changes; it is not a disjoint count. Additions already marked Done/Blocked remain
+additions, not fabricated transitions. Array/field/item order and export-time-only
+refreshes do not count as card changes. Source prose edits count as updates, never
+as dependency satisfaction or completion evidence.
+
+The host owns **in-memory-only** `previous`/`current` references. Start with
+`previous = null`; after a distinct valid publication, rotate `previous = current`
+before adopting the new current snapshot. Do not rotate on an identical poll, a
+failed fetch, invalid/incomplete data, a different project URL or an older export.
+Validate both the transport response and completeness before adopting a snapshot:
+the structural validator cannot prove that an exporter fetched every page.
+Keep the existing dock/baseline on failure; pass invalid data only to display an
+explicit unavailable state. Reload clears this baseline: the first observation
+is explicitly **not** “nothing changed.” No full private/public snapshots, tokens
+or diff results should be persisted to browser storage.
+
+Dock counts and callbacks refer to actual site cards, not inferred tasks.
+Workstream yards disclose each card's source Outcome, notes/evidence,
+Dependencies and Crossovers instead of inventing a shared finish line.
+Long source notes and relation text are collapsed; remaining cards are listed
+separately from Done cards. Summaries are project-wide with site-specific transition
+details; removed workstream cards use previous explicit Workstream membership,
+without recovering previous titles. Private/body-redacted cards expose no notes,
+Outcome, relation fields or links. Explicit canonical HTTPS GitHub repository,
+issue/PR and project references are linked; arbitrary queries/fragments are
+removed (only the exporter draft-card selector is preserved). No repository is
+guessed from a bare name or `#number`. A source card marked Done, a changed export,
+and a deployment independently verified are three different things.
+### Project identity signs
+
+`js/site-identities.js` exports pure, offline `itemIdentity(item)`,
+`siteIdentity(site)` and `isSafeArtworkUrl(url)` helpers. These are integration
+building blocks; importing them does not change the flight scene or load images.
+The result contains `{ kind, label, projects, artwork, fallback }`; each project
+also includes `repositoryUrl`, `association`, `associationEvidence`, and artwork
+provenance (pinned revision, source/evidence/license URLs, credit, verification date).
+`fallback` supplies a distinct monogram/color for locally drawn wayfinding,
+**not an official project logo**.
+
+Only exact public repository references and five reviewed portfolio item IDs
+**with their explicit repository links still present** establish identity.
+Titles, workstream names, dependency mentions and ENS names do not. Private or
+body-redacted items fail closed. Unknown repositories stay unbranded. A milestone
+is always an `MS` route gate; a workstream yard has no primary project logo,
+even when only one member has an identified repository. `projects` describes
+explicitly linked members, not ownership of the whole yard. A caller-created
+`type: 'repository'` site receives primary artwork only when every member
+explicitly resolves to the same public repository.
+
+Reviewed public sources on **2026-10-23**:
+
+| Project | Pinned project-owned asset | Identity evidence |
+| --- | --- | --- |
+| [Canopy](https://github.com/TheJollyLaMa/DecentCanopy) | `assets/decentcanopy-ens-favicon.png` at `14aef826` | Repository `index.html` favicon |
+| [Busking](https://github.com/TheJollyLaMa/DecentBusking) | `img/hat.svg` at `7c3658a2` | Repository `index.html` favicon; platform emoji appearance varies |
+| [BigNuten](https://github.com/TheJollyLaMa/BigNuten_Vanilla) | `img/BigNuten.png` at `8eb8d131` | Repository `index.html` favicon / “BigNuten Logo” |
+| [Head](https://github.com/TheJollyLaMa/DecentHead) | `img/ens/head-avatar.png` at `3b2a72f7` | Public artwork commit [`9aa196ca`](https://github.com/TheJollyLaMa/DecentHead/commit/9aa196caf305588b9a677fb1b6dc7db784fdb932), Supporter-front adaptation |
+| [Market](https://github.com/TheJollyLaMa/DecentMarket) | `img/ens/market-avatar.png` at `76afe749` | Repository `data/market-ens.json`; **prepared, not proof of published ENS** |
+
+Each source README licenses artwork under **CC BY 4.0**; credit **The Jolly LaMa /
+A Decent Agency**, retain the source and license links, and indicate modifications.
+No images are bundled or altered here. Metadata uses full immutable commit URLs;
+never substitute a GitHub owner's avatar or a third-party service logo.
+
+Optional accessible panel: import `mountSiteIdentity` from
+`js/site-identities-ui.js` and include `css/site-identities.css`. Call
+`const panel = mountSiteIdentity(container, site)` (inactive, no image requests),
+then `panel.update(selectedSite, { active: true })` **only for a selected/nearby
+site**. It creates at most three lazy images, with source/license credit and local
+badges retained on failure. `panel.update(site)` disables image rendering;
+`panel.destroy()` removes the panel. Use a bounded number of mounted panels,
+not one per library card. Remote images require connectivity and may fail under
+CSP/offline hosting; metadata and local badges still work. No automatic ENS,
+wallet, GitHub API, image fetch or global observer runs on import.
+
+For 3D integration, draw `fallback.monogram`/`color` as immediate local sign
+textures. Give milestone gates a distinct silhouette and `MS` label. Keep yard
+names primary, with a small row of member project badges, never a guessed yard
+owner. Load an allowlisted `project.artwork.url` only as a bounded selected/nearby
+upgrade, dispose replaced textures, and retain fallback on CORS/load failure.
+Expose provenance/credit in the selected-site panel; artwork is identity
+wayfinding, not evidence of integration, deployment, funding or endorsement.
+
 ## Snapshot sync and privacy
+
+### Combined landing experience
+
+The flight tab includes **Today's flight / where attention could help**, a
+collapsible, read-only suggestion route. **Go to site** charts the existing
+construction destination; **Open source card** opens the normal detail panel.
+The current search and Project view selection bound both the route and the
+evidence available to resolve prerequisites.
+
+The change summary compares the latest changed publication with its predecessor
+observed in this tab. The first load explicitly has no baseline. An unchanged
+poll retains the last changed-publication comparison; failed, invalid, older or
+wrong-project refreshes do not replace the valid baseline. Reloading resets it.
+Neither snapshot is written to localStorage by these features.
+
+At a selected site, expand **Project signs / public artwork** to request up to
+three reviewed images, with repository references, artwork sources, credit and
+license links. Closing or changing a site returns to local metadata without an
+ecosystem-wide image scan. Milestone route signs remain milestones; mixed yards
+list explicit public repository references rather than inheriting one logo.
+
+Expand **Dock / finish line, evidence and dependencies** to pause the ship and
+read the actual Outcome field, source evidence, remaining cards and quoted
+dependencies/crossovers. The dock uses only current validated-publication members,
+not stale site details, and does not infer deployment or prerequisite satisfaction.
+All original board/roadmap/editor views remain available.
 
 Node **20+**, no dependencies beyond built-in `fetch`:
 

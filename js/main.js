@@ -4,6 +4,10 @@ import { COLORS, ROLE_COLORS, VIEWS, tabMatches, viewMatches, spatialPages } fro
 import { loadMap, saveMap, validateMap, downloadMap, projectToMap, readMapResponse, MAX_FILE_BYTES } from './editor.js';
 import { exportProject, projectIdFromUrl } from './project.js';
 import { constructionSites, snapshotFreshness } from './construction-model.js';
+import { mount as mountTodaysFlight } from './todays-flight-ui.js';
+import { compareSnapshots, isPublishedSnapshot, summarizeChanges } from './planning-changes.js';
+import { mountPlanningDock } from './planning-dock.js';
+import { mountSiteIdentity } from './site-identities-ui.js';
 
 const $ = selector => document.querySelector(selector);
 const tabs = [...document.querySelectorAll('[data-tab]')];
@@ -11,6 +15,35 @@ const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { tab: 'flight', query: '', view: '', page: 0, reduced: reducedQuery.matches || navigator.connection?.saveData || false, list: reducedQuery.matches || matchMedia('(max-width: 620px)').matches || navigator.connection?.saveData || false, project: { items: [], views: [] } };
 let scene, sceneKind, sceneFailed = false, selected, detailOpener, editing, map, toastTimer, flightSites = [], flightIndex = 0;
 const scenes = new Map(), scenePromises = new Map(), sceneData = new WeakMap();
+const dailyFlight = mountTodaysFlight({
+  container: $('#daily-flight'),
+  onDestination: id => {
+    const index = flightSites.findIndex(site => site.id === id);
+    if (index < 0) { notify('This destination is not in the current filtered route.'); return; }
+    chartSite(index);
+    $('#scene canvas:not([hidden])')?.focus();
+  },
+  onItem: openDetail
+});
+let dailyFlightKey = '';
+let previousPublication = null, publicationLoaded = false;
+const planningDock = mountPlanningDock({ container: $('#planning-dock'), current: null, onItem: openDetail });
+const siteIdentityPanel = mountSiteIdentity($('#flight-site-identity'), null);
+let identitySiteId = null;
+function updateSitePanels(site = flightSites[flightIndex]) {
+  planningDock.update({ site, previous: previousPublication, current: publicationLoaded ? state.project : null });
+  if (identitySiteId !== site?.id) {
+    identitySiteId = site?.id;
+    $('#flight-identity-panel').open = false;
+  }
+  siteIdentityPanel.update(site, { active: state.tab === 'flight' && $('#flight-identity-panel').open });
+}
+$('#flight-identity-panel').addEventListener('toggle', () => {
+  siteIdentityPanel.update(flightSites[flightIndex], { active: state.tab === 'flight' && $('#flight-identity-panel').open });
+});
+$('#flight-dock-panel').addEventListener('toggle', () => {
+  if ($('#flight-dock-panel').open && scenes.has('flight')) { scenes.get('flight').setPaused(true); updatePause(true); }
+});
 function notify(message) { $('#toast').textContent = message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,7500); }
 try { map = loadMap(); } catch { map={schemaVersion:1,nodes:[],links:[]};notify('Browser storage is unavailable or contains an invalid map. It has not been overwritten. Export your work to keep a copy.'); }
 function persist() { try {saveMap(map);} catch {notify('Could not save in this browser. Your map remains in memory: download JSON to keep it.');} }
@@ -71,6 +104,7 @@ function showFlightSite(site, index = 0) {
     const button = document.createElement('button'); button.textContent = `${item.fields?.Status || 'Unknown'} / ${item.title}`;
     button.addEventListener('click', () => openDetail(item)); return button;
   }));
+  updateSitePanels(site);
 }
 function chartSite(index) {
   if (!flightSites.length) return;
@@ -92,6 +126,13 @@ function render() {
   $('#editor-tools').hidden=!own;$('#project-view').disabled=own;
   document.querySelector('.office').classList.toggle('construction-view', flight);
   $('#flight-tools').hidden=!flight;$('#flight-site').hidden=!flight;$('#flight-controls').hidden=!flight||list;
+  $('#daily-flight-panel').hidden=!flight;
+  $('#planning-change-summary').hidden=!flight;
+  if (!flight) { $('#flight-identity-panel').open = false; }
+  if (flight) {
+    const key = JSON.stringify(items);
+    if (key !== dailyFlightKey) { dailyFlight.update(items); dailyFlightKey = key; }
+  }
   if (flight) {
     const previous = flightSites[flightIndex]?.id;
     flightSites = constructionSites(items);
@@ -184,13 +225,16 @@ async function refreshProject() {
     const response=await fetch(new URL('../data/project.json',import.meta.url), { cache:'no-store', signal:AbortSignal.timeout(20000) });
     if(!response.ok)throw new Error(`Snapshot returned HTTP ${response.status}.`);
     const project=await response.json();
-    if (project.schemaVersion !== 1 || !Array.isArray(project.items) || !Array.isArray(project.views)
-      || !Number.isFinite(Date.parse(project.exportedAt))
-      || !project.items.every(item => typeof item.id === 'string' && typeof item.title === 'string' && item.fields && typeof item.fields === 'object')) {
+    if (!isPublishedSnapshot(project) || !Array.isArray(project.views)) {
       throw new Error('Public snapshot has an unsupported or incomplete format.');
     }
+    const comparison = compareSnapshots(publicationLoaded ? state.project : null, project);
+    if (comparison.kind === 'unavailable') throw new Error(comparison.reason);
     const changed = JSON.stringify(project) !== JSON.stringify(state.project);
+    if (changed && publicationLoaded) previousPublication = state.project;
     state.project=project;
+    publicationLoaded = true;
+    $('#planning-change-summary').textContent = `${summarizeChanges(compareSnapshots(previousPublication, project))} Comparison stays in this tab's memory; Done is a source status, not verified delivery.`;
     $('#project-view').replaceChildren(new Option('All items',''));
     for(const view of state.project.views){const option=new Option(view.name,view.filter);option.title=`${view.layout} · ${view.filter||'All items'}`;$('#project-view').append(option);}
     if ([...$('#project-view').options].some(option => option.value === state.view)) $('#project-view').value=state.view;
@@ -202,6 +246,7 @@ async function refreshProject() {
   } catch(error){
     console.error('[Planning Office snapshot]',error);
     $('#sync-status').textContent=state.project.items.length?'REFRESH FAILED · SHOWING PREVIOUS SNAPSHOT':'PUBLIC SNAPSHOT UNAVAILABLE';
+    $('#planning-change-summary').textContent = 'Refresh failed. Previous publication and comparison retained; no new progress inferred.';
     notify(`${error.message} ${state.project.items.length?'Previous snapshot retained; no new progress inferred.':'You can still make your own map.'}`);
   } finally { refreshing=false; $('#refresh-project').disabled=false; }
 }
