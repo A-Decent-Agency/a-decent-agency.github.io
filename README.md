@@ -152,6 +152,60 @@ issue/PR and project references are linked; arbitrary queries/fragments are
 removed (only the exporter draft-card selector is preserved). No repository is
 guessed from a bare name or `#number`. A source card marked Done, a changed export,
 and a deployment independently verified are three different things.
+### Project identity signs (integration module)
+
+`js/site-identities.js` exports pure, offline `itemIdentity(item)`,
+`siteIdentity(site)` and `isSafeArtworkUrl(url)` helpers. These are integration
+building blocks; importing them does not change the flight scene or load images.
+The result contains `{ kind, label, projects, artwork, fallback }`; each project
+also includes `repositoryUrl`, `association`, `associationEvidence`, and artwork
+provenance (pinned revision, source/evidence/license URLs, credit, verification date).
+`fallback` supplies a distinct monogram/color for locally drawn wayfinding,
+**not an official project logo**.
+
+Only exact public repository references and five reviewed portfolio item IDs
+**with their explicit repository links still present** establish identity.
+Titles, workstream names, dependency mentions and ENS names do not. Private or
+body-redacted items fail closed. Unknown repositories stay unbranded. A milestone
+is always an `MS` route gate; a workstream yard has no primary project logo,
+even when only one member has an identified repository. `projects` describes
+explicitly linked members, not ownership of the whole yard. A caller-created
+`type: 'repository'` site receives primary artwork only when every member
+explicitly resolves to the same public repository.
+
+Reviewed public sources on **2026-10-23**:
+
+| Project | Pinned project-owned asset | Identity evidence |
+| --- | --- | --- |
+| [Canopy](https://github.com/TheJollyLaMa/DecentCanopy) | `assets/decentcanopy-ens-favicon.png` at `14aef826` | Repository `index.html` favicon |
+| [Busking](https://github.com/TheJollyLaMa/DecentBusking) | `img/hat.svg` at `7c3658a2` | Repository `index.html` favicon; platform emoji appearance varies |
+| [BigNuten](https://github.com/TheJollyLaMa/BigNuten_Vanilla) | `img/BigNuten.png` at `8eb8d131` | Repository `index.html` favicon / “BigNuten Logo” |
+| [Head](https://github.com/TheJollyLaMa/DecentHead) | `img/ens/head-avatar.png` at `3b2a72f7` | Public artwork commit [`9aa196ca`](https://github.com/TheJollyLaMa/DecentHead/commit/9aa196caf305588b9a677fb1b6dc7db784fdb932), Supporter-front adaptation |
+| [Market](https://github.com/TheJollyLaMa/DecentMarket) | `img/ens/market-avatar.png` at `76afe749` | Repository `data/market-ens.json`; **prepared, not proof of published ENS** |
+
+Each source README licenses artwork under **CC BY 4.0**; credit **The Jolly LaMa /
+A Decent Agency**, retain the source and license links, and indicate modifications.
+No images are bundled or altered here. Metadata uses full immutable commit URLs;
+never substitute a GitHub owner's avatar or a third-party service logo.
+
+Optional accessible panel: import `mountSiteIdentity` from
+`js/site-identities-ui.js` and include `css/site-identities.css`. Call
+`const panel = mountSiteIdentity(container, site)` (inactive, no image requests),
+then `panel.update(selectedSite, { active: true })` **only for a selected/nearby
+site**. It creates at most three lazy images, with source/license credit and local
+badges retained on failure. `panel.update(site)` disables image rendering;
+`panel.destroy()` removes the panel. Use a bounded number of mounted panels,
+not one per library card. Remote images require connectivity and may fail under
+CSP/offline hosting; metadata and local badges still work. No automatic ENS,
+wallet, GitHub API, image fetch or global observer runs on import.
+
+For 3D integration, draw `fallback.monogram`/`color` as immediate local sign
+textures. Give milestone gates a distinct silhouette and `MS` label. Keep yard
+names primary, with a small row of member project badges, never a guessed yard
+owner. Load an allowlisted `project.artwork.url` only as a bounded selected/nearby
+upgrade, dispose replaced textures, and retain fallback on CORS/load failure.
+Expose provenance/credit in the selected-site panel; artwork is identity
+wayfinding, not evidence of integration, deployment, funding or endorsement.
 
 ## Snapshot sync and privacy
 

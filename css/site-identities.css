@@ -1,0 +1,5 @@
+.site-identity { display: grid; gap: .6rem; }
+.site-identity-project { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.site-identity-project small { flex-basis: 100%; }
+.site-identity-project img { width: 4rem; height: 4rem; object-fit: contain; }
+.site-identity-badge { display: inline-grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: .5rem; color: #142130; font-weight: 700; }
