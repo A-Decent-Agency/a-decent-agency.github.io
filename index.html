@@ -9,6 +9,7 @@
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./js/decent-head/head.css">
   <link rel="stylesheet" href="./css/office.css">
+  <link rel="stylesheet" href="./css/construction-flight.css">
   <script type="importmap">
     { "imports": {
       "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
@@ -19,7 +20,7 @@
   <script type="module" src="./js/main.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#workspace">Skip to planning board</a>
+  <a class="skip-link" href="#workspace">Skip to construction flight</a>
   <header class="decent-head">
     <button id="house-button" class="head-control" title="House your own data"><span class="head-orb">⬡</span><span>IPFS <small>Your data. Your home.</small></span></button>
     <button id="about-button" class="head-brand"><span class="brand-mark">a<span>↗</span></span><span>A Decent Agency<small>Independently interconnected.</small></span></button>
@@ -38,7 +39,8 @@
     <section class="office" aria-label="Planning office">
       <div class="office-topline"><span><span class="live-dot"></span> MARATHON CONTROL ROOM</span><span id="sync-status">Loading public snapshot…</span></div>
       <nav class="tabs" role="tablist" aria-label="Planning views">
-        <button role="tab" id="tab-board" aria-selected="true" aria-controls="workspace" data-tab="board"><span>01</span> Board</button>
+        <button role="tab" id="tab-flight" aria-selected="true" aria-controls="workspace" data-tab="flight"><span>↗</span> Construction flight</button>
+        <button role="tab" id="tab-board" aria-selected="false" aria-controls="workspace" data-tab="board" tabindex="-1"><span>01</span> Board</button>
         <button role="tab" id="tab-roadmap" aria-selected="false" aria-controls="workspace" data-tab="roadmap" tabindex="-1"><span>02</span> Roadmap</button>
         <button role="tab" id="tab-canopy" aria-selected="false" aria-controls="workspace" data-tab="canopy" tabindex="-1"><span>03</span> Workstreams / Canopy</button>
         <button role="tab" id="tab-passports" aria-selected="false" aria-controls="workspace" data-tab="passports" tabindex="-1"><span>04</span> Repo passports</button>
@@ -55,13 +57,34 @@
       <div id="editor-tools" class="editor-tools" hidden>
         <button id="add-node" class="accent-button">＋ Add a node</button><button id="link-nodes">⌁ Link nodes</button><button id="export-map">↓ Export JSON</button><label class="file-button">↑ Import JSON<input id="import-map" type="file" accept=".json,application/json"></label><button id="house-map">⬡ House your data</button><span>Saved on this device · drag a node to move it</span>
       </div>
-      <div id="workspace" role="tabpanel" aria-labelledby="tab-board" tabindex="0">
+      <div id="flight-tools" class="flight-tools" hidden>
+        <label>CHART A COURSE<select id="flight-destination" aria-label="Construction site destination"></select></label>
+        <button id="flight-previous" aria-label="Previous construction site">← Previous site</button>
+        <button id="flight-next">Next site →</button>
+        <button id="flight-pause" aria-pressed="false">Pause ship</button>
+        <button id="refresh-project">↻ Refresh plan</button>
+      </div>
+      <div id="workspace" role="tabpanel" aria-labelledby="tab-flight" tabindex="0">
         <div id="scene" aria-label="Interactive 3D planning board. Drag to orbit, scroll to zoom; choose 2D list for keyboard-accessible cards."></div>
         <div class="scene-compass" aria-hidden="true"><span>N</span><div>↗</div><span>DECENT COORDINATES</span></div>
         <div class="site-stamp" aria-hidden="true">A DECENT<br>WORK IN<br><b>PROGRESS.</b></div>
         <div id="list-view" hidden></div>
         <div id="tooltip" role="tooltip" hidden></div>
         <div id="scene-notice" class="scene-notice" hidden></div>
+        <aside id="flight-site" class="flight-site" aria-label="Current construction site" hidden>
+          <span id="flight-site-type" class="eyebrow">FLIGHT CONTROL</span>
+          <h3 id="flight-site-title">Preparing the construction route…</h3>
+          <p id="flight-site-dates"></p>
+          <p id="flight-site-metrics"></p>
+          <details><summary>What is being built here?</summary><p id="flight-metric-help">Cranes are a visual proxy for planning activity, not effort, budget, people, or deployment progress. Todo-only sites have one foundation crane; active sites have 1 + ceil(√active cards), capped at six. All-Done sites retire their cranes. Site footprint follows card count.</p><div id="flight-site-items"></div></details>
+        </aside>
+      </div>
+      <div id="flight-controls" class="flight-controls" role="group" aria-label="Ship controls" hidden>
+        <span>Hold W / ↑ to thrust · S / ↓ reverse · A D steer · Q E altitude · Shift boost · drag to steer</span>
+        <button data-thrust="a" aria-label="Steer ship left">←</button><button data-thrust="d" aria-label="Steer ship right">→</button>
+        <button data-thrust="q" aria-label="Lower ship">Descend</button><button data-thrust="e" aria-label="Raise ship">Rise</button>
+        <button data-thrust="w">Thrust</button><button data-thrust="s">Reverse</button>
+        <p>Fly freely inside the route corridor, not into an endless canvas. Select a site to auto-pilot; any steering takes over. Space pauses. Motion off jumps without flying.</p>
       </div>
       <div class="workspace-footer"><div class="legend"><span><i class="cyan"></i> In Progress</span><span><i class="purple"></i> Todo</span><span><i class="gold"></i> Done</span><span><i class="rose"></i> Blocked</span></div><div class="scene-controls"><button id="prev-page" aria-label="Previous spatial page">←</button><span id="page-label">Scene 1 / 1</span><button id="next-page" aria-label="Next spatial page">→</button><button id="reset-camera">⌖ Reset view</button></div></div>
       <div class="office-caption"><span>↖ DRAG TO ORBIT · SCROLL TO ZOOM · CLICK TO EXPLORE</span><span>Infrastructure, not a data landlord.</span></div>

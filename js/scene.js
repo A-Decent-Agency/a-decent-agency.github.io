@@ -171,5 +171,5 @@ export class OfficeScene {
   setMotion(reduced){this.reduced=reduced;this.stop();if(!reduced&&this.active!==false)this.animate();else this.render();}
   animate(){let last=0;const frame=time=>{if(time-last>50&&!document.hidden){this.stars.rotation.z=Math.sin(time/150000)*.025;if(this.tab==='canopy'){for(const card of this.cards){const o=card.userData.orbit;if(o){const a=o.a+Math.sin(time/18000)*.035;card.position.x=o.cx+9*Math.cos(a);card.position.y=o.cy+6.8*Math.sin(a);}}}this.render();last=time;}this.frame=requestAnimationFrame(frame);};this.frame=requestAnimationFrame(frame);}
   stop(){if(this.frame)cancelAnimationFrame(this.frame);this.frame=null;}
-  setActive(active){this.active=active;this.stop();if(active){this.resize();this.setMotion(this.reduced);}}
+  setActive(active){this.active=active;this.renderer.domElement.hidden=!active;this.stop();if(active){this.resize();this.setMotion(this.reduced);}}
 }

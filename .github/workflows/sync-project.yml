@@ -37,6 +37,7 @@ jobs:
       - name: Commit only changed project data
         if: steps.token.outputs.available == 'true'
         run: |
+          node --test
           if ! git diff --quiet -- data/project.json; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

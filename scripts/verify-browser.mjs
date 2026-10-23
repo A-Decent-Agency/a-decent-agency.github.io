@@ -63,7 +63,7 @@ try {
   await page.locator('#next-page').click();assert.match(await page.locator('#page-label').innerText(), /Scene 2/);
   await page.locator('#search').fill('M1 —');assert.equal(await count(),'1 ITEMS');
   await page.locator('#search').fill('');
-  await page.locator('#project-view').selectOption('kind:Milestone');assert.equal(await count(),'18 ITEMS');
+  await page.locator('#project-view').selectOption('kind:Milestone');assert.equal(await count(),`${data.items.filter(item=>item.fields?.Kind==='Milestone').length} ITEMS`);
   await page.locator('#project-view').selectOption('');
   await page.locator('#about-button').click();assert.equal(await page.locator('#about-dialog').isVisible(),true);await page.locator('#about-dialog .dialog-close').click();
 
@@ -132,5 +132,5 @@ try {
   await mobile.goto(base);await mobile.waitForSelector('.list-card');assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth),true);await mobile.screenshot({path:`${shots}/10-mobile.png`,fullPage:true});await mobile.close();
   const fallback=await browser.newPage();await fallback.route('https://cdn.jsdelivr.net/**',route=>route.abort());await fallback.goto(base);await fallback.waitForSelector('.list-card');assert.equal(await fallback.locator('.list-card').count(),data.items.length);await fallback.close();
   const prefix=await browser.newPage();await prefix.route(`${base}ipfs/example/**`,async route=>{const upstream=await route.fetch({url:route.request().url().replace('/ipfs/example/','/')});await route.fulfill({response:upstream});});await prefix.goto(`${base}ipfs/example/`);await prefix.waitForSelector('#scene canvas');assert.equal(await prefix.locator('#item-count').innerText(),`${data.items.length} ITEMS`);await prefix.close();
-  console.log(`PASS: 5 real-data 3D views; 138-card list; hover/click; search/view filters; pagination; local add/edit/link/drag/delete/persist/import/export; mocked IPFS/Pinata/GitHub; EIP-6963 and fallback wallets (no RPC until click); no persisted tokens; reduced motion; mobile; CDN failure; IPFS-style prefix. ${errors.length} console/page errors. Screenshots: ${shots}`);
+  console.log(`PASS: 5 real-data 3D views; ${data.items.length}-card list; hover/click; search/view filters; pagination; local add/edit/link/drag/delete/persist/import/export; mocked IPFS/Pinata/GitHub; EIP-6963 and fallback wallets (no RPC until click); no persisted tokens; reduced motion; mobile; CDN failure; IPFS-style prefix. ${errors.length} console/page errors. Screenshots: ${shots}`);
 } finally {await browser.close();}
