@@ -21,6 +21,7 @@ Three.js **0.169.0**, OrbitControls, and ethers **6.13.4** come from the pinned 
 The office uses a checked-in, privacy-filtered snapshot of [DecentAgency — Agency Marathon](https://github.com/orgs/A-Decent-Agency/projects/3), project node `PVT_kwDODD7ovc4Bn91h`. The source project is private: visitors do **not** need access or a token to view the public snapshot. GitHub source links may require access.
 
 - **Board:** Todo / In Progress / Done / Blocked, six spatial cards per column per page. Pagination keeps dense boards usable; the 2D list always contains **all** matching items.
+- **Construction flight (landing view):** an actual perspective flight corridor through the GitHub roadmap. Dated milestones are sites in Start/Target order; undated milestones and workstream yards follow in Horizon order. Each non-milestone card belongs to its workstream yard, so every matching public item appears exactly once. Workstream grouping does not invent milestone dependencies. Route spacing is navigational, not proportional to time, effort, or budget. Select any site, use previous/next, or click its 3D sign to chart an approach. Open **What is being built here?** to inspect its real cards.
 - **Roadmap:** milestones positioned by Start (or Target if Start is missing), duration lines to Target, a UTC today marker, and an undated staging area. Dates are plans, not promises.
 - **Workstreams / Canopy:** orbit clusters by Workstream, eight spatial cards per cluster per page. Dependency lines are solid cyan; crossovers are dashed gold. Parsing recognizes milestone identifiers (`M1`), linked item URLs, and repository-name arrows (`decent-canopy -> big-nuten`). Prose is retained in the side panel, not guessed into edges. Only endpoints on the current spatial page are connected.
 - **Repo passports:** Portfolio cards colored by Role (legend below the scene), sized and raised by Baseline met count.
@@ -28,6 +29,30 @@ The office uses a checked-in, privacy-filtered snapshot of [DecentAgency — Age
 - **Project view selector:** all exported GitHub view names, layouts and filter strings are preserved in the snapshot; supported filters reproduce the current field:value / quoted value / comma-OR / negation views across the spatial tabs. The office reinterprets these as 3D views; it does not clone GitHub's private column order, hidden fields or table configuration. Future GitHub filter operators beyond this subset need an adapter update.
 
 Search works across titles, public notes, and fields. Orbit by dragging empty space, zoom with the wheel, hover for a title, click for full fields and safe Markdown notes. Use **2D list** for keyboard-accessible cards, or **Motion off** to stop animation. Reduced-motion preferences, small screens and `saveData` default to the list, without loading WebGL. Arrow keys/Home/End switch tabs; Escape closes card details. Empty states and network errors leave the local editor usable.
+
+### Fly between construction sites
+
+Focus the flight canvas: **W / up arrow** thrusts, **S / down arrow** reverses,
+**A / D** steers sideways, **Q / E** changes altitude, **Shift** boosts, and
+**Space** pauses. Dragging steers too; it does not orbit the whole canvas. Labeled
+hold controls support touch. You can maneuver 24 units either side and 16 units
+above/below the curved route, but cannot leave its endpoints. Steering cancels
+auto-pilot. Motion off or pause turns destination selection into an instant jump.
+The original orbitable board/roadmap, complete list, and local editor remain.
+
+Site footprint follows public card count. Crane density follows **explicit
+In Progress counts**: one foundation crane at Todo-only sites; `1 + ceil(sqrt(active))`
+at active sites, capped at six; zero when all cards are Done. A large but unstarted
+backlog is not drawn as a busy build. Blocked sites carry restricted-access
+status; Done retires cranes, but does not independently prove deployment. These
+are visual planning proxies, not workforce, monetary, effort, or completion
+measurements. Construction scaffolds, signs, route gates and the ship are generated
+locally; no additional image lookups or private identities are inferred.
+
+The flight scene renders on demand and at no more than 30fps while moving. It
+stops when inactive/hidden or paused, clears held keys on focus loss, and respects
+reduced motion. Switching back to another office tab deactivates the flight
+renderer. No weapons, scores, rewards, wallet actions, or project writes are added.
 
 ## Snapshot sync and privacy
 
@@ -50,6 +75,17 @@ The exporter queries GraphQL directly, paginates project items, preserves the pr
 ### Scheduled refresh
 
 `.github/workflows/sync-project.yml` runs every six hours (at minute 17), or with **Run workflow**. GitHub can delay schedules. It gracefully emits a notice and skips if the credential is absent. It commits **only** `data/project.json` if changed, using `GITHUB_TOKEN`'s `contents: write` for the commit, and includes the Copilot co-author trailer.
+
+The browser checks that published snapshot every five minutes while visible,
+on return to the tab, or with **Refresh plan**. Sites, dates, crane counts and card
+lists rebuild only when the snapshot changes, preserving the selected site by ID
+when possible. Search and exported GitHub Project-view filters also apply to the
+flight. The header separates the last changed export from the browser's check
+time; its freshness tooltip explains old exports. Failed refreshes explicitly
+retain the previous snapshot and never infer new progress. This is dynamic,
+privacy-filtered publishing, **not** live private-project access or a guarantee
+that a GitHub schedule runs on time. Both export commits and deployment run the
+Node tests before publishing.
 
 The steward must:
 
@@ -94,14 +130,23 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/decent-head/head.{js,css}` — swappable header, About/IPFS entry points, wallet discovery.
 - `js/main.js` — tabs, accessible list/details, local editor and housing interactions.
 - `js/scene.js` — pinned Three.js scene, controls, spatial views, picking and dragging.
+- `js/construction-scene.js`, `js/construction-model.js` — bounded ship flight, source-derived construction sites and crane/workload rules.
 - `js/model.js` — view filters, color semantics, date and relationship parsing.
 - `js/markdown.js` — HTML-escaped, small Markdown subset (no raw HTML/images).
 - `js/editor.js` — versioned map validation/storage, import/export.
 - `js/project.js`, `scripts/export-project.mjs` — shared GraphQL exporter/privacy boundary and Node entry point.
 - `data/project.json` — the real public project snapshot.
 - `.github/workflows/sync-project.yml` — six-hour/manual snapshot sync.
-- `tests/*.test.js`, `scripts/verify-browser.mjs` — focused unit/acceptance checks.
+- `tests/*.test.js`, `scripts/verify-browser.mjs`, `scripts/verify-flight.mjs` — focused unit/acceptance checks.
 - `.nojekyll`, `package.json`, `LICENSE`, `NOTICE`, `README.md` — publishing, metadata and documentation.
+
+Run `npm test` for the dependency-free unit/privacy suite. For optional browser
+acceptance, serve this checkout, set `OFFICE_URL`, `SCREENSHOT_DIR` and
+`PLAYWRIGHT_MODULE` to an existing Playwright installation, then run
+`node scripts/verify-flight.mjs` and `node scripts/verify-browser.mjs` **sequentially**
+to avoid competing headless WebGL contexts. The flight helper checks real snapshot
+coverage, steering frame bounds, pause, dynamic published-snapshot changes and
+failure retention, all original tabs, reduced motion and 375/320px touch layouts.
 
 ## License and credits
 

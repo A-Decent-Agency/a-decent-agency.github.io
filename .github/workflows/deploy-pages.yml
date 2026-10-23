@@ -26,6 +26,7 @@ jobs:
           ref: main
       - name: Assemble site
         run: |
+          node --test
           mkdir -p _site
           cp -R index.html favicon.svg .nojekyll css js data LICENSE NOTICE _site/
       - uses: actions/upload-pages-artifact@v3

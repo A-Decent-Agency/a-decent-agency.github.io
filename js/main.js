@@ -3,12 +3,14 @@ import { escapeHTML as esc, markdown, safeURL } from './markdown.js';
 import { COLORS, ROLE_COLORS, VIEWS, tabMatches, viewMatches, spatialPages } from './model.js';
 import { loadMap, saveMap, validateMap, downloadMap, projectToMap, readMapResponse, MAX_FILE_BYTES } from './editor.js';
 import { exportProject, projectIdFromUrl } from './project.js';
+import { constructionSites, snapshotFreshness } from './construction-model.js';
 
 const $ = selector => document.querySelector(selector);
 const tabs = [...document.querySelectorAll('[data-tab]')];
 const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
-const state = { tab: 'board', query: '', view: '', page: 0, reduced: reducedQuery.matches || navigator.connection?.saveData || false, list: reducedQuery.matches || matchMedia('(max-width: 620px)').matches || navigator.connection?.saveData || false, project: { items: [], views: [] } };
-let scene, scenePromise, sceneFailed = false, selected, detailOpener, editing, map, toastTimer;
+const state = { tab: 'flight', query: '', view: '', page: 0, reduced: reducedQuery.matches || navigator.connection?.saveData || false, list: reducedQuery.matches || matchMedia('(max-width: 620px)').matches || navigator.connection?.saveData || false, project: { items: [], views: [] } };
+let scene, sceneKind, sceneFailed = false, selected, detailOpener, editing, map, toastTimer, flightSites = [], flightIndex = 0;
+const scenes = new Map(), scenePromises = new Map(), sceneData = new WeakMap();
 function notify(message) { $('#toast').textContent = message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,7500); }
 try { map = loadMap(); } catch { map={schemaVersion:1,nodes:[],links:[]};notify('Browser storage is unavailable or contains an invalid map. It has not been overwritten. Export your work to keep a copy.'); }
 function persist() { try {saveMap(map);} catch {notify('Could not save in this browser. Your map remains in memory: download JSON to keep it.');} }
@@ -29,6 +31,7 @@ function visibleItems() {
   return items.filter(item=>tabMatches(item,state.tab)&&(state.tab==='own'||viewMatches(item,state.view))&&(!query||[item.title,item.body,JSON.stringify(item.fields)].join(' ').toLowerCase().includes(query)));
 }
 function openDetail(item) {
+  if (state.tab === 'flight' && scenes.has('flight')) { scenes.get('flight').setPaused(true); updatePause(true); }
   selected=item;detailOpener=document.activeElement;
   const panel=$('#detail-panel');const content=$('#detail-content');
   const fields=Object.entries(item.fields||{}).filter(([,value])=>value?.length);
@@ -53,23 +56,64 @@ function showList(items) {
   if(!items.length){const p=document.createElement('p');p.textContent=state.tab==='own'?'Add a node to make a beginning.':'No matches. Try another search or Project view.';list.append(p);}
   for(const item of items){const button=document.createElement('button');button.className='list-card';button.style.setProperty('--card-color',state.tab==='passports'?ROLE_COLORS[item.fields?.Role]||'#aa8bea':item.color||COLORS[item.fields?.Status]||'#aa8bea');const kind=document.createElement('small');kind.textContent=item.fields?.Kind||item.kind||'Item';const title=document.createElement('strong');title.textContent=item.title;const status=document.createElement('span');status.textContent=[item.fields?.Status,item.fields?.Workstream,item.fields?.Role].filter(Boolean).join(' / ');button.append(kind,title,status);button.addEventListener('click',()=>openDetail(item));list.append(button);}
 }
+function showFlightSite(site, index = 0) {
+  flightIndex = index;
+  $('#flight-destination').value = site?.id || '';
+  $('#flight-previous').disabled = !flightSites.length || index <= 0;
+  $('#flight-next').disabled = !flightSites.length || index >= flightSites.length - 1;
+  $('#flight-site-type').textContent = site ? `${site.type === 'milestone' ? '🏗 MILESTONE' : '🚧 WORKSTREAM YARD'} / ${site.horizon}` : 'FLIGHT CONTROL';
+  $('#flight-site-title').textContent = site?.title || 'No construction sites match this view';
+  $('#flight-site-dates').textContent = site ? site.start || site.target
+    ? `${site.start || 'Start unset'} → ${site.target || 'Target unset'} · tentative GitHub dates`
+    : 'Undated staging area · no dates invented' : 'Change the search or Project view filter.';
+  $('#flight-site-metrics').textContent = site ? `${site.phase === 'Handover' ? '✓' : '🏗'} ${site.phase} · ${site.cranes} cranes · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked` : '';
+  $('#flight-site-items').replaceChildren(...(site?.items || []).map(item => {
+    const button = document.createElement('button'); button.textContent = `${item.fields?.Status || 'Unknown'} / ${item.title}`;
+    button.addEventListener('click', () => openDetail(item)); return button;
+  }));
+}
+function chartSite(index) {
+  if (!flightSites.length) return;
+  const at = Math.max(0, Math.min(flightSites.length - 1, index));
+  if (!state.list && sceneKind === 'flight' && !sceneFailed) scene?.goTo(at);
+  else showFlightSite(flightSites[at], at);
+}
 function render() {
-  const own=state.tab==='own',items=visibleItems(),pages=spatialPages(items,state.tab);
+  const own=state.tab==='own',flight=state.tab==='flight',items=visibleItems(),pages=spatialPages(items,state.tab);
   state.page=Math.max(0,Math.min(state.page,pages-1));
   const list=state.list||sceneFailed;
   document.documentElement.dataset.reduced=String(state.reduced);
+  document.documentElement.dataset.view=state.tab;
   $('#mode-button').textContent=list?'◇ 3D space':'☷ 2D list';$('#mode-button').setAttribute('aria-pressed',String(list));
   $('#motion-button').textContent=state.reduced?'◌ Motion off':'◌ Motion on';$('#motion-button').setAttribute('aria-pressed',String(state.reduced));
   $('#scene').hidden=list;$('#list-view').hidden=!list;$('#workspace').classList.toggle('list-mode',list);
   $('#view-title').textContent=VIEWS[state.tab][0];$('#view-description').textContent=VIEWS[state.tab][1];
   $('#item-count').textContent=`${items.length} ${own?'NODES':'ITEMS'}`;
   $('#editor-tools').hidden=!own;$('#project-view').disabled=own;
+  document.querySelector('.office').classList.toggle('construction-view', flight);
+  $('#flight-tools').hidden=!flight;$('#flight-site').hidden=!flight;$('#flight-controls').hidden=!flight||list;
+  if (flight) {
+    const previous = flightSites[flightIndex]?.id;
+    flightSites = constructionSites(items);
+    $('#flight-destination').replaceChildren(...flightSites.map(site => new Option(`${site.type === 'milestone' ? '🏗' : '🚧'} ${site.title}`, site.id)));
+    showFlightSite(flightSites[Math.max(0, flightSites.findIndex(site => site.id === previous))], Math.max(0, flightSites.findIndex(site => site.id === previous)));
+  }
   $('#page-label').textContent=list?`All ${items.length} ${own?'nodes':'items'}`:`Scene ${state.page+1} / ${pages} · ${items.length} total`;
-  $('#prev-page').disabled=list||state.page===0;$('#next-page').disabled=list||state.page===pages-1;
+  $('#prev-page').disabled=flight||list||state.page===0;$('#next-page').disabled=flight||list||state.page===pages-1;
   $('#reset-camera').disabled=list;
+  $('.office-caption > span:first-child').textContent = flight ? 'FLY THE ROUTE · DOCK AT A SITE · SOURCE: PUBLIC GITHUB PROJECT SNAPSHOT' : '↖ DRAG TO ORBIT · SCROLL TO ZOOM · CLICK TO EXPLORE';
+  $('#scene').setAttribute('aria-label', flight ? 'Construction route. Focus the canvas to steer; use destination selection or 2D list without flight.' : 'Interactive 3D planning board. Drag to orbit, scroll to zoom; choose 2D list for keyboard-accessible cards.');
   const legend=state.tab==='passports'?Object.entries(ROLE_COLORS):state.tab==='catalog'?[['Shared solution','#71e6d0'],['Standard','#aa8bea'],['Decision','#e5c583']]:Object.entries(COLORS);
   $('.legend').replaceChildren(...legend.map(([label,color])=>{const span=document.createElement('span'),dot=document.createElement('i');dot.style.background=color;span.append(dot,document.createTextNode(label));return span;}));
-  if(list){showList(items);scene?.setActive(false);}else if(scene){scene.setActive(true);scene.setData(items,state.tab,state.page,map.links);scene.setMotion(state.reduced);}
+  if(list){showList(items);scene?.setActive(false);}else {
+    const kind = flight ? 'flight' : 'board';
+    if (scene && sceneKind === kind) {
+      const key = JSON.stringify([items, state.tab, state.page, own ? map.links : []]);
+      scene.setActive(true);
+      if (sceneData.get(scene) !== key) { scene.setData(items,state.tab,state.page,map.links); sceneData.set(scene,key); }
+      scene.setMotion(state.reduced);
+    } else { scene?.setActive(false); startScene(); }
+  }
 }
 function selectTab(tab) {
   if(!VIEWS[tab])return;
@@ -85,6 +129,30 @@ $('#search').addEventListener('input',event=>{state.query=event.target.value;sta
 $('#project-view').addEventListener('change',event=>{state.view=event.target.value;state.page=0;render();});
 $('#mode-button').onclick=async()=>{if(sceneFailed){notify('3D is unavailable. The complete 2D list and editor remain usable.');return;}state.list=!state.list;if(!state.list)await startScene();render();};
 $('#motion-button').onclick=()=>{state.reduced=!state.reduced;render();};
+$('#flight-destination').addEventListener('change', event => chartSite(flightSites.findIndex(site => site.id === event.target.value)));
+$('#flight-previous').onclick=()=>chartSite(flightIndex-1);
+$('#flight-next').onclick=()=>chartSite(flightIndex+1);
+$('#flight-pause').onclick=()=>{
+  const flight = scenes.get('flight');
+  if (!flight || state.list) { notify('Choose 3D space to steer; destination selection works without motion in the list.'); return; }
+  flight.setPaused(!flight.paused); updatePause(flight.paused);
+};
+function updatePause(paused) {
+  $('#flight-pause').textContent = paused ? 'Resume ship' : 'Pause ship';
+  $('#flight-pause').setAttribute('aria-pressed', String(paused));
+}
+$('#scene').addEventListener('flightpause', event => updatePause(event.detail));
+for (const button of document.querySelectorAll('[data-thrust]')) {
+  const release = () => scenes.get('flight')?.hold(button.dataset.thrust, false);
+  button.addEventListener('pointerdown', event => {
+    event.preventDefault(); button.setPointerCapture(event.pointerId);
+    scenes.get('flight')?.hold(button.dataset.thrust, true);
+  });
+  button.addEventListener('pointerup', release); button.addEventListener('pointercancel', release);
+  button.addEventListener('lostpointercapture', release); button.addEventListener('blur', release);
+  button.addEventListener('keydown', event => { if (['Enter', ' '].includes(event.key)) { event.preventDefault(); scenes.get('flight')?.hold(button.dataset.thrust, true); } });
+  button.addEventListener('keyup', release);
+}
 reducedQuery.addEventListener('change',event=>{state.reduced=event.matches;if(event.matches)state.list=true;render();});
 $('#next-page').onclick=()=>{state.page++;render();};$('#prev-page').onclick=()=>{state.page--;render();};$('#reset-camera').onclick=()=>scene?.reset();
 
@@ -108,24 +176,62 @@ $('#pin-pinata').addEventListener('click',guard(async()=>{let token=$('#pinata-t
 $('#load-cid').addEventListener('click',guard(async()=>{const cid=$('#map-cid').value.trim();if(!/^(Qm[1-9A-HJ-NP-Za-km-z]{44}|b[a-z2-7]{20,150})$/.test(cid))throw new Error('Enter a CID only, not a URL or path.');$('#house-status').textContent='Reading the public CID through ipfs.io…';const response=await fetch(`https://ipfs.io/ipfs/${cid}`,{signal:AbortSignal.timeout(45000)});if(replaceMap(await readMapResponse(response)))$('#house-status').textContent='Public map loaded in this browser. Export to keep a backup.';}));
 $('#import-github').addEventListener('click',guard(async()=>{let token=$('#github-token').value.trim();$('#github-token').value='';try{if(!token)throw new Error('Enter a GitHub token with read:project access.');$('#house-status').textContent='Reading your project directly from GitHub…';const id=await projectIdFromUrl($('#github-project-url').value.trim(),token);const project=await exportProject(token,id);if(project.items.length>500)throw new Error('This project exceeds the editor’s 500-node limit.');if(replaceMap(projectToMap(project)))$('#house-status').textContent=`Imported ${project.items.length} cards. Private issue/PR details were filtered. Your map stays local until you export or pin it.`;}finally{token='';}}));
 
-render();
-try {
-  const response=await fetch(new URL('../data/project.json',import.meta.url));
-  if(!response.ok)throw new Error(`Snapshot returned HTTP ${response.status}.`);
-  state.project=await response.json();
-  for(const view of state.project.views){const option=new Option(view.name,view.filter);option.title=`${view.layout} · ${view.filter||'All items'}`;$('#project-view').append(option);}
-  $('#sync-status').textContent=`LAST SYNCED ${new Date(state.project.exportedAt).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})}`;
-  $('#project-readme').innerHTML=markdown(state.project.readme);
-  render();
-} catch(error){$('#sync-status').textContent='PUBLIC SNAPSHOT UNAVAILABLE';notify(`${error.message} You can still make your own map.`);}
-async function startScene(){
-  if(scene)return;
-  if(scenePromise)return scenePromise;
-  scenePromise=(async()=>{try {
-  const {OfficeScene}=await import('./scene.js');
-  scene=new OfficeScene($('#scene'),{onSelect:openDetail,onHover:hover,onMove:(id,x,y)=>{const node=map.nodes.find(n=>n.id===id);if(node){node.x=x;node.y=y;persist();render();}},onFailure:message=>{sceneFailed=true;render();notify(message);}});
-  render();
-} catch {sceneFailed=true;render();notify('3D is unavailable on this device or CDN connection. The complete 2D planning office is ready.');}})();
-  return scenePromise;
+let refreshing = false;
+async function refreshProject() {
+  if (refreshing) return;
+  refreshing = true; $('#refresh-project').disabled = true;
+  try {
+    const response=await fetch(new URL('../data/project.json',import.meta.url), { cache:'no-store', signal:AbortSignal.timeout(20000) });
+    if(!response.ok)throw new Error(`Snapshot returned HTTP ${response.status}.`);
+    const project=await response.json();
+    if (project.schemaVersion !== 1 || !Array.isArray(project.items) || !Array.isArray(project.views)
+      || !Number.isFinite(Date.parse(project.exportedAt))
+      || !project.items.every(item => typeof item.id === 'string' && typeof item.title === 'string' && item.fields && typeof item.fields === 'object')) {
+      throw new Error('Public snapshot has an unsupported or incomplete format.');
+    }
+    const changed = JSON.stringify(project) !== JSON.stringify(state.project);
+    state.project=project;
+    $('#project-view').replaceChildren(new Option('All items',''));
+    for(const view of state.project.views){const option=new Option(view.name,view.filter);option.title=`${view.layout} · ${view.filter||'All items'}`;$('#project-view').append(option);}
+    if ([...$('#project-view').options].some(option => option.value === state.view)) $('#project-view').value=state.view;
+    else state.view='';
+    $('#sync-status').textContent=`LAST SYNCED ${new Date(project.exportedAt).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})} · checked ${new Date().toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'})}`;
+    $('#sync-status').title=`${snapshotFreshness(project.exportedAt)}. Last synced means last changed export, not last poll. Source export is scheduled every six hours; this page checks every five minutes while visible.`;
+    $('#project-readme').innerHTML=markdown(state.project.readme);
+    if (changed) render();
+  } catch(error){
+    console.error('[Planning Office snapshot]',error);
+    $('#sync-status').textContent=state.project.items.length?'REFRESH FAILED · SHOWING PREVIOUS SNAPSHOT':'PUBLIC SNAPSHOT UNAVAILABLE';
+    notify(`${error.message} ${state.project.items.length?'Previous snapshot retained; no new progress inferred.':'You can still make your own map.'}`);
+  } finally { refreshing=false; $('#refresh-project').disabled=false; }
 }
-if(!state.list)await startScene();
+$('#refresh-project').onclick=refreshProject;
+let refreshTimer;
+function scheduleRefresh() {
+  clearTimeout(refreshTimer);
+  if (!document.hidden) refreshTimer=setTimeout(async()=>{await refreshProject();scheduleRefresh();},300000);
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshProject();scheduleRefresh();});
+render();
+await refreshProject();
+scheduleRefresh();
+async function startScene(){
+  const kind=state.tab==='flight'?'flight':'board';
+  if (scenes.has(kind)) { scene?.setActive(false); scene=scenes.get(kind); sceneKind=kind; render(); return; }
+  if(scenePromises.has(kind))return scenePromises.get(kind);
+  const promise=(async()=>{try {
+    let next;
+    const onFailure=message=>{sceneFailed=true;render();notify(message);};
+    if (kind==='flight') {
+      const {ConstructionScene}=await import('./construction-scene.js');
+      next=new ConstructionScene($('#scene'),{onSite:showFlightSite,onFailure});
+    } else {
+      const {OfficeScene}=await import('./scene.js');
+      next=new OfficeScene($('#scene'),{onSelect:openDetail,onHover:hover,onMove:(id,x,y)=>{const node=map.nodes.find(n=>n.id===id);if(node){node.x=x;node.y=y;persist();render();}},onFailure});
+    }
+    next.setActive(false); scenes.set(kind,next);
+    if ((state.tab==='flight'?'flight':'board')===kind && !state.list) { scene?.setActive(false);scene=next;sceneKind=kind;render(); }
+  } catch(error) {console.error('[Planning Office 3D]',error);sceneFailed=true;render();notify('3D is unavailable on this device or CDN connection. The complete 2D planning office is ready.');}})();
+  scenePromises.set(kind,promise);
+  return promise;
+}
