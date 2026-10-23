@@ -1,0 +1,11 @@
+.planning-dock { min-width: 0; max-width: 48rem; overflow-wrap: anywhere; }
+.planning-dock h3, .planning-dock h4 { margin: .7rem 0 .4rem; }
+.planning-dock details { border-top: 1px solid currentColor; padding: .55rem 0; }
+.planning-dock summary { cursor: pointer; }
+.planning-dock-text { white-space: pre-wrap; max-height: 12rem; overflow: auto; }
+.planning-dock-note { font-size: .85em; opacity: .8; }
+.planning-dock-cards { max-height: 15rem; overflow: auto; padding-left: 1.3rem; }
+.planning-dock li { margin: .4rem 0; }
+.planning-dock button { color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.planning-dock-links a { display: inline-block; max-width: 100%; }
+.planning-dock :is(button, summary, a):focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
