@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { COLORS } from './model.js';
 import { constructionSites, routePoint, flightStep, FLIGHT_BOUNDS } from './construction-model.js';
+import { siteIdentity } from './site-identities.js';
 
 const lineMaterial = color => new THREE.LineBasicMaterial({ color });
 function lines(points, color) {
@@ -136,6 +137,12 @@ export class ConstructionScene {
       title.position.set(0, 32, 0); title.userData.index = site.index; this.targets.push(title); campus.add(title);
       const count = textSprite(`${site.cranes} CRANES / ${site.active} ACTIVE / ${site.done} DONE / ${site.total} CARDS`, '#e5c583', 30);
       count.position.set(0, -3, 12); campus.add(count);
+      const identity = siteIdentity(site);
+      const sign = textSprite(identity.projects.length
+        ? `PUBLIC REPO REFERENCES / ${identity.projects.map(project => project.name).join(' / ')}`
+        : identity.kind === 'milestone' ? 'MILESTONE / NOT A REPOSITORY' : 'WORKSTREAM / NO PROJECT IDENTITY ESTABLISHED',
+      identity.fallback.color, 34);
+      sign.position.set(0, 27, 0); campus.add(sign);
       if (site.start || site.target) {
         const dates = textSprite(`${site.start || 'UNSET'}  >  ${site.target || 'UNSET'} / TENTATIVE`, '#a89eb9', 33);
         dates.position.set(0, 37, 0); campus.add(dates);

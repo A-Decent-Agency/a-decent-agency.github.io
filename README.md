@@ -152,7 +152,7 @@ issue/PR and project references are linked; arbitrary queries/fragments are
 removed (only the exporter draft-card selector is preserved). No repository is
 guessed from a bare name or `#number`. A source card marked Done, a changed export,
 and a deployment independently verified are three different things.
-### Project identity signs (integration module)
+### Project identity signs
 
 `js/site-identities.js` exports pure, offline `itemIdentity(item)`,
 `siteIdentity(site)` and `isSafeArtworkUrl(url)` helpers. These are integration
@@ -208,6 +208,32 @@ Expose provenance/credit in the selected-site panel; artwork is identity
 wayfinding, not evidence of integration, deployment, funding or endorsement.
 
 ## Snapshot sync and privacy
+
+### Combined landing experience
+
+The flight tab includes **Today's flight / where attention could help**, a
+collapsible, read-only suggestion route. **Go to site** charts the existing
+construction destination; **Open source card** opens the normal detail panel.
+The current search and Project view selection bound both the route and the
+evidence available to resolve prerequisites.
+
+The change summary compares the latest changed publication with its predecessor
+observed in this tab. The first load explicitly has no baseline. An unchanged
+poll retains the last changed-publication comparison; failed, invalid, older or
+wrong-project refreshes do not replace the valid baseline. Reloading resets it.
+Neither snapshot is written to localStorage by these features.
+
+At a selected site, expand **Project signs / public artwork** to request up to
+three reviewed images, with repository references, artwork sources, credit and
+license links. Closing or changing a site returns to local metadata without an
+ecosystem-wide image scan. Milestone route signs remain milestones; mixed yards
+list explicit public repository references rather than inheriting one logo.
+
+Expand **Dock / finish line, evidence and dependencies** to pause the ship and
+read the actual Outcome field, source evidence, remaining cards and quoted
+dependencies/crossovers. The dock uses only current validated-publication members,
+not stale site details, and does not infer deployment or prerequisite satisfaction.
+All original board/roadmap/editor views remain available.
 
 Node **20+**, no dependencies beyond built-in `fetch`:
 
