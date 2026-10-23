@@ -89,6 +89,69 @@ container. `onDestination(siteId)` navigates the existing construction route;
 public snapshot selection changes. The panel uses plain-text DOM rendering,
 keyboard-native buttons, no animation and no network or wallet actions; empty
 groups explain the missing evidence.
+### Docking and changes since the previous publication
+
+The standalone `js/planning-dock.js` module is ready for the flight controller to
+mount; it does not change the existing page or scene itself. Optionally load
+`css/planning-dock.css` for bounded scrolling, compact disclosure rows and focus
+styles. It uses no dependencies, storage, network requests or project writes.
+
+```js
+import { mountPlanningDock } from './js/planning-dock.js';
+import { compareSnapshots, isPublishedSnapshot } from './js/planning-changes.js';
+
+const dock = mountPlanningDock({
+  container, site, items: current.items, previous, current, onItem: openDetail,
+});
+dock.update({ site: nextSite, items: nextCurrent.items, previous: nextPrevious, current: nextCurrent });
+// When leaving the flight UI permanently:
+dock.destroy();
+```
+
+`site` uses the existing `constructionSites()` shape: `{ id, title, type, items }`.
+Membership is by stable ID, with card content always re-read from `current.items`,
+not stale site objects. `items` is a fallback membership list only when `site.items`
+is absent. `onItem(item)` receives the current source card. `update()` merges
+provided options; pass `previous: null` to reset the comparison. `destroy()`
+removes its click listener, markup and held options. Pure
+`renderPlanningDock(options)` returns the same escaped HTML for testing.
+
+`isPublishedSnapshot(snapshot)` validates schema version 1, a parseable publication
+date, unique nonempty stable IDs, titles and string/string-array field values.
+`compareSnapshots(previous, current)` is pure and returns `kind`:
+`first-observation`, `unavailable`, or `compared`; `changed` is `null` when no
+comparison is possible. Successful comparisons expose sorted `added`, `removed`,
+`updated`, `newlyBlocked`, `completed` ID arrays, `statusChanges` entries
+`{id, from, to}`, and `dateShifts` entries `{id, field, from, to}` for Start/Target.
+`updated` includes every observably modified existing card, including status/date
+changes; it is not a disjoint count. Additions already marked Done/Blocked remain
+additions, not fabricated transitions. Array/field/item order and export-time-only
+refreshes do not count as card changes. Source prose edits count as updates, never
+as dependency satisfaction or completion evidence.
+
+The host owns **in-memory-only** `previous`/`current` references. Start with
+`previous = null`; after a distinct valid publication, rotate `previous = current`
+before adopting the new current snapshot. Do not rotate on an identical poll, a
+failed fetch, invalid/incomplete data, a different project URL or an older export.
+Validate both the transport response and completeness before adopting a snapshot:
+the structural validator cannot prove that an exporter fetched every page.
+Keep the existing dock/baseline on failure; pass invalid data only to display an
+explicit unavailable state. Reload clears this baseline: the first observation
+is explicitly **not** “nothing changed.” No full private/public snapshots, tokens
+or diff results should be persisted to browser storage.
+
+Dock counts and callbacks refer to actual site cards, not inferred tasks.
+Workstream yards disclose each card's source Outcome, notes/evidence,
+Dependencies and Crossovers instead of inventing a shared finish line.
+Long source notes and relation text are collapsed; remaining cards are listed
+separately from Done cards. Summaries are project-wide with site-specific transition
+details; removed workstream cards use previous explicit Workstream membership,
+without recovering previous titles. Private/body-redacted cards expose no notes,
+Outcome, relation fields or links. Explicit canonical HTTPS GitHub repository,
+issue/PR and project references are linked; arbitrary queries/fragments are
+removed (only the exporter draft-card selector is preserved). No repository is
+guessed from a bare name or `#number`. A source card marked Done, a changed export,
+and a deployment independently verified are three different things.
 
 ## Snapshot sync and privacy
 
