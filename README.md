@@ -183,6 +183,52 @@ issue/PR and project references are linked; arbitrary queries/fragments are
 removed (only the exporter draft-card selector is preserved). No repository is
 guessed from a bare name or `#number`. A source card marked Done, a changed export,
 and a deployment independently verified are three different things.
+### Version-mint galleries and legacy checkpoints
+
+Receipt-backed editions appear beside their own project buildings as two-sided
+collectible displays and in sidepanels as front/back artwork with native purchase
+links. Click a 3D card or its BUY sign to open the same approved checkout in a new
+tab; flight pauses. Keyboard, mobile, reduced-motion and 2D users use the sidepanel
+links. No wallet request, approval or transaction originates in the planning office.
+
+The public observer binds `supporter-minted.json` verification (Head/Market), or
+widget `supporter-listing-evidence.json` protocol evidence plus
+`supporter-release.json`, to the same repository/version, metadata, NFT, token and
+mint transaction. Only the approved Base NFT/escrow, 10 USDC standard and reviewed
+Head/Market checkout routes are accepted. Front/back URLs name exact published
+release assets. Missing/mismatched listing evidence withholds checkout and reports
+the error while retaining the minted floor. Existing snapshots without storefronts
+remain supported. Failed artwork retains labeled signs and links with a notice.
+Published evidence is not current inventory or a fresh chain audit: the existing
+checkout rechecks price, pause state and stock before any user-approved purchase.
+Transient GitHub failure labels retained public observations; nothing implies a
+currently available sale. At most 20 observed release editions are displayed.
+
+Reuse decision: adapt `DecentHead/js/supporter-purchase.js` and
+`scripts/supporter-protocol.mjs` at `8542720354a8eb1fb619ff7d57c23982b3b42d35`
+for purchase-route/contract checks, and the two-sided card shape in
+`DecentMarket/js/supporter-display.mjs` at
+`8dc6c7043ac22f59462ae0973d9b965a7b5c07eb`. The receiving app needs read-only
+wayfinding, not the donors' wallet/ethers or configurable asset gateways; no
+checkout or mint implementation is duplicated. Display original edition art with
+The Jolly LaMa / A Decent Agency attribution and source/license links. The Canopy
+public capability map was consulted; current donor releases/listing receipts are
+the integration evidence, not old release prose. Receiving acceptance is covered
+by `tests/version-mints.test.js` and `scripts/verify-version-mints.mjs`.
+
+GitHub release downloads do not permit cross-origin WebGL textures. During Pages
+assembly, `node scripts/cache-mint-art.mjs "$PWD/_site/data/mint-art"` downloads
+only these validated public PNGs, checks each release-published SHA-256 and serves
+them same-origin under checksum filenames. A bad/missing asset fails deployment
+rather than substituting unrelated artwork; the previous Pages deployment remains.
+For local preview, run `node scripts/cache-mint-art.mjs` after refreshing progress.
+The generated `data/mint-art/` directory is ignored, not committed or a new catalog.
+
+The older milestone road gates are labeled **legacy checkpoints** in 3D,
+destination selection and sidepanels. Their current source statuses and tentative
+dates remain unchanged; they are not project completion scores. This iteration
+does not change GitHub milestone acceptance, statuses or planning windows.
+
 ### Project identity signs
 
 `js/site-identities.js` exports pure, offline `itemIdentity(item)`,

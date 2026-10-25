@@ -64,6 +64,14 @@ html[data-view="flight"] .intro h1 > span { margin-left: .25em; }
 .campus-details details { margin: 12px 0; border-top: 1px solid var(--line); padding-top: 10px; }
 .campus-details ul { padding-left: 18px; font-size: 11px; line-height: 1.7; }
 .campus-details small { display: block; color: var(--muted); overflow-wrap: anywhere; }
+.version-mints { border: 1px solid var(--gold); border-radius: 8px; padding: 12px; margin-bottom: 16px; }
+.version-mints h4 { color: var(--gold); font-size: 14px; margin: 6px 0; overflow-wrap: anywhere; }
+.version-mints article + article { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px; }
+.mint-faces { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mint-faces figure { margin: 0; min-width: 0; }
+.mint-faces img { width: 100%; height: auto; border-radius: 6px; }
+.mint-faces figcaption { font-size: 10px; color: var(--muted); }
+.version-mints .mint-buy { display: block; padding: 12px; margin-top: 12px; border-radius: 6px; background: #28453e; color: #b8f3e6; font-size: 13px; font-weight: 700; }
 .flight-site summary { font-size: 11px; color: var(--gold); cursor: pointer; }
 #flight-site-items { display: grid; gap: 8px; margin-top: 12px; }
 #flight-site-items button { text-align: left; padding: 9px; font-size: 11px; line-height: 1.6; }
