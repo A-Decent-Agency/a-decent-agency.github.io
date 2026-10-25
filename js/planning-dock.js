@@ -78,7 +78,7 @@ export function renderPlanningDock(options = {}) {
     ${transitions ? `<details><summary>Site changes since previous publication</summary><ul>${transitions}</ul></details>` : ''}
     ${!isPublishedSnapshot(current) ? '<p>Current publication unavailable. No card progress inferred.</p>' : !site ? '<p>Select a site to inspect its actual cards.</p>' : !cards.length ? '<p>No published cards at this site.</p>' : `
     <h4>Source Outcome / finish line and evidence</h4>
-    ${cards.length === 1 ? source(cards[0]) : `<p>Workstream grouping only — no extra milestone or inferred finish line.</p>${cards.map(item => `<details><summary>${esc(item.title)} — ${esc(item.fields.Status || 'Status unset')}</summary>${source(item)}</details>`).join('')}`}
+    ${cards.length === 1 ? source(cards[0]) : `<p>${site.project ? 'Explicit public repository grouping' : 'Workstream grouping only'} — no extra milestone or inferred finish line.</p>${cards.map(item => `<details><summary>${esc(item.title)} — ${esc(item.fields.Status || 'Status unset')}</summary>${source(item)}</details>`).join('')}`}
     <h4>Remaining actual cards (${remaining.length} / ${cards.length})</h4>
     ${remaining.length ? `<ul class="planning-dock-cards">${remaining.map(item => `<li>${itemButton(item)} <span>${esc(item.fields.Status || 'Status unset')}</span></li>`).join('')}</ul>` : '<p>All site cards are marked Done in the source; evidence still requires review.</p>'}
     <details><summary>All source cards (${cards.length})</summary><ul>${cards.map(item => `<li>${itemButton(item)}</li>`).join('')}</ul></details>`}

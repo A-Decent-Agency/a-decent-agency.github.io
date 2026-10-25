@@ -35,6 +35,11 @@ html[data-view="flight"] .intro h1 > span { margin-left: .25em; }
 .flight-site h3 { font-size: 17px; margin: 10px 0; overflow-wrap: anywhere; }
 .flight-site p { font-size: 10px; line-height: 1.7; color: var(--muted); margin-bottom: 10px; }
 .flight-site #flight-site-metrics { color: var(--cyan); }
+.campus-stage { color: var(--gold); font-size: 14px; font-weight: 700; line-height: 1.5; }
+.campus-details a { color: var(--cyan); overflow-wrap: anywhere; }
+.campus-details details { margin: 12px 0; border-top: 1px solid var(--line); padding-top: 10px; }
+.campus-details ul { padding-left: 18px; font-size: 11px; line-height: 1.7; }
+.campus-details small { display: block; color: var(--muted); overflow-wrap: anywhere; }
 .flight-site summary { font-size: 11px; color: var(--gold); cursor: pointer; }
 #flight-site-items { display: grid; gap: 8px; margin-top: 12px; }
 #flight-site-items button { text-align: left; padding: 9px; font-size: 11px; line-height: 1.6; }

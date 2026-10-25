@@ -96,6 +96,7 @@ test('real public snapshot resolves all five reviewed portfolios without reclass
   }
   for (const site of constructionSites(snapshot.items)) {
     if (site.type === 'milestone') assert.equal(siteIdentity(site).projects.length, 0);
+    else if (site.type === 'repository' && siteIdentity(site).projects.length === 1) assert.ok(siteIdentity(site).artwork);
     else assert.equal(siteIdentity(site).artwork, null);
   }
 });

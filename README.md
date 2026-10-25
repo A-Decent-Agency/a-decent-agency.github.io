@@ -4,6 +4,18 @@
 
 Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, account, database, or application server. Apache-2.0.
 
+## Project highway / living construction
+
+The landing flight now passes recognizable project offramps before the shared milestone/workstream districts: Agency entrance, Busking tower, Head and Market halls, Canopy's broad foundation, BigNuten staging, and later public repository blueprints. Matching uses explicit public repository references or reviewed portfolio identities, never guessed private names or arbitrary title keywords. Every board card still appears exactly once. Private/redacted portfolios stay in unbranded shared yards.
+
+Architecture is a labeled steward milestone, not a calculated completion percentage. Busking's “Version 1 construction complete” records the steward's 25 October direction, **not** an invented GitHub v1 release. Done cards add bounded structural floors; backlog size does not manufacture a finished tower. Public GitHub releases, recent merged PRs, board progress and unavailable observations are presented separately.
+
+Offramps, project signs and pinned project-owned artwork are visible in 3D. Highway and project-to-project signal packets illustrate recorded integration paths, not actual network traffic, usage, balances or payments. Ambient rendering is capped at 12 fps; piloting at 30 fps. Pause, reduced motion, hidden tabs and inactive views stop animation. Mobile/save-data visitors keep the complete list fallback and can opt into flight.
+
+Project detail disclosures adapt DecentCanopy's provenance-first card pattern (`scripts/agency-map.js` at `6a45fff8620f289028538309efa36d754756b4c2`: readiness, evidence, connections) rather than copying its application-specific treasury or creator-auth logic. The existing Office dock remains responsible for source cards and dependencies. Receiving-app validation covers exact card partition/privacy, six architectural landmarks, refreshed release signs, unavailable observations and desktop/mobile flight behavior.
+
+Public activity is automatically collected hourly into `data/progress.json`; the private board snapshot is exported only when its separate read secret is available. Visible pages recheck publications every five minutes and on return. Refresh errors retain prior data with an explicit failure label. This is scheduled observation, not a live socket or a guarantee that an unedited board knows about a release. New architectural stages and approved integration paths still need deliberate curation; no board writes or private-data publication is automated.
+
 ## Run locally
 
 From this repository:
@@ -21,7 +33,7 @@ Three.js **0.169.0**, OrbitControls, and ethers **6.13.4** come from the pinned 
 The office uses a checked-in, privacy-filtered snapshot of [DecentAgency — Agency Marathon](https://github.com/orgs/A-Decent-Agency/projects/3), project node `PVT_kwDODD7ovc4Bn91h`. The source project is private: visitors do **not** need access or a token to view the public snapshot. GitHub source links may require access.
 
 - **Board:** Todo / In Progress / Done / Blocked, six spatial cards per column per page. Pagination keeps dense boards usable; the 2D list always contains **all** matching items.
-- **Construction flight (landing view):** an actual perspective flight corridor through the GitHub roadmap. Dated milestones are sites in Start/Target order; undated milestones and workstream yards follow in Horizon order. Each non-milestone card belongs to its workstream yard, so every matching public item appears exactly once. Workstream grouping does not invent milestone dependencies. Route spacing is navigational, not proportional to time, effort, or budget. Select any site, use previous/next, or click its 3D sign to chart an approach. Open **What is being built here?** to inspect its real cards.
+- **Construction flight (landing view):** an actual perspective flight corridor through the GitHub roadmap. Explicit public repository campuses come first, with the core landmarks ahead of future blueprints. Remaining dated milestones follow in Start/Target order; undated milestones and unassigned workstream yards follow in Horizon order. Every matching public item appears exactly once. Grouping does not invent milestone dependencies. Route spacing is navigational, not proportional to time, effort, or budget. Select any site, use previous/next, or click its 3D sign to chart an approach. Open **What is being built here?** to inspect its real cards.
 - **Roadmap:** milestones positioned by Start (or Target if Start is missing), duration lines to Target, a UTC today marker, and an undated staging area. Dates are plans, not promises.
 - **Workstreams / Canopy:** orbit clusters by Workstream, eight spatial cards per cluster per page. Dependency lines are solid cyan; crossovers are dashed gold. Parsing recognizes milestone identifiers (`M1`), linked item URLs, and repository-name arrows (`decent-canopy -> big-nuten`). Prose is retained in the side panel, not guessed into edges. Only endpoints on the current spatial page are connected.
 - **Repo passports:** Portfolio cards colored by Role (legend below the scene), sized and raised by Baseline met count.
@@ -47,9 +59,12 @@ backlog is not drawn as a busy build. Blocked sites carry restricted-access
 status; Done retires cranes, but does not independently prove deployment. These
 are visual planning proxies, not workforce, monetary, effort, or completion
 measurements. Construction scaffolds, signs, route gates and the ship are generated
-locally; no additional image lookups or private identities are inferred.
+locally; the five reviewed project campuses also load pinned public artwork from
+the existing identity registry. No private identities or arbitrary remote images
+are inferred. Failed artwork retains a project sign and surfaces a notice.
 
-The flight scene renders on demand and at no more than 30fps while moving. It
+The flight scene renders on demand, at up to 12fps for illustrative signals and
+at no more than 30fps while moving. It
 stops when inactive/hidden or paused, clears held keys on focus loss, and respects
 reduced motion. Switching back to another office tab deactivates the flight
 renderer. No weapons, scores, rewards, wallet actions, or project writes are added.
@@ -202,8 +217,9 @@ wallet, GitHub API, image fetch or global observer runs on import.
 For 3D integration, draw `fallback.monogram`/`color` as immediate local sign
 textures. Give milestone gates a distinct silhouette and `MS` label. Keep yard
 names primary, with a small row of member project badges, never a guessed yard
-owner. Load an allowlisted `project.artwork.url` only as a bounded selected/nearby
-upgrade, dispose replaced textures, and retain fallback on CORS/load failure.
+owner. The highway loads at most five reviewed project-campus artwork textures
+per scene publication; it never loads images per board card or arbitrary future
+district. Dispose replaced textures and retain fallback on CORS/load failure.
 Expose provenance/credit in the selected-site panel; artwork is identity
 wayfinding, not evidence of integration, deployment, funding or endorsement.
 
@@ -253,7 +269,7 @@ The exporter queries GraphQL directly, paginates project items, preserves the pr
 
 ### Scheduled refresh
 
-`.github/workflows/sync-project.yml` runs every six hours (at minute 17), or with **Run workflow**. GitHub can delay schedules. It gracefully emits a notice and skips if the credential is absent. It commits **only** `data/project.json` if changed, using `GITHUB_TOKEN`'s `contents: write` for the commit, and includes the Copilot co-author trailer.
+`.github/workflows/sync-project.yml` runs hourly (at minute 17), or with **Run workflow**. GitHub can delay schedules. Without the project credential it emits a notice and skips the private board export, while the public repository observer still runs using the workflow token. A failed board export is reported separately and does not block public observation. It tests the result and commits **only** changed `data/project.json` and `data/progress.json`, using `GITHUB_TOKEN`'s `contents: write` for the commit, and includes the Copilot co-author trailer. Public collection checks visibility first; an unconfirmed or private repository has its old details withheld. Other API errors retain confirmed-public observations with an explicit unavailable label.
 
 The browser checks that published snapshot every five minutes while visible,
 on return to the tab, or with **Refresh plan**. Sites, dates, crane counts and card
@@ -310,22 +326,27 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/main.js` — tabs, accessible list/details, local editor and housing interactions.
 - `js/scene.js` — pinned Three.js scene, controls, spatial views, picking and dragging.
 - `js/construction-scene.js`, `js/construction-model.js` — bounded ship flight, source-derived construction sites and crane/workload rules.
+- `js/project-campus.js`, `js/campus-details.js` — explicit public repository grouping, curated architecture and source-backed project disclosures.
+- `js/progress-feed.js`, `scripts/sync-progress.mjs`, `data/progress.json` — bounded public GitHub observation, validation and approved integration paths.
 - `js/model.js` — view filters, color semantics, date and relationship parsing.
 - `js/markdown.js` — HTML-escaped, small Markdown subset (no raw HTML/images).
 - `js/editor.js` — versioned map validation/storage, import/export.
 - `js/project.js`, `scripts/export-project.mjs` — shared GraphQL exporter/privacy boundary and Node entry point.
 - `data/project.json` — the real public project snapshot.
-- `.github/workflows/sync-project.yml` — six-hour/manual snapshot sync.
-- `tests/*.test.js`, `scripts/verify-browser.mjs`, `scripts/verify-flight.mjs` — focused unit/acceptance checks.
+- `.github/workflows/sync-project.yml` — hourly/manual public observation and optional private-board snapshot sync.
+- `tests/*.test.js`, `scripts/verify-browser.mjs`, `scripts/verify-flight.mjs`, `scripts/verify-highway.mjs` — focused unit/acceptance checks.
 - `.nojekyll`, `package.json`, `LICENSE`, `NOTICE`, `README.md` — publishing, metadata and documentation.
 
 Run `npm test` for the dependency-free unit/privacy suite. For optional browser
 acceptance, serve this checkout, set `OFFICE_URL`, `SCREENSHOT_DIR` and
 `PLAYWRIGHT_MODULE` to an existing Playwright installation, then run
-`node scripts/verify-flight.mjs` and `node scripts/verify-browser.mjs` **sequentially**
+`node scripts/verify-highway.mjs`, `node scripts/verify-flight.mjs` and
+`node scripts/verify-browser.mjs` **sequentially**
 to avoid competing headless WebGL contexts. The flight helper checks real snapshot
 coverage, steering frame bounds, pause, dynamic published-snapshot changes and
 failure retention, all original tabs, reduced motion and 375/320px touch layouts.
+The highway helper checks six landmarks, visible release-sign updates, explicit
+unavailable states and older/malformed/failed activity-publication retention.
 
 ## License and credits
 

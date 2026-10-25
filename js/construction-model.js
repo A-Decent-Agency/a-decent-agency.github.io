@@ -1,4 +1,5 @@
 import { dateNumber } from './model.js';
+import { projectSites } from './project-campus.js';
 
 export const FLIGHT_BOUNDS = { lateral: 24, vertical: 16, spacing: 110 };
 const horizons = ['Now', 'Next', 'Later', 'Inventory'];
@@ -13,11 +14,13 @@ export function siteMetrics(items) {
     phase: total === done ? 'Handover' : active ? 'Under construction' : blocked ? 'Access restricted' : 'Foundations / not started' };
 }
 export function constructionSites(items) {
+  const campuses = projectSites(items);
+  const assigned = new Set(campuses.flatMap(site => site.items.map(item => item.id)));
   const milestones = items.filter(item => item.fields?.Kind === 'Milestone');
   const sites = milestones.map(item => ({ id: item.id, title: item.title, type: 'milestone', items: [item],
     start: item.fields?.Start || '', target: item.fields?.Target || '', horizon: item.fields?.Horizon || 'Inventory' }));
   const groups = new Map();
-  for (const item of items.filter(item => item.fields?.Kind !== 'Milestone')) {
+  for (const item of items.filter(item => item.fields?.Kind !== 'Milestone' && !assigned.has(item.id))) {
     const workstream = item.fields?.Workstream || 'Unassigned';
     if (!groups.has(workstream)) groups.set(workstream, []);
     groups.get(workstream).push(item);
@@ -32,7 +35,7 @@ export function constructionSites(items) {
     if (ad !== null || bd !== null) return ad !== null ? -1 : 1;
     return horizons.indexOf(a.horizon) - horizons.indexOf(b.horizon) || a.title.localeCompare(b.title);
   });
-  return sites.map((site, index) => ({ ...site, ...siteMetrics(site.items), index, position: routePoint(index) }));
+  return [...campuses, ...sites].map((site, index) => ({ ...site, ...siteMetrics(site.items), index, position: routePoint(index) }));
 }
 export function routePoint(progress) {
   return { x: Math.sin(progress * .85) * 32, y: Math.sin(progress * .47) * 9, z: -progress * FLIGHT_BOUNDS.spacing };

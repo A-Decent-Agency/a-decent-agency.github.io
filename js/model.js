@@ -2,7 +2,7 @@ export const STATUS = ['Todo', 'In Progress', 'Done', 'Blocked'];
 export const COLORS = { Todo: '#aa8bea', 'In Progress': '#71e6d0', Done: '#e5c583', Blocked: '#ee92af' };
 export const ROLE_COLORS = { 'Umbrella & core platform': '#e5c583', 'Active dapp': '#71e6d0', 'Shared module source': '#8aaff1', Incubating: '#aa8bea', 'Reference / archive candidate': '#bd9c8b', 'External / learning': '#ee92af' };
 export const VIEWS = {
-  flight: ['The Agency, under construction', 'Fly the GitHub Marathon: dated milestone sites first, then undated workstream yards. Cranes follow the planning snapshot, not an invented schedule.'],
+  flight: ['The Agency, under construction', 'Fly the project highway: recognizable buildings and public repository offramps, then shared milestone and workstream districts. Architecture records steward milestones; cranes follow the board.'],
   board: ['The execution board', 'Small moves, shared momentum. Pick a card to see what’s behind it.'],
   roadmap: ['The marathon runway', 'Milestones by Start / Target. Today is cyan; undated possibilities wait in staging.'],
   canopy: ['Independently interconnected', 'Workstreams in orbit. Solid lines: dependencies. Dashed lines: crossovers.'],

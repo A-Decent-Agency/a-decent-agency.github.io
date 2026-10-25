@@ -33,7 +33,7 @@
   <main>
     <section class="intro" aria-labelledby="page-title">
       <div class="intro-copy"><div class="eyebrow"><span class="live-dot"></span> THE DECENT AGENCY PLANNING OFFICE <span class="version">/ V.01</span></div>
-        <h1 id="page-title">Good things.<br><span>Under construction.</span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M10 80 L80 10 M20 10 H80 V70"/></svg></h1>
+        <h1 id="page-title">Decent Agency.<br><span>The road we're building.</span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M10 80 L80 10 M20 10 H80 V70"/></svg></h1>
         <p>A shared blueprint for a more decent internet.<br>Explore the marathon. Find your crossover. Build your own.</p>
       </div>
       <div class="site-note"><span class="note-number">SITE NOTICE / 001</span><p>Not a finished empire.<br><em>A living construction site.</em></p><div class="note-rule"></div><span>Open infrastructure. Human-scale ambition.</span><a href="https://github.com/orgs/A-Decent-Agency/projects/3" target="_blank" rel="noopener noreferrer">Follow the Agency Marathon ↗</a><small>Source project is private · public snapshot below</small></div>
@@ -65,6 +65,7 @@
         <div id="daily-flight"></div>
       </details>
       <p id="planning-change-summary" class="planning-change-summary" role="status" hidden></p>
+      <p id="progress-status" class="planning-change-summary" role="status">Loading public repository activity…</p>
       <div id="flight-tools" class="flight-tools" hidden>
         <label>CHART A COURSE<select id="flight-destination" aria-label="Construction site destination"></select></label>
         <button id="flight-previous" aria-label="Previous construction site">← Previous site</button>
@@ -84,9 +85,10 @@
           <h3 id="flight-site-title">Preparing the construction route…</h3>
           <p id="flight-site-dates"></p>
           <p id="flight-site-metrics"></p>
+          <div id="campus-details" class="campus-details"></div>
           <details id="flight-identity-panel"><summary>Project signs / public artwork</summary><div id="flight-site-identity"></div></details>
           <details id="flight-dock-panel"><summary>Dock / finish line, evidence and dependencies</summary><div id="planning-dock"></div></details>
-          <details id="flight-card-panel"><summary>What is being built here?</summary><p id="flight-metric-help">Cranes are a visual proxy for planning activity, not effort, budget, people, or deployment progress. Todo-only sites have one foundation crane; active sites have 1 + ceil(√active cards), capped at six. All-Done sites retire their cranes. Site footprint follows card count.</p><div id="flight-site-items"></div></details>
+          <details id="flight-card-panel"><summary>What is being built here?</summary><p id="flight-metric-help">Buildings follow labeled steward milestones: Busking tower, Canopy foundation, Head/Market halls, BigNuten staging and future blueprints. Completed board cards add bounded floors; this is not a readiness percentage. Cranes reflect board activity, not people or money. Connection signals illustrate recorded integration paths, not actual traffic.</p><div id="flight-site-items"></div></details>
         </aside>
       </div>
       <div id="flight-controls" class="flight-controls" role="group" aria-label="Ship controls" hidden>
