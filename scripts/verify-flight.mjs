@@ -7,7 +7,7 @@ const base = process.env.OFFICE_URL || 'http://127.0.0.1:18773/';
 const shots = process.env.SCREENSHOT_DIR || 'office-shots';
 await mkdir(shots, { recursive: true });
 const fixture = JSON.parse(await readFile(new URL('../data/project.json', import.meta.url)));
-const expected = constructionSites(fixture.items);
+const expected = constructionSites(fixture.items, { includeContext: true });
 const browser = await chromium.launch({ headless: true });
 const results = [];
 try {
@@ -85,7 +85,7 @@ try {
   for (const item of next.items.filter(item => expected[0].items.some(member => member.id === item.id))) item.fields.Status = 'Done';
   await page.route('**/data/project.json', route => route.fulfill({ json: next }));
   await page.locator('#refresh-project').click();
-  await page.waitForFunction(() => document.querySelector('#flight-site-metrics').textContent.includes('0 cranes'));
+  await page.waitForFunction(() => document.querySelector('#flight-site-metrics').textContent.includes('Handover'));
   assert.match(await page.locator('#flight-site-metrics').innerText(), /Handover/);
   assert.match(await page.locator('#planning-change-summary').innerText(), /marked Done/);
   const retainedComparison = await page.locator('#planning-change-summary').innerText();

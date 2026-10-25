@@ -1,21 +1,24 @@
 {
-  "schemaVersion": 1,
-  "checkedAt": "2026-10-25T15:26:02.555Z",
+  "schemaVersion": 2,
+  "checkedAt": "2026-10-25T16:08:33.204Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-21T13:12:22Z",
       "release": null,
       "mergedPulls": [],
-      "issues": null
+      "issues": null,
+      "codeBytes": 79189,
+      "versions": [],
+      "versionsTruncated": false
     },
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-25T14:44:30Z",
       "release": null,
@@ -51,14 +54,17 @@
           "mergedAt": "2026-10-24T11:14:03Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 4120375,
+      "versions": [],
+      "versionsTruncated": false
     },
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
-      "pushedAt": "2026-10-25T15:19:16Z",
+      "pushedAt": "2026-10-25T15:55:23Z",
       "release": null,
       "mergedPulls": [
         {
@@ -92,12 +98,15 @@
           "mergedAt": "2026-10-23T16:02:47Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 1266112,
+      "versions": [],
+      "versionsTruncated": false
     },
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-24T19:22:12Z",
       "release": {
@@ -137,12 +146,27 @@
           "mergedAt": "2026-10-22T03:08:04Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 2851368,
+      "versions": [
+        {
+          "tag": "v2.0.0",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/releases/tag/v2.0.0",
+          "publishedAt": "2026-10-21T21:28:52Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/DecentHead/releases/download/v2.0.0/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "70",
+          "mintTxHash": "0x7b4c03b10c0a255a2a86410d8296d6745378e4d2e3d0af7cab9fa1213515e20b",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 12
+        }
+      ],
+      "versionsTruncated": false
     },
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-25T09:20:53Z",
       "release": {
@@ -182,12 +206,27 @@
           "mergedAt": "2026-10-22T15:43:59Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 955107,
+      "versions": [
+        {
+          "tag": "v0.3.1",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
+          "publishedAt": "2026-10-22T02:26:31Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/DecentMarket/releases/download/v0.3.1/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "71",
+          "mintTxHash": "0x2066fcd27b522f1824ca6543a8755d4b57c7cc56fc71d535c3fdc2b3352f7e4b",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 12
+        }
+      ],
+      "versionsTruncated": false
     },
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-23T06:15:59Z",
       "release": null,
@@ -223,12 +262,15 @@
           "mergedAt": "2026-08-18T08:01:39Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 1669279,
+      "versions": [],
+      "versionsTruncated": false
     },
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:20Z",
       "release": {
@@ -262,12 +304,27 @@
           "mergedAt": "2026-10-24T11:26:55Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 437800,
+      "versions": [
+        {
+          "tag": "v0.2.0",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/releases/tag/v0.2.0",
+          "publishedAt": "2026-10-24T19:24:20Z",
+          "evidenceUrl": "https://github.com/A-Decent-Agency/DecentJukebox/releases/download/v0.2.0/supporter-mint-evidence.json",
+          "chainId": 8453,
+          "tokenId": "72",
+          "mintTxHash": "0xb244337fc61a2072fce840289725e73e29a280fa072d5d45694ff0d51f45c160",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 64
+        }
+      ],
+      "versionsTruncated": false
     },
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:36Z",
       "release": {
@@ -307,12 +364,27 @@
           "mergedAt": "2026-10-24T11:30:11Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 59528,
+      "versions": [
+        {
+          "tag": "v0.2.0",
+          "url": "https://github.com/A-Decent-Agency/DBuskRadio/releases/tag/v0.2.0",
+          "publishedAt": "2026-10-24T19:24:36Z",
+          "evidenceUrl": "https://github.com/A-Decent-Agency/DBuskRadio/releases/download/v0.2.0/supporter-mint-evidence.json",
+          "chainId": 8453,
+          "tokenId": "74",
+          "mintTxHash": "0xa4e15fbead66c839e52271dfc989c6a507e74bdaf973b4000514d3d606f8be69",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 50
+        }
+      ],
+      "versionsTruncated": false
     },
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
       "pushedAt": "2026-10-24T19:31:33Z",
       "release": {
@@ -352,14 +424,29 @@
           "mergedAt": "2026-10-24T11:26:58Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 97363,
+      "versions": [
+        {
+          "tag": "v0.2.1",
+          "url": "https://github.com/A-Decent-Agency/DVert/releases/tag/v0.2.1",
+          "publishedAt": "2026-10-24T19:31:34Z",
+          "evidenceUrl": "https://github.com/A-Decent-Agency/DVert/releases/download/v0.2.1/supporter-mint-evidence.json",
+          "chainId": 8453,
+          "tokenId": "73",
+          "mintTxHash": "0xe95e1ca897c514ff89afb5643a8d8f393e67a083a97e7b1056f6bdba45d359e7",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 57
+        }
+      ],
+      "versionsTruncated": false
     },
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-25T15:26:02.555Z",
+      "checkedAt": "2026-10-25T16:08:33.204Z",
       "error": "",
-      "pushedAt": "2026-10-25T15:25:32Z",
+      "pushedAt": "2026-10-25T15:26:09Z",
       "release": null,
       "mergedPulls": [
         {
@@ -393,10 +480,19 @@
           "mergedAt": "2026-10-23T17:36:19Z"
         }
       ],
-      "issues": null
+      "issues": null,
+      "codeBytes": 231601,
+      "versions": [],
+      "versionsTruncated": false
     }
   ],
   "connections": [
+    {
+      "from": "A-Decent-Agency/a-decent-agency.github.io",
+      "to": "TheJollyLaMa/DecentCanopy",
+      "label": "Planning office adapts Canopy provenance and public project-map patterns",
+      "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/7"
+    },
     {
       "from": "TheJollyLaMa/DecentHead",
       "to": "TheJollyLaMa/DecentMarket",

@@ -1,4 +1,5 @@
 import { itemIdentity } from './site-identities.js';
+import { CANOPY } from './canopy-registry.js';
 
 // Art direction records steward milestones, not a computed readiness or ownership score.
 export const LANDMARKS = [
@@ -14,12 +15,16 @@ export const LANDMARKS = [
     milestone: 'Broad foundations / growing the network' },
   { repository: 'TheJollyLaMa/BigNuten_Vanilla', name: 'BigNuten', form: 'staging', color: '#cfaaef',
     milestone: 'Next construction site / recovery acceptance ahead' },
+  { repository: 'A-Decent-Agency/a-decent-agency.github.io', name: 'Agency Office', form: 'hall', color: '#baa2e8',
+    milestone: 'Planning observatory / shared jobs and project map' },
 ];
 
 export function publicRepository(item) {
   if (!item || item.private || item.bodyRedacted || item.redacted || item.isPrivate || item.repository?.isPrivate) return null;
   const identity = itemIdentity(item);
   if (identity.projects.length === 1) return identity.projects[0].repository;
+  const explicit = item.fields?.Project;
+  if (CANOPY.projects.some(project => project.repository === explicit)) return explicit;
   const direct = typeof item.repository === 'string' && /^[\w.-]+\/[\w.-]+$/.test(item.repository)
     ? item.repository : item.url?.match(/^https:\/\/github\.com\/([\w.-]+\/[\w.-]+)\/(?:issues|pull)\/\d+$/)?.[1];
   if (direct) return direct;
@@ -27,7 +32,7 @@ export function publicRepository(item) {
   return item.body?.match(/(?:^|\n)Repository:\s*https:\/\/github\.com\/([\w.-]+\/[\w.-]+)(?=[\s/]|$)/i)?.[1] || null;
 }
 
-export function projectSites(items) {
+export function projectSites(items, { includeContext = false } = {}) {
   const groups = new Map();
   for (const item of items) {
     if (item.fields?.Kind === 'Milestone') continue;
@@ -36,6 +41,10 @@ export function projectSites(items) {
     const key = repository.toLowerCase();
     if (!groups.has(key)) groups.set(key, { repository, items: [] });
     groups.get(key).items.push(item);
+  }
+  if (includeContext) for (const project of [...CANOPY.projects,
+    { repository: 'A-Decent-Agency/DBuskRadio' }, { repository: 'A-Decent-Agency/DVert' }]) {
+    if (!groups.has(project.repository.toLowerCase())) groups.set(project.repository.toLowerCase(), { repository: project.repository, items: [] });
   }
   return [...groups.values()].map(group => {
     const index = LANDMARKS.findIndex(project => project.repository.toLowerCase() === group.repository.toLowerCase());
@@ -51,11 +60,20 @@ export function campusStructure(site, feed) {
   const observation = feed?.repositories?.find(entry => entry.repository.toLowerCase() === site.project?.repository.toLowerCase());
   const form = site.project?.form || 'blueprint';
   const completed = site.items.filter(item => item.fields?.Status === 'Done').length;
-  const floors = form === 'tower' ? Math.min(12, 5 + Math.floor(completed / 3))
-    : form === 'foundation' ? 2 + Math.min(2, Math.floor(completed / 8)) : form === 'hall' || form === 'entrance' ? 1 : 0;
-  return { form, floors, completed, observation,
-    height: form === 'tower' ? floors * 7 : form === 'foundation' ? floors * 4 : form === 'hall' ? 10 : 5,
-    width: form === 'foundation' ? 43 : form === 'hall' ? 36 : form === 'tower' ? 23 : 30,
+  const versions = observation?.versions || [];
+  const deliveredFloors = Math.min(12, versions.length);
+  const remaining = site.items.filter(item => !['Done'].includes(item.fields?.Status) && item.fields?.Kind !== 'Portfolio');
+  const active = remaining.filter(item => ['In Progress', 'Blocked'].includes(item.fields?.Status));
+  const baseFloors = form === 'tower' ? Math.min(9, 3 + Math.floor(completed / 4)) : form === 'foundation' ? 2 : form === 'hall' || form === 'entrance' ? 1 : 0;
+  const floors = Math.max(deliveredFloors, baseFloors);
+  const codeBytes = observation?.codeBytes;
+  const size = codeBytes == null ? 1 : Math.min(1.65, .85 + Math.log10(1 + codeBytes / 10000) * .22);
+  const width = (form === 'foundation' ? 43 : form === 'hall' ? 36 : form === 'tower' ? 23 : 30) * size;
+  const messy = active.length > 0 || !deliveredFloors && form !== 'entrance';
+  const buildCranes = messy && site.items.length ? Math.max(1, site.cranes || 0) : 0;
+  return { form, floors, deliveredFloors, versions, completed, remaining, active, codeBytes, observation, messy, buildCranes,
+    height: form === 'tower' ? floors * 9 : form === 'foundation' ? floors * 6 : Math.max(8, floors * 9),
+    width,
     label: site.project?.milestone || site.phase,
-    basis: site.project?.basis || 'Steward-selected architectural stage; board counts and GitHub observations shown separately.' };
+    basis: `${site.project?.basis || 'Steward-selected architectural stage'}. ${versions.length} receipt-backed delivered version(s); ${remaining.length} remaining mapped jobs. Public language bytes scale footprint logarithmically, not value or readiness.` };
 }

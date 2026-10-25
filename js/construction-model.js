@@ -9,12 +9,12 @@ export function siteMetrics(items) {
   const done = items.filter(item => item.fields?.Status === 'Done').length;
   const blocked = items.filter(item => item.fields?.Status === 'Blocked').length;
   // A planning-card count is a visual workload proxy, never an effort or funding estimate.
-  const cranes = total === done ? 0 : active === 0 ? 1 : Math.min(6, 1 + Math.ceil(Math.sqrt(active)));
+  const cranes = !total || total === done ? 0 : active === 0 ? 1 : Math.min(6, 1 + Math.ceil(Math.sqrt(active)));
   return { total, active, done, blocked, cranes, scale: 1 + Math.min(1.7, Math.sqrt(total) / 6),
-    phase: total === done ? 'Handover' : active ? 'Under construction' : blocked ? 'Access restricted' : 'Foundations / not started' };
+    phase: !total ? 'Context / no mapped jobs' : total === done ? 'Handover' : active ? 'Under construction' : blocked ? 'Access restricted' : 'Foundations / not started' };
 }
-export function constructionSites(items) {
-  const campuses = projectSites(items);
+export function constructionSites(items, options) {
+  const campuses = projectSites(items, options);
   const assigned = new Set(campuses.flatMap(site => site.items.map(item => item.id)));
   const milestones = items.filter(item => item.fields?.Kind === 'Milestone');
   const sites = milestones.map(item => ({ id: item.id, title: item.title, type: 'milestone', items: [item],

@@ -1,7 +1,9 @@
 // Shared by the Node exporter and the visitor's direct-to-GitHub importer.
+import { CANOPY } from './canopy-registry.js';
+import { REPOSITORIES } from './progress-feed.js';
 export const PROJECT_ID = 'PVT_kwDODD7ovc4Bn91h';
 const PRIVATE_PORTFOLIOS = new Set(['bean', 'decentmaker', 'jacobsladder26', 'duoduel', 'decentcalendar', 'decentcanvas', 'decentfoot', 'decentfooter', 'thejokerwillplay']);
-export const FIELD_NAMES = ['Status', 'Kind', 'Workstream', 'Horizon', 'Role', 'Decision', 'Baseline met', 'Start', 'Target', 'Outcome', 'Dependencies', 'Crossovers'];
+export const FIELD_NAMES = ['Status', 'Kind', 'Workstream', 'Horizon', 'Role', 'Decision', 'Baseline met', 'Start', 'Target', 'Outcome', 'Dependencies', 'Crossovers', 'Project', 'Component', 'Delivery version', 'Priority'];
 const PAGE = `pageInfo { hasNextPage endCursor }`;
 const QUERY = `query OfficeProject($id: ID!, $cursor: String) {
   node(id: $id) { ... on ProjectV2 {
@@ -54,6 +56,10 @@ export function sanitizeItem(item) {
   // Registry cards hold people, access reviews and sponsor details; keep them out of public snapshots.
   const isRegistry = /^Registry:/i.test(content.title) || fields.Kind === 'Registry';
   const hideBody = isRegistry || (knownPrivate && (!repository || repository.isPrivate !== false));
+  const allowed = new Set([...REPOSITORIES, ...CANOPY.projects.map(project => project.repository)]);
+  if (hideBody || !allowed.has(fields.Project)) {
+    for (const name of ['Project', 'Component', 'Delivery version', 'Priority']) fields[name] = '';
+  }
   return {
     id: item.id, title: content.title,
     type: ({ DRAFT_ISSUE: 'draft', ISSUE: 'issue', PULL_REQUEST: 'PR' })[item.type] || 'draft',
