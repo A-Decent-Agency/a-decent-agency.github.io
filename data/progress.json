@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-25T17:06:46.199Z",
+  "checkedAt": "2026-10-25T19:06:15.285Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-21T13:12:22Z",
       "release": null,
@@ -18,7 +18,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-25T14:44:30Z",
       "release": null,
@@ -62,9 +62,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
-      "pushedAt": "2026-10-25T16:56:22Z",
+      "pushedAt": "2026-10-25T18:56:02Z",
       "release": null,
       "mergedPulls": [
         {
@@ -106,7 +106,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-24T19:22:12Z",
       "release": {
@@ -177,7 +177,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-25T09:20:53Z",
       "release": {
@@ -248,7 +248,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-23T06:15:59Z",
       "release": null,
@@ -292,7 +292,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:20Z",
       "release": {
@@ -357,7 +357,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:36Z",
       "release": {
@@ -428,7 +428,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
       "pushedAt": "2026-10-24T19:31:33Z",
       "release": {
@@ -499,11 +499,17 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-25T17:06:46.199Z",
+      "checkedAt": "2026-10-25T19:06:15.285Z",
       "error": "",
-      "pushedAt": "2026-10-25T17:06:20Z",
+      "pushedAt": "2026-10-25T17:25:50Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 11,
+          "title": "Enable same-page Supporter purchases beside project sites",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/11",
+          "mergedAt": "2026-10-25T17:25:50Z"
+        },
         {
           "number": 10,
           "title": "Add project mint galleries with verified purchase links",
@@ -527,16 +533,10 @@
           "title": "Add explicit public identities for construction site signs",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/5",
           "mergedAt": "2026-10-23T17:36:22Z"
-        },
-        {
-          "number": 4,
-          "title": "Add source-grounded flight docking and publication change summaries",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/4",
-          "mergedAt": "2026-10-23T17:36:21Z"
         }
       ],
       "issues": null,
-      "codeBytes": 309580,
+      "codeBytes": 348077,
       "versions": [],
       "versionsTruncated": false
     }
