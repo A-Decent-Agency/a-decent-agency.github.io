@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-25T15:17:07.078Z",
+  "checkedAt": "2026-10-25T15:26:02.555Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-21T13:12:22Z",
       "release": null,
@@ -15,7 +15,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-25T14:44:30Z",
       "release": null,
@@ -56,9 +56,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
-      "pushedAt": "2026-10-25T14:55:50Z",
+      "pushedAt": "2026-10-25T15:19:16Z",
       "release": null,
       "mergedPulls": [
         {
@@ -97,7 +97,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-24T19:22:12Z",
       "release": {
@@ -142,7 +142,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-25T09:20:53Z",
       "release": {
@@ -187,7 +187,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-23T06:15:59Z",
       "release": null,
@@ -228,7 +228,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:20Z",
       "release": {
@@ -267,7 +267,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:36Z",
       "release": {
@@ -312,7 +312,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
       "pushedAt": "2026-10-24T19:31:33Z",
       "release": {
@@ -357,11 +357,17 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "checkedAt": "2026-10-25T15:26:02.555Z",
       "error": "",
-      "pushedAt": "2026-10-24T20:49:52Z",
+      "pushedAt": "2026-10-25T15:25:32Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 7,
+          "title": "Build a living project highway for the Agency planning office",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/7",
+          "mergedAt": "2026-10-25T15:25:32Z"
+        },
         {
           "number": 5,
           "title": "Add explicit public identities for construction site signs",
@@ -385,12 +391,6 @@
           "title": "Integrate daily flight, project signs and change-aware docking",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/6",
           "mergedAt": "2026-10-23T17:36:19Z"
-        },
-        {
-          "number": 2,
-          "title": "Make construction flight the Agency Office landing view",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/2",
-          "mergedAt": "2026-10-23T17:08:41Z"
         }
       ],
       "issues": null
