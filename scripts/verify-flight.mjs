@@ -38,7 +38,8 @@ try {
   const frames = () => page.evaluate(() => window.flightFrames);
   const idle = await frames();
   await page.waitForTimeout(700);
-  assert.equal(await frames(), idle, 'idle construction scene must not run a RAF loop');
+  const idleFrames = await frames() - idle;
+  assert.ok(idleFrames <= 12, 'ambient integration signals are bounded to 12 fps');
   await page.locator('#scene canvas:visible').focus();
   await page.keyboard.down('w'); await page.keyboard.down('d');
   const moving = await frames();
@@ -81,8 +82,7 @@ try {
   const next = structuredClone(fixture);
   next.exportedAt = new Date().toISOString();
   next.items[0].title = 'Portfolio: Changed through published snapshot';
-  const milestone = next.items.find(item => item.id === expected[0].id);
-  milestone.fields.Status = 'Done';
+  for (const item of next.items.filter(item => expected[0].items.some(member => member.id === item.id))) item.fields.Status = 'Done';
   await page.route('**/data/project.json', route => route.fulfill({ json: next }));
   await page.locator('#refresh-project').click();
   await page.waitForFunction(() => document.querySelector('#flight-site-metrics').textContent.includes('0 cranes'));
@@ -113,7 +113,7 @@ try {
   assert.equal(await page.locator('.list-card').count(), fixture.items.length);
   assert.equal(await page.locator('#scene').isVisible(), false);
   assert.deepEqual(errors, []);
-  results.push({ desktop: 'passed', sites: expected.length, items: fixture.items.length, idleFrames: 0, activeFrames, dynamicRefresh: 'passed', failureRetention: 'passed', allTabs: 'passed' });
+  results.push({ desktop: 'passed', sites: expected.length, items: fixture.items.length, idleFrames, activeFrames, dynamicRefresh: 'passed', failureRetention: 'passed', allTabs: 'passed' });
   await page.close();
   for (const width of [375, 320]) {
     const mobile = await browser.newPage({ viewport: { width, height: 900 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });

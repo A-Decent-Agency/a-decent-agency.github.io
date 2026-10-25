@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { COLORS } from './model.js';
 import { constructionSites, routePoint, flightStep, FLIGHT_BOUNDS } from './construction-model.js';
 import { siteIdentity } from './site-identities.js';
+import { campusStructure } from './project-campus.js';
 
 const lineMaterial = color => new THREE.LineBasicMaterial({ color });
 function lines(points, color) {
@@ -26,7 +27,7 @@ function textSprite(text, color = '#eee9f6', size = 24) {
   canvas.width = 1024; canvas.height = 160;
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = '#100e1de8'; ctx.fillRect(0, 0, 1024, 160);
-  ctx.textAlign = 'center'; ctx.fillStyle = color; ctx.font = 'bold 35px system-ui';
+  ctx.textAlign = 'center'; ctx.fillStyle = color; ctx.font = `bold ${text.length < 32 ? 56 : 35}px system-ui`;
   const words = text.split(/\s+/); let row = '', y = 58;
   for (const word of words) {
     if (ctx.measureText(`${row} ${word}`).width > 950 && row) { ctx.fillText(row, 512, y); row = word; y += 46; }
@@ -43,7 +44,7 @@ export class ConstructionScene {
     this.container = container; this.onSite = onSite; this.sites = []; this.state = { progress: 0, x: 0, y: 0 };
     this.active = false; this.reduced = false; this.paused = false; this.keys = new Set();
     this.scene = new THREE.Scene(); this.scene.background = new THREE.Color('#100e1d');
-    this.scene.fog = new THREE.Fog('#100e1d', 200, 850);
+    this.scene.fog = new THREE.Fog('#100e1d', 400, 1600);
     this.camera = new THREE.PerspectiveCamera(58, 1, .1, 1200);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'low-power' });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
@@ -106,23 +107,46 @@ export class ConstructionScene {
     });
     this.group.clear();
   }
-  setData(items) {
+  setData(items, tab, page, links, feed) {
     const previous = this.sites[this.selected]?.id;
-    this.clear(); this.sites = constructionSites(items); this.targets = [];
+    this.clear(); this.sites = constructionSites(items); this.targets = []; this.signals = []; this.campuses = new Map();
     this.keys.clear(); this.target = null;
     this.sites.forEach(site => {
-      const campus = new THREE.Group(); campus.position.set(site.position.x + (site.index % 2 ? 39 : -39), site.position.y - 12, site.position.z);
+      const campus = new THREE.Group(); campus.position.set(site.position.x + (site.index % 2 ? 69 : -69), site.position.y - 22, site.position.z);
+      if (site.project) this.campuses.set(site.project.repository.toLowerCase(), campus);
       const color = site.blocked ? COLORS.Blocked : site.active ? COLORS['In Progress'] : site.done === site.total ? COLORS.Done : COLORS.Todo;
-      const pad = new THREE.Mesh(new THREE.CylinderGeometry(16 * site.scale, 16 * site.scale, 1, 6), new THREE.MeshBasicMaterial({ color: '#211a30' }));
+      const pad = new THREE.Mesh(new THREE.CylinderGeometry(27 * site.scale, 27 * site.scale, 1, 6), new THREE.MeshBasicMaterial({ color: '#211a30' }));
       pad.userData.index = site.index; campus.add(pad); this.targets.push(pad);
       const ring = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(Array.from({ length: 6 }, (_, index) => {
         const a = index / 6 * Math.PI * 2; return new THREE.Vector3(Math.cos(a) * 16 * site.scale, .7, Math.sin(a) * 16 * site.scale);
       })), lineMaterial(color)); campus.add(ring);
-      const levels = site.phase === 'Handover' ? 4 : site.active ? 2 : 1;
-      for (let i = 0; i < Math.min(site.total, 9); i++) {
-        const height = (levels + i % 3) * 2;
-        const building = new THREE.Mesh(new THREE.BoxGeometry(4, height, 4), new THREE.MeshBasicMaterial({ color, wireframe: true }));
-        building.position.set((i % 3 - 1) * 6, height / 2 + 1, (Math.floor(i / 3) - 1) * 6); campus.add(building);
+      const structure = campusStructure(site, feed), tint = site.project?.color || color;
+      if (site.project && structure.floors) {
+        for (let floor = 0; floor < structure.floors; floor++) {
+          const height = structure.height / structure.floors, width = structure.width - floor * (structure.form === 'tower' ? .9 : 1);
+          const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height - .5, 20), new THREE.MeshBasicMaterial({ color: tint, transparent: true, opacity: .35 }));
+          mesh.position.set(0, 1 + floor * height + height / 2, 0); campus.add(mesh);
+          const edges = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), lineMaterial(tint)); edges.position.copy(mesh.position); campus.add(edges);
+          for (let x = -width / 2 + 3; x < width / 2; x += 5) {
+            const window = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.MeshBasicMaterial({ color: tint }));
+            window.position.set(x, mesh.position.y, 10.1); campus.add(window);
+          }
+        }
+        const crown = textSprite(site.project.milestone, tint, 40); crown.position.set(0, structure.height + 8, 0); campus.add(crown);
+        if (structure.form === 'entrance') {
+          const billboard = textSprite('DECENT AGENCY / PLANNING OFFICE', '#71e6d0', 56);
+          billboard.position.set(0, 20, 12); campus.add(billboard);
+          campus.add(lines([[-22, 1, 12], [-22, 20, 12], [22, 1, 12], [22, 20, 12]], '#71e6d0'));
+        }
+      } else {
+        campus.add(lines([[-18, 1, -10], [18, 1, -10], [18, 1, -10], [18, 1, 10],
+          [18, 1, 10], [-18, 1, 10], [-18, 1, 10], [-18, 1, -10]], tint));
+        const blueprint = new THREE.Mesh(new THREE.PlaneGeometry(26, 15), new THREE.MeshBasicMaterial({ color: '#294c69', side: THREE.DoubleSide }));
+        blueprint.rotation.x = -Math.PI / 2; blueprint.position.y = 1; campus.add(blueprint);
+        for (let x = -20; x <= 20; x += 8) {
+          const barrier = new THREE.Mesh(new THREE.BoxGeometry(5, 2, 1), new THREE.MeshBasicMaterial({ color: '#e5a65b' }));
+          barrier.position.set(x, 2, 16); campus.add(barrier);
+        }
       }
       for (let i = 0; i < site.cranes; i++) {
         const tower = crane(.65 + site.scale * .2), angle = i / Math.max(1, site.cranes) * Math.PI * 2;
@@ -133,21 +157,47 @@ export class ConstructionScene {
         const cone = new THREE.Mesh(new THREE.ConeGeometry(.6, 1.8, 6), new THREE.MeshBasicMaterial({ color: site.blocked ? '#ee92af' : '#e5a65b' }));
         cone.position.set(side * 8, 1.7, 12 * site.scale); campus.add(cone);
       }
-      const title = textSprite(`${site.type === 'milestone' ? 'MILESTONE' : 'WORKSTREAM'} / ${site.title}`, color, 39);
-      title.position.set(0, 32, 0); title.userData.index = site.index; this.targets.push(title); campus.add(title);
+      const title = textSprite(`${site.project ? 'EXIT ' + (site.index + 1) : site.type === 'milestone' ? 'MILESTONE' : 'WORKSTREAM'} / ${site.title}`, tint, site.project ? 58 : 45);
+      title.position.set(0, site.project ? -4 : 32, 22); title.userData.index = site.index; this.targets.push(title); campus.add(title);
       const count = textSprite(`${site.cranes} CRANES / ${site.active} ACTIVE / ${site.done} DONE / ${site.total} CARDS`, '#e5c583', 30);
-      count.position.set(0, -3, 12); campus.add(count);
+      count.position.set(0, -10, 22); campus.add(count);
       const identity = siteIdentity(site);
       const sign = textSprite(identity.projects.length
         ? `PUBLIC REPO REFERENCES / ${identity.projects.map(project => project.name).join(' / ')}`
         : identity.kind === 'milestone' ? 'MILESTONE / NOT A REPOSITORY' : 'WORKSTREAM / NO PROJECT IDENTITY ESTABLISHED',
       identity.fallback.color, 34);
-      sign.position.set(0, 27, 0); campus.add(sign);
+      sign.position.set(0, site.project ? -16 : 27, 0); campus.add(sign);
       if (site.start || site.target) {
         const dates = textSprite(`${site.start || 'UNSET'}  >  ${site.target || 'UNSET'} / TENTATIVE`, '#a89eb9', 33);
         dates.position.set(0, 37, 0); campus.add(dates);
       }
       this.group.add(campus);
+      if (site.project) {
+        if (structure.observation) {
+          const observation = structure.observation;
+          const label = observation.state !== 'available' ? 'GITHUB OBSERVATION UNAVAILABLE'
+            : observation.release ? `RELEASE / ${observation.release.tag}` : 'PUBLIC GITHUB ACTIVITY / OBSERVED';
+          const activity = textSprite(label, observation.state === 'available' ? '#71e6d0' : '#ee92af', 38);
+          activity.position.set(0, structure.height + (structure.form === 'entrance' ? 32 : 15), 0); campus.add(activity);
+        }
+        const from = new THREE.Vector3(site.position.x, site.position.y - 18, site.position.z + 35);
+        const to = campus.position.clone().add(new THREE.Vector3(0, 2, 24));
+        const curve = new THREE.QuadraticBezierCurve3(from, new THREE.Vector3(to.x, from.y, from.z), to);
+        this.addSignal(curve, tint);
+        const exit = textSprite(`${site.index + 1} / ${site.title}  >>`, tint, 30);
+        exit.position.copy(from).add(new THREE.Vector3(0, 10, 0)); this.group.add(exit);
+        const identity = siteIdentity(site);
+        if (identity.artwork) {
+          new THREE.TextureLoader().load(identity.artwork.url, texture => {
+            if (!campus.parent) { texture.dispose(); return; }
+            texture.colorSpace = THREE.SRGBColorSpace;
+            const sign = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false }));
+            sign.scale.set(15, 15, 1); sign.position.set(0, structure.height + 29, 0); campus.add(sign); this.invalidate();
+          }, undefined, () => {
+            if (campus.parent) this.container.dispatchEvent(new CustomEvent('artworkerror', { detail: `${site.title}: artwork unavailable; project sign retained.` }));
+          });
+        }
+      }
       const gate = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(Array.from({ length: 48 }, (_, i) => {
         const a = i / 48 * Math.PI * 2; return new THREE.Vector3(Math.cos(a) * 27, Math.sin(a) * 19, 0);
       })), new THREE.LineBasicMaterial({ color, transparent: true, opacity: .35 }));
@@ -155,11 +205,27 @@ export class ConstructionScene {
     });
     const route = [];
     for (let n = 0; n <= Math.max(0, this.sites.length - 1) * 10; n++) { const p = routePoint(n / 10); route.push(new THREE.Vector3(p.x, p.y - 18, p.z)); }
-    if (route.length > 1) this.group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(route), new THREE.LineDashedMaterial({ color: '#71e6d0', dashSize: 3, gapSize: 4 })));
+    if (route.length > 1) {
+      for (const offset of [-12, 12]) {
+        this.group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(route.map(p => p.clone().add(new THREE.Vector3(offset, 0, 0)))), lineMaterial('#596d95')));
+      }
+      this.group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(route), new THREE.LineDashedMaterial({ color: '#71e6d0', dashSize: 3, gapSize: 4 })));
+    }
     this.group.children.at(-1)?.computeLineDistances?.();
+    for (const link of feed?.connections || []) {
+      const a = this.campuses.get(link.from.toLowerCase()), b = this.campuses.get(link.to.toLowerCase());
+      if (!a || !b) continue;
+      const from = a.position.clone().add(new THREE.Vector3(0, 12, 0)), to = b.position.clone().add(new THREE.Vector3(0, 12, 0));
+      this.addSignal(new THREE.QuadraticBezierCurve3(from, from.clone().lerp(to, .5).add(new THREE.Vector3(0, 42, 0)), to), '#aa8bea');
+    }
     this.selected = Math.max(0, this.sites.findIndex(site => site.id === previous));
     this.state = { progress: this.selected, x: 0, y: 0 }; this.onSite(this.sites[this.selected], this.selected);
     this.invalidate();
+  }
+  addSignal(curve, color) {
+    this.group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(30)), lineMaterial(color)));
+    const packet = new THREE.Mesh(new THREE.SphereGeometry(1.1, 6, 6), new THREE.MeshBasicMaterial({ color }));
+    this.group.add(packet); this.signals.push({ curve, packet });
   }
   goTo(index) {
     if (!this.sites.length) return;
@@ -201,12 +267,16 @@ export class ConstructionScene {
     const nearest = Math.round(this.state.progress);
     if (this.target == null && nearest !== this.selected) { this.selected = nearest; this.onSite(this.sites[nearest], nearest); }
     const point = routePoint(this.state.progress), ahead = routePoint(this.state.progress + .5);
+    for (const [index, signal] of (this.signals || []).entries()) {
+      const t = this.reduced || this.paused ? .5 : (time / 4200 + index * .17) % 1;
+      signal.packet.position.copy(signal.curve.getPoint(index % 2 ? 1 - t : t));
+    }
     this.ship.position.set(point.x + this.state.x, point.y + this.state.y, point.z + 27);
     this.ship.rotation.z = (Number(this.keys.has('a')) - Number(this.keys.has('d'))) * .4;
     this.flame.visible = steering || this.target != null;
-    this.camera.position.set(point.x + this.state.x * .65, point.y + this.state.y * .7 + 11, point.z + 85);
-    this.camera.lookAt(ahead.x + this.state.x * .35, ahead.y + this.state.y * .35, ahead.z - 25);
+    this.camera.position.set(point.x + this.state.x * .65, point.y + this.state.y * .7 + 52, point.z + 150);
+    this.camera.lookAt(ahead.x + this.state.x * .35, ahead.y + this.state.y * .35, ahead.z - 35);
     this.renderer.render(this.scene, this.camera);
-    if (!this.paused && !this.reduced && (steering || this.target != null)) this.timer = setTimeout(() => { this.timer = null; this.invalidate(); }, 1000 / 30);
+    if (!this.paused && !this.reduced && (steering || this.target != null || this.signals?.length)) this.timer = setTimeout(() => { this.timer = null; this.invalidate(); }, 1000 / (steering || this.target != null ? 30 : 12));
   }
 }

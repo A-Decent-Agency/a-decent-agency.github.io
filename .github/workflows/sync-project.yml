@@ -1,7 +1,7 @@
 name: Sync marathon project
 on:
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -24,24 +24,26 @@ jobs:
             echo 'available=true' >> "$GITHUB_OUTPUT"
           fi
       - uses: actions/checkout@v4
-        if: steps.token.outputs.available == 'true'
       - uses: actions/setup-node@v4
-        if: steps.token.outputs.available == 'true'
         with:
           node-version: '20'
       - name: Export privacy-filtered snapshot
         if: steps.token.outputs.available == 'true'
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.PROJECT_READ_TOKEN }}
         run: node scripts/export-project.mjs
+      - name: Observe approved public repositories
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/sync-progress.mjs
       - name: Commit only changed project data
-        if: steps.token.outputs.available == 'true'
         run: |
           node --test
-          if ! git diff --quiet -- data/project.json; then
+          if [ -n "$(git status --porcelain -- data/project.json data/progress.json)" ]; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add data/project.json
+            git add data/project.json data/progress.json
             git commit -m "Sync marathon snapshot" -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
             git push
           fi

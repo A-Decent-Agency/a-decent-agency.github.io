@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-25T15:17:07.078Z",
+  "repositories": [
+    {
+      "repository": "TheJollyLaMa/DecentAgency",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-21T13:12:22Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null
+    },
+    {
+      "repository": "TheJollyLaMa/DecentBusking",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-25T14:44:30Z",
+      "release": null,
+      "mergedPulls": [
+        {
+          "number": 287,
+          "title": "Bring DJuke, DBusk and DVert widgets up to date with seamless playlist fixes",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/287",
+          "mergedAt": "2026-10-24T18:56:59Z"
+        },
+        {
+          "number": 286,
+          "title": "Make paid DJuke playlist transitions seamless",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/286",
+          "mergedAt": "2026-10-24T18:18:18Z"
+        },
+        {
+          "number": 285,
+          "title": "Fix paid playlist continuity and preloaded radio handoffs",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/285",
+          "mergedAt": "2026-10-24T13:32:43Z"
+        },
+        {
+          "number": 283,
+          "title": "Keep stale radio play promises from stopping the next recording",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/283",
+          "mergedAt": "2026-10-24T11:27:58Z"
+        },
+        {
+          "number": 281,
+          "title": "Extract DVert controllers for standalone shared-session widgets",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/281",
+          "mergedAt": "2026-10-24T11:14:03Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "TheJollyLaMa/DecentCanopy",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-25T14:55:50Z",
+      "release": null,
+      "mergedPulls": [
+        {
+          "number": 44,
+          "title": "Make the Agency overview a reuse-first build desk",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/44",
+          "mergedAt": "2026-10-24T14:29:50Z"
+        },
+        {
+          "number": 43,
+          "title": "Mount pinned standalone DBusk radio widget in Canopy",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/43",
+          "mergedAt": "2026-10-24T11:33:54Z"
+        },
+        {
+          "number": 42,
+          "title": "Consolidate creator maps and add ordered map dropdown",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/42",
+          "mergedAt": "2026-10-23T18:20:39Z"
+        },
+        {
+          "number": 41,
+          "title": "Accept nullable Busking evidence without enabling balances",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/41",
+          "mergedAt": "2026-10-23T17:48:56Z"
+        },
+        {
+          "number": 40,
+          "title": "Harden GitHub connector revocation recovery",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/40",
+          "mergedAt": "2026-10-23T16:02:47Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "TheJollyLaMa/DecentHead",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-24T19:22:12Z",
+      "release": {
+        "tag": "v2.0.0",
+        "url": "https://github.com/TheJollyLaMa/DecentHead/releases/tag/v2.0.0",
+        "publishedAt": "2026-10-21T21:28:52Z"
+      },
+      "mergedPulls": [
+        {
+          "number": 31,
+          "title": "Support 100-edition product releases without rewriting legacy manifests",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/31",
+          "mergedAt": "2026-10-24T19:22:12Z"
+        },
+        {
+          "number": 30,
+          "title": "Add reusable Supporter DNFT kit for any Decent dapp",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/30",
+          "mergedAt": "2026-10-23T06:12:29Z"
+        },
+        {
+          "number": 29,
+          "title": "Pin release site at Supporter prep; gate Discord on ENS",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/29",
+          "mergedAt": "2026-10-23T05:33:55Z"
+        },
+        {
+          "number": 28,
+          "title": "Add ENS avatar and header art",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/28",
+          "mergedAt": "2026-10-22T18:08:01Z"
+        },
+        {
+          "number": 26,
+          "title": "Accept Studio evidence in verified Supporter announcements",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/26",
+          "mergedAt": "2026-10-22T03:08:04Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "TheJollyLaMa/DecentMarket",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-25T09:20:53Z",
+      "release": {
+        "tag": "v0.3.1",
+        "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
+        "publishedAt": "2026-10-22T02:26:31Z"
+      },
+      "mergedPulls": [
+        {
+          "number": 69,
+          "title": "Release USDC-only DJuke v0.5 with incremental playlist fees",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/69",
+          "mergedAt": "2026-10-23T17:46:12Z"
+        },
+        {
+          "number": 67,
+          "title": "Rehearse the DJuke playlist worker against deployed v0.4 contracts",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/67",
+          "mergedAt": "2026-10-23T05:37:18Z"
+        },
+        {
+          "number": 68,
+          "title": "Pin release site at Supporter prep; adopt Head ENS gate",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/68",
+          "mergedAt": "2026-10-23T05:36:34Z"
+        },
+        {
+          "number": 66,
+          "title": "feat: DJuke v0.4 playlist lane, tiered pricing, 24-song cap",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/66",
+          "mergedAt": "2026-10-22T17:04:47Z"
+        },
+        {
+          "number": 65,
+          "title": "feat: DJuke v0.4 named playlists",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/65",
+          "mergedAt": "2026-10-22T15:43:59Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "TheJollyLaMa/BigNuten_Vanilla",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-23T06:15:59Z",
+      "release": null,
+      "mergedPulls": [
+        {
+          "number": 344,
+          "title": "Adopt standard Supporter DNFT release workflows",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/344",
+          "mergedAt": "2026-10-23T06:15:58Z"
+        },
+        {
+          "number": 332,
+          "title": "Modernize payroll with ART and BNUT support",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/332",
+          "mergedAt": "2026-09-30T08:26:42Z"
+        },
+        {
+          "number": 333,
+          "title": "Default BigNuten to Base with selectable Optimism fallback",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/333",
+          "mergedAt": "2026-09-18T14:55:51Z"
+        },
+        {
+          "number": 331,
+          "title": "Add Pinata-backed IPFS provider and unified storage status UI",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/331",
+          "mergedAt": "2026-08-24T16:46:32Z"
+        },
+        {
+          "number": 329,
+          "title": "Decouple backup layer from web3.storage — provider-agnostic StorageProvider interface with content-addressed snapshots",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/329",
+          "mergedAt": "2026-08-18T08:01:39Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "A-Decent-Agency/DecentJukebox",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-24T19:24:20Z",
+      "release": {
+        "tag": "v0.2.0",
+        "url": "https://github.com/A-Decent-Agency/DecentJukebox/releases/tag/v0.2.0",
+        "publishedAt": "2026-10-24T19:24:20Z"
+      },
+      "mergedPulls": [
+        {
+          "number": 8,
+          "title": "Freeze current playlist playback fixes for 100 supporter editions",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/8",
+          "mergedAt": "2026-10-24T19:24:06Z"
+        },
+        {
+          "number": 7,
+          "title": "Keep supporter minting personal and Agency authority ENS-only",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/7",
+          "mergedAt": "2026-10-24T12:48:43Z"
+        },
+        {
+          "number": 5,
+          "title": "Add key-free unsigned DJuke deployment planning",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/5",
+          "mergedAt": "2026-10-24T11:51:11Z"
+        },
+        {
+          "number": 4,
+          "title": "Deliver cloneable DJuke widget with pinned USDC checkout source",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/4",
+          "mergedAt": "2026-10-24T11:26:55Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "A-Decent-Agency/DBuskRadio",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-24T19:24:36Z",
+      "release": {
+        "tag": "v0.2.0",
+        "url": "https://github.com/A-Decent-Agency/DBuskRadio/releases/tag/v0.2.0",
+        "publishedAt": "2026-10-24T19:24:36Z"
+      },
+      "mergedPulls": [
+        {
+          "number": 7,
+          "title": "Freeze seamless radio handoffs for 100 supporter editions",
+          "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/7",
+          "mergedAt": "2026-10-24T19:24:06Z"
+        },
+        {
+          "number": 5,
+          "title": "Polish radio product front and keep Agency control ENS-only",
+          "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/5",
+          "mergedAt": "2026-10-24T12:48:43Z"
+        },
+        {
+          "number": 3,
+          "title": "Align clone instructions and gates with the verified rollout",
+          "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/3",
+          "mergedAt": "2026-10-24T11:51:11Z"
+        },
+        {
+          "number": 2,
+          "title": "Validate actual media range payloads before release",
+          "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/2",
+          "mergedAt": "2026-10-24T11:38:27Z"
+        },
+        {
+          "number": 1,
+          "title": "Add standalone DBusk radio widget with shared upstream provenance",
+          "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/1",
+          "mergedAt": "2026-10-24T11:30:11Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "A-Decent-Agency/DVert",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-24T19:31:33Z",
+      "release": {
+        "tag": "v0.2.1",
+        "url": "https://github.com/A-Decent-Agency/DVert/releases/tag/v0.2.1",
+        "publishedAt": "2026-10-24T19:31:34Z"
+      },
+      "mergedPulls": [
+        {
+          "number": 7,
+          "title": "Remove stale draft label before first supporter mint",
+          "url": "https://github.com/A-Decent-Agency/DVert/pull/7",
+          "mergedAt": "2026-10-24T19:31:21Z"
+        },
+        {
+          "number": 5,
+          "title": "Prepare current DVert snapshot for 100 supporter editions",
+          "url": "https://github.com/A-Decent-Agency/DVert/pull/5",
+          "mergedAt": "2026-10-24T19:24:05Z"
+        },
+        {
+          "number": 4,
+          "title": "Separate personal supporter minting from Agency ENS control",
+          "url": "https://github.com/A-Decent-Agency/DVert/pull/4",
+          "mergedAt": "2026-10-24T12:48:44Z"
+        },
+        {
+          "number": 2,
+          "title": "Add key-free independent DVert deployment plans",
+          "url": "https://github.com/A-Decent-Agency/DVert/pull/2",
+          "mergedAt": "2026-10-24T11:51:11Z"
+        },
+        {
+          "number": 1,
+          "title": "Add cloneable DVert advertising widget and unsigned release inputs",
+          "url": "https://github.com/A-Decent-Agency/DVert/pull/1",
+          "mergedAt": "2026-10-24T11:26:58Z"
+        }
+      ],
+      "issues": null
+    },
+    {
+      "repository": "A-Decent-Agency/a-decent-agency.github.io",
+      "state": "available",
+      "checkedAt": "2026-10-25T15:17:07.078Z",
+      "error": "",
+      "pushedAt": "2026-10-24T20:49:52Z",
+      "release": null,
+      "mergedPulls": [
+        {
+          "number": 5,
+          "title": "Add explicit public identities for construction site signs",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/5",
+          "mergedAt": "2026-10-23T17:36:22Z"
+        },
+        {
+          "number": 4,
+          "title": "Add source-grounded flight docking and publication change summaries",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/4",
+          "mergedAt": "2026-10-23T17:36:21Z"
+        },
+        {
+          "number": 3,
+          "title": "Add explainable Today's flight route and isolated panel",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/3",
+          "mergedAt": "2026-10-23T17:36:21Z"
+        },
+        {
+          "number": 6,
+          "title": "Integrate daily flight, project signs and change-aware docking",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/6",
+          "mergedAt": "2026-10-23T17:36:19Z"
+        },
+        {
+          "number": 2,
+          "title": "Make construction flight the Agency Office landing view",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/2",
+          "mergedAt": "2026-10-23T17:08:41Z"
+        }
+      ],
+      "issues": null
+    }
+  ],
+  "connections": [
+    {
+      "from": "TheJollyLaMa/DecentHead",
+      "to": "TheJollyLaMa/DecentMarket",
+      "label": "Pinned shared header and session boundary",
+      "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/68"
+    },
+    {
+      "from": "TheJollyLaMa/DecentBusking",
+      "to": "TheJollyLaMa/DecentCanopy",
+      "label": "Public fund evidence adapter",
+      "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/41"
+    },
+    {
+      "from": "TheJollyLaMa/DecentBusking",
+      "to": "A-Decent-Agency/DecentJukebox",
+      "label": "Extracted DJuke product",
+      "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/282"
+    },
+    {
+      "from": "TheJollyLaMa/DecentBusking",
+      "to": "A-Decent-Agency/DBuskRadio",
+      "label": "Extracted radio / Canopy host",
+      "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/43"
+    },
+    {
+      "from": "TheJollyLaMa/DecentBusking",
+      "to": "A-Decent-Agency/DVert",
+      "label": "Extracted advertising product",
+      "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/282"
+    }
+  ]
+}

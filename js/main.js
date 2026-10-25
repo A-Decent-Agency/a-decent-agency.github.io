@@ -8,6 +8,8 @@ import { mount as mountTodaysFlight } from './todays-flight-ui.js';
 import { compareSnapshots, isPublishedSnapshot, summarizeChanges } from './planning-changes.js';
 import { mountPlanningDock } from './planning-dock.js';
 import { mountSiteIdentity } from './site-identities-ui.js';
+import { renderCampusDetails } from './campus-details.js';
+import { isProgressFeed } from './progress-feed.js';
 
 const $ = selector => document.querySelector(selector);
 const tabs = [...document.querySelectorAll('[data-tab]')];
@@ -30,7 +32,9 @@ let previousPublication = null, publicationLoaded = false;
 const planningDock = mountPlanningDock({ container: $('#planning-dock'), current: null, onItem: openDetail });
 const siteIdentityPanel = mountSiteIdentity($('#flight-site-identity'), null);
 let identitySiteId = null;
+let progressFeed = null;
 function updateSitePanels(site = flightSites[flightIndex]) {
+  $('#campus-details').innerHTML = renderCampusDetails(site, progressFeed);
   planningDock.update({ site, previous: previousPublication, current: publicationLoaded ? state.project : null });
   if (identitySiteId !== site?.id) {
     identitySiteId = site?.id;
@@ -94,12 +98,12 @@ function showFlightSite(site, index = 0) {
   $('#flight-destination').value = site?.id || '';
   $('#flight-previous').disabled = !flightSites.length || index <= 0;
   $('#flight-next').disabled = !flightSites.length || index >= flightSites.length - 1;
-  $('#flight-site-type').textContent = site ? `${site.type === 'milestone' ? '🏗 MILESTONE' : '🚧 WORKSTREAM YARD'} / ${site.horizon}` : 'FLIGHT CONTROL';
+  $('#flight-site-type').textContent = site ? `${site.project ? 'PROJECT OFFRAMP' : site.type === 'milestone' ? '🏗 MILESTONE' : '🚧 WORKSTREAM YARD'} / ${site.horizon}` : 'FLIGHT CONTROL';
   $('#flight-site-title').textContent = site?.title || 'No construction sites match this view';
   $('#flight-site-dates').textContent = site ? site.start || site.target
     ? `${site.start || 'Start unset'} → ${site.target || 'Target unset'} · tentative GitHub dates`
-    : 'Undated staging area · no dates invented' : 'Change the search or Project view filter.';
-  $('#flight-site-metrics').textContent = site ? `${site.phase === 'Handover' ? '✓' : '🏗'} ${site.phase} · ${site.cranes} cranes · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked` : '';
+    : site.project ? 'Project district · architectural milestone and source evidence below' : 'Undated staging area · no dates invented' : 'Change the search or Project view filter.';
+  $('#flight-site-metrics').textContent = site ? `${site.phase === 'Handover' ? '✓' : '🏗'} ${site.project ? 'Board only: ' : ''}${site.phase} · ${site.cranes} cranes · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked` : '';
   $('#flight-site-items').replaceChildren(...(site?.items || []).map(item => {
     const button = document.createElement('button'); button.textContent = `${item.fields?.Status || 'Unknown'} / ${item.title}`;
     button.addEventListener('click', () => openDetail(item)); return button;
@@ -136,7 +140,7 @@ function render() {
   if (flight) {
     const previous = flightSites[flightIndex]?.id;
     flightSites = constructionSites(items);
-    $('#flight-destination').replaceChildren(...flightSites.map(site => new Option(`${site.type === 'milestone' ? '🏗' : '🚧'} ${site.title}`, site.id)));
+    $('#flight-destination').replaceChildren(...flightSites.map(site => new Option(`${site.project ? 'EXIT' : site.type === 'milestone' ? '🏗' : '🚧'} ${site.title}`, site.id)));
     showFlightSite(flightSites[Math.max(0, flightSites.findIndex(site => site.id === previous))], Math.max(0, flightSites.findIndex(site => site.id === previous)));
   }
   $('#page-label').textContent=list?`All ${items.length} ${own?'nodes':'items'}`:`Scene ${state.page+1} / ${pages} · ${items.length} total`;
@@ -149,9 +153,9 @@ function render() {
   if(list){showList(items);scene?.setActive(false);}else {
     const kind = flight ? 'flight' : 'board';
     if (scene && sceneKind === kind) {
-      const key = JSON.stringify([items, state.tab, state.page, own ? map.links : []]);
+      const key = JSON.stringify([items, state.tab, state.page, own ? map.links : [], flight ? progressFeed : null]);
       scene.setActive(true);
-      if (sceneData.get(scene) !== key) { scene.setData(items,state.tab,state.page,map.links); sceneData.set(scene,key); }
+      if (sceneData.get(scene) !== key) { scene.setData(items,state.tab,state.page,map.links,progressFeed); sceneData.set(scene,key); }
       scene.setMotion(state.reduced);
     } else { scene?.setActive(false); startScene(); }
   }
@@ -183,6 +187,13 @@ function updatePause(paused) {
   $('#flight-pause').setAttribute('aria-pressed', String(paused));
 }
 $('#scene').addEventListener('flightpause', event => updatePause(event.detail));
+const artworkFailures = new Set();
+$('#scene').addEventListener('artworkerror', event => {
+  if (artworkFailures.has(event.detail)) return;
+  artworkFailures.add(event.detail);
+  console.warn('[Planning Office artwork]', event.detail);
+  notify(event.detail);
+});
 for (const button of document.querySelectorAll('[data-thrust]')) {
   const release = () => scenes.get('flight')?.hold(button.dataset.thrust, false);
   button.addEventListener('pointerdown', event => {
@@ -222,6 +233,20 @@ async function refreshProject() {
   if (refreshing) return;
   refreshing = true; $('#refresh-project').disabled = true;
   try {
+    const response = await fetch(new URL('../data/progress.json', import.meta.url), { cache: 'no-store', signal: AbortSignal.timeout(20000) });
+    if (!response.ok) throw new Error(`Public activity returned HTTP ${response.status}.`);
+    const next = await response.json();
+    if (!isProgressFeed(next)) throw new Error('Public activity format is invalid.');
+    if (progressFeed && Date.parse(next.checkedAt) < Date.parse(progressFeed.checkedAt)) throw new Error('Public activity publication is older than the retained observation.');
+    progressFeed = next;
+    const available = next.repositories.filter(entry => entry.state === 'available').length;
+    $('#progress-status').textContent = `PUBLIC ACTIVITY CHECKED ${new Date(next.checkedAt).toLocaleString()} · ${available}/${next.repositories.length} repositories available · hourly GitHub observation / page checks every 5 minutes`;
+    render();
+  } catch (error) {
+    console.error('[Planning Office public activity]', error);
+    $('#progress-status').textContent = `PUBLIC ACTIVITY REFRESH FAILED · ${progressFeed ? 'previous observation retained' : 'activity unavailable'} · ${error.message}`;
+  }
+  try {
     const response=await fetch(new URL('../data/project.json',import.meta.url), { cache:'no-store', signal:AbortSignal.timeout(20000) });
     if(!response.ok)throw new Error(`Snapshot returned HTTP ${response.status}.`);
     const project=await response.json();
@@ -240,7 +265,7 @@ async function refreshProject() {
     if ([...$('#project-view').options].some(option => option.value === state.view)) $('#project-view').value=state.view;
     else state.view='';
     $('#sync-status').textContent=`LAST SYNCED ${new Date(project.exportedAt).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})} · checked ${new Date().toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'})}`;
-    $('#sync-status').title=`${snapshotFreshness(project.exportedAt)}. Last synced means last changed export, not last poll. Source export is scheduled every six hours; this page checks every five minutes while visible.`;
+    $('#sync-status').title=`${snapshotFreshness(project.exportedAt)}. Last synced means last changed export, not last poll. Source export is scheduled hourly when its read secret is available; this page checks every five minutes while visible.`;
     $('#project-readme').innerHTML=markdown(state.project.readme);
     if (changed) render();
   } catch(error){
