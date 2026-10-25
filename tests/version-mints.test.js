@@ -61,11 +61,13 @@ test('widget listing protocol is bound to the same repo/version/token/mint and c
     assert.throws(() => versionStorefront(receipt, { ...listing, ...patch }, receipt, release, version, repository));
   }
 });
-test('sidepanel shows two faces and native safe buy link; retains unavailable/source-only states', () => {
+test('sidepanel shows two faces and in-map checkout button; retains unavailable/source-only states', () => {
   const html = renderVersionMints(site, feed);
   assert.match(html, /data-mint-art/g);
   assert.equal((html.match(/data-mint-art/g) || []).length, 2);
-  assert.match(html, /Buy v2.0.0 · 10 USDC on Base/);
+  assert.match(html, /View \/ buy v2.0.0 · 10 USDC on Base/);
+  assert.match(html, /data-mint-checkout=/);
+  assert.doesNotMatch(html, /<a class="mint-buy"/);
   assert.match(html, /rel="noopener noreferrer"/);
   assert.match(html, /not live stock/);
   const old = structuredClone(feed); old.repositories[0].state = 'unavailable';

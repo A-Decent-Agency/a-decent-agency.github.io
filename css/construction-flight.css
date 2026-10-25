@@ -72,6 +72,12 @@ html[data-view="flight"] .intro h1 > span { margin-left: .25em; }
 .mint-faces img { width: 100%; height: auto; border-radius: 6px; }
 .mint-faces figcaption { font-size: 10px; color: var(--muted); }
 .version-mints .mint-buy { display: block; padding: 12px; margin-top: 12px; border-radius: 6px; background: #28453e; color: #b8f3e6; font-size: 13px; font-weight: 700; }
+#supporter-checkout { width: min(560px, calc(100vw - 32px)); max-height: 90dvh; overflow: auto; box-sizing: border-box; }
+#supporter-checkout [data-checkout-image] { display: block; width: min(100%, 300px); height: auto; margin: 12px auto; border-radius: 10px; }
+#supporter-checkout [data-checkout-image][hidden] { display: none; }
+#supporter-checkout p { overflow-wrap: anywhere; }
+#supporter-checkout [data-checkout-buy] { width: 100%; margin: 12px 0; padding: 14px; background: #28453e; color: #b8f3e6; }
+#supporter-checkout [role="alert"] { color: #ee92af; }
 .flight-site summary { font-size: 11px; color: var(--gold); cursor: pointer; }
 #flight-site-items { display: grid; gap: 8px; margin-top: 12px; }
 #flight-site-items button { text-align: left; padding: 9px; font-size: 11px; line-height: 1.6; }

@@ -20,7 +20,7 @@ export function renderVersionMints(site, feed) {
     ${versions.map(version => `<article data-version-mint="${esc(version.tag)}"><h4>${esc(site.title)} ${esc(version.tag)}</h4>
       <p>Base · ERC-1155 · token ${esc(version.tokenId)}${version.retained ? ' · retained observation / refresh unavailable' : ''}</p>
       ${version.storefront ? `<div class="mint-faces">${['front', 'back'].map(face => `<figure><img src="${mintArtworkPath(version.storefront, face)}" alt="${esc(site.title)} ${esc(version.tag)} Supporter edition ${face}" loading="lazy" referrerpolicy="no-referrer" data-mint-art><figcaption>${face}</figcaption></figure>`).join('')}</div>
-      <a class="mint-buy" href="${esc(version.storefront.purchaseUrl)}" target="_blank" rel="noopener noreferrer">Buy ${esc(version.tag)} · 10 USDC on Base ↗</a>
+      <button type="button" class="mint-buy" data-mint-checkout="${esc(version.storefront.purchaseUrl)}">View / buy ${esc(version.tag)} · 10 USDC on Base</button>
       <p>${link(version.storefront.evidenceUrl, 'Published listing evidence')}</p>
       <small>Original art: The Jolly LaMa / A Decent Agency · ${link(`https://github.com/${site.project.repository}`, 'Source and license')}</small>`
       : `<p>${esc(version.storefrontError || 'No approved purchase evidence observed; checkout link withheld.')}</p>`}
