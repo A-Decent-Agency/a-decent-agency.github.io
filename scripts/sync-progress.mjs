@@ -1,6 +1,40 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
-import { REPOSITORIES, CONNECTIONS, isProgressFeed, isDeliveredVersion } from '../js/progress-feed.js';
+import { REPOSITORIES, CONNECTIONS, isProgressFeed, isDeliveredVersion, isVersionStorefront } from '../js/progress-feed.js';
+
+export function versionStorefront(receipt, listing, manifest, release, version, repository) {
+  const matches = value => value?.version === version.tag && [repository, repository.split('/')[1]].includes(value.repo);
+  const proof = listing || receipt;
+  const mint = listing?.protocolEvidence?.mint || receipt.verification;
+  if (!matches(proof) || !matches(manifest) || receipt.chainId !== 8453
+    || (!listing && receipt.priceUSDC !== manifest.priceUSDC) || proof.metadataURI !== manifest.metadataURI
+    || receipt.metadataURI !== manifest.metadataURI || manifest.chainId !== 8453
+    || (listing && (listing.status !== 'listed' || !matches(listing.protocolEvidence)
+      || listing.protocolEvidence.metadataURI !== manifest.metadataURI || listing.tokenId !== version.tokenId
+      || listing.nft?.toLowerCase() !== version.nftContract.toLowerCase()
+      || listing.listingId !== mint?.listingId || listing.escrow?.toLowerCase() !== mint?.escrow?.toLowerCase()
+      || listing.purchaseUrl !== mint?.purchaseUrl || listing.priceUSDC !== manifest.priceUSDC))
+    || mint?.chainId !== 8453 || mint.tokenId !== version.tokenId || mint.mintTxHash !== version.mintTxHash
+    || mint.nftContract?.toLowerCase() !== version.nftContract.toLowerCase()
+    || !Number.isSafeInteger(Number(mint.confirmations)) || Number(mint.confirmations) < 12
+    || !/^[1-9]\d*$/.test(proof.available || receipt.verification?.available || '')) {
+    throw new Error('Published listing does not match the minted edition');
+  }
+  for (const name of ['supporter-front.png', 'supporter-back.png']) {
+    if (!release.assets.some(asset => asset.name === name)) throw new Error('Published edition artwork missing');
+  }
+  const root = `https://github.com/${repository}/releases/download/${encodeURIComponent(version.tag)}/`;
+  const store = { purchaseUrl: mint.purchaseUrl, escrow: mint.escrow, listingId: mint.listingId,
+    priceUSDC: manifest.priceUSDC, frontUrl: `${root}supporter-front.png`, backUrl: `${root}supporter-back.png`,
+    evidenceUrl: `${root}${listing ? 'supporter-listing-evidence.json' : 'supporter-minted.json'}` };
+  for (const face of ['front', 'back']) {
+    const digest = release.assets.find(asset => asset.name === `supporter-${face}.png`).digest;
+    if (!/^sha256:[\da-f]{64}$/.test(digest)) throw new Error('Published artwork checksum missing');
+    store[`${face}SHA256`] = digest.slice(7);
+  }
+  if (!isVersionStorefront(store, version, repository)) throw new Error('Unapproved Supporter checkout or artwork route');
+  return store;
+}
 
 export function deliveredVersion(receipt, release, repository, evidenceUrl) {
   const mint = receipt?.verification || receipt?.transactions?.mint;
@@ -43,6 +77,19 @@ export async function collectProgress({ fetcher = fetch, token = '', previous = 
         const receipt = await get(`repos/${repository}/releases/assets/${asset.id}`, false, true);
         const version = deliveredVersion(receipt, edition, repository, `https://github.com/${repository}/releases/download/${encodeURIComponent(edition.tag_name)}/${asset.name}`);
         if (!isDeliveredVersion(version, repository)) throw new Error('Mint evidence does not match its repository/version');
+        try {
+          const readAsset = async name => {
+            const value = edition.assets.find(candidate => candidate.name === name);
+            if (!value || !Number.isSafeInteger(value.id) || value.size > 100000) throw new Error(`Missing or oversized ${name}`);
+            return get(`repos/${repository}/releases/assets/${value.id}`, false, true);
+          };
+          const listing = asset.name === 'supporter-minted.json' ? null : await readAsset('supporter-listing-evidence.json');
+          const manifest = listing ? await readAsset('supporter-release.json') : receipt;
+          version.storefront = versionStorefront(receipt, listing, manifest, edition, version, repository);
+        } catch (error) {
+          version.storefrontError = 'Purchase evidence unavailable or mismatched; checkout link withheld. See the release for details.';
+          console.error(`[Supporter storefront] ${repository}/${version.tag}: ${error.message}`);
+        }
         versions.push(version);
       }
       repositories.push({ ...blank, state: 'available', checkedAt: now, pushedAt: repo.pushed_at,

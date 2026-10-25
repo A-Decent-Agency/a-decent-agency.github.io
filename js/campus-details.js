@@ -2,9 +2,12 @@ import { escapeHTML as esc } from './markdown.js';
 import { campusStructure } from './project-campus.js';
 import { CANOPY } from './canopy-registry.js';
 import { ENS_ARTWORK_OBSERVATION, PROJECT_MURALS } from './site-identities.js';
+import { renderVersionMints } from './version-mints.js';
 
 export function renderCampusDetails(site, feed) {
-  if (!site?.project) return '<p>Shared planning yard. Select a project offramp for its building, evidence and connections.</p>';
+  if (!site?.project) return site?.type === 'milestone'
+    ? '<p>Legacy planning checkpoint. Source status and tentative dates are retained, not a project-completion score. Review its original acceptance evidence before changing status.</p>'
+    : '<p>Shared planning yard. Select a project offramp for its building, evidence and connections.</p>';
   const model = campusStructure(site, feed), observation = model.observation;
   const repository = site.project.repository;
   const identity = CANOPY.projects.find(project => project.repository.toLowerCase() === repository.toLowerCase());
@@ -12,7 +15,7 @@ export function renderCampusDetails(site, feed) {
   const mural = PROJECT_MURALS[repository];
   const connections = (feed?.connections || []).filter(link => [link.from.toLowerCase(), link.to.toLowerCase()].includes(repository.toLowerCase()));
   const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
-  return `<div class="campus-stage">${esc(model.label)}</div><p>${esc(model.basis)}</p>
+  return `${renderVersionMints(site, feed)}<div class="campus-stage">${esc(model.label)}</div><p>${esc(model.basis)}</p>
     ${identity?.ens ? `<p>Recorded ENS identity: <b>${esc(identity.ens)}</b>.</p>` : ''}
     ${avatarRecord ? `<details><summary>ENS artwork provenance / observed ${ENS_ARTWORK_OBSERVATION.observedAt}</summary><p>${esc(avatarRecord)}. Mainnet avatar text read without a wallet connection. Project-owned, commit-pinned artwork is displayed instead of following mutable avatar-service URLs automatically.</p></details>` : ''}
     ${mural ? `<figure class="campus-mural"><img src="${esc(mural.url)}" alt="${esc(mural.alt)}" loading="lazy" referrerpolicy="no-referrer" data-project-mural><figcaption>${link(mural.source, 'Project artwork')} · The Jolly LaMa / A Decent Agency · ${link(mural.license, 'CC BY 4.0')} (unmodified)</figcaption></figure>` : ''}

@@ -38,8 +38,8 @@ let identitySiteId = null;
 let progressFeed = null;
 function updateSitePanels(site = flightSites[flightIndex]) {
   $('#campus-details').innerHTML = renderCampusDetails(site, progressFeed);
-  for (const image of $('#campus-details').querySelectorAll('[data-project-mural]')) image.addEventListener('error', () => {
-    image.hidden = true; notify('Project artwork unavailable; source link and project badge retained.');
+  for (const image of $('#campus-details').querySelectorAll('[data-project-mural], [data-mint-art]')) image.addEventListener('error', () => {
+    image.hidden = true; notify('Project or edition artwork unavailable; source and purchase evidence links retained.');
   }, { once: true });
   $('#campus-plan').innerHTML = renderCampusPlan(site, flightSites, progressFeed);
   campusArtwork.update(site?.project ? site : null, { active: Boolean(site?.project && state.tab === 'flight') });
@@ -107,13 +107,14 @@ function showFlightSite(site, index = 0) {
   $('#flight-destination').value = site?.id || '';
   $('#flight-previous').disabled = !flightSites.length || index <= 0;
   $('#flight-next').disabled = !flightSites.length || index >= flightSites.length - 1;
-  $('#flight-site-type').textContent = site ? `${site.project ? 'PROJECT OFFRAMP' : site.type === 'milestone' ? '🏗 MILESTONE' : '🚧 WORKSTREAM YARD'} / ${site.horizon}` : 'FLIGHT CONTROL';
+  $('#flight-site-type').textContent = site ? `${site.project ? 'PROJECT OFFRAMP' : site.type === 'milestone' ? 'LEGACY CHECKPOINT' : '🚧 WORKSTREAM YARD'} / ${site.horizon}` : 'FLIGHT CONTROL';
   $('#flight-site-title').textContent = site?.title || 'No construction sites match this view';
   $('#flight-site-dates').textContent = site ? site.start || site.target
     ? `${site.start || 'Start unset'} → ${site.target || 'Target unset'} · tentative GitHub dates`
     : site.project ? 'Project district · architectural milestone and source evidence below' : 'Undated staging area · no dates invented' : 'Change the search or Project view filter.';
   $('#flight-site-metrics').textContent = site ? site.project
     ? `${campusStructure(site, progressFeed).buildCranes} build cranes · ${campusStructure(site, progressFeed).deliveredFloors} clean version floors · Board only: ${site.phase} · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked`
+    : site.type === 'milestone' ? `Source status: ${site.items[0]?.fields?.Status || 'Unset'} · historical planning checkpoint, not a completion score`
     : `${site.phase === 'Handover' ? '✓' : '🏗'} ${site.phase} · ${site.cranes} cranes · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked` : '';
   $('#flight-site-items').replaceChildren(...(site?.items || []).map(item => {
     const button = document.createElement('button'); button.textContent = `${item.fields?.Status || 'Unknown'} / ${item.title}`;
@@ -151,7 +152,7 @@ function render() {
   if (flight) {
     const previous = flightSites[flightIndex]?.id;
     flightSites = constructionSites(items, { includeContext: !state.query && !state.view });
-    $('#flight-destination').replaceChildren(...flightSites.map(site => new Option(`${site.project ? 'EXIT' : site.type === 'milestone' ? '🏗' : '🚧'} ${site.title}`, site.id)));
+    $('#flight-destination').replaceChildren(...flightSites.map(site => new Option(`${site.project ? 'EXIT' : site.type === 'milestone' ? 'LEGACY CHECKPOINT /' : '🚧'} ${site.title}`, site.id)));
     showFlightSite(flightSites[Math.max(0, flightSites.findIndex(site => site.id === previous))], Math.max(0, flightSites.findIndex(site => site.id === previous)));
   }
   $('#page-label').textContent=list?`All ${items.length} ${own?'nodes':'items'}`:`Scene ${state.page+1} / ${pages} · ${items.length} total`;
@@ -362,7 +363,7 @@ async function startScene(){
     const onFailure=message=>{sceneFailed=true;render();notify(message);};
     if (kind==='flight') {
       const {ConstructionScene}=await import('./construction-scene.js');
-      next=new ConstructionScene($('#scene'),{onSite:showFlightSite,onFailure});
+      next=new ConstructionScene($('#scene'),{onSite:showFlightSite,onFailure,onMint:url=>window.open(url,'_blank','noopener,noreferrer')});
       next.setCamera($('#flight-camera').value);
       next.setZoom($('#flight-zoom').value);
     } else {

@@ -5,6 +5,8 @@ import { siteIdentity, PROJECT_MURALS } from './site-identities.js';
 import { campusStructure } from './project-campus.js';
 import { buildCampus } from './campus-buildings.js';
 import { campusConnections, campusPriority } from './campus-graph.js';
+import { projectMints } from './version-mints.js';
+import { mintArtworkPath } from './progress-feed.js';
 
 const lineMaterial = color => new THREE.LineBasicMaterial({ color });
 function lines(points, color) {
@@ -67,7 +69,8 @@ function sitePlanSprite(site) {
     sprite.scale.set(27, 20, 1); return sprite;
   }
 export class ConstructionScene {
-  constructor(container, { onSite, onFailure }) {
+  constructor(container, { onSite, onFailure, onMint }) {
+    this.onMint = onMint;
     this.container = container; this.onSite = onSite; this.sites = []; this.state = { progress: 0, x: 0, y: 0 };
     this.active = false; this.reduced = false; this.paused = false; this.keys = new Set();
     this.scene = new THREE.Scene(); this.scene.background = new THREE.Color('#100e1d');
@@ -130,7 +133,11 @@ export class ConstructionScene {
         const rect = container.getBoundingClientRect(), ray = new THREE.Raycaster();
         ray.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), this.camera);
         const hit = ray.intersectObjects(this.targets)[0];
-        if (hit) this.goTo(hit.object.userData.index);
+        if (hit?.object.userData.purchaseUrl) {
+          this.setPaused(true);
+          this.container.dispatchEvent(new CustomEvent('flightpause', { detail: true }));
+          this.onMint?.(hit.object.userData.purchaseUrl);
+        } else if (hit) this.goTo(hit.object.userData.index);
       }
       this.down = null;
     });
@@ -170,6 +177,39 @@ export class ConstructionScene {
         const plan = sitePlanSprite(site); plan.position.set(-structure.width / 2 - 16, 13, 18);
         plan.userData.index = site.index; this.targets.push(plan); campus.add(plan);
         const crown = textSprite(site.project.milestone, tint, 62); crown.position.set(0, structure.height + 15, 0); campus.add(crown);
+        const editions = projectMints(site, feed);
+        editions.forEach((version, index) => {
+          const display = new THREE.Group();
+          display.position.set(structure.width / 2 + 40 + index % 4 * 34, 16 + Math.floor(index / 4) * 36, -12);
+          campus.add(display);
+          const store = version.storefront;
+          const label = textSprite(`${version.tag} / TOKEN ${version.tokenId}`, '#e5c583', 29);
+          label.position.y = 16; display.add(label);
+          const action = textSprite(store ? 'BUY / 10 USDC / BASE' : 'MINTED / NO CHECKOUT EVIDENCE', store ? '#71e6d0' : '#a89eb9', 30);
+          action.position.y = -16; display.add(action);
+          if (store) {
+            const card = new THREE.Mesh(new THREE.BoxGeometry(24, 24, .6), [
+              ...Array.from({ length: 4 }, () => new THREE.MeshBasicMaterial({ color: '#71e6d0' })),
+              new THREE.MeshBasicMaterial({ color: '#ffffff' }), new THREE.MeshBasicMaterial({ color: '#ffffff' }),
+            ]);
+            display.add(card);
+            for (const target of [card, action]) {
+              target.userData.index = site.index; target.userData.purchaseUrl = store.purchaseUrl; this.targets.push(target);
+            }
+            ['front', 'back'].forEach((face, faceIndex) => {
+              new THREE.TextureLoader().load(mintArtworkPath(store, face), texture => {
+                if (!campus.parent) { texture.dispose(); return; }
+                texture.colorSpace = THREE.SRGBColorSpace;
+                card.material[4 + faceIndex].map = texture;
+                card.material[4 + faceIndex].needsUpdate = true; this.invalidate();
+              }, undefined, () => {
+                if (campus.parent) this.container.dispatchEvent(new CustomEvent('artworkerror', { detail: `${site.title} ${version.tag}: edition artwork unavailable; labeled buy sign and evidence retained.` }));
+              });
+            });
+          }
+          const stand = lines([[-13, -13, 0], [13, -13, 0], [13, -13, 0], [13, 13, 0], [13, 13, 0], [-13, 13, 0], [-13, 13, 0], [-13, -13, 0]], '#e5c583');
+          display.add(stand);
+        });
         if (structure.form === 'entrance') {
           const billboard = textSprite('DECENT AGENCY / PLANNING OFFICE', '#71e6d0', 76);
           billboard.position.set(0, 30, 12); campus.add(billboard);
@@ -193,14 +233,15 @@ export class ConstructionScene {
         const cone = new THREE.Mesh(new THREE.ConeGeometry(.6, 1.8, 6), new THREE.MeshBasicMaterial({ color: site.blocked ? '#ee92af' : '#e5a65b' }));
         cone.position.set(side * 8, 1.7, 12 * site.scale); campus.add(cone);
       }
-      const title = textSprite(`${site.project ? 'EXIT ' + (site.index + 1) : site.type === 'milestone' ? 'MILESTONE' : 'WORKSTREAM'} / ${site.title}`, tint, site.project ? 80 : 52);
+      const title = textSprite(`${site.project ? 'EXIT ' + (site.index + 1) : site.type === 'milestone' ? 'LEGACY CHECKPOINT' : 'WORKSTREAM'} / ${site.title}`, tint, site.project ? 80 : 52);
       title.position.set(0, site.project ? -4 : 32, 22); title.userData.index = site.index; this.targets.push(title); campus.add(title);
-      const count = textSprite(`${site.visibleCranes ?? site.cranes} BUILD CRANES / ${site.active} ACTIVE / ${site.done} DONE / ${site.total} CARDS`, '#e5c583', 40);
+      const count = textSprite(site.type === 'milestone' ? `SOURCE STATUS / ${site.items[0]?.fields?.Status || 'UNSET'} / NOT A COMPLETION SCORE`
+        : `${site.visibleCranes ?? site.cranes} BUILD CRANES / ${site.active} ACTIVE / ${site.done} DONE / ${site.total} CARDS`, '#e5c583', 40);
       count.position.set(0, -10, 22); campus.add(count);
       const identity = siteIdentity(site);
       const sign = textSprite(identity.projects.length
         ? `PUBLIC REPO REFERENCES / ${identity.projects.map(project => project.name).join(' / ')}`
-        : identity.kind === 'milestone' ? 'MILESTONE / NOT A REPOSITORY' : 'WORKSTREAM / NO PROJECT IDENTITY ESTABLISHED',
+        :         identity.kind === 'milestone' ? 'LEGACY PLAN / NOT A REPOSITORY' : 'WORKSTREAM / NO PROJECT IDENTITY ESTABLISHED',
       identity.fallback.color, 34);
       sign.position.set(0, site.project ? -16 : 27, 0); campus.add(sign);
       if (site.start || site.target) {

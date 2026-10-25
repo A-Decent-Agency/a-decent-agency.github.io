@@ -42,6 +42,7 @@ jobs:
           node --test
           mkdir -p _site
           cp -R index.html favicon.svg .nojekyll css js data LICENSE NOTICE _site/
+          node scripts/cache-mint-art.mjs "$PWD/_site/data/mint-art"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
