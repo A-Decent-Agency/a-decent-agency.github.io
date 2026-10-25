@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-25T17:01:41.932Z",
+  "checkedAt": "2026-10-25T17:06:46.199Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-21T13:12:22Z",
       "release": null,
@@ -18,7 +18,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-25T14:44:30Z",
       "release": null,
@@ -62,7 +62,7 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-25T16:56:22Z",
       "release": null,
@@ -106,7 +106,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-24T19:22:12Z",
       "release": {
@@ -177,7 +177,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-25T09:20:53Z",
       "release": {
@@ -248,7 +248,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-23T06:15:59Z",
       "release": null,
@@ -292,7 +292,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:20Z",
       "release": {
@@ -357,7 +357,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:36Z",
       "release": {
@@ -428,7 +428,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
       "pushedAt": "2026-10-24T19:31:33Z",
       "release": {
@@ -499,11 +499,17 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-25T17:01:41.932Z",
+      "checkedAt": "2026-10-25T17:06:46.199Z",
       "error": "",
-      "pushedAt": "2026-10-25T16:29:16Z",
+      "pushedAt": "2026-10-25T17:06:20Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 10,
+          "title": "Add project mint galleries with verified purchase links",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/10",
+          "mergedAt": "2026-10-25T17:06:20Z"
+        },
         {
           "number": 9,
           "title": "Create an artful campus observatory with version-backed floors",
@@ -527,16 +533,10 @@
           "title": "Add source-grounded flight docking and publication change summaries",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/4",
           "mergedAt": "2026-10-23T17:36:21Z"
-        },
-        {
-          "number": 3,
-          "title": "Add explainable Today's flight route and isolated panel",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/3",
-          "mergedAt": "2026-10-23T17:36:21Z"
         }
       ],
       "issues": null,
-      "codeBytes": 279325,
+      "codeBytes": 309580,
       "versions": [],
       "versionsTruncated": false
     }
