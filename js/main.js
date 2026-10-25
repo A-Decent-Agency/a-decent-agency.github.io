@@ -12,6 +12,8 @@ import { renderCampusDetails } from './campus-details.js';
 import { isProgressFeed } from './progress-feed.js';
 import { renderCampusPlan } from './campus-plan.js';
 import { campusStructure } from './project-campus.js';
+import { projectMints } from './version-mints.js';
+import { mountSupporterCheckout } from './supporter-checkout-ui.js';
 
 const $ = selector => document.querySelector(selector);
 const tabs = [...document.querySelectorAll('[data-tab]')];
@@ -61,11 +63,26 @@ try { map = loadMap(); } catch { map={schemaVersion:1,nodes:[],links:[]};notify(
 function persist() { try {saveMap(map);} catch {notify('Could not save in this browser. Your map remains in memory: download JSON to keep it.');} }
 function openHouse() { $('#house-status').textContent='';$('#house-dialog').showModal(); }
 function openAbout() { $('#about-dialog').showModal(); }
-initHeader({openHouse,openAbout,notify});
+const walletSession = initHeader({openHouse,openAbout,notify});
+const supporterCheckout = mountSupporterCheckout({
+  dialog: $('#supporter-checkout'), session: walletSession, notify,
+  onOpen: () => { scenes.get('flight')?.setPaused(true); updatePause(true); },
+});
+function openProjectMint(url) {
+  for (const site of flightSites) {
+    const version = projectMints(site, progressFeed).find(value => value.storefront?.purchaseUrl === url);
+    if (version) { supporterCheckout.open({ title: site.title, repository: site.project.repository, version }); return; }
+  }
+  notify('This edition is no longer in the current public map. Refresh the project and review its purchase evidence.');
+}
+$('#campus-details').addEventListener('click', event => {
+  const button = event.target.closest('[data-mint-checkout]');
+  if (button) openProjectMint(button.dataset.mintCheckout);
+});
 $('#bottom-about').addEventListener('click',openAbout);
 for(const dialog of document.querySelectorAll('dialog')) {
   dialog.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-  dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
+  dialog.addEventListener('click',event=>{if(event.target===dialog&&!dialog.querySelector('.dialog-close').disabled){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
 }
 $('#house-dialog').addEventListener('close',()=>{ $('#pinata-token').value='';$('#github-token').value=''; });
 function guard(action) { return async event => { const button=event?.currentTarget;try {if(button?.tagName==='BUTTON')button.disabled=true;await action(event);}catch(error){notify(error.message);if($('#house-dialog').open)$('#house-status').textContent=error.message;}finally{if(button?.tagName==='BUTTON')button.disabled=false;} }; }
@@ -363,7 +380,7 @@ async function startScene(){
     const onFailure=message=>{sceneFailed=true;render();notify(message);};
     if (kind==='flight') {
       const {ConstructionScene}=await import('./construction-scene.js');
-      next=new ConstructionScene($('#scene'),{onSite:showFlightSite,onFailure,onMint:url=>window.open(url,'_blank','noopener,noreferrer')});
+      next=new ConstructionScene($('#scene'),{onSite:showFlightSite,onFailure,onMint:openProjectMint});
       next.setCamera($('#flight-camera').value);
       next.setZoom($('#flight-zoom').value);
     } else {

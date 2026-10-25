@@ -186,10 +186,28 @@ and a deployment independently verified are three different things.
 ### Version-mint galleries and legacy checkpoints
 
 Receipt-backed editions appear beside their own project buildings as two-sided
-collectible displays and in sidepanels as front/back artwork with native purchase
-links. Click a 3D card or its BUY sign to open the same approved checkout in a new
-tab; flight pauses. Keyboard, mobile, reduced-motion and 2D users use the sidepanel
-links. No wallet request, approval or transaction originates in the planning office.
+collectible displays and in sidepanels as front/back artwork with **View / buy**
+buttons. Click a 3D card, its BUY sign or a sidepanel button to pause flight and open
+the native in-map purchase dialog, including in fullscreen. Flip the art and review
+the edition, token, listing, price and gas notice without leaving this page.
+Opening a card makes only public Base reads; it never connects or prompts a wallet.
+Keyboard, mobile, reduced-motion and 2D users use the same sidepanel buttons.
+
+**Buy one** uses the existing header-selected EIP-6963/injected wallet session,
+connecting only if needed, and explicitly switches/adds Base if required.
+`js/supporter-checkout.js` checks the listing's exact project token, approved
+NFT/escrow, pause state, stock, 10-USDC price, balance and allowance. Only an exact
+10-USDC approval is requested when needed, followed by a separate wallet purchase
+confirmation for quantity one. It rechecks account/network/session and listing
+after approval and before sending; estimates gas; waits for a successful receipt
+and matching escrow `Purchased` event before claiming success. No native-ETH
+payment, arbitrary contract, unlimited approval, automatic retry, or background
+wallet prompt is supported. Gas requires Base ETH. Transaction hashes link to
+BaseScan in the dialog. Rejections/errors are explicit; approval does not equal a
+purchase. A submitted purchase blocks repeated submission in the current page,
+including when its confirmation is uncertain. Inspect the transaction before retrying.
+Confirmed approvals remain in place if a later purchase is declined or fails.
+The dialog cannot close while a wallet request/confirmation is pending.
 
 The public observer binds `supporter-minted.json` verification (Head/Market), or
 widget `supporter-listing-evidence.json` protocol evidence plus
@@ -199,22 +217,33 @@ Head/Market checkout routes are accepted. Front/back URLs name exact published
 release assets. Missing/mismatched listing evidence withholds checkout and reports
 the error while retaining the minted floor. Existing snapshots without storefronts
 remain supported. Failed artwork retains labeled signs and links with a notice.
-Published evidence is not current inventory or a fresh chain audit: the existing
-checkout rechecks price, pause state and stock before any user-approved purchase.
+Published evidence is not current inventory or a fresh chain audit: the in-map
+checkout reads current Base state and fails closed on RPC/listing errors.
 Transient GitHub failure labels retained public observations; nothing implies a
 currently available sale. At most 20 observed release editions are displayed.
 
 Reuse decision: adapt `DecentHead/js/supporter-purchase.js` and
 `scripts/supporter-protocol.mjs` at `8542720354a8eb1fb619ff7d57c23982b3b42d35`
-for purchase-route/contract checks, and the two-sided card shape in
+for purchase-route/contract checks, plus `js/components/Header/AboutModal.js`
+for the existing USDC approval/purchase flow and `js/wallet-logic.js` for explicit
+chain switching. These Apache-2.0 implementations are adapted to the Office's
+lightweight DecentHead adapter rather than importing a second header, config
+singleton, wallet connection or donor modal. Account/network guards, live pause
+checks, exact edition validation and confirmed purchase-event checks are added
+at the receiving boundary. Adapt the two-sided card shape in
 `DecentMarket/js/supporter-display.mjs` at
-`8dc6c7043ac22f59462ae0973d9b965a7b5c07eb`. The receiving app needs read-only
-wayfinding, not the donors' wallet/ethers or configurable asset gateways; no
-checkout or mint implementation is duplicated. Display original edition art with
+`8dc6c7043ac22f59462ae0973d9b965a7b5c07eb`. No new runtime dependency or
+shared package is introduced; the Office's pinned ethers import is reused.
+Donor worktrees are not edited. Display original edition art with
 The Jolly LaMa / A Decent Agency attribution and source/license links. The Canopy
 public capability map was consulted; current donor releases/listing receipts are
 the integration evidence, not old release prose. Receiving acceptance is covered
-by `tests/version-mints.test.js` and `scripts/verify-version-mints.mjs`.
+by `tests/version-mints.test.js`, `tests/supporter-checkout.test.js`,
+`scripts/verify-version-mints.mjs` and `scripts/verify-supporter-checkout.mjs`.
+The checkout browser suite uses real ethers with mocked RPC/wallet responses;
+it does not spend funds. Run with existing Playwright/ethers installations using
+`PLAYWRIGHT_MODULE` and `ETHERS_MODULE` when they are outside this dependency-free
+repo. A real MetaMask-signed purchase remains a separate user-approved action.
 
 GitHub release downloads do not permit cross-origin WebGL textures. During Pages
 assembly, `node scripts/cache-mint-art.mjs "$PWD/_site/data/mint-art"` downloads

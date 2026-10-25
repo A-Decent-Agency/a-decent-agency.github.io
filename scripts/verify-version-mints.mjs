@@ -19,8 +19,8 @@ try {
     await page.locator('#flight-destination').selectOption(`project:${version.repository.toLowerCase()}`);
     const gallery = page.locator(`[data-version-mint="${version.tag}"]`);
     const buy = gallery.locator('.mint-buy');
-    assert.equal(await buy.getAttribute('href'), version.storefront.purchaseUrl);
-    assert.equal(await buy.getAttribute('target'), '_blank');
+    assert.equal(await buy.getAttribute('data-mint-checkout'), version.storefront.purchaseUrl);
+    assert.equal(await buy.getAttribute('href'), null);
     assert.match(await buy.innerText(), /10 USDC on Base/);
     const art = gallery.locator('[data-mint-art]');
     await art.first().scrollIntoViewIfNeeded();
@@ -98,5 +98,5 @@ try {
     await mobile.close();
   }
   assert.deepEqual(errors, []);
-  console.log(`PASS: ${editions.length} project-specific live-receipt galleries, 10 loaded front/back images, real 3D card and BUY raycast, distinct textures, pause, safe links, unminted no-buy state, legacy disclosure, keyboard and 320/375px reduced-motion access; zero page errors.`);
+  console.log(`PASS: ${editions.length} project-specific live-receipt galleries, 10 loaded front/back images, real 3D card and BUY raycast, distinct textures, pause, in-map checkout buttons, unminted no-buy state, legacy disclosure, keyboard and 320/375px reduced-motion access; zero page errors.`);
 } finally { await browser.close(); }
