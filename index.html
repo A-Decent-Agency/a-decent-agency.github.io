@@ -72,8 +72,16 @@
         <button id="flight-next">Next site →</button>
         <button id="flight-pause" aria-pressed="false">Pause ship</button>
         <button id="refresh-project">↻ Refresh plan</button>
+        <label>CAMERA<select id="flight-camera" aria-label="Camera angle"><option value="flight">Ship / highway</option><option value="orbit">City / orbit</option><option value="top">Top-down site plan</option><option value="universe">Whole universe / atlas</option></select></label>
+        <label>ZOOM<input id="flight-zoom" aria-label="Camera distance" type="range" min="0.45" max="3" step="0.05" value="1"></label>
+        <button id="flight-fullscreen" aria-pressed="false">⛶ Fullscreen</button>
       </div>
       <div id="workspace" role="tabpanel" aria-labelledby="tab-flight" tabindex="0">
+        <div class="immersive-tools" id="immersive-tools" hidden>
+          <button id="immersive-exit">Exit fullscreen</button><button id="immersive-camera">Change camera</button><button id="immersive-previous">Previous site</button><button id="immersive-next">Next site</button>
+          <button id="immersive-zoom-in" aria-label="Zoom camera in">Zoom +</button><button id="immersive-zoom-out" aria-label="Zoom camera out">Zoom −</button><button id="immersive-pause">Pause ship</button>
+          <button id="immersive-panel" aria-pressed="true">Hide site panel</button>
+        </div>
         <div id="scene" aria-label="Interactive 3D planning board. Drag to orbit, scroll to zoom; choose 2D list for keyboard-accessible cards."></div>
         <div class="scene-compass" aria-hidden="true"><span>N</span><div>↗</div><span>DECENT COORDINATES</span></div>
         <div class="site-stamp" aria-hidden="true">A DECENT<br>WORK IN<br><b>PROGRESS.</b></div>
@@ -83,8 +91,10 @@
         <aside id="flight-site" class="flight-site" aria-label="Current construction site" hidden>
           <span id="flight-site-type" class="eyebrow">FLIGHT CONTROL</span>
           <h3 id="flight-site-title">Preparing the construction route…</h3>
+          <div id="campus-artwork"></div>
           <p id="flight-site-dates"></p>
           <p id="flight-site-metrics"></p>
+          <details id="campus-plan-panel" open><summary>2D site plan / connections and jobs</summary><div id="campus-plan"></div></details>
           <div id="campus-details" class="campus-details"></div>
           <details id="flight-identity-panel"><summary>Project signs / public artwork</summary><div id="flight-site-identity"></div></details>
           <details id="flight-dock-panel"><summary>Dock / finish line, evidence and dependencies</summary><div id="planning-dock"></div></details>

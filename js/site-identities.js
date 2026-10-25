@@ -1,7 +1,7 @@
 // Curated public identities, not a name/keyword classifier. Revisions pin artwork provenance.
 const entries = [
-  ['canopy', 'DecentCanopy', 'CN', '#74dfb4', '14aef826624f9e1651bf39407a3a82ef2936e39d',
-    'assets/decentcanopy-ens-favicon.png', 'Project favicon', 'index.html',
+  ['canopy', 'DecentCanopy', 'CN', '#74dfb4', '9a8777e8f0e7dbfaa65352b0f00fd5fbce5d7d99',
+    'assets/decentcanopy-ens-avatar.jpg', 'Project ENS avatar artwork', 'index.html',
     'PVTI_lADODD7ovc4Bn91hzhCOGZs'],
   ['busking', 'DecentBusking', 'BK', '#f0bd70', '7c3658a2079dd720823702dcd39805cb1e7d49e8',
     'img/hat.svg', 'Project favicon', 'index.html',
@@ -39,6 +39,27 @@ const identities = entries.map(([id, name, monogram, color, revision, path, desc
     },
   };
 });
+
+export const ENS_ARTWORK_OBSERVATION = {
+  observedAt: '2026-10-25',
+  source: 'Ethereum mainnet resolver avatar text records, read-only public RPC',
+  records: {
+    'decentagency.eth': 'https://euc.li/decentagency.eth',
+    'decentcanopy.eth': 'https://euc.li/decentcanopy.eth',
+    'decentbusking.decentagency.eth': 'https://euc.li/decentbusking.decentagency.eth',
+    'decenthead.decentagency.eth': 'ipfs://bafybeie6yd4kiyr7amfkmoop56xtc6wuz46hwizv6wkkvoaw3fqcdkk5xm/img/ens/head-avatar.png',
+    'decentmarket.decentagency.eth': 'ipfs://bafybeieu4ypnyluhjokrpjyjcr6rcguwokvawsgrq7qqcaa264vc2qqt34/img/ens/market-avatar.png',
+  },
+};
+
+export const PROJECT_MURALS = {
+  'TheJollyLaMa/DecentBusking': {
+    url: 'https://raw.githubusercontent.com/TheJollyLaMa/DecentBusking/93274c8a37c15b32857551db1dd1e7ee3909b0b0/img/D_Busker.jpeg',
+    alt: 'DecentBusking project artwork: the busker',
+    source: 'https://github.com/TheJollyLaMa/DecentBusking/blob/93274c8a37c15b32857551db1dd1e7ee3909b0b0/img/D_Busker.jpeg',
+    license: 'https://github.com/TheJollyLaMa/DecentBusking/blob/93274c8a37c15b32857551db1dd1e7ee3909b0b0/LICENSES/CC-BY-4.0.txt',
+  },
+};
 
 function repositoryFrom(value) {
   if (typeof value !== 'string') return null;

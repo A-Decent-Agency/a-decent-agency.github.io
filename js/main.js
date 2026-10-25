@@ -10,6 +10,8 @@ import { mountPlanningDock } from './planning-dock.js';
 import { mountSiteIdentity } from './site-identities-ui.js';
 import { renderCampusDetails } from './campus-details.js';
 import { isProgressFeed } from './progress-feed.js';
+import { renderCampusPlan } from './campus-plan.js';
+import { campusStructure } from './project-campus.js';
 
 const $ = selector => document.querySelector(selector);
 const tabs = [...document.querySelectorAll('[data-tab]')];
@@ -31,10 +33,16 @@ let dailyFlightKey = '';
 let previousPublication = null, publicationLoaded = false;
 const planningDock = mountPlanningDock({ container: $('#planning-dock'), current: null, onItem: openDetail });
 const siteIdentityPanel = mountSiteIdentity($('#flight-site-identity'), null);
+const campusArtwork = mountSiteIdentity($('#campus-artwork'), null);
 let identitySiteId = null;
 let progressFeed = null;
 function updateSitePanels(site = flightSites[flightIndex]) {
   $('#campus-details').innerHTML = renderCampusDetails(site, progressFeed);
+  for (const image of $('#campus-details').querySelectorAll('[data-project-mural]')) image.addEventListener('error', () => {
+    image.hidden = true; notify('Project artwork unavailable; source link and project badge retained.');
+  }, { once: true });
+  $('#campus-plan').innerHTML = renderCampusPlan(site, flightSites, progressFeed);
+  campusArtwork.update(site?.project ? site : null, { active: Boolean(site?.project && state.tab === 'flight') });
   planningDock.update({ site, previous: previousPublication, current: publicationLoaded ? state.project : null });
   if (identitySiteId !== site?.id) {
     identitySiteId = site?.id;
@@ -68,6 +76,7 @@ function visibleItems() {
   return items.filter(item=>tabMatches(item,state.tab)&&(state.tab==='own'||viewMatches(item,state.view))&&(!query||[item.title,item.body,JSON.stringify(item.fields)].join(' ').toLowerCase().includes(query)));
 }
 function openDetail(item) {
+  if (state.tab === 'flight') scenes.get('flight')?.highlightTask(item.id);
   if (state.tab === 'flight' && scenes.has('flight')) { scenes.get('flight').setPaused(true); updatePause(true); }
   selected=item;detailOpener=document.activeElement;
   const panel=$('#detail-panel');const content=$('#detail-content');
@@ -103,7 +112,9 @@ function showFlightSite(site, index = 0) {
   $('#flight-site-dates').textContent = site ? site.start || site.target
     ? `${site.start || 'Start unset'} → ${site.target || 'Target unset'} · tentative GitHub dates`
     : site.project ? 'Project district · architectural milestone and source evidence below' : 'Undated staging area · no dates invented' : 'Change the search or Project view filter.';
-  $('#flight-site-metrics').textContent = site ? `${site.phase === 'Handover' ? '✓' : '🏗'} ${site.project ? 'Board only: ' : ''}${site.phase} · ${site.cranes} cranes · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked` : '';
+  $('#flight-site-metrics').textContent = site ? site.project
+    ? `${campusStructure(site, progressFeed).buildCranes} build cranes · ${campusStructure(site, progressFeed).deliveredFloors} clean version floors · Board only: ${site.phase} · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked`
+    : `${site.phase === 'Handover' ? '✓' : '🏗'} ${site.phase} · ${site.cranes} cranes · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked` : '';
   $('#flight-site-items').replaceChildren(...(site?.items || []).map(item => {
     const button = document.createElement('button'); button.textContent = `${item.fields?.Status || 'Unknown'} / ${item.title}`;
     button.addEventListener('click', () => openDetail(item)); return button;
@@ -139,7 +150,7 @@ function render() {
   }
   if (flight) {
     const previous = flightSites[flightIndex]?.id;
-    flightSites = constructionSites(items);
+    flightSites = constructionSites(items, { includeContext: !state.query && !state.view });
     $('#flight-destination').replaceChildren(...flightSites.map(site => new Option(`${site.project ? 'EXIT' : site.type === 'milestone' ? '🏗' : '🚧'} ${site.title}`, site.id)));
     showFlightSite(flightSites[Math.max(0, flightSites.findIndex(site => site.id === previous))], Math.max(0, flightSites.findIndex(site => site.id === previous)));
   }
@@ -155,7 +166,7 @@ function render() {
     if (scene && sceneKind === kind) {
       const key = JSON.stringify([items, state.tab, state.page, own ? map.links : [], flight ? progressFeed : null]);
       scene.setActive(true);
-      if (sceneData.get(scene) !== key) { scene.setData(items,state.tab,state.page,map.links,progressFeed); sceneData.set(scene,key); }
+      if (sceneData.get(scene) !== key) { scene.setData(items,state.tab,state.page,map.links,progressFeed,{ includeContext: !state.query && !state.view }); sceneData.set(scene,key); }
       scene.setMotion(state.reduced);
     } else { scene?.setActive(false); startScene(); }
   }
@@ -185,8 +196,65 @@ $('#flight-pause').onclick=()=>{
 function updatePause(paused) {
   $('#flight-pause').textContent = paused ? 'Resume ship' : 'Pause ship';
   $('#flight-pause').setAttribute('aria-pressed', String(paused));
+  $('#immersive-pause').textContent = paused ? 'Resume ship' : 'Pause ship';
+  $('#immersive-pause').setAttribute('aria-pressed', String(paused));
 }
 $('#scene').addEventListener('flightpause', event => updatePause(event.detail));
+$('#campus-plan').addEventListener('click', event => {
+  const destination = event.target.closest('[data-campus-site]');
+  if (destination) chartSite(flightSites.findIndex(site => site.id === destination.dataset.campusSite));
+  const job = event.target.closest('[data-campus-item]');
+  if (job) {
+    const item = state.project.items.find(item => item.id === job.dataset.campusItem);
+    if (item) openDetail(item);
+  }
+});
+$('#flight-camera').addEventListener('change', event => scenes.get('flight')?.setCamera(event.target.value));
+$('#flight-zoom').addEventListener('input', event => scenes.get('flight')?.setZoom(event.target.value));
+$('#scene').addEventListener('camerazoom', event => { $('#flight-zoom').value = event.detail; });
+$('#immersive-camera').onclick = () => {
+  const camera = $('#flight-camera');
+  camera.selectedIndex = (camera.selectedIndex + 1) % camera.options.length;
+  camera.dispatchEvent(new Event('change'));
+};
+$('#immersive-previous').onclick = () => chartSite(flightIndex - 1);
+$('#immersive-next').onclick = () => chartSite(flightIndex + 1);
+$('#immersive-pause').onclick = () => $('#flight-pause').click();
+for (const [id, factor] of [['#immersive-zoom-in', .8], ['#immersive-zoom-out', 1.25]]) {
+  $(id).onclick = () => {
+    const zoom = $('#flight-zoom');
+    zoom.value = Math.max(Number(zoom.min), Math.min(Number(zoom.max), Number(zoom.value) * factor));
+    zoom.dispatchEvent(new Event('input'));
+  };
+}
+$('#immersive-panel').onclick = () => {
+  const hidden = $('#workspace').classList.toggle('panel-hidden');
+  $('#immersive-panel').setAttribute('aria-pressed', String(!hidden));
+  $('#immersive-panel').textContent = hidden ? 'Show site panel' : 'Hide site panel';
+};
+function updateFullscreen() {
+  const active = document.fullscreenElement === $('#workspace') || $('#workspace').classList.contains('immersive');
+  $('#immersive-tools').hidden = !active;
+  $('#flight-fullscreen').setAttribute('aria-pressed', String(active));
+  $('#flight-fullscreen').textContent = active ? 'Exit fullscreen' : '⛶ Fullscreen';
+}
+async function toggleFullscreen() {
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else if ($('#workspace').classList.contains('immersive')) $('#workspace').classList.remove('immersive');
+    else if ($('#workspace').requestFullscreen) await $('#workspace').requestFullscreen();
+    else { $('#workspace').classList.add('immersive'); notify('Native fullscreen unavailable; expanded window mode enabled. Escape exits.'); }
+    updateFullscreen();
+  } catch (error) { notify(`Fullscreen failed: ${error.message}`); }
+}
+$('#flight-fullscreen').onclick = toggleFullscreen;
+$('#immersive-exit').onclick = toggleFullscreen;
+document.addEventListener('fullscreenchange', updateFullscreen);
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && $('#workspace').classList.contains('immersive')) {
+    $('#workspace').classList.remove('immersive'); updateFullscreen();
+  }
+});
 const artworkFailures = new Set();
 $('#scene').addEventListener('artworkerror', event => {
   if (artworkFailures.has(event.detail)) return;
@@ -295,6 +363,8 @@ async function startScene(){
     if (kind==='flight') {
       const {ConstructionScene}=await import('./construction-scene.js');
       next=new ConstructionScene($('#scene'),{onSite:showFlightSite,onFailure});
+      next.setCamera($('#flight-camera').value);
+      next.setZoom($('#flight-zoom').value);
     } else {
       const {OfficeScene}=await import('./scene.js');
       next=new OfficeScene($('#scene'),{onSelect:openDetail,onHover:hover,onMove:(id,x,y)=>{const node=map.nodes.find(n=>n.id===id);if(node){node.x=x;node.y=y;persist();render();}},onFailure});

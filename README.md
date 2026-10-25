@@ -8,13 +8,29 @@ Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, acco
 
 The landing flight now passes recognizable project offramps before the shared milestone/workstream districts: Agency entrance, Busking tower, Head and Market halls, Canopy's broad foundation, BigNuten staging, and later public repository blueprints. Matching uses explicit public repository references or reviewed portfolio identities, never guessed private names or arbitrary title keywords. Every board card still appears exactly once. Private/redacted portfolios stay in unbranded shared yards.
 
-Architecture is a labeled steward milestone, not a calculated completion percentage. Busking's “Version 1 construction complete” records the steward's 25 October direction, **not** an invented GitHub v1 release. Done cards add bounded structural floors; backlog size does not manufacture a finished tower. Public GitHub releases, recent merged PRs, board progress and unavailable observations are presented separately.
+Architecture is a labeled steward milestone, not a calculated completion percentage. Busking's “Version 1 construction complete” records the steward's 25 October direction, **not** an invented GitHub v1 release. The performance tower has a stage and equalizer roofline; Canopy has planted terraces; Head a gateway pavilion; Market stalls/awnings; BigNuten a domed raw-campus plan. These are original procedural designs using Three.js primitives, not copied game assets.
+
+Only version-matched published Supporter mint receipts produce **clean delivered floors**. Head, Market and the three standalone widgets have observed receipt-backed floors; a release tag, preparation manifest or stale release prose is insufficient. Current active/blocked jobs occupy separate scaffolded yards with crates and barriers, while clean editions retain landscaping and no build cranes unless a new active job starts. Further minted versions add floors, capped at twelve visible floors; details retain the actual observed edition list. The latest twenty releases are examined; a full page is labeled partial. Receipt data is source-reported verification, **not a new independent chain audit**, a funding balance or proof of project-wide completeness.
+
+GitHub language byte totals scale the footprint logarithmically within a bounded range. They are public Linguist source-size observations, not lines of code, value, effort, budget or a readiness score. Repositories outside the observer allowlist use a neutral footprint and explicitly unavailable size evidence.
 
 Offramps, project signs and pinned project-owned artwork are visible in 3D. Highway and project-to-project signal packets illustrate recorded integration paths, not actual network traffic, usage, balances or payments. Ambient rendering is capped at 12 fps; piloting at 30 fps. Pause, reduced motion, hidden tabs and inactive views stop animation. Mobile/save-data visitors keep the complete list fallback and can opt into flight.
+
+The larger canvas has **Ship / highway**, **City / orbit**, **Top-down site plan** and **Whole universe / atlas** cameras, zoom controls, and drag-to-orbit outside ship mode (also usable with motion off). Fullscreen expands the scene with in-canvas destination/camera/panel controls. Unsupported native fullscreen uses an explicitly labeled expanded-window mode; failures are surfaced. Escape exits fullscreen. Each campus has a physical 2D job-board sign and an accessible 2D connection/job plan using the same published item IDs, Project/Component, Status and Priority metadata; selecting a job opens its source details and emphasizes its building's connection lines.
+
+The public Canopy map is imported from `data/agency-map.json` at `9a8777e8f0e7dbfaa65352b0f00fd5fbce5d7d99`, with all 24 public-endpoint relationships and their types/evidence/caveats preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
+
+Sidepanels immediately show bounded pinned project artwork with source/license credit. Canopy uses its full ENS avatar, Head/Market their project-owned ENS artwork, and Busking its hat plus original busker mural (also on its 3D stage). Public Ethereum mainnet avatar text records were read without a wallet connection on 2026-10-25: Head/Market point to IPFS images; Agency/Canopy/Busking point to mutable avatar-service URLs. The UI records this provenance and uses reviewed immutable repository artwork rather than automatically following arbitrary services or assuming prepared ENS metadata is live. No ENS writes occur.
 
 Project detail disclosures adapt DecentCanopy's provenance-first card pattern (`scripts/agency-map.js` at `6a45fff8620f289028538309efa36d754756b4c2`: readiness, evidence, connections) rather than copying its application-specific treasury or creator-auth logic. The existing Office dock remains responsible for source cards and dependencies. Receiving-app validation covers exact card partition/privacy, six architectural landmarks, refreshed release signs, unavailable observations and desktop/mobile flight behavior.
 
 Public activity is automatically collected hourly into `data/progress.json`; the private board snapshot is exported only when its separate read secret is available. Visible pages recheck publications every five minutes and on return. Refresh errors retain prior data with an explicit failure label. This is scheduled observation, not a live socket or a guarantee that an unedited board knows about a release. New architectural stages and approved integration paths still need deliberate curation; no board writes or private-data publication is automated.
+
+### GitHub planning alignment
+
+With steward approval, `scripts/align-planning.mjs --apply` adds public-allowlisted **Project**, **Component**, **Delivery version** and **Priority** text fields, keeping Status/Horizon/dates and existing visible columns. Components initially reuse explicit Workstream values (not inferred code ownership); unknown mappings remain shared yards. Priority translates the existing Horizon, not an invented achievement score. Delivery version is populated only for portfolio editions with mint evidence, not retroactively attributed to every task. Private/redacted records do not receive or publish these new fields.
+
+The script is dry-run by default and must be run against a freshly exported board. It reconciles the shipped M1 reuse desk to Done and M2 public activity to In Progress, with source links and remaining full-acceptance gaps; it does not close M2 just because the bounded observer shipped. It also corrects the whole-library Portfolio view filter and exposes the new fields in supported board/table views. GitHub's roadmap API does not support visible-field columns; it still uses those same underlying items/status/outcomes. Dates are retained as planning windows, not fabricated actual completion dates. Alignment is an explicit steward operation, never part of the hourly read-only observation workflow.
 
 ## Run locally
 
@@ -192,7 +208,7 @@ Reviewed public sources on **2026-10-23**:
 
 | Project | Pinned project-owned asset | Identity evidence |
 | --- | --- | --- |
-| [Canopy](https://github.com/TheJollyLaMa/DecentCanopy) | `assets/decentcanopy-ens-favicon.png` at `14aef826` | Repository `index.html` favicon |
+| [Canopy](https://github.com/TheJollyLaMa/DecentCanopy) | `assets/decentcanopy-ens-avatar.jpg` at `9a8777e8` | Project-owned ENS identity artwork |
 | [Busking](https://github.com/TheJollyLaMa/DecentBusking) | `img/hat.svg` at `7c3658a2` | Repository `index.html` favicon; platform emoji appearance varies |
 | [BigNuten](https://github.com/TheJollyLaMa/BigNuten_Vanilla) | `img/BigNuten.png` at `8eb8d131` | Repository `index.html` favicon / “BigNuten Logo” |
 | [Head](https://github.com/TheJollyLaMa/DecentHead) | `img/ens/head-avatar.png` at `3b2a72f7` | Public artwork commit [`9aa196ca`](https://github.com/TheJollyLaMa/DecentHead/commit/9aa196caf305588b9a677fb1b6dc7db784fdb932), Supporter-front adaptation |
@@ -326,7 +342,8 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/main.js` — tabs, accessible list/details, local editor and housing interactions.
 - `js/scene.js` — pinned Three.js scene, controls, spatial views, picking and dragging.
 - `js/construction-scene.js`, `js/construction-model.js` — bounded ship flight, source-derived construction sites and crane/workload rules.
-- `js/project-campus.js`, `js/campus-details.js` — explicit public repository grouping, curated architecture and source-backed project disclosures.
+- `js/project-campus.js`, `js/campus-details.js`, `js/campus-buildings.js` — explicit public repository grouping, receipt-backed version floors, distinctive architecture and source-backed disclosures.
+- `js/campus-graph.js`, `js/campus-plan.js`, `js/canopy-registry.js` — typed Canopy/board connections and the same-data 2D site/job plan.
 - `js/progress-feed.js`, `scripts/sync-progress.mjs`, `data/progress.json` — bounded public GitHub observation, validation and approved integration paths.
 - `js/model.js` — view filters, color semantics, date and relationship parsing.
 - `js/markdown.js` — HTML-escaped, small Markdown subset (no raw HTML/images).
@@ -334,13 +351,13 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/project.js`, `scripts/export-project.mjs` — shared GraphQL exporter/privacy boundary and Node entry point.
 - `data/project.json` — the real public project snapshot.
 - `.github/workflows/sync-project.yml` — hourly/manual public observation and optional private-board snapshot sync.
-- `tests/*.test.js`, `scripts/verify-browser.mjs`, `scripts/verify-flight.mjs`, `scripts/verify-highway.mjs` — focused unit/acceptance checks.
+- `tests/*.test.js`, `scripts/verify-browser.mjs`, `scripts/verify-flight.mjs`, `scripts/verify-highway.mjs`, `scripts/verify-observatory.mjs` — focused unit/acceptance checks.
 - `.nojekyll`, `package.json`, `LICENSE`, `NOTICE`, `README.md` — publishing, metadata and documentation.
 
 Run `npm test` for the dependency-free unit/privacy suite. For optional browser
 acceptance, serve this checkout, set `OFFICE_URL`, `SCREENSHOT_DIR` and
 `PLAYWRIGHT_MODULE` to an existing Playwright installation, then run
-`node scripts/verify-highway.mjs`, `node scripts/verify-flight.mjs` and
+`node scripts/verify-observatory.mjs`, `node scripts/verify-highway.mjs`, `node scripts/verify-flight.mjs` and
 `node scripts/verify-browser.mjs` **sequentially**
 to avoid competing headless WebGL contexts. The flight helper checks real snapshot
 coverage, steering frame bounds, pause, dynamic published-snapshot changes and

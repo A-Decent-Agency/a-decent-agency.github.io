@@ -27,15 +27,39 @@ html[data-view="flight"] .intro h1 > span { margin-left: .25em; }
 .flight-tools label { flex: 1; min-width: 180px; font-size: 8px; letter-spacing: 1px; }
 .flight-tools select { max-width: 100%; width: 100%; font-size: 11px; letter-spacing: 0; }
 .flight-tools button { font-size: 11px; padding: 9px 12px; align-self: end; }
-.construction-view #scene { height: clamp(430px, 52vh, 620px); }
+.construction-view #scene { height: clamp(560px, 76vh, 960px); }
 .construction-view #scene canvas { outline-offset: -4px; }
 .construction-view .scene-compass, .construction-view .site-stamp { display: none; }
-.flight-site { position: absolute; top: 18px; right: 18px; width: min(290px, 35%); background: #15111fe8; border: 1px solid #e5c58355; border-radius: 10px; padding: 16px; max-height: calc(100% - 36px); overflow: auto; box-shadow: 0 8px 35px #0005; }
+.flight-site { position: absolute; top: 18px; right: 18px; width: min(370px, 32%); background: #15111ff2; border: 1px solid #e5c58355; border-radius: 10px; padding: 16px; max-height: calc(100% - 36px); overflow: auto; box-shadow: 0 8px 35px #0005; }
+.flight-tools input[type="range"] { width: 100%; accent-color: var(--cyan); }
+#campus-artwork .site-identity { padding: 0; }
+#campus-artwork .site-identity > strong { display: none; }
+#campus-artwork .site-identity-project { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#campus-artwork img { order: -1; width: 96px; height: 96px; object-fit: contain; border-radius: 12px; background: #252236; }
+#campus-artwork small { flex-basis: 100%; }
+.campus-plan svg { width: 100%; height: auto; margin: 12px 0; }
+.campus-plan h4 { font-size: 13px; }
+.campus-plan a { color: var(--cyan); overflow-wrap: anywhere; }
+.campus-plan li { font-size: 11px; line-height: 1.6; margin: 8px 0; }
+.campus-plan ul { padding-left: 16px; }
+.campus-plan details { margin: 12px 0; }
+.campus-jobs, .campus-neighbors { display: grid; gap: 8px; margin: 12px 0; }
+.campus-jobs button { text-align: left; font-size: 12px; border-left: 4px solid; padding: 10px; white-space: normal; overflow-wrap: anywhere; }
+.campus-jobs small { display: block; color: var(--muted); margin-bottom: 4px; }
+.immersive-tools { position: absolute; left: 12px; top: 12px; z-index: 5; display: flex; flex-wrap: wrap; gap: 6px; max-width: 65%; }
+.immersive-tools button { padding: 9px; background: #211c32; font-size: 11px; }
+#workspace:fullscreen, #workspace.immersive { width: 100vw; height: 100dvh; background: #100e1d; overflow: auto; }
+#workspace.immersive { position: fixed; inset: 0; z-index: 1000; }
+.construction-view #workspace:fullscreen #scene, .construction-view #workspace.immersive #scene { height: 100dvh; }
+#workspace.panel-hidden #flight-site { display: none; }
 .flight-site .eyebrow { font-size: 8px; color: var(--gold); line-height: 1.8; }
 .flight-site h3 { font-size: 17px; margin: 10px 0; overflow-wrap: anywhere; }
 .flight-site p { font-size: 10px; line-height: 1.7; color: var(--muted); margin-bottom: 10px; }
 .flight-site #flight-site-metrics { color: var(--cyan); }
 .campus-stage { color: var(--gold); font-size: 14px; font-weight: 700; line-height: 1.5; }
+.campus-mural { margin: 12px 0; }
+.campus-mural img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 8px; }
+.campus-mural figcaption { font-size: 9px; line-height: 1.6; }
 .campus-details a { color: var(--cyan); overflow-wrap: anywhere; }
 .campus-details details { margin: 12px 0; border-top: 1px solid var(--line); padding-top: 10px; }
 .campus-details ul { padding-left: 18px; font-size: 11px; line-height: 1.7; }
@@ -66,7 +90,10 @@ html[data-view="flight"] .intro h1 > span { margin-left: .25em; }
   .construction-view .workspace-heading { padding: 16px 12px; }
   .construction-view .workspace-heading h2 { font-size: 18px; }
   .construction-view #workspace { display: flex; flex-direction: column; }
-  .construction-view #scene { height: 390px; }
+  .construction-view #scene { height: 65dvh; min-height: 390px; }
+  .construction-view #workspace:fullscreen, .construction-view #workspace.immersive { display: block; }
+  #workspace:fullscreen .flight-site, #workspace.immersive .flight-site { position: absolute; top: 70px; right: 8px; width: min(320px, 86%); max-height: calc(100dvh - 90px); margin: 0; }
+  .immersive-tools { max-width: 100%; right: 10px; }
   .construction-view .flight-site { position: static; width: auto; margin: 12px; max-height: none; }
   .construction-view #workspace.list-mode .flight-site { margin: 12px; }
   .flight-site h3 { font-size: 16px; }

@@ -49,5 +49,5 @@ test('project detail follows Canopy provenance/disclosure pattern and does not h
   assert.match(html, /Unavailable \/ retained observation/);
   assert.match(html, /not live network traffic/);
   assert.match(html, /&lt;img/);
-  assert.doesNotMatch(html, /<img/);
+  assert.doesNotMatch(html, /<img onerror=bad>/);
 });
