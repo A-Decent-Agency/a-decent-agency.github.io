@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-26T00:26:46.889Z",
+  "checkedAt": "2026-10-26T00:59:47.298Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
       "pushedAt": "2026-10-21T13:12:22Z",
       "release": null,
@@ -18,15 +18,21 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
-      "pushedAt": "2026-10-26T00:12:09Z",
+      "pushedAt": "2026-10-26T00:46:45Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
         "publishedAt": "2026-10-26T00:12:09Z"
       },
       "mergedPulls": [
+        {
+          "number": 290,
+          "title": "Fix Base Supporter checkout in About",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/290",
+          "mergedAt": "2026-10-26T00:46:43Z"
+        },
         {
           "number": 288,
           "title": "Prepare v1.0.0 supporter release with approved 100-USDC terms",
@@ -50,25 +56,42 @@
           "title": "Fix paid playlist continuity and preloaded radio handoffs",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/285",
           "mergedAt": "2026-10-24T13:32:43Z"
-        },
-        {
-          "number": 283,
-          "title": "Keep stale radio play promises from stopping the next recording",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/283",
-          "mergedAt": "2026-10-24T11:27:58Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4121422,
-      "versions": [],
+      "codeBytes": 4127101,
+      "versions": [
+        {
+          "tag": "v1.0.0",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
+          "publishedAt": "2026-10-26T00:12:09Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "75",
+          "mintTxHash": "0x7f34b88b601c68c6f66e131f56b5b376e654c3bb836173ded8a4ab67546381ce",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 12,
+          "storefront": {
+            "purchaseUrl": "https://thejollylama.github.io/DecentHead/supporter/buy.html?chainId=8453&escrow=0x31b07b83e99A9bdF379bf40225b8A80d3804C89d&listingId=5&priceUSDC=100000000",
+            "escrow": "0x31b07b83e99A9bdF379bf40225b8A80d3804C89d",
+            "listingId": "5",
+            "priceUSDC": "100000000",
+            "frontUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-front.png",
+            "backUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-back.png",
+            "evidenceUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-minted.json",
+            "frontSHA256": "e39cbab34de8e4479b4adcaebd30b313bfc4a2f6b1815587bd26efea7c1ff9fc",
+            "backSHA256": "e006cc359910c7a03e5d592b190736e94499bf44c6b25f4b662798c389edabff"
+          }
+        }
+      ],
       "versionsTruncated": false
     },
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
-      "pushedAt": "2026-10-26T00:18:20Z",
+      "pushedAt": "2026-10-26T00:56:48Z",
       "release": null,
       "mergedPulls": [
         {
@@ -110,7 +133,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
       "pushedAt": "2026-10-26T00:09:58Z",
       "release": {
@@ -181,7 +204,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
       "pushedAt": "2026-10-26T00:09:47Z",
       "release": {
@@ -252,7 +275,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
       "pushedAt": "2026-10-23T06:15:59Z",
       "release": null,
@@ -296,7 +319,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:20Z",
       "release": {
@@ -361,7 +384,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:36Z",
       "release": {
@@ -432,7 +455,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
       "pushedAt": "2026-10-24T19:31:33Z",
       "release": {
@@ -503,9 +526,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-26T00:26:46.889Z",
+      "checkedAt": "2026-10-26T00:59:47.298Z",
       "error": "",
-      "pushedAt": "2026-10-26T00:17:57Z",
+      "pushedAt": "2026-10-26T00:26:57Z",
       "release": null,
       "mergedPulls": [
         {
