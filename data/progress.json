@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-25T21:52:08.142Z",
+  "checkedAt": "2026-10-26T00:17:48.035Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
       "pushedAt": "2026-10-21T13:12:22Z",
       "release": null,
@@ -18,11 +18,21 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
-      "pushedAt": "2026-10-25T14:44:30Z",
-      "release": null,
+      "pushedAt": "2026-10-26T00:12:09Z",
+      "release": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
+        "publishedAt": "2026-10-26T00:12:09Z"
+      },
       "mergedPulls": [
+        {
+          "number": 288,
+          "title": "Prepare v1.0.0 supporter release with approved 100-USDC terms",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/288",
+          "mergedAt": "2026-10-26T00:12:07Z"
+        },
         {
           "number": 287,
           "title": "Bring DJuke, DBusk and DVert widgets up to date with seamless playlist fixes",
@@ -46,25 +56,19 @@
           "title": "Keep stale radio play promises from stopping the next recording",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/283",
           "mergedAt": "2026-10-24T11:27:58Z"
-        },
-        {
-          "number": 281,
-          "title": "Extract DVert controllers for standalone shared-session widgets",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/281",
-          "mergedAt": "2026-10-24T11:14:03Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4120375,
+      "codeBytes": 4121422,
       "versions": [],
       "versionsTruncated": false
     },
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
-      "pushedAt": "2026-10-25T21:42:24Z",
+      "pushedAt": "2026-10-26T00:17:46Z",
       "release": null,
       "mergedPulls": [
         {
@@ -106,15 +110,21 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:22:12Z",
+      "pushedAt": "2026-10-26T00:09:58Z",
       "release": {
         "tag": "v2.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentHead/releases/tag/v2.0.0",
         "publishedAt": "2026-10-21T21:28:52Z"
       },
       "mergedPulls": [
+        {
+          "number": 32,
+          "title": "Support frozen 100-USDC supporter release terms",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/32",
+          "mergedAt": "2026-10-26T00:09:59Z"
+        },
         {
           "number": 31,
           "title": "Support 100-edition product releases without rewriting legacy manifests",
@@ -138,16 +148,10 @@
           "title": "Add ENS avatar and header art",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/28",
           "mergedAt": "2026-10-22T18:08:01Z"
-        },
-        {
-          "number": 26,
-          "title": "Accept Studio evidence in verified Supporter announcements",
-          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/26",
-          "mergedAt": "2026-10-22T03:08:04Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2851368,
+      "codeBytes": 2856254,
       "versions": [
         {
           "tag": "v2.0.0",
@@ -177,15 +181,21 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
-      "pushedAt": "2026-10-25T09:20:53Z",
+      "pushedAt": "2026-10-26T00:09:47Z",
       "release": {
         "tag": "v0.3.1",
         "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
         "publishedAt": "2026-10-22T02:26:31Z"
       },
       "mergedPulls": [
+        {
+          "number": 70,
+          "title": "Bind supporter minting to reviewed supply and USDC price",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/70",
+          "mergedAt": "2026-10-26T00:09:47Z"
+        },
         {
           "number": 69,
           "title": "Release USDC-only DJuke v0.5 with incremental playlist fees",
@@ -209,16 +219,10 @@
           "title": "feat: DJuke v0.4 playlist lane, tiered pricing, 24-song cap",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/66",
           "mergedAt": "2026-10-22T17:04:47Z"
-        },
-        {
-          "number": 65,
-          "title": "feat: DJuke v0.4 named playlists",
-          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/65",
-          "mergedAt": "2026-10-22T15:43:59Z"
         }
       ],
       "issues": null,
-      "codeBytes": 955107,
+      "codeBytes": 960208,
       "versions": [
         {
           "tag": "v0.3.1",
@@ -248,7 +252,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
       "pushedAt": "2026-10-23T06:15:59Z",
       "release": null,
@@ -292,7 +296,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:20Z",
       "release": {
@@ -357,7 +361,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
       "pushedAt": "2026-10-24T19:24:36Z",
       "release": {
@@ -428,7 +432,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
       "pushedAt": "2026-10-24T19:31:33Z",
       "release": {
@@ -499,11 +503,17 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-26T00:17:48.035Z",
       "error": "",
-      "pushedAt": "2026-10-25T19:06:23Z",
+      "pushedAt": "2026-10-26T00:09:47Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 12,
+          "title": "Honor release-backed supporter prices throughout the map",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/12",
+          "mergedAt": "2026-10-26T00:09:47Z"
+        },
         {
           "number": 11,
           "title": "Enable same-page Supporter purchases beside project sites",
@@ -527,16 +537,10 @@
           "title": "Build a living project highway for the Agency planning office",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/7",
           "mergedAt": "2026-10-25T15:25:32Z"
-        },
-        {
-          "number": 5,
-          "title": "Add explicit public identities for construction site signs",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/5",
-          "mergedAt": "2026-10-23T17:36:22Z"
         }
       ],
       "issues": null,
-      "codeBytes": 348077,
+      "codeBytes": 351859,
       "versions": [],
       "versionsTruncated": false
     }
