@@ -12,6 +12,7 @@ const buyer = `0x${'1'.repeat(40)}`, blockHash = `0x${'7'.repeat(64)}`;
 const browser = await chromium.launch({ headless: true });
 const errors = [];
 async function scenario(options = {}) {
+  const price = options.priceUSDC || '10000000';
   const page = await browser.newPage({ viewport: { width: options.width || 1280, height: 900 }, reducedMotion: options.threeD ? 'no-preference' : 'reduce' });
   page.on('pageerror', error => errors.push(error.message));
   const calls = [], sent = [], transactions = new Map();
@@ -55,11 +56,11 @@ async function scenario(options = {}) {
         state.checks++;
         const changed = options.changedPrice && state.allowance > 0n;
         const id = Number(parsed.args[0]);
-        result = [[SUPPORTER_NFT, 70 + id, 0n, BASE_USDC, changed ? 1n : 10000000n,
+        result = [[SUPPORTER_NFT, 70 + id, 0n, BASE_USDC, changed ? 1n : BigInt(price),
           options.soldOut ? 0n : 99n, true, 'Mock listing']];
       } else if (parsed.name === 'getNFTBalance') result = [99n];
       else if (parsed.name === 'paused') result = [!!options.paused];
-      else if (parsed.name === 'balanceOf') result = [options.lowBalance ? 1n : 10000000n];
+      else if (parsed.name === 'balanceOf') result = [options.lowBalance ? 1n : BigInt(price)];
       else if (parsed.name === 'allowance') result = [state.allowance];
       else throw new Error(`Unexpected view ${parsed.name}`);
       return abi.encodeFunctionResult(parsed.name, result);
@@ -83,10 +84,10 @@ async function scenario(options = {}) {
       const hash = params[0], tx = transactions.get(hash); if (!tx) return null;
       const logs = [];
       if (tx.isApproval) {
-        state.allowance = 10000000n;
+        state.allowance = BigInt(price);
         if (options.accountChange) await page.evaluate(() => window.checkoutMockEvents.accountsChanged([`0x${'3'.repeat(40)}`]));
       } else {
-        const encoded = escrowABI.encodeEventLog(escrowABI.getEvent('Purchased'), [0n, buyer, 1n, BASE_USDC, 10000000n]);
+        const encoded = escrowABI.encodeEventLog(escrowABI.getEvent('Purchased'), [0n, buyer, 1n, BASE_USDC, BigInt(price)]);
         logs.push({ ...encoded, address: SUPPORTER_ESCROW, blockHash, blockNumber: '0x64', transactionHash: hash,
           transactionIndex: '0x0', logIndex: '0x0', removed: false });
       }
@@ -107,6 +108,16 @@ async function scenario(options = {}) {
   };
   await page.route('**/__checkout_mock_rpc', handle);
   await page.route('https://mainnet.base.org/**', handle);
+  if (options.priceUSDC) await page.route('**/data/progress.json*', async route => {
+    const response = await route.fetch();
+    const feed = await response.json();
+    const edition = feed.repositories.find(entry => entry.repository === 'TheJollyLaMa/DecentHead').versions[0];
+    edition.storefront.priceUSDC = price;
+    const url = new URL(edition.storefront.purchaseUrl);
+    url.searchParams.set('priceUSDC', price);
+    edition.storefront.purchaseUrl = url.href;
+    await route.fulfill({ json: feed });
+  });
   await page.goto(base);
   await page.waitForFunction(() => document.querySelector('#progress-status').textContent.includes('repositories available'));
   assert.equal(calls.length, 0, 'No wallet or chain read until a token is selected');
@@ -163,8 +174,8 @@ async function scenario(options = {}) {
       const purchase = sent.find(tx => tx.name === 'purchaseWithToken');
       assert.deepEqual(purchase.args, ['0', '1']); assert.equal(purchase.value, '0x0');
     }
-    if (options.allowance) assert.equal(sent.filter(tx => tx.name === 'approve').length, 0);
-    for (const tx of sent.filter(tx => tx.name === 'approve')) assert.deepEqual(tx.args, [SUPPORTER_ESCROW, '10000000']);
+    if (options.allowance >= BigInt(price)) assert.equal(sent.filter(tx => tx.name === 'approve').length, 0);
+    for (const tx of sent.filter(tx => tx.name === 'approve')) assert.deepEqual(tx.args, [SUPPORTER_ESCROW, price]);
     if (options.preconnect) assert.equal(calls.filter(method => method === 'eth_requestAccounts').length, 1, 'Checkout reuses the selected header session');
   }
   assert.equal(popups, 0); assert.equal(page.url(), base);
@@ -175,6 +186,7 @@ async function scenario(options = {}) {
 }
 try {
   await scenario({ preconnect: true, screenshot: 'checkout-confirmed' });
+  await scenario({ priceUSDC: '100000000', allowance: 10000000n, screenshot: 'checkout-hundred-confirmed' });
   await scenario({ threeD: true, allowance: 10000000n, screenshot: 'checkout-3d-fullscreen' });
   await scenario({ allowance: 10000000n, wrongChain: true, width: 320, screenshot: 'checkout-mobile' });
   await scenario({ rejectApproval: true, expectedError: /declined/ });
