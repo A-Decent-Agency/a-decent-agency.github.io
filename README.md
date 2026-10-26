@@ -4,6 +4,15 @@
 
 Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, account, database, or application server. Apache-2.0.
 
+Supporter checkout accepts the release-evidenced 10 or 100 Base USDC price.
+The observer, 3D sign, sidepanel, dialog, exact approval, listing rechecks and
+confirmed purchase event use that same price. Existing editions remain 10 USDC.
+100-USDC external routes explicitly carry `priceUSDC=100000000`; deploy the
+compatible Head checkout before publishing those routes. This adapts
+DecentHead's `scripts/supporter-metadata.mjs` / `scripts/supporter-protocol.mjs`
+and Market's frozen-manifest minting rather than creating another mint contract.
+Price support alone does not mean Busking is minted, listed or ENS-deployed.
+
 ## Project highway / living construction
 
 The landing flight now passes recognizable project offramps before the shared milestone/workstream districts: Agency entrance, Busking tower, Head and Market halls, Canopy's broad foundation, BigNuten staging, and later public repository blueprints. Matching uses explicit public repository references or reviewed portfolio identities, never guessed private names or arbitrary title keywords. Every board card still appears exactly once. Private/redacted portfolios stay in unbranded shared yards.

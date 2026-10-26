@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { purchaseEdition, inspectListing, validateEdition, validateListing, ensureBase, checkoutError, BASE_USDC } from '../js/supporter-checkout.js';
-import { SUPPORTER_ESCROW, SUPPORTER_NFT } from '../js/progress-feed.js';
+import { SUPPORTER_ESCROW, SUPPORTER_NFT, isVersionStorefront } from '../js/progress-feed.js';
 
 const feed = JSON.parse(await readFile(new URL('../data/progress.json', import.meta.url)));
 const repo = feed.repositories.find(entry => entry.repository === 'TheJollyLaMa/DecentHead');
@@ -12,9 +12,11 @@ const hash = `0x${'2'.repeat(64)}`;
 const listing = { nftContract: SUPPORTER_NFT, tokenId: BigInt(selection.version.tokenId),
   priceETH: 0n, priceToken: BASE_USDC, priceAmount: 10000000n, available: 9n, active: true };
 function setup(options = {}) {
+  const chosen = options.selection || selection;
+  const price = BigInt(chosen.version.storefront.priceUSDC);
   const calls = [], messages = [], txs = [];
   const state = { address: options.disconnected ? null : buyer, generation: 1, chain: options.chain || '0x2105',
-    allowance: options.allowance || 0n, listing: { ...listing, ...options.listing }, checks: 0 };
+    allowance: options.allowance || 0n, listing: { ...listing, priceAmount: price, ...options.listing }, checks: 0 };
   const raw = { request: async ({ method, params }) => {
     calls.push([method, params]);
     if (method === 'eth_chainId') return state.chain;
@@ -29,7 +31,7 @@ function setup(options = {}) {
     getNFTBalance: async () => options.stock ?? 9n, paused: async () => options.paused || false,
     connect: () => escrow,
     interface: { parseLog: () => ({ name: 'Purchased', args: { listingId: BigInt(selection.version.storefront.listingId),
-      buyer: options.wrongBuyer ? `0x${'3'.repeat(40)}` : buyer, amount: 1n, paymentToken: BASE_USDC, totalPaid: 10000000n } }) },
+      buyer: options.wrongBuyer ? `0x${'3'.repeat(40)}` : buyer, amount: 1n, paymentToken: BASE_USDC, totalPaid: options.eventPrice ?? price } }) },
   };
   escrow.purchaseWithToken = Object.assign(async (id, quantity) => {
     calls.push(['purchase', id, quantity]); if (options.rejectPurchase) throw { code: 'ACTION_REJECTED' };
@@ -58,7 +60,7 @@ function setup(options = {}) {
     },
     Contract: class { constructor(address) { return address === SUPPORTER_ESCROW ? escrow : token; } },
   };
-  const run = () => purchaseEdition(selection, session, { ethers, onStatus: text => messages.push(text), onTransaction: tx => txs.push(tx) });
+  const run = () => purchaseEdition(chosen, session, { ethers, onStatus: text => messages.push(text), onTransaction: tx => txs.push(tx) });
   return { run, calls, messages, txs, state, raw, ethers };
 }
 test('purchase uses existing session, approves exactly 10 USDC, rechecks, buys one and requires confirmed event', async () => {
@@ -70,6 +72,24 @@ test('purchase uses existing session, approves exactly 10 USDC, rechecks, buys o
   assert.equal(h.calls.filter(call => call[0] === 'connect').length, 0);
   assert.deepEqual(h.txs.map(tx => tx.stage), ['approval', 'purchase']);
   assert.equal(h.calls.at(-1)[0], 'destroy');
+});
+test('100-USDC edition binds route and live price, approves exactly 100000000 and verifies paid amount', async () => {
+  const chosen = structuredClone(selection), store = chosen.version.storefront;
+  store.priceUSDC = '100000000';
+  store.purchaseUrl += '&priceUSDC=100000000';
+  assert.ok(isVersionStorefront(store, chosen.version, chosen.repository));
+  assert.equal(isVersionStorefront({ ...store, purchaseUrl: selection.version.storefront.purchaseUrl }, chosen.version, chosen.repository), false);
+  assert.equal(isVersionStorefront({ ...store, purchaseUrl: store.purchaseUrl + '&priceUSDC=100000000' }, chosen.version, chosen.repository), false);
+  const h = setup({ selection: chosen, balance: 100000000n, allowance: 10000000n });
+  await h.run();
+  assert.deepEqual(h.calls.find(call => call[0] === 'approve'), ['approve', SUPPORTER_ESCROW, 100000000n]);
+  assert.ok(h.messages.some(text => text.includes('Approve exactly 100 USDC')));
+  await assert.rejects(setup({ selection: chosen, balance: 100000000n, eventPrice: 10000000n }).run(), /expected purchase event/);
+  for (const options of [{ balance: 10000000n }, { listing: { priceAmount: 10000000n } }]) {
+    const blocked = setup({ selection: chosen, ...options });
+    await assert.rejects(blocked.run());
+    assert.ok(!blocked.calls.some(call => ['approve', 'purchase'].includes(call[0])));
+  }
 });
 test('existing allowance skips approval, new wallet connects only inside buy, and Base switches explicitly', async () => {
   const h = setup({ allowance: 10000000n, disconnected: true, chain: '0x1' });

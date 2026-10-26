@@ -14,11 +14,15 @@ const github = (value, repository) => typeof value === 'string' && value.startsW
   && !/[<>"'\s]/.test(value) && !new URL(value).username;
 export const SUPPORTER_NFT = '0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B';
 export const SUPPORTER_ESCROW = '0x31b07b83e99A9bdF379bf40225b8A80d3804C89d';
+export function supporterPriceLabel(priceUSDC) {
+  if (!['10000000', '100000000'].includes(priceUSDC)) throw new Error('Unsupported Supporter price');
+  return `${BigInt(priceUSDC) / 1000000n} USDC`;
+}
 export function isVersionStorefront(store, version, repository) {
   if (!store || version.nftContract?.toLowerCase() !== SUPPORTER_NFT.toLowerCase()
     || store.escrow?.toLowerCase() !== SUPPORTER_ESCROW.toLowerCase()
     || !/^(0|[1-9]\d{0,77})$/.test(store.listingId) || BigInt(store.listingId) >= 2n ** 256n
-    || store.priceUSDC !== '10000000') return false;
+    || !['10000000', '100000000'].includes(store.priceUSDC)) return false;
   const assetRoot = `https://github.com/${repository}/releases/download/${encodeURIComponent(version.tag)}/`;
   if (store.frontUrl !== `${assetRoot}supporter-front.png` || store.backUrl !== `${assetRoot}supporter-back.png`
     || !/^[\da-f]{64}$/.test(store.frontSHA256) || !/^[\da-f]{64}$/.test(store.backSHA256)
@@ -27,7 +31,9 @@ export function isVersionStorefront(store, version, repository) {
   try {
     const url = new URL(store.purchaseUrl);
     return routes.includes(`${url.origin}${url.pathname}`) && !url.username && !url.password && !url.hash
-      && [...url.searchParams].length === 3 && url.searchParams.get('chainId') === '8453'
+      && [...url.searchParams].length === (store.priceUSDC === '10000000' ? 3 : 4)
+      && (store.priceUSDC === '10000000' ? !url.searchParams.has('priceUSDC') : url.searchParams.get('priceUSDC') === store.priceUSDC)
+      && url.searchParams.get('chainId') === '8453'
       && url.searchParams.get('escrow')?.toLowerCase() === store.escrow.toLowerCase()
       && url.searchParams.get('listingId') === store.listingId;
   } catch { return false; }

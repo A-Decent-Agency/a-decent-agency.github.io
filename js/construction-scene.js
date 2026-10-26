@@ -6,7 +6,7 @@ import { campusStructure } from './project-campus.js';
 import { buildCampus } from './campus-buildings.js';
 import { campusConnections, campusPriority } from './campus-graph.js';
 import { projectMints } from './version-mints.js';
-import { mintArtworkPath } from './progress-feed.js';
+import { mintArtworkPath, supporterPriceLabel } from './progress-feed.js';
 
 const lineMaterial = color => new THREE.LineBasicMaterial({ color });
 function lines(points, color) {
@@ -185,7 +185,7 @@ export class ConstructionScene {
           const store = version.storefront;
           const label = textSprite(`${version.tag} / TOKEN ${version.tokenId}`, '#e5c583', 29);
           label.position.y = 16; display.add(label);
-          const action = textSprite(store ? 'BUY / 10 USDC / BASE' : 'MINTED / NO CHECKOUT EVIDENCE', store ? '#71e6d0' : '#a89eb9', 30);
+          const action = textSprite(store ? `BUY / ${supporterPriceLabel(store.priceUSDC)} / BASE` : 'MINTED / NO CHECKOUT EVIDENCE', store ? '#71e6d0' : '#a89eb9', 30);
           action.position.y = -16; display.add(action);
           if (store) {
             const card = new THREE.Mesh(new THREE.BoxGeometry(24, 24, .6), [

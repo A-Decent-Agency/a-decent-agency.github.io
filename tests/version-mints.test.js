@@ -32,6 +32,16 @@ test('published Head/Market receipt yields a bound Base purchase route and exact
   assert.equal(projectMints({ project: { repository: 'TheJollyLaMa/DecentBusking' } }, feed).length, 0);
   assert.equal(projectMints({ type: 'milestone' }, feed).length, 0);
 });
+test('observer and sidepanel bind the 100-USDC release price without relabeling historical editions', () => {
+  const highReceipt = structuredClone(receipt);
+  highReceipt.priceUSDC = '100000000';
+  highReceipt.verification.purchaseUrl += '&priceUSDC=100000000';
+  const highStore = versionStorefront(highReceipt, null, highReceipt, release, version, repository);
+  const highFeed = { repositories: [{ repository, state: 'available', versions: [{ ...version, storefront: highStore }] }] };
+  assert.match(renderVersionMints(site, highFeed), /100 USDC on Base/);
+  assert.match(renderVersionMints(site, feed), /10 USDC on Base/);
+  assert.throws(() => versionStorefront(highReceipt, null, receipt, release, version, repository));
+});
 test('checkout rejects foreign hosts, credentials, extra params, wrong chain/escrow/id/price and foreign artwork', () => {
   for (const bad of [
     { purchaseUrl: store.purchaseUrl.replace('thejollylama.github.io', 'evil.test') },

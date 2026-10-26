@@ -1,5 +1,5 @@
 import { escapeHTML as esc } from './markdown.js';
-import { mintArtworkPath } from './progress-feed.js';
+import { mintArtworkPath, supporterPriceLabel } from './progress-feed.js';
 import { validateEdition, readEdition, purchaseEdition, checkoutError } from './supporter-checkout.js';
 
 export function mountSupporterCheckout({ dialog, session, onOpen, notify }) {
@@ -69,7 +69,8 @@ export function mountSupporterCheckout({ dialog, session, onOpen, notify }) {
       dialog.querySelector('[data-checkout-title]').textContent = `${value.title} ${value.version.tag}`;
       dialog.querySelector('[data-checkout-token]').textContent = `Base · ERC-1155 · token ${value.version.tokenId} · listing ${value.version.storefront.listingId}`;
       dialog.querySelector('[data-checkout-evidence]').innerHTML = `<a href="${esc(value.version.storefront.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Published listing evidence ↗</a>`;
-      updateWallet(); buy.disabled = true; buy.textContent = 'Buy one · 10 USDC + gas';
+      const priceLabel = supporterPriceLabel(value.version.storefront.priceUSDC);
+      updateWallet(); buy.disabled = true; buy.textContent = `Buy one · ${priceLabel} + gas`;
       if (!dialog.open) dialog.showModal();
       const prior = outcomes.get(key(value));
       if (prior) {
@@ -82,7 +83,7 @@ export function mountSupporterCheckout({ dialog, session, onOpen, notify }) {
       try {
         const { listing } = await readEdition(value);
         if (current !== request || !dialog.open) return;
-        message(`Available on Base: ${listing.available} listed edition(s). Buy one for 10 USDC plus network gas. Your wallet opens only when you choose Buy.`);
+        message(`Available on Base: ${listing.available} listed edition(s). Buy one for ${priceLabel} plus network gas. Your wallet opens only when you choose Buy.`);
         buy.disabled = false;
       } catch (error) {
         if (current !== request || !dialog.open) return;

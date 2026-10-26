@@ -1,4 +1,4 @@
-import { isDeliveredVersion, isVersionStorefront, SUPPORTER_ESCROW, SUPPORTER_NFT } from './progress-feed.js';
+import { isDeliveredVersion, isVersionStorefront, SUPPORTER_ESCROW, SUPPORTER_NFT, supporterPriceLabel } from './progress-feed.js';
 
 // Adapted from DecentHead supporter-purchase.js / AboutModal.js, Apache-2.0.
 export const BASE_USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
@@ -18,7 +18,6 @@ export const USDC_ABI = [
   'function approve(address,uint256) returns (bool)',
 ];
 const equal = (a, b) => typeof a === 'string' && typeof b === 'string' && a.toLowerCase() === b.toLowerCase();
-const price = 10000000n;
 export function validateEdition(selection) {
   if (!selection || !isDeliveredVersion(selection.version, selection.repository)
     || !isVersionStorefront(selection.version.storefront, selection.version, selection.repository)) {
@@ -27,11 +26,11 @@ export function validateEdition(selection) {
   return selection.version.storefront;
 }
 export function validateListing(listing, stock, paused, selection) {
-  validateEdition(selection);
+  const store = validateEdition(selection);
   if (!equal(listing.nftContract, SUPPORTER_NFT) || listing.tokenId !== BigInt(selection.version.tokenId)) throw new Error('Listing token does not match this project edition.');
   if (paused) throw new Error('Supporter sales are paused.');
   if (!listing.active || listing.available < 1n || stock < 1n) throw new Error('This Supporter edition is sold out or not available.');
-  if (!equal(listing.priceToken, BASE_USDC) || listing.priceETH !== 0n || listing.priceAmount !== price) throw new Error('Listing price changed. Only the displayed 10 Base USDC price is approved.');
+  if (!equal(listing.priceToken, BASE_USDC) || listing.priceETH !== 0n || listing.priceAmount !== BigInt(store.priceUSDC)) throw new Error(`Listing price changed. Only the displayed ${supporterPriceLabel(store.priceUSDC)} on Base is approved.`);
   return listing;
 }
 export async function inspectListing(selection, runner, ethers) {
@@ -64,6 +63,7 @@ export async function ensureBase(raw) {
 }
 export async function purchaseEdition(selection, session, { ethers, onStatus = () => {}, onTransaction = () => {} } = {}) {
   const store = validateEdition(selection);
+  const price = BigInt(store.priceUSDC), priceLabel = supporterPriceLabel(store.priceUSDC);
   ethers ||= await import('ethers');
   if (!session.snapshot().address) {
     onStatus('Connect your wallet to buy this edition…');
@@ -93,15 +93,15 @@ export async function purchaseEdition(selection, session, { ethers, onStatus = (
     onStatus('Checking live listing, price, pause state and escrow stock…');
     const check = () => inspectListing(selection, provider, ethers);
     await check();
-    if (await token.balanceOf(locked.address) < price) throw new Error('Insufficient Base USDC. One edition costs 10 USDC; Base ETH is also needed for gas.');
+    if (await token.balanceOf(locked.address) < price) throw new Error(`Insufficient Base USDC. One edition costs ${priceLabel}; Base ETH is also needed for gas.`);
     if (await token.allowance(locked.address, SUPPORTER_ESCROW) < price) {
       await guard();
-      onStatus('Approve exactly 10 USDC for the approved escrow in your wallet. A separate purchase confirmation follows.');
+      onStatus(`Approve exactly ${priceLabel} for the approved escrow in your wallet. A separate purchase confirmation follows.`);
       const approval = await token.approve(SUPPORTER_ESCROW, price);
       onTransaction({ stage: 'approval', hash: approval.hash });
       const receipt = await approval.wait();
       if (receipt?.status !== 1) throw new Error('USDC approval did not confirm successfully. No purchase submitted.');
-      onStatus('10 USDC approval confirmed. Rechecking the edition before purchase…');
+      onStatus(`${priceLabel} approval confirmed. Rechecking the edition before purchase…`);
     }
     await guard();
     const { escrow } = await check();
@@ -110,7 +110,7 @@ export async function purchaseEdition(selection, session, { ethers, onStatus = (
     const purchase = escrow.connect(signer);
     await purchase.purchaseWithToken.estimateGas(store.listingId, 1n);
     await guard();
-    onStatus('Confirm purchase of one edition for 10 USDC plus gas in your wallet…');
+    onStatus(`Confirm purchase of one edition for ${priceLabel} plus gas in your wallet…`);
     const tx = await purchase.purchaseWithToken(store.listingId, 1n);
     onTransaction({ stage: 'purchase', hash: tx.hash });
     onStatus('Purchase submitted. Waiting for Base confirmation; do not submit another purchase.');
