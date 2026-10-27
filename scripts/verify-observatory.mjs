@@ -17,7 +17,9 @@ try {
   await page.waitForFunction(() => [...document.querySelectorAll('#campus-artwork img')].some(img => img.complete && img.naturalWidth > 0));
   assert.match(await page.locator('#campus-details').innerText(), /Delivered version floors \(1\)/);
   assert.match(await page.locator('#campus-details').innerText(), /token 70/);
-  assert.match(await page.locator('#flight-site-metrics').innerText(), /0 build cranes/);
+  // A delivered hall needs no crane unless it has unfinished planned structures (open milestone issues).
+  const metrics = await page.locator('#flight-site-metrics').innerText(), planned = metrics.match(/(\d+)\/(\d+) planned structures finished/);
+  assert.match(metrics, planned && planned[1] !== planned[2] ? /[1-9]\d* build cranes/ : /0 build cranes/);
   assert.ok(await page.locator('#campus-plan svg line').count() > 0);
   for (const camera of ['flight', 'orbit', 'top', 'universe']) {
     await page.locator('#flight-camera').selectOption(camera);
