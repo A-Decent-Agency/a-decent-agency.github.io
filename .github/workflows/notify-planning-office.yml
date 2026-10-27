@@ -1,0 +1,30 @@
+name: Notify planning office
+# Reusable: observed repositories call this so the office re-observes milestones, issues, PRs and releases promptly.
+# Without OFFICE_DISPATCH_TOKEN (or for fork PRs, which receive no secrets) it skips; the hourly sync still catches up.
+on:
+  workflow_call:
+    secrets:
+      OFFICE_DISPATCH_TOKEN:
+        required: false
+permissions: {}
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask the planning office to re-observe
+        env:
+          TOKEN: ${{ secrets.OFFICE_DISPATCH_TOKEN }}
+          SOURCE: ${{ github.repository }}
+          ACTIVITY: ${{ github.event_name }}
+          ACTION: ${{ github.event.action }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo '::notice::OFFICE_DISPATCH_TOKEN is not set; the planning office will catch up on its scheduled sync.'
+            exit 0
+          fi
+          payload=$(jq -nc --arg r "$SOURCE" --arg e "$ACTIVITY" --arg a "$ACTION" \
+            '{event_type: "repo-changed", client_payload: {repository: $r, event: $e, action: $a}}')
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $TOKEN" -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' \
+            https://api.github.com/repos/A-Decent-Agency/a-decent-agency.github.io/dispatches -d "$payload"
+          echo "Planning office notified: $SOURCE $ACTIVITY ${ACTION:-}"

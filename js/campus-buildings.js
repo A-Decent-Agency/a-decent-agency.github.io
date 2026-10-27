@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { LEVEL_HEIGHT } from './project-campus.js';
+import { LEVEL_HEIGHT, SATELLITE_WIDTH } from './project-campus.js';
 
 function block(group, x, y, z, w, h, d, color, glass = false) {
   group.userData.buildingBlocks.push({ x, y: y + h / 2, z, w, h, d, color, glass });
@@ -54,8 +54,29 @@ function skeletonBox(group, cx, y, cz, w, h, d, bays, clad, finished, color) {
     for (const z of [cz - d / 2, cz + d / 2]) block(group, x, y + .6, z, bay - .6, h - 1.4, .25, color, true);
   }
 }
+function road(group, x1, z1, x2, z2) {
+  const length = Math.hypot(x2 - x1, z2 - z1);
+  const strip = new THREE.Mesh(new THREE.BoxGeometry(length, .3, 6), new THREE.MeshLambertMaterial({ color: '#3a4352' }));
+  strip.position.set((x1 + x2) / 2, 1.3, (z1 + z2) / 2); strip.rotation.y = -Math.atan2(z2 - z1, x2 - x1); group.add(strip);
+}
+// Satellite towers ring fractal cul-de-sacs once a main tower is full; same bay rules as the main tower.
+function buildSprawl(group, model, color) {
+  for (const segment of model.roads || []) road(group, segment.x1, segment.z1, segment.x2, segment.z2);
+  for (const bulb of model.culdesacs || []) {
+    const disc = new THREE.Mesh(new THREE.CylinderGeometry(bulb.radius, bulb.radius, .35, 24), new THREE.MeshLambertMaterial({ color: '#3a4352' }));
+    disc.position.set(bulb.x, 1.35, bulb.z); group.add(disc);
+    const island = new THREE.Mesh(new THREE.CylinderGeometry(bulb.radius * .35, bulb.radius * .35, .8, 16), new THREE.MeshLambertMaterial({ color: '#3d987d' }));
+    island.position.set(bulb.x, 1.6, bulb.z); group.add(island);
+  }
+  for (const tower of model.towers || []) {
+    block(group, tower.x, 1.2, tower.z, SATELLITE_WIDTH + 4, .6, 16, '#d0c8ae');
+    for (const level of tower.levels) skeletonBox(group, tower.x, level.y, tower.z, level.width, LEVEL_HEIGHT - .4, 12, level.bays, level.cladBays, level.finished, color);
+    if (tower.finished) block(group, tower.x, tower.top, tower.z, SATELLITE_WIDTH * .6, 2.5, 8, color);
+  }
+}
 function buildSkeleton(group, model, color) {
-  for (const level of model.levels) skeletonBox(group, 0, level.y, 0, level.width, LEVEL_HEIGHT - .4, 18, level.bays, level.cladBays, level.finished, color);
+  for (const level of model.levels.filter(level => !level.tower)) skeletonBox(group, 0, level.y, 0, level.width, LEVEL_HEIGHT - .4, 18, level.bays, level.cladBays, level.finished, color);
+  buildSprawl(group, model, color);
   for (const structure of model.grounds) {
     const { x, z, size, height } = structure;
     block(group, x, 1.2, z, size + 3, .6, size + 3, '#d0c8ae');

@@ -47,12 +47,34 @@ The script is dry-run by default and must be run against a freshly exported boar
 Every observed public repository can plan its building with ordinary GitHub milestones. The observer reads only titles and open/closed issue counts.
 
 - `Level N: <name>` stacks a tower level, in N order, above any delivered version floors.
-- `Grounds: <name>` raises a nearby structure behind the tower (up to six).
+- `Grounds: <name>` raises a nearby structure behind the tower (six nearby slots; more move onto cul-de-sac lots).
 - Other milestones are ignored, so existing release milestones keep working.
 
 Each issue in a planned milestone is one structural **bay**, with up to 16 bays per level and 8 per grounds structure. Open issues show bare steel on a concrete deck. Each closed issue clads one bay in the project color. A structure looks **finished** (solid glass, lit windows, roof) only when it has at least one issue and none remain open. An empty milestone stays an outline. Open structures keep build cranes on site. The site panel lists every level and grounds structure with its stage, closed/total count and a link to its milestone issues.
 
 To plan a project: create the milestones, assign each planned issue to exactly one, then close issues as work lands. The next sync (or a manual run of **Sync GitHub Project snapshot**) updates the building. Issue counts are planning evidence, not a quality, readiness or funding score. Finished levels never create receipt-backed version floors.
+
+### Sprawl: cul-de-sacs when a tower is full
+
+A main tower holds at most 12 stories (base floors plus planned levels). Further levels become six-story **satellite towers** on cul-de-sacs that branch outward and behind the campus, away from the highway. Each cul-de-sac has three lots; extra cul-de-sacs branch from the previous ones as a small fractal tree. Every level still appears in the side panel with its tower and cul-de-sac. The layout is pure and tested in `js/project-campus.js` (`culDeSacLayout`, `issueSkeleton`); its branching adapts DecentCanopy's `scripts/spiral.js` `placeBranch` / `angleOffsets` pattern.
+
+### The Canopy city
+
+DecentCanopy's roof carries a top-down city of the curated Canopy registry (`js/canopy-registry.js`, imported from DecentCanopy `data/agency-map.json`). Branches follow mapped connections outward from DecentCanopy; each disconnected cluster branches from the hub. Every branch gets an angular wedge in proportion to its leaves. Mini-building height follows observed planned structures; steel caps mark open ones; grey buildings are not observed yet. Selecting one flies to its site. Use the **Top** camera on DecentCanopy for the canopy view.
+
+`canopyCity(registry, feed, { root })` in `js/canopy-city.js` accepts any registry with the same `{ projects, connections }` shape, so another steward's agency map could render their own close-up city. The office does not fetch third-party registries today.
+
+### Automatic updates from observed repositories
+
+**Sync GitHub Project snapshot** runs hourly and also accepts a `repository_dispatch` of type `repo-changed`. Observed repositories send one through the reusable `.github/workflows/notify-planning-office.yml` workflow when issues, PRs, milestones, releases or default-branch pushes change. Bursts collapse into one pending sync.
+
+To wire a repository:
+
+1. Copy `templates/notify-planning-office.yml` to its `.github/workflows/`.
+2. Add the repository secret `OFFICE_DISPATCH_TOKEN`: a fine-grained personal access token whose resource owner is A-Decent-Agency, limited to `a-decent-agency.github.io`, with **Contents: Read and write**. Store it only as a GitHub secret.
+3. Add the repository to `REPOSITORIES` in `js/progress-feed.js` so the observer includes it.
+
+Without the secret (and for fork PRs, which receive no secrets) the notifier logs a notice and skips; the hourly sync still catches up. The payload names only the repository and event type.
 
 ## Run locally
 
@@ -382,7 +404,7 @@ The exporter queries GraphQL directly, paginates project items, preserves the pr
 
 ### Scheduled refresh
 
-`.github/workflows/sync-project.yml` runs hourly (at minute 17), or with **Run workflow**. GitHub can delay schedules. Without the project credential it emits a notice and skips the private board export, while the public repository observer still runs using the workflow token. A failed board export is reported separately and does not block public observation. It tests the result and commits **only** changed `data/project.json` and `data/progress.json`, using `GITHUB_TOKEN`'s `contents: write` for the commit, and includes the Copilot co-author trailer. Public collection checks visibility first; an unconfirmed or private repository has its old details withheld. Other API errors retain confirmed-public observations with an explicit unavailable label.
+`.github/workflows/sync-project.yml` runs hourly (at minute 17), when an observed repository sends a `repo-changed` dispatch (see *Automatic updates*), or with **Run workflow**. GitHub can delay schedules. Without the project credential it emits a notice and skips the private board export, while the public repository observer still runs using the workflow token. A failed board export is reported separately and does not block public observation. It tests the result and commits **only** changed `data/project.json` and `data/progress.json`, using `GITHUB_TOKEN`'s `contents: write` for the commit, and includes the Copilot co-author trailer. Public collection checks visibility first; an unconfirmed or private repository has its old details withheld. Other API errors retain confirmed-public observations with an explicit unavailable label.
 
 The browser checks that published snapshot every five minutes while visible,
 on return to the tab, or with **Refresh plan**. Sites, dates, crane counts and card
@@ -440,6 +462,7 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/scene.js` — pinned Three.js scene, controls, spatial views, picking and dragging.
 - `js/construction-scene.js`, `js/construction-model.js` — bounded ship flight, source-derived construction sites and crane/workload rules.
 - `js/project-campus.js`, `js/campus-details.js`, `js/campus-buildings.js` — explicit public repository grouping, receipt-backed version floors, distinctive architecture and source-backed disclosures.
+- `js/canopy-city.js` — data-driven top-down city of an agency-map registry, shown on DecentCanopy's roof.
 - `js/campus-graph.js`, `js/campus-plan.js`, `js/canopy-registry.js` — typed Canopy/board connections and the same-data 2D site/job plan.
 - `js/progress-feed.js`, `scripts/sync-progress.mjs`, `data/progress.json` — bounded public GitHub observation, validation and approved integration paths.
 - `js/model.js` — view filters, color semantics, date and relationship parsing.
@@ -447,7 +470,8 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/editor.js` — versioned map validation/storage, import/export.
 - `js/project.js`, `scripts/export-project.mjs` — shared GraphQL exporter/privacy boundary and Node entry point.
 - `data/project.json` — the real public project snapshot.
-- `.github/workflows/sync-project.yml` — hourly/manual public observation and optional private-board snapshot sync.
+- `.github/workflows/sync-project.yml` — hourly/dispatched/manual public observation and optional private-board snapshot sync.
+- `.github/workflows/notify-planning-office.yml`, `templates/notify-planning-office.yml` — reusable notifier and the caller each observed repository installs.
 - `tests/*.test.js`, `scripts/verify-browser.mjs`, `scripts/verify-flight.mjs`, `scripts/verify-highway.mjs`, `scripts/verify-observatory.mjs` — focused unit/acceptance checks.
 - `.nojekyll`, `package.json`, `LICENSE`, `NOTICE`, `README.md` — publishing, metadata and documentation.
 
