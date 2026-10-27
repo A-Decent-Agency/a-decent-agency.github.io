@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import { collectProgress, deliveredVersion } from '../scripts/sync-progress.mjs';
 import { isProgressFeed, REPOSITORIES } from '../js/progress-feed.js';
 const now = '2026-10-25T15:00:00Z';
-function fake({ privateRepo = false, fail = false } = {}) {
+function fake({ privateRepo = false, fail = false, milestones = [] } = {}) {
   return async url => {
     if (url.endsWith('/languages')) return { status: 200, ok: true, json: async () => ({ JavaScript: 10000 }) };
     if (url.endsWith('/releases?per_page=20')) return { status: 200, ok: true, json: async () => [] };
+    if (url.includes('/milestones?')) return { status: 200, ok: true, json: async () => milestones };
     if (url.includes('/releases/')) return { status: 404, ok: false };
     if (url.includes('/pulls?')) return { status: fail ? 503 : 200, ok: !fail, json: async () => [] };
     return { status: 200, ok: true, json: async () => ({ private: privateRepo, visibility: privateRepo ? 'private' : 'public', pushed_at: now }) };

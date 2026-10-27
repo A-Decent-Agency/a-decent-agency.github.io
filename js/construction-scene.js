@@ -174,6 +174,15 @@ export class ConstructionScene {
       if (site.project) {
         buildCampus(campus, site, structure);
         site.visibleCranes = structure.buildCranes;
+        const progress = item => `${item.closed}/${item.total} ISSUES`;
+        for (const level of structure.levels) {
+          const sign = textSprite(`L${level.order} ${level.name.toUpperCase()} / ${level.finished ? 'FINISHED' : progress(level)}`, level.finished ? tint : '#e0b867', 30);
+          sign.position.set(-level.width / 2 - 13, level.y + 4.5, 0); campus.add(sign);
+        }
+        for (const ground of structure.grounds) {
+          const sign = textSprite(`${ground.name.toUpperCase()} / ${ground.finished ? 'FINISHED' : progress(ground)}`, ground.finished ? tint : '#e0b867', 28);
+          sign.position.set(ground.x, ground.height + 9, ground.z); campus.add(sign);
+        }
         const plan = sitePlanSprite(site); plan.position.set(-structure.width / 2 - 16, 13, 18);
         plan.userData.index = site.index; this.targets.push(plan); campus.add(plan);
         const crown = textSprite(site.project.milestone, tint, 62); crown.position.set(0, structure.height + 15, 0); campus.add(crown);

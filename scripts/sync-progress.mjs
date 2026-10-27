@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
-import { REPOSITORIES, CONNECTIONS, isProgressFeed, isDeliveredVersion, isVersionStorefront } from '../js/progress-feed.js';
+import { REPOSITORIES, CONNECTIONS, MAX_STRUCTURES, isProgressFeed, isDeliveredVersion, isVersionStorefront, milestoneStructure } from '../js/progress-feed.js';
 
 export function versionStorefront(receipt, listing, manifest, release, version, repository) {
   const matches = value => value?.version === version.tag && [repository, repository.split('/')[1]].includes(value.repo);
@@ -63,12 +63,16 @@ export async function collectProgress({ fetcher = fetch, token = '', previous = 
       const repo = await get(`repos/${repository}`);
       if (repo.private !== false || repo.visibility !== 'public') throw new Error('Repository is not confirmed public');
       publicConfirmed = true;
-      const [release, pulls, languages, releases] = await Promise.all([
+      const [release, pulls, languages, releases, milestones] = await Promise.all([
         get(`repos/${repository}/releases/latest`, true),
         get(`repos/${repository}/pulls?state=closed&sort=updated&direction=desc&per_page=30`),
         get(`repos/${repository}/languages`),
         get(`repos/${repository}/releases?per_page=20`),
+        get(`repos/${repository}/milestones?state=all&per_page=100`),
       ]);
+      if (!Array.isArray(milestones)) throw new Error('Milestone observation has an invalid format');
+      const structures = milestones.map(milestone => milestoneStructure(milestone, repository)).filter(Boolean)
+        .sort((a, b) => a.kind.localeCompare(b.kind) || a.order - b.order || a.number - b.number).slice(0, MAX_STRUCTURES);
       const versions = [];
       for (const edition of releases.filter(value => !value.draft && !value.prerelease)) {
         const asset = edition.assets?.find(value => ['supporter-minted.json', 'supporter-mint-evidence.json'].includes(value.name));
@@ -93,7 +97,7 @@ export async function collectProgress({ fetcher = fetch, token = '', previous = 
         versions.push(version);
       }
       repositories.push({ ...blank, state: 'available', checkedAt: now, pushedAt: repo.pushed_at,
-        codeBytes: Object.values(languages).reduce((sum, bytes) => sum + bytes, 0), versions, versionsTruncated: releases.length === 20,
+        codeBytes: Object.values(languages).reduce((sum, bytes) => sum + bytes, 0), versions, structures, versionsTruncated: releases.length === 20,
         release: release ? { tag: release.tag_name, url: release.html_url, publishedAt: release.published_at } : null,
         mergedPulls: pulls.filter(pr => pr.merged_at).slice(0, 5).map(pr => ({
           number: pr.number, title: pr.title, url: pr.html_url, mergedAt: pr.merged_at,

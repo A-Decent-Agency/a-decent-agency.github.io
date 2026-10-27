@@ -12,6 +12,8 @@ import { renderCampusDetails } from './campus-details.js';
 import { isProgressFeed } from './progress-feed.js';
 import { renderCampusPlan } from './campus-plan.js';
 import { campusStructure } from './project-campus.js';
+const skeletonSummary = model => model.levels.length + model.grounds.length
+  ? `${model.finishedCount}/${model.levels.length + model.grounds.length} planned structures finished · ` : '';
 import { projectMints } from './version-mints.js';
 import { mountSupporterCheckout } from './supporter-checkout-ui.js';
 
@@ -130,7 +132,7 @@ function showFlightSite(site, index = 0) {
     ? `${site.start || 'Start unset'} → ${site.target || 'Target unset'} · tentative GitHub dates`
     : site.project ? 'Project district · architectural milestone and source evidence below' : 'Undated staging area · no dates invented' : 'Change the search or Project view filter.';
   $('#flight-site-metrics').textContent = site ? site.project
-    ? `${campusStructure(site, progressFeed).buildCranes} build cranes · ${campusStructure(site, progressFeed).deliveredFloors} clean version floors · Board only: ${site.phase} · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked`
+    ? `${campusStructure(site, progressFeed).buildCranes} build cranes · ${campusStructure(site, progressFeed).deliveredFloors} clean version floors · ${skeletonSummary(campusStructure(site, progressFeed))}Board only: ${site.phase} · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked`
     : site.type === 'milestone' ? `Source status: ${site.items[0]?.fields?.Status || 'Unset'} · historical planning checkpoint, not a completion score`
     : `${site.phase === 'Handover' ? '✓' : '🏗'} ${site.phase} · ${site.cranes} cranes · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked` : '';
   $('#flight-site-items').replaceChildren(...(site?.items || []).map(item => {
