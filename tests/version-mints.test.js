@@ -132,7 +132,7 @@ test('observer attaches verified checkout and retains minted floors with explici
     if (url.endsWith('/releases?per_page=20')) return reply(url.includes(repository) ? [edition] : []);
     if (url.endsWith('/releases/latest')) return { ok: false, status: 404 };
     if (url.endsWith('/languages')) return reply({});
-    if (url.includes('/pulls?')) return reply([]);
+    if (url.includes('/pulls?') || url.includes('/milestones?')) return reply([]);
     return reply({ private: false, visibility: 'public', pushed_at: version.publishedAt });
   };
   const observed = await collectProgress({ fetcher });

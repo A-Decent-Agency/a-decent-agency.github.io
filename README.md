@@ -41,6 +41,19 @@ With steward approval, `scripts/align-planning.mjs --apply` adds public-allowlis
 
 The script is dry-run by default and must be run against a freshly exported board. It reconciles the shipped M1 reuse desk to Done and M2 public activity to In Progress, with source links and remaining full-acceptance gaps; it does not close M2 just because the bounded observer shipped. It also corrects the whole-library Portfolio view filter and exposes the new fields in supported board/table views. GitHub's roadmap API does not support visible-field columns; it still uses those same underlying items/status/outcomes. Dates are retained as planning windows, not fabricated actual completion dates. Alignment is an explicit steward operation, never part of the hourly read-only observation workflow.
 
+
+### Issue skeletons: planned levels and grounds
+
+Every observed public repository can plan its building with ordinary GitHub milestones. The observer reads only titles and open/closed issue counts.
+
+- `Level N: <name>` stacks a tower level, in N order, above any delivered version floors.
+- `Grounds: <name>` raises a nearby structure behind the tower (up to six).
+- Other milestones are ignored, so existing release milestones keep working.
+
+Each issue in a planned milestone is one structural **bay**, with up to 16 bays per level and 8 per grounds structure. Open issues show bare steel on a concrete deck. Each closed issue clads one bay in the project color. A structure looks **finished** (solid glass, lit windows, roof) only when it has at least one issue and none remain open. An empty milestone stays an outline. Open structures keep build cranes on site. The site panel lists every level and grounds structure with its stage, closed/total count and a link to its milestone issues.
+
+To plan a project: create the milestones, assign each planned issue to exactly one, then close issues as work lands. The next sync (or a manual run of **Sync GitHub Project snapshot**) updates the building. Issue counts are planning evidence, not a quality, readiness or funding score. Finished levels never create receipt-backed version floors.
+
 ## Run locally
 
 From this repository:

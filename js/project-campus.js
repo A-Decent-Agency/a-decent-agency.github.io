@@ -69,11 +69,42 @@ export function campusStructure(site, feed) {
   const codeBytes = observation?.codeBytes;
   const size = codeBytes == null ? 1 : Math.min(1.65, .85 + Math.log10(1 + codeBytes / 10000) * .22);
   const width = (form === 'foundation' ? 43 : form === 'hall' ? 36 : form === 'tower' ? 23 : 30) * size;
-  const messy = active.length > 0 || !deliveredFloors && form !== 'entrance';
-  const buildCranes = messy && site.items.length ? Math.max(1, site.cranes || 0) : 0;
+  const baseHeight = form === 'tower' ? floors * 9 : form === 'foundation' ? floors * 6 : Math.max(8, floors * 9);
+  const skeleton = issueSkeleton(observation?.structures, { width, baseTop: floors ? baseHeight : 0 });
+  const openSkeleton = [...skeleton.levels, ...skeleton.grounds].some(structure => structure.open > 0);
+  const messy = active.length > 0 || openSkeleton || !deliveredFloors && form !== 'entrance' && !skeleton.finished;
+  const buildCranes = messy && (site.items.length || openSkeleton) ? Math.max(1, site.cranes || 0) : 0;
   return { form, floors, deliveredFloors, versions, completed, remaining, active, codeBytes, observation, messy, buildCranes,
-    height: form === 'tower' ? floors * 9 : form === 'foundation' ? floors * 6 : Math.max(8, floors * 9),
-    width,
+    baseHeight, height: Math.max(baseHeight, skeleton.top), width, ...skeleton,
     label: site.project?.milestone || site.phase,
-    basis: `${site.project?.basis || 'Steward-selected architectural stage'}. ${versions.length} receipt-backed delivered version(s); ${remaining.length} remaining mapped jobs. Public language bytes scale footprint logarithmically, not value or readiness.` };
+    basis: `${site.project?.basis || 'Steward-selected architectural stage'}. ${versions.length} receipt-backed delivered version(s); ${remaining.length} remaining mapped jobs. ${skeleton.levels.length + skeleton.grounds.length ? `${skeleton.finishedCount}/${skeleton.levels.length + skeleton.grounds.length} planned structures finished from public milestone issue counts. ` : ''}Public language bytes scale footprint logarithmically, not value or readiness.` };
+}
+
+export const LEVEL_HEIGHT = 9;
+// Grounds sit behind the tower, clear of the level signs (left), service yard (right) and plan sign (front left).
+const GROUNDS_SLOTS = [() => [-16, -46], () => [16, -46], w => [-(w / 2 + 26), -38], w => [w / 2 + 32, -42], () => [0, -72], w => [-(w / 2 + 26), -64]];
+// Each public issue in a planned milestone is one structural bay; closed issues clad their bay. Counts are planning evidence, not quality.
+export function issueSkeleton(structures, { width = 30, baseTop = 0 } = {}) {
+  const shape = structure => {
+    const total = structure.open + structure.closed;
+    const bays = Math.max(1, Math.min(16, total));
+    return { ...structure, total, bays,
+      cladBays: !total ? 0 : !structure.open ? bays : Math.min(bays - 1, Math.max(structure.closed ? 1 : 0, Math.round(bays * structure.closed / total))),
+      finished: total > 0 && structure.open === 0,
+      stage: !total ? 'Outlined / no issues yet' : structure.open === 0 ? 'Finished' : structure.closed ? 'Under construction' : 'Skeleton' };
+  };
+  const list = Array.isArray(structures) ? structures : [];
+  const levels = list.filter(structure => structure.kind === 'level').sort((a, b) => a.order - b.order || a.number - b.number)
+    .slice(0, 12).map((structure, index) => ({ ...shape(structure),
+      y: 2 + baseTop + index * LEVEL_HEIGHT, width: Math.max(12, width * .82 - index * 1.4) }));
+  const grounds = list.filter(structure => structure.kind === 'grounds').sort((a, b) => a.order - b.order || a.number - b.number)
+    .slice(0, GROUNDS_SLOTS.length).map((structure, index) => {
+      const [x, z] = GROUNDS_SLOTS[index](width), shaped = shape(structure);
+      return { ...shaped, x, z,
+        size: 11 + Math.min(6, shaped.bays * .5), height: 6 + Math.min(8, shaped.bays) };
+    });
+  const all = [...levels, ...grounds];
+  return { levels, grounds, finishedCount: all.filter(structure => structure.finished).length,
+    finished: all.length > 0 && all.every(structure => structure.finished),
+    top: levels.length ? baseTop + levels.length * LEVEL_HEIGHT : 0 };
 }

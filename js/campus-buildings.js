@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { LEVEL_HEIGHT } from './project-campus.js';
 
 function block(group, x, y, z, w, h, d, color, glass = false) {
   group.userData.buildingBlocks.push({ x, y: y + h / 2, z, w, h, d, color, glass });
@@ -33,6 +34,35 @@ function terrace(group, width, y, color) {
     planter.position.set(x, y + 3, 7); group.add(planter);
   }
 }
+const STEEL = '#e0b867', SLAB = '#4f5768';
+// Open bays show bare steel; each closed issue clads one bay; a finished structure becomes solid project-colored floor space.
+function skeletonBox(group, cx, y, cz, w, h, d, bays, clad, finished, color) {
+  block(group, cx, y, cz, w, .5, d, finished ? '#e6d8be' : SLAB);
+  if (finished) {
+    block(group, cx, y + .5, cz, w - .6, h - 1, d - .6, color, true);
+    for (let x = cx - w / 2 + 2; x < cx + w / 2 - 1; x += 4) block(group, x, y + 2, cz + d / 2 - .2, 1.6, Math.max(1, h - 4), .2, '#fae5a0');
+    block(group, cx, y + h - .5, cz, w, .5, d, color);
+    return;
+  }
+  const bay = w / bays;
+  for (let i = 0; i <= bays; i++) for (const z of [cz - d / 2, cz + d / 2]) block(group, cx - w / 2 + i * bay, y + .5, z, .45, h - .5, .45, STEEL);
+  for (const x of [cx - w / 2, cx + w / 2]) block(group, x, y + .5, cz, .45, h - .5, .45, STEEL);
+  for (const z of [cz - d / 2, cz + d / 2]) block(group, cx, y + h - .5, z, w, .45, .45, STEEL);
+  for (const x of [cx - w / 2, cx + w / 2]) block(group, x, y + h - .5, cz, .45, .45, d, STEEL);
+  for (let i = 0; i < clad; i++) {
+    const x = cx - w / 2 + (i + .5) * bay;
+    for (const z of [cz - d / 2, cz + d / 2]) block(group, x, y + .6, z, bay - .6, h - 1.4, .25, color, true);
+  }
+}
+function buildSkeleton(group, model, color) {
+  for (const level of model.levels) skeletonBox(group, 0, level.y, 0, level.width, LEVEL_HEIGHT - .4, 18, level.bays, level.cladBays, level.finished, color);
+  for (const structure of model.grounds) {
+    const { x, z, size, height } = structure;
+    block(group, x, 1.2, z, size + 3, .6, size + 3, '#d0c8ae');
+    skeletonBox(group, x, 1.8, z, size, height, size * .8, Math.min(8, structure.bays), Math.min(8, structure.cladBays), structure.finished, color);
+    if (structure.finished) block(group, x, 1.8 + height, z, size * .6, 2, size * .5, color);
+  }
+}
 export function buildCampus(group, site, model) {
   group.userData.buildingBlocks = [];
   const color = site.project?.color || '#8ba3bd', width = model.width;
@@ -40,7 +70,7 @@ export function buildCampus(group, site, model) {
   block(group, 0, 2, 15, width + 10, .5, 5, '#d0c8ae');
   for (const x of [-width / 2 - 4, width / 2 + 4]) tree(group, x, 10);
   for (let floor = 0; floor < model.floors; floor++) {
-    const h = model.height / model.floors, y = 2 + floor * h;
+    const h = model.baseHeight / model.floors, y = 2 + floor * h;
     const delivered = floor < model.deliveredFloors;
     const tint = delivered ? color : '#60748b';
     const w = Math.max(10, width - floor * (model.form === 'tower' ? 1.8 : model.form === 'foundation' ? 5 : 0));
@@ -84,13 +114,14 @@ export function buildCampus(group, site, model) {
   } else {
     block(group, 0, 2, 0, width * .7, .4, 18, '#386b8a');
     for (let x = -width / 3; x <= width / 3; x += 6) block(group, x, 2, 0, .35, .45, 18, '#98cadd');
-    if (model.form === 'staging') {
+    if (model.form === 'staging' && !model.levels?.length) {
       for (const x of [-9, 9]) {
         const dome = new THREE.Mesh(new THREE.SphereGeometry(6, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshLambertMaterial({ color: '#bd9bd5', wireframe: true }));
         dome.position.set(x, 2, 0); group.add(dome);
       }
     }
   }
+  if (model.levels?.length || model.grounds?.length) buildSkeleton(group, model, color);
   // Work in progress occupies a separate service yard, never the delivered version floors.
   const messy = model.messy;
   if (messy) {
