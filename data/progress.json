@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-27T16:09:10.978Z",
+  "checkedAt": "2026-10-27T18:04:12.852Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:22Z",
+      "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -30,9 +30,9 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-26T00:46:45Z",
+      "pushedAt": "2026-10-27T18:02:28Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
@@ -133,9 +133,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-27T15:58:29Z",
+      "pushedAt": "2026-10-27T18:02:31Z",
       "release": null,
       "mergedPulls": [
         {
@@ -229,9 +229,9 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-26T00:09:58Z",
+      "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
         "tag": "v2.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentHead/releases/tag/v2.0.0",
@@ -312,9 +312,9 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-26T00:09:47Z",
+      "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
         "tag": "v0.3.1",
         "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
@@ -395,9 +395,9 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-23T06:15:59Z",
+      "pushedAt": "2026-10-27T18:02:37Z",
       "release": null,
       "mergedPulls": [
         {
@@ -531,9 +531,9 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:24:20Z",
+      "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
         "tag": "v0.2.0",
         "url": "https://github.com/A-Decent-Agency/DecentJukebox/releases/tag/v0.2.0",
@@ -618,9 +618,9 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:24:36Z",
+      "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
         "tag": "v0.2.0",
         "url": "https://github.com/A-Decent-Agency/DBuskRadio/releases/tag/v0.2.0",
@@ -690,9 +690,9 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:31:33Z",
+      "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
         "tag": "v0.2.1",
         "url": "https://github.com/A-Decent-Agency/DVert/releases/tag/v0.2.1",
@@ -762,11 +762,17 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-27T15:54:41Z",
+      "pushedAt": "2026-10-27T18:02:05Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 14,
+          "title": "Living map: cul-de-sac sprawl, Canopy city and repo-triggered sync",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/14",
+          "mergedAt": "2026-10-27T18:02:05Z"
+        },
         {
           "number": 13,
           "title": "Issue skeletons: milestone levels and grounds that finish as issues close",
@@ -790,16 +796,10 @@
           "title": "Add project mint galleries with verified purchase links",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/10",
           "mergedAt": "2026-10-25T17:06:20Z"
-        },
-        {
-          "number": 9,
-          "title": "Create an artful campus observatory with version-backed floors",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/9",
-          "mergedAt": "2026-10-25T16:25:45Z"
         }
       ],
       "issues": null,
-      "codeBytes": 366735,
+      "codeBytes": 385910,
       "versions": [],
       "versionsTruncated": false,
       "structures": []
@@ -807,9 +807,9 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:43Z",
+      "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -832,9 +832,9 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:41Z",
+      "pushedAt": "2026-10-27T18:02:50Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -857,9 +857,9 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:32Z",
+      "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -882,9 +882,9 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:37Z",
+      "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -907,9 +907,9 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:24Z",
+      "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -942,9 +942,9 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:45Z",
+      "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -967,9 +967,9 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-10-27T16:09:10.978Z",
+      "checkedAt": "2026-10-27T18:04:12.852Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:47Z",
+      "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
