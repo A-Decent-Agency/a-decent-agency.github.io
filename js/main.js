@@ -16,6 +16,7 @@ const skeletonSummary = model => model.levels.length + model.grounds.length
   ? `${model.finishedCount}/${model.levels.length + model.grounds.length} planned structures finished · ` : '';
 import { projectMints } from './version-mints.js';
 import { mountSupporterCheckout } from './supporter-checkout-ui.js';
+import { siteAddress, resolveSiteAddress, siteForCard } from './site-links.js';
 
 const $ = selector => document.querySelector(selector);
 const tabs = [...document.querySelectorAll('[data-tab]')];
@@ -40,6 +41,52 @@ const siteIdentityPanel = mountSiteIdentity($('#flight-site-identity'), null);
 const campusArtwork = mountSiteIdentity($('#campus-artwork'), null);
 let identitySiteId = null;
 let progressFeed = null;
+let pendingSiteAddress = location.href;
+function publishedSites() {
+  return constructionSites(state.project.items, { includeContext: true });
+}
+function openSiteShare(site, card) {
+  if (!site) { notify('This card has no published construction site. Local maps are not shared by URL.'); return; }
+  $('#share-title').textContent = `Share ${site.title}`;
+  $('#share-description').textContent = card ? `Open this site and its card: ${card.title}` : 'Open this construction site directly.';
+  const address = siteAddress(location.href, site.id, card?.id);
+  $('#share-address').value = address;
+  $('#open-site-address').href = address;
+  $('#share-status').textContent = '';
+  scenes.get('flight')?.setPaused(true); updatePause(true);
+  $('#share-dialog').showModal();
+}
+$('#share-site').onclick = () => openSiteShare(flightSites[flightIndex]);
+$('#share-card').onclick = () => {
+  if (selected && state.tab !== 'own') openSiteShare(siteForCard(publishedSites(), selected.id), selected);
+};
+$('#copy-site-address').addEventListener('click', async () => {
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard access is unavailable.');
+    await navigator.clipboard.writeText($('#share-address').value);
+    $('#share-status').textContent = 'Link copied.';
+  } catch (error) {
+    $('#share-status').textContent = `Could not copy the link: ${error.message} Select and copy the address above.`;
+    $('#share-address').focus(); $('#share-address').select();
+  }
+});
+function applySiteAddress({ reset = false } = {}) {
+  if (!publicationLoaded || pendingSiteAddress === null) return;
+  const address = pendingSiteAddress;
+  pendingSiteAddress = null;
+  const sites = publishedSites();
+  const destination = resolveSiteAddress(address, sites) || (reset && sites.length ? { site: sites[0] } : null);
+  $('#site-link-status').hidden = !destination?.error;
+  $('#site-link-status').textContent = destination?.error || '';
+  if (!destination?.site) return;
+  state.query = ''; state.view = ''; $('#search').value = ''; $('#project-view').value = '';
+  selectTab('flight');
+  chartSite(flightSites.findIndex(site => site.id === destination.site.id), { history: false, immediate: true });
+  $('#flight-card-panel').open = true;
+  $('#workspace').scrollIntoView({ block: 'start', behavior: 'instant' });
+  if (destination.card) openDetail(destination.card);
+}
+window.addEventListener('popstate', () => { pendingSiteAddress = location.href; applySiteAddress({ reset: true }); });
 function updateSitePanels(site = flightSites[flightIndex]) {
   $('#campus-details').innerHTML = renderCampusDetails(site, progressFeed);
   for (const image of $('#campus-details').querySelectorAll('[data-project-mural], [data-mint-art]')) image.addEventListener('error', () => {
@@ -98,6 +145,7 @@ function openDetail(item) {
   if (state.tab === 'flight') scenes.get('flight')?.highlightTask(item.id);
   if (state.tab === 'flight' && scenes.has('flight')) { scenes.get('flight').setPaused(true); updatePause(true); }
   selected=item;detailOpener=document.activeElement;
+  $('#share-card').hidden = state.tab === 'own' || !siteForCard(publishedSites(), item.id);
   const panel=$('#detail-panel');const content=$('#detail-content');
   const fields=Object.entries(item.fields||{}).filter(([,value])=>value?.length);
   const url=safeURL(item.url);
@@ -123,6 +171,7 @@ function showList(items) {
 }
 function showFlightSite(site, index = 0) {
   flightIndex = index;
+  $('#share-site').disabled = !site;
   $('#flight-destination').value = site?.id || '';
   $('#flight-previous').disabled = !flightSites.length || index <= 0;
   $('#flight-next').disabled = !flightSites.length || index >= flightSites.length - 1;
@@ -141,10 +190,16 @@ function showFlightSite(site, index = 0) {
   }));
   updateSitePanels(site);
 }
-function chartSite(index) {
+function chartSite(index, { history: recordHistory = true, immediate = false } = {}) {
   if (!flightSites.length) return;
   const at = Math.max(0, Math.min(flightSites.length - 1, index));
-  if (!state.list && sceneKind === 'flight' && !sceneFailed) scene?.goTo(at);
+  if (recordHistory) {
+    const address = siteAddress(location.href, flightSites[at].id);
+    if (address !== location.href) history.pushState(null, '', address);
+    $('#site-link-status').hidden = true;
+  }
+  if (immediate) { scenes.get('flight')?.setPaused(true); updatePause(true); }
+  if (!state.list && sceneKind === 'flight' && !sceneFailed) scene?.goTo(at, { immediate });
   else showFlightSite(flightSites[at], at);
 }
 function render() {
@@ -186,7 +241,8 @@ function render() {
     if (scene && sceneKind === kind) {
       const key = JSON.stringify([items, state.tab, state.page, own ? map.links : [], flight ? progressFeed : null]);
       scene.setActive(true);
-      if (sceneData.get(scene) !== key) { scene.setData(items,state.tab,state.page,map.links,progressFeed,{ includeContext: !state.query && !state.view }); sceneData.set(scene,key); }
+      if (sceneData.get(scene) !== key) { scene.setData(items,state.tab,state.page,map.links,progressFeed,{ includeContext: !state.query && !state.view, siteId: flightSites[flightIndex]?.id }); sceneData.set(scene,key); }
+      if (flight && scene.sites[scene.selected]?.id !== flightSites[flightIndex]?.id) scene.goTo(flightIndex, { immediate: true });
       scene.setMotion(state.reduced);
     } else { scene?.setActive(false); startScene(); }
   }
@@ -356,6 +412,7 @@ async function refreshProject() {
     $('#sync-status').title=`${snapshotFreshness(project.exportedAt)}. Last synced means last changed export, not last poll. Source export is scheduled hourly when its read secret is available; this page checks every five minutes while visible.`;
     $('#project-readme').innerHTML=markdown(state.project.readme);
     if (changed) render();
+    applySiteAddress();
   } catch(error){
     console.error('[Planning Office snapshot]',error);
     $('#sync-status').textContent=state.project.items.length?'REFRESH FAILED · SHOWING PREVIOUS SNAPSHOT':'PUBLIC SNAPSHOT UNAVAILABLE';

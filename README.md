@@ -27,6 +27,33 @@ Offramps, project signs and pinned project-owned artwork are visible in 3D. High
 
 The larger canvas has **Ship / highway**, **City / orbit**, **Top-down site plan** and **Whole universe / atlas** cameras, zoom controls, and drag-to-orbit outside ship mode (also usable with motion off). Fullscreen expands the scene with in-canvas destination/camera/panel controls. Unsupported native fullscreen uses an explicitly labeled expanded-window mode; failures are surfaced. Escape exits fullscreen. Each campus has a physical 2D job-board sign and an accessible 2D connection/job plan using the same published item IDs, Project/Component, Status and Priority metadata; selecting a job opens its source details and emphasizes its building's connection lines.
 
+### Direct building addresses
+
+Every project building, milestone checkpoint and workstream yard has a stable
+`?site=<site ID>` address, independent of its position along the road. Use **Share
+site** in the site panel or **Share site / card** in a public card's side panel.
+The sharing dialog provides a selectable URL and a **Copy link** button; blocked
+clipboard access leaves the address visible with an explicit error. Card links
+add `&card=<published card ID>` to open the card at its site.
+
+For example, [DecentHead](https://a-decent-agency.github.io/?site=project%3Athejollylama%2Fdecenthead)
+and the [DCal public blueprint checkpoint](https://a-decent-agency.github.io/?site=PVTI_lADODD7ovc4Bn91hzhELHuo)
+can be opened directly. DCal's checkpoint is the approved public plan, not a
+completed standalone Calendar campus.
+
+Links resolve after the public snapshot loads, clear local search/view filters,
+and select the same site in 3D or the mobile/reduced-motion 2D view. Back/Forward
+restores shared destinations. A missing site/card is reported explicitly without
+recovering withheld data. Shared URLs preserve the current deployment path
+(including IPFS subpaths), but exclude other query parameters, wallet state and
+local-editor data. Recipients see the latest public roadmap, not the sender's
+snapshot. A local editor node cannot be shared by URL; use its JSON export.
+
+Validate link resolution with `node --test tests/site-links.test.js`.
+For desktop/3D and mobile/2D browser acceptance, serve the site and run
+`OFFICE_URL=http://127.0.0.1:8000/ node scripts/verify-site-links.mjs` with
+Playwright available (`PLAYWRIGHT_MODULE` may point to an existing installation).
+
 The public Canopy map is imported from `data/agency-map.json` at `9a8777e8f0e7dbfaa65352b0f00fd5fbce5d7d99`, with all 24 public-endpoint relationships and their types/evidence/caveats preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
 
 Sidepanels immediately show bounded pinned project artwork with source/license credit. Canopy uses its full ENS avatar, Head/Market their project-owned ENS artwork, and Busking its hat plus original busker mural (also on its 3D stage). Public Ethereum mainnet avatar text records were read without a wallet connection on 2026-10-25: Head/Market point to IPFS images; Agency/Canopy/Busking point to mutable avatar-service URLs. The UI records this provenance and uses reviewed immutable repository artwork rather than automatically following arbitrary services or assuming prepared ENS metadata is live. No ENS writes occur.

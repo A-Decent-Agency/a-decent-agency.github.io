@@ -191,7 +191,7 @@ export class ConstructionScene {
     }
   }
   setData(items, tab, page, links, feed, options) {
-    const previous = this.sites[this.selected]?.id;
+    const previous = options?.siteId || this.sites[this.selected]?.id;
     this.clear(); this.sites = constructionSites(items, options); this.targets = []; this.signals = []; this.campuses = new Map();
     this.connections = campusConnections(this.sites, feed);
     this.keys.clear(); this.target = null;
@@ -391,12 +391,12 @@ export class ConstructionScene {
     }
     this.invalidate();
   }
-  goTo(index) {
+  goTo(index, { immediate = false } = {}) {
     if (!this.sites.length) return;
     const at = Math.max(0, Math.min(this.sites.length - 1, index));
     this.selected = at; this.keys.clear(); this.onSite(this.sites[at], at);
     this.highlightSite(this.sites[at].id);
-    if (this.reduced || this.paused) { this.state = { progress: at, x: 0, y: 0 }; this.target = null; }
+    if (immediate || this.reduced || this.paused) { this.state = { progress: at, x: 0, y: 0 }; this.target = null; }
     else this.target = at;
     this.invalidate();
   }
