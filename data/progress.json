@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-29T00:28:17.429Z",
+  "checkedAt": "2026-10-29T01:48:17.219Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -30,15 +30,27 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
-      "pushedAt": "2026-10-28T23:49:00Z",
+      "pushedAt": "2026-10-29T01:06:42Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
         "publishedAt": "2026-10-26T00:12:09Z"
       },
       "mergedPulls": [
+        {
+          "number": 299,
+          "title": "Advert tallies: include paid-queue adverts and archive versioned journals",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/299",
+          "mergedAt": "2026-10-29T01:06:43Z"
+        },
+        {
+          "number": 298,
+          "title": "Main search dropdown + advert vote tallies",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/298",
+          "mergedAt": "2026-10-29T01:00:52Z"
+        },
         {
           "number": 297,
           "title": "Retry transient Pinata uploads and surface failed NFT requests",
@@ -56,22 +68,10 @@
           "title": "Track DBusker wallet credits and add voluntary steward review",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/295",
           "mergedAt": "2026-10-28T19:44:21Z"
-        },
-        {
-          "number": 294,
-          "title": "Add bounded public money-trail evidence to DBusker",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/294",
-          "mergedAt": "2026-10-28T18:28:44Z"
-        },
-        {
-          "number": 293,
-          "title": "Clarify DBusker modes and classify safe model failures",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/293",
-          "mergedAt": "2026-10-27T23:24:44Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4364531,
+      "codeBytes": 4400758,
       "versions": [
         {
           "tag": "v1.0.0",
@@ -133,11 +133,17 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
-      "pushedAt": "2026-10-28T23:56:21Z",
+      "pushedAt": "2026-10-29T01:45:02Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 47,
+          "title": "BigNuten: Level 3 'Recovery and privacy' evidence",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/47",
+          "mergedAt": "2026-10-29T00:28:36Z"
+        },
         {
           "number": 46,
           "title": "BigNuten: Level 2 'Scrub and test' evidence",
@@ -161,12 +167,6 @@
           "title": "Mount pinned standalone DBusk radio widget in Canopy",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/43",
           "mergedAt": "2026-10-24T11:33:54Z"
-        },
-        {
-          "number": 42,
-          "title": "Consolidate creator maps and add ordered map dropdown",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/42",
-          "mergedAt": "2026-10-23T18:20:39Z"
         }
       ],
       "issues": null,
@@ -229,7 +229,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -312,7 +312,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -395,44 +395,44 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
-      "pushedAt": "2026-10-29T00:27:44Z",
+      "pushedAt": "2026-10-29T01:48:03Z",
       "release": null,
       "mergedPulls": [
         {
-          "number": 368,
-          "title": "Encrypt IPFS fitness backups and harden Pinata JWTs",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/368",
-          "mergedAt": "2026-10-29T00:27:44Z"
+          "number": 372,
+          "title": "Add sleep, daily energy and guided Heart breathwork",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/372",
+          "mergedAt": "2026-10-29T01:47:49Z"
         },
         {
-          "number": 367,
-          "title": "Fix recovery deletion guardrail and persist notice choices",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/367",
-          "mergedAt": "2026-10-29T00:02:40Z"
+          "number": 373,
+          "title": "Add workout effort, recovery and monthly body logging",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/373",
+          "mergedAt": "2026-10-29T01:40:45Z"
         },
         {
-          "number": 366,
-          "title": "Fix preparation timers surviving workout cancellation",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/366",
-          "mergedAt": "2026-10-28T23:47:23Z"
+          "number": 374,
+          "title": "Add daily calorie totals and editable meal timing",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/374",
+          "mergedAt": "2026-10-29T01:32:28Z"
         },
         {
-          "number": 364,
-          "title": "Require hosted Genie consent and wire raw-food quick logging",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/364",
-          "mergedAt": "2026-10-28T23:24:47Z"
+          "number": 375,
+          "title": "Add registry-backed vital readings and clinical unit displays",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/375",
+          "mergedAt": "2026-10-29T01:22:49Z"
         },
         {
-          "number": 365,
-          "title": "Fix water persistence and refresh health panels after snapshot restore",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/365",
-          "mergedAt": "2026-10-28T23:13:47Z"
+          "number": 371,
+          "title": "Add Throat chanting sessions and complete local credential deletion",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/371",
+          "mergedAt": "2026-10-29T01:10:18Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1853923,
+      "codeBytes": 2028063,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -501,8 +501,8 @@
           "kind": "level",
           "order": 4,
           "name": "Health foundation",
-          "open": 22,
-          "closed": 0,
+          "open": 0,
+          "closed": 22,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/4"
         },
@@ -521,7 +521,7 @@
           "kind": "level",
           "order": 6,
           "name": "Release crown",
-          "open": 2,
+          "open": 3,
           "closed": 0,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/6"
@@ -531,7 +531,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
@@ -618,7 +618,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
@@ -690,7 +690,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
@@ -762,9 +762,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
-      "pushedAt": "2026-10-28T23:47:57Z",
+      "pushedAt": "2026-10-29T00:28:32Z",
       "release": null,
       "mergedPulls": [
         {
@@ -818,7 +818,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -843,7 +843,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:50Z",
       "release": null,
@@ -868,7 +868,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -893,7 +893,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -918,7 +918,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -953,7 +953,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -978,7 +978,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-10-29T00:28:17.429Z",
+      "checkedAt": "2026-10-29T01:48:17.219Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
