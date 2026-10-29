@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-29T12:19:50.876Z",
+  "checkedAt": "2026-10-29T13:24:48.897Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -30,7 +30,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-29T12:17:41Z",
       "release": {
@@ -133,9 +133,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
-      "pushedAt": "2026-10-29T12:19:47Z",
+      "pushedAt": "2026-10-29T13:18:48Z",
       "release": null,
       "mergedPulls": [
         {
@@ -229,7 +229,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -312,7 +312,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -395,44 +395,44 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
-      "pushedAt": "2026-10-29T12:15:49Z",
+      "pushedAt": "2026-10-29T13:24:28Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 384,
+          "title": "Anchor immutable final post-settlement receipts",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/384",
+          "mergedAt": "2026-10-29T13:24:23Z"
+        },
+        {
+          "number": 385,
+          "title": "Add source-only ranked payout ties",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/385",
+          "mergedAt": "2026-10-29T13:15:04Z"
+        },
+        {
+          "number": 383,
+          "title": "Clarify earned-only competition awards",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/383",
+          "mergedAt": "2026-10-29T12:57:31Z"
+        },
+        {
+          "number": 382,
+          "title": "Clarify committed-stake withdrawal policy before joining",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/382",
+          "mergedAt": "2026-10-29T12:48:27Z"
+        },
         {
           "number": 381,
           "title": "Add privacy-gated competition results and settlement workflow",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/381",
           "mergedAt": "2026-10-29T12:15:38Z"
-        },
-        {
-          "number": 379,
-          "title": "Enable ETH and decimal-aware streak escrows",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/379",
-          "mergedAt": "2026-10-29T11:43:53Z"
-        },
-        {
-          "number": 380,
-          "title": "Add per-competition achievement metadata and templates",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/380",
-          "mergedAt": "2026-10-29T11:22:49Z"
-        },
-        {
-          "number": 377,
-          "title": "Add rehearsal-safe StreakBet journey and payout explainer",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/377",
-          "mergedAt": "2026-10-29T10:25:28Z"
-        },
-        {
-          "number": 378,
-          "title": "Add no-real-funds StreakBet local-fork rehearsal",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/378",
-          "mergedAt": "2026-10-29T10:25:15Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2283580,
+      "codeBytes": 2359413,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -531,7 +531,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
@@ -618,7 +618,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
@@ -690,7 +690,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
@@ -762,9 +762,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
-      "pushedAt": "2026-10-29T12:16:21Z",
+      "pushedAt": "2026-10-29T12:20:04Z",
       "release": null,
       "mergedPulls": [
         {
@@ -818,7 +818,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -843,7 +843,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:50Z",
       "release": null,
@@ -868,7 +868,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -893,7 +893,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -918,7 +918,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -953,7 +953,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -978,7 +978,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-10-29T12:19:50.876Z",
+      "checkedAt": "2026-10-29T13:24:48.897Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
