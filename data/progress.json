@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-29T14:15:37.984Z",
+  "checkedAt": "2026-10-29T14:41:18.647Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -30,7 +30,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-29T13:37:28Z",
       "release": {
@@ -133,9 +133,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
-      "pushedAt": "2026-10-29T13:56:09Z",
+      "pushedAt": "2026-10-29T14:40:45Z",
       "release": null,
       "mergedPulls": [
         {
@@ -229,7 +229,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -312,7 +312,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -395,11 +395,17 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
-      "pushedAt": "2026-10-29T14:15:19Z",
+      "pushedAt": "2026-10-29T14:41:07Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 388,
+          "title": "Add accessible local-only Quest Mode (partial #209)",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/388",
+          "mergedAt": "2026-10-29T14:40:54Z"
+        },
         {
           "number": 387,
           "title": "Add Genie Community Guide and read-only challenge coach",
@@ -423,16 +429,10 @@
           "title": "Add source-only ranked payout ties",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/385",
           "mergedAt": "2026-10-29T13:15:04Z"
-        },
-        {
-          "number": 383,
-          "title": "Clarify earned-only competition awards",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/383",
-          "mergedAt": "2026-10-29T12:57:31Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2426383,
+      "codeBytes": 2458309,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -531,7 +531,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
@@ -618,7 +618,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
@@ -690,7 +690,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
@@ -762,9 +762,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
-      "pushedAt": "2026-10-29T14:00:52Z",
+      "pushedAt": "2026-10-29T14:15:53Z",
       "release": null,
       "mergedPulls": [
         {
@@ -818,7 +818,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -843,7 +843,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:50Z",
       "release": null,
@@ -868,7 +868,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -893,7 +893,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -918,7 +918,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -953,7 +953,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -978,7 +978,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-10-29T14:15:37.984Z",
+      "checkedAt": "2026-10-29T14:41:18.647Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
