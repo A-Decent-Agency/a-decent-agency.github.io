@@ -65,4 +65,9 @@ test('editor and viewer are bundled and network restricted, with no automatic cl
   const studio = await readFile(new URL('../studio/studio.js', import.meta.url), 'utf8');
   assert.doesNotMatch(studio, /localStorage|indexedDB|fetch\(/);
   assert.match(studio, /format, spin/);
+  const deployment = await readFile(new URL('../.github/workflows/deploy-pages.yml', import.meta.url), 'utf8');
+  const assembly = deployment.match(/cp -R ([^\n]+) _site\//)?.[1].split(/\s+/);
+  for (const directory of ['css', 'js', 'data', 'assets', 'studio', 'vendor']) {
+    assert.ok(assembly?.includes(directory), `Pages assembly must include ${directory}`);
+  }
 });
