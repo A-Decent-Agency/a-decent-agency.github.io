@@ -1,0 +1,7 @@
+#simple-map-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; width: 100%; }
+#studio-panel iframe { display: block; width: 100%; height: max(850px, 85dvh); border: 0; }
+#workspace.studio-mode > .scene-compass,
+#workspace.studio-mode > .site-stamp,
+#workspace.studio-mode > #scene-notice,
+.studio-view > .workspace-footer,
+.studio-view > .office-caption { display: none; }

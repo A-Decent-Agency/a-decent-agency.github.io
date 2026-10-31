@@ -1,0 +1,67 @@
+import assert from 'node:assert/strict';
+import { mkdir } from 'node:fs/promises';
+import { REVIVAL_PLANS } from '../js/revival-plans.js';
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const base = process.env.OFFICE_URL || 'http://127.0.0.1:8073/';
+const shots = process.env.SCREENSHOT_DIR || 'office-shots';
+await mkdir(shots, { recursive: true });
+const browser = await chromium.launch({ headless: true });
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1050 } });
+  const errors = []; page.on('pageerror', error => errors.push(error.message));
+  await page.goto(base);
+  await page.waitForSelector('#scene canvas:visible');
+  await page.waitForSelector('[data-recall-repository]', { state: 'attached' });
+  await page.locator('#project-recall-panel > summary').click();
+  assert.equal(await page.locator('[data-recall-repository]').count(), 14);
+  assert.match(await page.locator('#project-recall').innerText(), /not proof of deployment/);
+  await page.screenshot({ path: `${shots}/october-recall.png`, fullPage: true });
+  await page.locator('#project-recall-panel > summary').click();
+  await page.locator('#motion-button').click();
+  for (const plan of REVIVAL_PLANS) {
+    const value = `project:${plan.repository.toLowerCase()}`;
+    await page.locator('#flight-destination').selectOption(value);
+    await page.waitForFunction(name => document.querySelector('#flight-site-title').textContent === name, plan.name);
+    const campus = page.locator(`[data-revival-plan="${plan.repository}"]`);
+    assert.equal(await campus.count(), 1);
+    assert.equal(await campus.locator('[data-revival-stage]').count(), 5);
+    assert.match(await campus.innerText(), /Acceptance:/);
+    assert.match(await campus.innerText(), /PROPOSED \/ not delivered/);
+    await page.locator('#flight-camera').selectOption('orbit');
+    await page.waitForTimeout(100);
+    await page.screenshot({ path: `${shots}/${plan.motif}-tower.png`, fullPage: true });
+    await campus.locator('[data-revival-archive]').click();
+    assert.equal(await page.locator('#historical-map-dialog').isVisible(), true);
+    await page.waitForFunction(() => {
+      const image = document.querySelector('#historical-map-image');
+      return image.complete && image.naturalWidth > 1000;
+    });
+    assert.match(await page.locator('#historical-map-name').innerText(), plan.archive.id === 'smarthome-4' ? /SmartHome/ : /BabelBet/);
+    await page.locator('#historical-map-dialog .dialog-close').click();
+  }
+  await page.locator('#human-priorities-panel > summary').click();
+  assert.equal(await page.locator('#human-priorities [data-human-priority]').count(), 8);
+  await page.locator('#human-priorities [data-human-site="entity:decent-settlements-router"]').first().click();
+  assert.equal(await page.locator('#flight-site-title').innerText(), 'DecentSettlementsRouter');
+  assert.equal(await page.locator('[data-revival-plan="entity:decent-settlements-router"] [data-revival-stage]').count(), 5);
+  assert.equal(await page.locator('#campus-plan a[href="https://github.com/TheJollyLaMa/ArtFi/issues/62"]').count(), 1);
+  await page.locator('#flight-camera').selectOption('orbit');
+  await page.screenshot({ path: `${shots}/settlements-router-tower.png`, fullPage: true });
+  await page.locator('#project-recall-panel > summary').click();
+  await page.locator('[data-recall-site="TheJollyLaMa/ArtFi"]').click();
+  await page.waitForFunction(() => document.querySelector('#flight-site-title').textContent === 'DecentLending / DLend');
+  assert.equal(await page.locator('#flight-camera').inputValue(), 'flight');
+  await page.locator('#historical-turn').click();
+  await page.waitForTimeout(150);
+  await page.screenshot({ path: `${shots}/four-map-history.png`, fullPage: true });
+  assert.deepEqual(errors, []);
+  await page.close();
+  const mobile = await browser.newPage({ viewport: { width: 375, height: 900 }, reducedMotion: 'reduce', isMobile: true, hasTouch: true });
+  await mobile.goto(base);
+  await mobile.locator('#flight-destination').selectOption('project:thejollylama/babelbet');
+  assert.equal(await mobile.locator('[data-revival-stage]').count(), 5);
+  await mobile.locator('#project-recall-panel > summary').click();
+  assert.equal(await mobile.locator('[data-recall-repository]').count(), 14);
+  assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  console.log('PASS: 14-project October recall, five revival towers plus independent router, eight human-needs lenses, original-map dialogs, DLend identity/navigation, four-map past camera, mobile overflow and no page errors.');
+} finally { await browser.close(); }

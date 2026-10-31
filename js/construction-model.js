@@ -40,6 +40,14 @@ export function constructionSites(items, options) {
 export function routePoint(progress) {
   return { x: Math.sin(progress * .85) * 32, y: Math.sin(progress * .47) * 9, z: -progress * FLIGHT_BOUNDS.spacing };
 }
+export function pastCameraOffset(radius, azimuth, elevation) {
+  const horizontal = Math.cos(elevation) * radius;
+  return {
+    x: Math.sin(azimuth) * horizontal,
+    y: Math.sin(elevation) * radius,
+    z: -Math.cos(azimuth) * horizontal,
+  };
+}
 export function flightStep(state, keys, seconds, count) {
   const dt = Math.min(.05, Math.max(0, seconds));
   const axis = (a, b) => Number(keys.has(a)) - Number(keys.has(b));

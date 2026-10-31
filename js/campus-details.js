@@ -9,6 +9,13 @@ export function renderCampusDetails(site, feed) {
     ? '<p>Legacy planning checkpoint. Source status and tentative dates are retained, not a project-completion score. Review its original acceptance evidence before changing status.</p>'
     : '<p>Shared planning yard. Select a project offramp for its building, evidence and connections.</p>';
   const model = campusStructure(site, feed), observation = model.observation;
+  if (site.project.entityId) return `<div class="campus-stage">${esc(model.label)}</div>
+    <p>${esc(model.basis)}</p><p>Independent infrastructure entity; source currently resides in
+    <a href="https://github.com/${esc(site.project.repository)}" target="_blank" rel="noopener noreferrer">ArtFi</a>.
+    No lending-project releases, mint receipts or balances are attributed to this entity.</p>
+    <p>Deployment and public-ledger reconciliation pending
+    <a href="https://github.com/TheJollyLaMa/ArtFi/issues/62" target="_blank" rel="noopener noreferrer">the dedicated makeover issue</a>.
+    Existing operation is steward-reported, not independently verified here.</p>`;
   const repository = site.project.repository;
   const identity = CANOPY.projects.find(project => project.repository.toLowerCase() === repository.toLowerCase());
   const avatarRecord = ENS_ARTWORK_OBSERVATION.records[identity?.ens];

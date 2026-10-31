@@ -12,7 +12,7 @@ test('project offramps use explicit identity, keep shared/private cards separate
     card('later', 'TheJollyLaMa/ArtFi'), { ...card('secret', 'private/hidden'), private: true },
     { ...card('milestone', 'TheJollyLaMa/DecentBusking'), fields: { Kind: 'Milestone' } }];
   const sites = constructionSites(items);
-  assert.deepEqual(sites.filter(site => site.project).map(site => site.title), ['DecentBusking', 'DecentHead', 'DecentCanopy', 'BigNuten', 'ArtFi']);
+  assert.deepEqual(sites.filter(site => site.project).map(site => site.title), ['DecentBusking', 'DecentHead', 'DecentCanopy', 'BigNuten', 'DecentLending / DLend']);
   assert.deepEqual(sites.flatMap(site => site.items.map(item => item.id)).sort(), items.map(item => item.id).sort());
   assert.ok(!sites.some(site => site.project?.repository === 'private/hidden'));
   assert.equal(publicRepository({ ...items[0], bodyRedacted: true }), null);

@@ -23,6 +23,70 @@ try {
   await page.waitForSelector('#scene canvas:visible');
   await page.waitForFunction(() => document.querySelector('#flight-destination').options.length > 0);
   assert.equal(await page.locator('#tab-flight').getAttribute('aria-selected'), 'true');
+  const panelToggle = page.locator('#flight-panel-toggle');
+  const openPanel = await page.locator('#flight-site').boundingBox();
+  const openTab = await panelToggle.boundingBox();
+  assert.ok(Math.abs(openTab.x + openTab.width - openPanel.x) <= 2, 'double-arrow tab hugs the panel left edge');
+  await panelToggle.focus();
+  await page.keyboard.press('Enter');
+  await page.locator('#flight-site').waitFor({ state: 'hidden' });
+  const tuckedPanel = await page.locator('#flight-site').boundingBox();
+  const workspace = await page.locator('#workspace').boundingBox();
+  assert.ok(tuckedPanel.x >= workspace.x + workspace.width - 2, 'panel slides fully beyond the right edge');
+  assert.equal(await page.locator('#flight-site').evaluate(panel => panel.inert), true);
+  const tuckedTab = await panelToggle.boundingBox();
+  assert.ok(Math.abs(tuckedTab.x + tuckedTab.width - workspace.x - workspace.width) <= 2, 'restore tab remains at the screen edge');
+  assert.equal(await page.locator('#flight-site').isVisible(), false);
+  assert.equal(await panelToggle.getAttribute('aria-expanded'), 'false');
+  assert.equal(await page.locator('#immersive-panel').getAttribute('aria-pressed'), 'false');
+  await page.locator('#flight-next').click();
+  assert.equal(await page.locator('#flight-site').isVisible(), false, 'navigation retains tucked panel');
+  await panelToggle.click();
+  assert.equal(await page.locator('#flight-site').isVisible(), true);
+  assert.equal(await panelToggle.getAttribute('aria-expanded'), 'true');
+  await page.locator('#flight-fullscreen').click();
+  await page.waitForSelector('#immersive-tools:visible');
+  await page.locator('#immersive-panel').click();
+  await page.locator('#flight-site').waitFor({ state: 'hidden' });
+  assert.equal(await page.locator('#workspace').evaluate(workspace => getComputedStyle(workspace).overflowX), 'hidden', 'offscreen drawer is clipped in fullscreen');
+  assert.equal(await page.locator('#flight-site').isVisible(), false);
+  assert.equal(await panelToggle.innerText(), '«');
+  await panelToggle.click();
+  assert.equal(await page.locator('#immersive-panel').getAttribute('aria-expanded'), 'true');
+  await page.locator('#immersive-exit').click();
+  assert.equal(await page.locator('#historical-reminder').isVisible(), true);
+  await page.locator('#historical-turn').click();
+  assert.equal(await page.locator('#flight-camera').inputValue(), 'past');
+  assert.equal(await page.locator('#historical-turn').getAttribute('aria-pressed'), 'true');
+  await page.locator('#historical-turn').click();
+  assert.equal(await page.locator('#flight-camera').inputValue(), 'flight');
+  assert.equal(await page.locator('#historical-turn').getAttribute('aria-pressed'), 'false');
+  await page.locator('#historical-open').click();
+  await page.waitForFunction(() => {
+    const image = document.querySelector('#historical-map-image');
+    return image.complete && image.naturalWidth >= 1200;
+  });
+  assert.equal(await page.locator('#historical-map-name').innerText(), 'DecentAgency / Early ecosystem blueprint');
+  assert.equal(await page.locator('#historical-map-links li').count(), 8);
+  assert.match(await page.locator('#historical-map-fullsize').getAttribute('href'), /decent-agency-early-plan\.png$/);
+  await page.locator('[data-historical-map="decent-and-jolly-maslow"]').click();
+  await page.waitForFunction(() => {
+    const image = document.querySelector('#historical-map-image');
+    return image.complete && image.naturalWidth >= 1200;
+  });
+  assert.equal(await page.locator('#historical-map-name').innerText(), 'A Decent and Jolly Maslow Hierarchy');
+  assert.match(await page.locator('#historical-map-fullsize').getAttribute('href'), /decent-and-jolly-maslow\.png$/);
+  await page.locator('[data-historical-map="smarthome-4"]').click();
+  await page.waitForFunction(() => {
+    const image = document.querySelector('#historical-map-image');
+    return image.complete && image.naturalWidth === 1600;
+  });
+  assert.match(await page.locator('#historical-map-fullsize').getAttribute('href'), /studio\/archive\.html$/);
+  assert.match(await page.locator('#historical-map-caption').innerText(), /all ten pages/);
+  await page.locator('[data-historical-repository="TheJollyLaMa/DecentBusking"]').click();
+  assert.equal(await page.locator('#historical-map-dialog').isVisible(), false);
+  assert.equal(await page.locator('#flight-camera').inputValue(), 'flight');
+  await page.waitForFunction(() => document.querySelector('#flight-site-title').textContent.includes('DecentBusking'));
   assert.equal(await page.locator('#flight-destination option').count(), expected.length);
   assert.equal(await page.locator('#item-count').innerText(), `${fixture.items.length} ITEMS`);
   assert.match(await page.locator('#planning-change-summary').innerText(), /First observation/);
@@ -106,6 +170,14 @@ try {
   await page.locator('#project-view').selectOption('');
   for (const tab of ['board', 'roadmap', 'canopy', 'passports', 'catalog', 'own', 'flight']) {
     await page.locator(`[data-tab="${tab}"]`).click();
+    if (tab === 'own') {
+      assert.equal(await page.locator('#studio-panel').isVisible(), true);
+      assert.equal(await page.locator('#scene').isVisible(), false);
+      const studio = page.frameLocator('#studio-frame');
+      await studio.locator('#download').waitFor();
+      await page.waitForFunction(() => !document.querySelector('#studio-frame').contentDocument.querySelector('#download').disabled);
+      continue;
+    }
     await page.waitForSelector('#scene canvas:visible');
     assert.equal(await page.locator('#scene canvas:visible').count(), 1, `${tab} must own one active renderer`);
   }
@@ -113,7 +185,7 @@ try {
   assert.equal(await page.locator('.list-card').count(), fixture.items.length);
   assert.equal(await page.locator('#scene').isVisible(), false);
   assert.deepEqual(errors, []);
-  results.push({ desktop: 'passed', sites: expected.length, items: fixture.items.length, idleFrames, activeFrames, dynamicRefresh: 'passed', failureRetention: 'passed', allTabs: 'passed' });
+  results.push({ desktop: 'passed', historicalArchive: 'passed', sites: expected.length, items: fixture.items.length, idleFrames, activeFrames, dynamicRefresh: 'passed', failureRetention: 'passed', allTabs: 'passed' });
   await page.close();
   for (const width of [375, 320]) {
     const mobile = await browser.newPage({ viewport: { width, height: 900 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
@@ -121,11 +193,26 @@ try {
     await mobile.goto(base);
     await mobile.waitForSelector('.list-card');
     assert.equal(await mobile.locator('#tab-flight').getAttribute('aria-selected'), 'true');
+    assert.equal(await mobile.locator('#historical-reminder').isVisible(), true);
+    await mobile.locator('#historical-open').click();
+    assert.equal(await mobile.locator('#historical-map-name').innerText(), 'DecentAgency / Early ecosystem blueprint');
+    await mobile.locator('#historical-map-dialog .dialog-close').click();
+    await mobile.locator('#historical-turn').click();
+    assert.equal(await mobile.locator('#flight-camera').inputValue(), 'past');
+    assert.equal(await mobile.locator('#historical-turn').getAttribute('aria-pressed'), 'true');
+    await mobile.locator('#historical-turn').click();
+    assert.equal(await mobile.locator('#flight-camera').inputValue(), 'flight');
     assert.equal(await mobile.locator('#scene canvas').count(), 0, 'reduced/mobile first load must not import WebGL');
     await mobile.locator('#flight-next').click();
     assert.equal(await mobile.locator('#flight-site-title').innerText(), expected[1].title);
     await mobile.locator('#mode-button').click();
     await mobile.waitForSelector('#scene canvas:visible');
+    await mobile.locator('#flight-panel-toggle').tap();
+    await mobile.locator('#flight-site').waitFor({ state: 'hidden' });
+    assert.equal(await mobile.locator('#flight-site').isVisible(), false);
+    assert.equal(await mobile.locator('#flight-panel-toggle').isVisible(), true);
+    await mobile.locator('#flight-panel-toggle').tap();
+    assert.equal(await mobile.locator('#flight-site').isVisible(), true);
     await mobile.locator('#motion-button').click();
     const control = mobile.locator('[data-thrust="w"]'); await control.scrollIntoViewIfNeeded();
     const box = await control.boundingBox();

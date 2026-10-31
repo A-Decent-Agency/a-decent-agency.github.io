@@ -4,6 +4,175 @@
 
 Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, account, database, or application server. Apache-2.0.
 
+## October recall and the next five planning towers
+
+The **October recall** disclosure reconciles fourteen selected public repositories
+with current GitHub source evidence: October merged PRs, issue closures, open
+issues, in-flight PRs and recent release tags. Each entry records its observation
+time, exact source links and omitted/partial history. These are GitHub counts,
+not effort, value, deployment, payment or completion percentages. Closed issues
+can be abandoned or superseded; merged code can still be only partially accepted.
+The new recall does not silently rewrite the older private-Project export or
+`data/progress.json`, so their different timestamps remain meaningful.
+Refresh deliberately with `node scripts/refresh-project-recall.mjs`; it refuses
+non-public repository metadata and writes only after all selected queries succeed.
+It retrieves up to three 100-item pages per issue/PR list; capped history is
+explicitly partial. No private board data, issue bodies, local credentials or
+uncommitted donor findings are copied into the public recall.
+
+Steward direction from **31 October 2026** adds five distinct **outlined planning
+towers**, each with five proposed levels, a first acceptance test per level,
+existing-source/issue signposts and a connection to the original founding map:
+
+- **DecentLending / DLend**: the proposed product rebrand over the existing
+  `TheJollyLaMa/ArtFi` identity. Local opportunity discovery, settlement policy,
+  onboarding, a portable host-controlled widget and a bounded pilot. The
+  creator-advance lifecycle and purpose-fund payroll router remain separate.
+- **JollySimSiddhi**: coherent runnable baseline, local household notebook,
+  practical sensor experiments, a proposed cadCAD-compatible what-if sandbox
+  and consentful local opportunity/helper loops.
+- **DecentPilgrimages**: read-only journey baseline, sponsor reservation/claim
+  accounting, presence/consent policy, local welcome and a bounded journey pilot.
+- **A Jolly Decent CodeCamp**: first-hour setup, issue/branch/test/PR learning,
+  the original Arduino creative/home track, explicitly funded opportunities and
+  a reproducible teach-forward capstone.
+- **BabelBet**: invite/counter/agree, credible evidence/outage policy, durable
+  challenge lifecycle, test-only settlement and a no-stakes language/opportunity
+  pilot. Historical Aave/yield remains a separate undecided branch.
+
+These levels live in `js/revival-plans.js`, **not synthetic GitHub board cards**.
+They do not create Done items, clean mint-backed floors, schedules, contract
+deployments, bounty amounts or automatic payouts. Planned crossovers are dashed,
+labeled proposals and carry a receiving-app integration acceptance test. Private
+or redacted board cards still cannot acquire a public project identity. Filtering
+does not invent missing project neighbors. A tower's height is schematic vision,
+not product readiness. Current real jobs remain separately visible in each site
+plan, and the receipt-backed delivered-floor model is unchanged.
+
+The original **BabelBetUseCase.pdf** supplied by the steward is preserved as a
+bounded PNG reproduction plus a small JPEG scene overview, behind the camera.
+No invented diagram replaces its symbols or layout. Its page shows invitations,
+counteroffers, staking/token creation, library/history, watcher, payout and yield;
+source presence does not prove those flows are operational. SmartHome references
+lead to the unchanged local PDF viewer at the relevant page: household/local
+opportunities (1), CodeCamp (2), journey/GeoRewards (5), and Arduino curriculum
+(6). A later Lucid-source import remains separate from PDF appearance.
+
+Reuse decision: consulted Canopy's curated offers/needs and the actual committed
+ArtFi protocol/router tests and symbols at `b14e7c6`, JollySimSiddhi API wiring at
+`e643800`, CodeCamp README/calendar exercise at `492c409`, Pilgrimages map/claim
+model at `7b97c4a`, and BabelBet committed challenge/watcher at `dbd3dd4`.
+Adapt their **intent, source signposts and acceptance questions** into the Office's
+existing campus, archive and evidence-rendering helpers; do not copy legacy
+credential/location handling or financial logic into current products. No donor
+repository is edited. License/runtime/chain/storage differences prevent treating
+these candidates as tested integrations. No cadCAD implementation is claimed.
+
+Run `npm test` and, with the existing browser tooling,
+`PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node scripts/verify-revival.mjs`.
+Checks cover all five proposal towers, 25 acceptance levels, exact card/privacy
+partition, dashed-proposal semantics, fourteen-project recall, original-map
+dialogs and navigation, mobile layout and preserved legacy flight behavior.
+
+## Local-file planning studio and SmartHome archive
+
+**Make your own map** now opens a full diagram studio, lazily loaded only when
+that tab is selected. Shapes, text, colors, connectors, groups, layers, multiple
+pages, arrangement, undo, and pan/zoom come from the pinned, self-hosted draw.io
+v32.6.9 engine. Open/download editable `.drawio` or `.xml` files; browser-generated
+SVG and PNG current-page exports are separate from the editable original.
+PNG output automatically downscales above eight million pixels; the editable
+download retains all pages. Office node-map
+JSON can be opened as an adapted diagram with labels, notes, kinds, colors,
+positions and edges. This is a one-way adaptation, not a generic Lucid/PDF/SVG
+object importer or bidirectional 3D synchronization. **Use simple node map**
+retains the original browser-saved editor, JSON import/export and explicit
+bring-your-own IPFS/GitHub controls without migrating or overwriting its storage.
+
+The studio holds work in tab memory, not browser storage or a server. Download
+before closing/reloading; an unsaved-change browser prompt is a best effort, not
+a backup. Switching Office tabs keeps the studio frame and its work in memory.
+Downloads are the persistence mechanism; there is no automatic cloud save,
+collaboration backend, AI service, wallet requirement, or application upload.
+Both editor and PDF engine are bundled, not loaded from a third-party iframe or
+CDN. Editor CSP allows same-origin static assets but blocks external resource
+requests and forms; local/offline configuration disables cloud integrations,
+plugins, tracking and service-worker registration. Imported external images and
+fonts are not fetched. Online shape search, server PDF export, remote fonts,
+cloud storage, and network integrations are intentionally unavailable. The
+surrounding Office still has its existing public-data requests, fonts and
+wallet/explicit pinning options; the studio's isolation is not a claim that the
+entire Office operates offline. A fresh visit still needs the static site assets.
+
+The **SmartHome 4.0** entry behind the camera uses a faithful 1600 x 1006,
+approximately 93 KB first-page overview from the user-supplied Lucid PDF, not an
+AI redraw. Its full-drawing link opens `studio/archive.html`: select the original
+SmartHome PDF locally to see all ten pages, with its symbols, text and spacing.
+The original PDF is **not included in the repository or public deployment** and
+is never uploaded or stored by the viewer. The preview alone is not the full
+ten-page archive. Public full-source hosting remains a separate publication
+decision; a future Lucid import can recover editable objects where supported.
+Current-work signposts distinguish steward-described lineage and integration
+leads from verified shipped implementations. **Visit this project in today's
+street** returns from the archive to the corresponding existing campus and
+forward camera; unavailable filtered destinations are disabled, not invented.
+
+PDF.js renders only to a viewport-sized canvas capped at **2,000,000 pixels**,
+including on high-DPI displays, rather than a bitmap at the document's enormous
+natural dimensions. Output-canvas limits do not bound all parsing, font,
+embedded-image or browser memory. The file limit is 80 MB. Zoom reaches 512x
+the fit-page overview; pointer drag, wheel, buttons and keyboard navigation work.
+Page rendering errors are surfaced, PDF scripts/forms/attachments/links are not
+activated, and closing destroys document resources. The text summary and
+present-day signposts supplement, but do not replace, visual PDF access.
+
+### Dependency provenance and reproducibility
+
+Reuse decision: the Office needs structured, Lucid-like local-file diagramming
+and faithful access to its giant founding PDF. The existing Office
+`js/editor.js` validation/starter/storage model is reused for legacy-map import;
+DecentCanvas's uncommitted `js/components/DecentCanvas/index.js` is a Three.js
+scene, not a diagram editor, and is left untouched. Canopy's curated
+`data/agency-map.json`, current Office issues and worktrees were checked; no
+full editor was identified within that search scope. Adapt draw.io at
+`dcd4f1ba3e8ebca47286ec2524e866a05b04afcd` plus PDF.js 5.4.296 instead of
+building a second diagram engine. Runtime/auth/storage differences are kept
+explicit: no diagram accounts/backend or automatic public pinning, and no
+assumption that a PDF contains editable diagram objects.
+
+The third-party runtime totals about 88 MB **on disk**, mostly lazy shape,
+language and image assets; it is not all downloaded on landing. Provenance is
+recorded in `vendor/studio-provenance.json`. Keep upstream license/notices and
+stencil/icon terms; do not imply draw.io or Lucid affiliation.
+
+Vendored static assets are checked in, so normal serving has no build step.
+To regenerate them deliberately:
+
+1. `npm ci --ignore-scripts`
+2. Obtain/extract the public draw.io source archive at the exact revision above.
+3. `DRAWIO_SOURCE=/absolute/path/to/extracted-source npm run vendor:studio`
+
+The script checks the pinned `app.min.js` SHA-256 before copying and records the
+Office boot/CSP modifications. PDF.js is copied from the exact npm lockfile
+version. No original private/local PDF is copied by this command.
+On macOS, regenerate the historical overview explicitly with
+`swift scripts/map-preview.swift /path/to/source.pdf assets/historical-maps/smarthome-preview.jpg`;
+this draws only the first-page thumbnail and leaves the PDF unchanged.
+
+Validation: `npm test` covers canvas bounds, zoom invariants, map adaptation,
+protocol origin/window checks, XML rejection, archive assets and existing Office
+behavior. With an existing Playwright install and a locally served Office:
+
+```sh
+PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs \
+OFFICE_URL=http://127.0.0.1:8073/ MAP_FOLDER=/path/to/local/maps \
+node scripts/verify-studio.mjs
+```
+
+The browser helper verifies editable-file reopen, SVG/PNG downloads, all ten
+actual SmartHome pages when supplied, zoom/pan, canvas limits, resource close,
+mobile startup, and no external requests/network writes during studio use.
+
 Supporter checkout accepts the release-evidenced 10 or 100 Base USDC price.
 The observer, 3D sign, sidepanel, dialog, exact approval, listing rechecks and
 confirmed purchase event use that same price. Existing editions remain 10 USDC.
@@ -25,7 +194,15 @@ GitHub language byte totals scale the footprint logarithmically within a bounded
 
 Offramps, project signs and pinned project-owned artwork are visible in 3D. Highway and project-to-project signal packets illustrate recorded integration paths, not actual network traffic, usage, balances or payments. Ambient rendering is capped at 12 fps; piloting at 30 fps. Pause, reduced motion, hidden tabs and inactive views stop animation. Mobile/save-data visitors keep the complete list fallback and can opt into flight.
 
+The double-arrow tab on the **left edge of the site panel** slides it offscreen to the right; the tab remains at the screen edge to restore it. It works in normal and fullscreen views, shares state with the fullscreen panel control, and retains the choice while navigating sites or tabs for the current page session. Tucked content is inert for keyboard navigation; reduced-motion visitors get an immediate transition.
+
+**DecentSettlementsRouter** is a separate infrastructure entity/tower, currently sourced from ArtFi rather than a separate repository. DLend is a lateral consumer, not its parent. The tower's five outlined levels describe the makeover of an existing, steward-reported operational router; they do not create transaction totals, duplicate lending jobs, or inherit ArtFi mint/release floors. Proposed paths connect DLend to the router and the router to Canopy/Office. Actual public consumer/fund/payment paths need chain-qualified reconciliation under [ArtFi #62](https://github.com/TheJollyLaMa/ArtFi/issues/62) before being labeled verified. That issue covers independent Canopy visibility, shared/separate/hybrid custody decisions, authority, fund accounting, continuity and coordinated migration/redeploy approvals. No contract or consumer deployment is changed here.
+
+The **Human needs / cultural beacons** disclosure and each campus's relevant lenses connect livelihood, health, joy, language/learning, essentials, refuge, connection and continuity. These overlapping steward-directed associations are not universal rankings, credit eligibility rules or evidence of outcomes. BigNuten remains primary, router financial visibility needs attention now, DLend is the next scoped revamp, and the other revivals remain staged discovery.
+
 The larger canvas has **Ship / highway**, **City / orbit**, **Top-down site plan** and **Whole universe / atlas** cameras, zoom controls, and drag-to-orbit outside ship mode (also usable with motion off). Fullscreen expands the scene with in-canvas destination/camera/panel controls. Unsupported native fullscreen uses an explicitly labeled expanded-window mode; failures are surfaced. Escape exits fullscreen. Each campus has a physical 2D job-board sign and an accessible 2D connection/job plan using the same published item IDs, Project/Component, Status and Priority metadata; selecting a job opens its source details and emphasizes its building's connection lines.
+
+The **Past / old plans** camera points behind the starting route to an archival gallery. A persistent reminder offers **Turn around / look back** and **Return to the road**; the posters open an accessible archive with readable previews, full-resolution map links, historical context, privacy caveats, questions, and links to current related issues. Compact previews keep the 3D scene light, and full-resolution images are not decoded until opened from their links. The archive preserves the user-supplied `DecentAgency.pdf` and `A Decent and Jolly Maslow Hierarchy.pdf` as image reproductions, not the original PDFs. The complex map's “rd13 · 10 Mar 2022” label and PDF export date are both retained as provenance clues, not a claim that every diagram label is current. Its wallet/NFT-gated mapping, token, personal-data, and simulation concepts are explicitly historical proposals—not current product, privacy, governance, or payout commitments. Links to Canopy, BigNuten, DecentCalendar, Busking, BabelBet, and JollySimSiddhi point to existing projects/issues; they do not imply those proposals have been delivered.
 
 The public Canopy map is imported from `data/agency-map.json` at `9a8777e8f0e7dbfaa65352b0f00fd5fbce5d7d99`, with all 24 public-endpoint relationships and their types/evidence/caveats preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
 

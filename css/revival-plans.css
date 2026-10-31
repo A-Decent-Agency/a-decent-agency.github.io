@@ -1,0 +1,17 @@
+.revival-stages { margin: 12px 0; padding-left: 22px; }
+.revival-stages li { margin: 12px 0; border-left: 2px dashed #b8a0eb; padding: 8px 10px; background: #272039; }
+.revival-stages small, .project-recall-grid small { display: block; color: #bfb1d4; font-size: 11px; overflow-wrap: anywhere; }
+.revival-caution { border-left: 3px solid #e4c18b; padding-left: 10px; }
+.revival-plan a, .revival-plan button { display: inline-block; margin: 4px 6px 4px 0; }
+.project-recall { margin: 14px 22px; }
+.project-recall > summary { cursor: pointer; color: #8de5d3; font-weight: bold; padding: 12px 0; }
+.project-recall-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; padding: 10px 0 20px; }
+.project-recall-grid article { background: #1f192e; border: 1px solid #827497; border-radius: 8px; padding: 14px; min-width: 0; overflow-wrap: anywhere; }
+.project-recall-grid h3 { margin-top: 0; }
+.project-recall-grid summary { cursor: pointer; padding: 8px 0; }
+.project-recall-grid li { margin-bottom: 8px; }
+.human-priorities > ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.human-priorities > ul > li { min-width: 0; padding: 12px; border: 1px solid #827497; border-radius: 8px; background: #1f192e; }
+.human-priorities p { font-size: 12px; line-height: 1.7; }
+.human-priorities h4 { margin: 0 0 8px; color: #8de5d3; }
+.human-priorities button { white-space: normal; overflow-wrap: anywhere; }

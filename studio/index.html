@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Make your own map / Decent Planning Studio</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./studio.css">
+  <script type="module" src="./studio.js"></script>
+</head>
+<body>
+  <header><a href="../index.html">A Decent Agency / return to the road</a><h1>Make your own map.</h1><p>Shapes, colors, connections, possibilities. Your file. Your computer.</p></header>
+  <nav class="tools" aria-label="Diagram file controls">
+    <button id="new">New map</button>
+    <label class="file-button">Open local map<input id="open" type="file" accept=".drawio,.xml,.json"></label>
+    <button id="download" disabled>Download editable map</button>
+    <button id="svg" disabled>Export SVG</button><button id="png" disabled>Export PNG</button>
+    <a href="./archive.html">Open a historical PDF</a>
+  </nav>
+  <p id="status" role="status">Loading the local diagram engine...</p>
+  <details class="help"><summary>Local-first, not a cloud account</summary><p>No automatic upload, cloud save, collaboration server, or AI service. Your working diagram stays in this tab's memory. Download before closing or reloading. Open editable .drawio/.xml files or an Office node-map JSON. An arbitrary PDF/SVG/image is not automatically an editable set of shapes.</p><p>Double-click to edit text; drag shapes from the left; drag connector handles to join them. Use the engine's pages, layers, arrange, style, undo, and zoom tools. External images, remote fonts, cloud integrations, server PDF export, and online shape search are unavailable in this local-only edition. The top SVG/PNG buttons export the current page; download the editable map to keep every page. PNG output is automatically downscaled above eight million pixels, rather than sent to a server.</p><p>Powered by <a href="../vendor/drawio/README.md" target="_blank" rel="noopener noreferrer">draw.io v32.6.9</a>, independently integrated under its bundled license. This is not a Lucid product or an affiliated draw.io service. The older Office node map remains separate and unchanged.</p></details>
+  <main id="engine"><iframe id="diagram" title="Local diagram editor" sandbox="allow-scripts allow-same-origin allow-downloads allow-modals" referrerpolicy="no-referrer"></iframe></main>
+</body>
+</html>

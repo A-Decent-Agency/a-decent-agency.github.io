@@ -1,0 +1,107 @@
+import assert from 'node:assert/strict';
+import { readFile, readdir, mkdir } from 'node:fs/promises';
+import { starterMap } from '../js/editor.js';
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const base = process.env.OFFICE_URL || 'http://127.0.0.1:8073/';
+const shots = process.env.SCREENSHOT_DIR || 'office-shots';
+await mkdir(shots, { recursive: true });
+const browser = await chromium.launch({ headless: true });
+const results = [];
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errors = [], external = [], writes = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  page.on('request', request => {
+    if (/^https?:/.test(request.url()) && new URL(request.url()).origin !== new URL(base).origin) external.push(request.url());
+    if (!['GET', 'HEAD'].includes(request.method())) writes.push([request.method(), request.url()]);
+  });
+  page.on('dialog', dialog => dialog.accept());
+  await page.goto(new URL('studio/', base).href);
+  await page.waitForFunction(() => !document.querySelector('#download').disabled);
+  const engine = page.frames().find(frame => frame.url().includes('vendor/drawio/index.html'));
+  await engine.waitForFunction(() => window.App?.main != null && window.EditorUi != null);
+  const source = starterMap();
+  source.nodes[0].title = 'A decent <plan> & a real connection';
+  source.nodes[0].notes = 'Keep these local notes.';
+  await page.locator('#open').setInputFiles({ name: 'my-plan.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(source)) });
+  await page.waitForFunction(() => document.querySelector('#status').textContent.includes('my-plan.drawio opened'));
+  await engine.getByText(source.nodes[0].title, { exact: true }).waitFor();
+  await engine.getByText(source.nodes[0].title, { exact: true }).dblclick();
+  const textEditor = engine.locator('.mxCellEditor[contenteditable="true"]');
+  await textEditor.fill('An edited plan, made here');
+  await textEditor.press('Control+Enter');
+  source.nodes[0].title = 'An edited plan, made here';
+  await engine.getByText(source.nodes[0].title, { exact: true }).waitFor();
+  const downloadFile = async id => {
+    const pending = page.waitForEvent('download');
+    await page.locator(id).click();
+    const download = await pending;
+    return { name: download.suggestedFilename(), bytes: await readFile(await download.path()) };
+  };
+  const editable = await downloadFile('#download');
+  assert.equal(editable.name, 'my-plan.drawio');
+  assert.match(editable.bytes.toString(), /<mxfile/);
+  assert.equal(await engine.evaluate(xml => {
+    const diagram = new DOMParser().parseFromString(xml, 'application/xml').querySelector('diagram');
+    const model = diagram.children.length ? diagram.innerHTML : Graph.decompress(diagram.textContent);
+    return model.includes('notes="Keep these local notes."') && model.includes('source="node-seed"');
+  }, editable.bytes.toString()), true, 'Notes and connectors survive the editor download');
+  await page.locator('#new').click();
+  await page.locator('#open').setInputFiles({ name: editable.name, mimeType: 'application/xml', buffer: editable.bytes });
+  await engine.getByText(source.nodes[0].title, { exact: true }).waitFor();
+  const svg = await downloadFile('#svg');
+  assert.match(svg.name, /\.svg$/);
+  assert.match(svg.bytes.toString(), /<svg/);
+  assert.match(svg.bytes.toString(), /An edited plan, made here/);
+  const png = await downloadFile('#png');
+  assert.equal(png.bytes.toString('ascii', 1, 4), 'PNG');
+  assert.ok(png.bytes.readUInt32BE(16) > 0);
+  await page.locator('#open').setInputFiles({ name: 'bad.xml', mimeType: 'application/xml', buffer: Buffer.from('<svg/>') });
+  await page.waitForFunction(() => document.querySelector('#status').textContent.includes('existing diagram was retained'));
+  assert.match(await page.locator('#status').innerText(), /existing diagram was retained/);
+  await engine.getByText(source.nodes[0].title, { exact: true }).waitFor();
+  assert.equal(await page.evaluate(() => localStorage.length), 0);
+  await page.screenshot({ path: `${shots}/diagram-studio.png`, fullPage: true });
+  results.push('Real text editing, editable-file reopen, retained notes/connectors, Office JSON adaptation, invalid-input retention, SVG and PNG downloads: passed');
+  await page.goto(new URL('studio/archive.html', base).href);
+  const folder = process.env.MAP_FOLDER;
+  if (folder) {
+    const file = (await readdir(folder)).find(name => name.includes('SmartHome 4.0') && name.endsWith('.pdf'));
+    assert.ok(file, 'SmartHome PDF exists in MAP_FOLDER');
+    await page.locator('#pdf-file').setInputFiles(`${folder}/${file}`);
+    await page.waitForFunction(() => document.querySelector('#status').textContent.includes('Local only.'), null, { timeout: 90_000 });
+    assert.equal(await page.locator('#page option').count(), 10);
+    for (let number = 1; number <= 10; number++) {
+      if (number !== 1) await page.locator('#page').selectOption(String(number));
+      await page.waitForFunction(number => {
+        const status = document.querySelector('#status').textContent;
+        return status.includes(`page ${number} of 10`) && status.includes('Local only.');
+      }, number, { timeout: 90_000 });
+      assert.ok(await page.locator('#page-canvas').evaluate(canvas => canvas.width * canvas.height <= 2_000_000));
+    }
+    await page.locator('#page').selectOption('1');
+    await page.waitForFunction(() => document.querySelector('#status').textContent.includes('page 1 of 10'));
+    await page.locator('#zoom-in').click();
+    await page.waitForFunction(() => document.querySelector('#status').textContent.includes('2.0x overview / canvas'));
+    await page.locator('#page-canvas').focus();
+    await page.keyboard.press('ArrowRight');
+    await page.waitForFunction(() => document.querySelector('#status').textContent.includes('Local only.'));
+    await page.screenshot({ path: `${shots}/smarthome-original-viewer.png`, fullPage: true });
+    await page.locator('#close').click();
+    await page.waitForFunction(() => document.querySelector('#status').textContent.includes('resources released'));
+    assert.equal(await page.locator('#page option').count(), 0);
+    assert.equal(await page.locator('#page-canvas').evaluate(canvas => canvas.width * canvas.height), 1);
+    results.push('Actual ten-page SmartHome original, page switching, zoom/pan, canvas <= 2M pixels, document close: passed');
+  } else results.push('Actual PDF validation skipped: set MAP_FOLDER to the local source folder.');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(new URL('studio/', base).href);
+  await page.waitForFunction(() => !document.querySelector('#download').disabled);
+  assert.ok(await page.locator('#diagram').isVisible());
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(external, []);
+  assert.deepEqual(writes, []);
+  results.push('Mobile startup; no page/console errors, external requests or network writes: passed');
+  console.log(results.join('\n'));
+} finally { await browser.close(); }

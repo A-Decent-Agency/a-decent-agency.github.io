@@ -1,8 +1,9 @@
 import { CANOPY } from './canopy-registry.js';
 import { relationships } from './model.js';
+import { PLANNING_PLANS, planningEntityKey } from './revival-plans.js';
 
 export function campusConnections(sites, feed) {
-  const byRepo = new Map(sites.filter(site => site.project).map(site => [site.project.repository.toLowerCase(), site.id]));
+  const byRepo = new Map(sites.filter(site => site.project).map(site => [planningEntityKey(site.project), site.id]));
   const byItem = new Map(sites.flatMap(site => site.items.map(item => [item.id, site.id])));
   const result = [], seen = new Set();
   const add = link => {
@@ -31,6 +32,11 @@ export function campusConnections(sites, feed) {
       kind: 'milestone', state: 'planning', proposed: false,
       label: 'Explicit milestone Project field', origin: 'GitHub Project fields', url: site.items[0]?.url || '' });
   }
+  for (const plan of PLANNING_PLANS) for (const connection of plan.connections) add({
+    from: byRepo.get(planningEntityKey(plan)), to: byRepo.get(connection.to.toLowerCase()),
+    kind: 'revival proposal', state: 'proposed', proposed: true, origin: 'Steward-directed planning · 31 Oct 2026',
+    label: connection.label, nextTest: connection.test, url: `https://github.com/${plan.repository}`,
+  });
   return result;
 }
 export function campusPriority(site) {

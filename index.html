@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="./css/todays-flight.css">
   <link rel="stylesheet" href="./css/site-identities.css">
   <link rel="stylesheet" href="./css/planning-dock.css">
+  <link rel="stylesheet" href="./css/planning-studio.css">
+  <link rel="stylesheet" href="./css/revival-plans.css">
   <script type="importmap">
     { "imports": {
       "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
@@ -41,6 +43,14 @@
 
     <section class="office" aria-label="Planning office">
       <div class="office-topline"><span><span class="live-dot"></span> MARATHON CONTROL ROOM</span><span id="sync-status">Loading public snapshot…</span></div>
+      <details id="project-recall-panel" class="project-recall">
+        <summary>October recall / active projects, closed work and what’s next</summary>
+        <div id="project-recall" role="status">Loading public project recall...</div>
+      </details>
+      <details id="human-priorities-panel" class="project-recall">
+        <summary>Human needs / cultural beacons and what deserves attention</summary>
+        <div id="human-priorities"></div>
+      </details>
       <nav class="tabs" role="tablist" aria-label="Planning views">
         <button role="tab" id="tab-flight" aria-selected="true" aria-controls="workspace" data-tab="flight"><span>↗</span> Construction flight</button>
         <button role="tab" id="tab-board" aria-selected="false" aria-controls="workspace" data-tab="board" tabindex="-1"><span>01</span> Board</button>
@@ -58,7 +68,12 @@
       </div>
       <div class="workspace-heading"><div><h2 id="view-title">The execution board</h2><p id="view-description">Small moves, shared momentum. Pick a card to see what’s behind it.</p></div><span id="item-count" class="count-badge">— ITEMS</span></div>
       <div id="editor-tools" class="editor-tools" hidden>
+        <button id="studio-toggle" type="button" aria-pressed="false">Use simple node map</button>
+        <a class="text-link" href="./studio/index.html" target="_blank" rel="noopener noreferrer">Open diagram studio in its own window ↗</a>
+        <span id="studio-help">Local files only · download your work before closing or reloading</span>
+        <div id="simple-map-tools" hidden>
         <button id="add-node" class="accent-button">＋ Add a node</button><button id="link-nodes">⌁ Link nodes</button><button id="export-map">↓ Export JSON</button><label class="file-button">↑ Import JSON<input id="import-map" type="file" accept=".json,application/json"></label><button id="house-map">⬡ House your data</button><span>Saved on this device · drag a node to move it</span>
+        </div>
       </div>
       <details id="daily-flight-panel" class="daily-flight-panel" hidden>
         <summary>Today's flight / where attention could help</summary>
@@ -72,7 +87,7 @@
         <button id="flight-next">Next site →</button>
         <button id="flight-pause" aria-pressed="false">Pause ship</button>
         <button id="refresh-project">↻ Refresh plan</button>
-        <label>CAMERA<select id="flight-camera" aria-label="Camera angle"><option value="flight">Ship / highway</option><option value="orbit">City / orbit</option><option value="top">Top-down site plan</option><option value="universe">Whole universe / atlas</option></select></label>
+        <label>CAMERA<select id="flight-camera" aria-label="Camera angle"><option value="flight">Ship / highway</option><option value="orbit">City / orbit</option><option value="top">Top-down site plan</option><option value="universe">Whole universe / atlas</option><option value="past">Past / old plans</option></select></label>
         <label>ZOOM<input id="flight-zoom" aria-label="Camera distance" type="range" min="0.45" max="3" step="0.05" value="1"></label>
         <button id="flight-fullscreen" aria-pressed="false">⛶ Fullscreen</button>
       </div>
@@ -80,14 +95,22 @@
         <div class="immersive-tools" id="immersive-tools" hidden>
           <button id="immersive-exit">Exit fullscreen</button><button id="immersive-camera">Change camera</button><button id="immersive-previous">Previous site</button><button id="immersive-next">Next site</button>
           <button id="immersive-zoom-in" aria-label="Zoom camera in">Zoom +</button><button id="immersive-zoom-out" aria-label="Zoom camera out">Zoom −</button><button id="immersive-pause">Pause ship</button>
-          <button id="immersive-panel" aria-pressed="true">Hide site panel</button>
+          <button id="immersive-panel" aria-controls="flight-site" aria-expanded="true" aria-pressed="true">Hide site panel</button>
         </div>
+        <aside id="historical-reminder" class="historical-reminder" aria-label="Historical map archive" hidden>
+          <div><span class="eyebrow">THE ARCHIVE IS BEHIND YOU</span><p>Early maps from before the current road.</p></div>
+          <button id="historical-turn" type="button" aria-pressed="false">↶ Turn around / look back</button>
+          <button id="historical-open" type="button">Read the old maps</button>
+        </aside>
         <div id="scene" aria-label="Interactive 3D planning board. Drag to orbit, scroll to zoom; choose 2D list for keyboard-accessible cards."></div>
+        <section id="studio-panel" aria-label="Make your own diagram" hidden><iframe id="studio-frame" title="Decent local-file planning studio" sandbox="allow-scripts allow-same-origin allow-downloads allow-modals" referrerpolicy="no-referrer"></iframe></section>
         <div class="scene-compass" aria-hidden="true"><span>N</span><div>↗</div><span>DECENT COORDINATES</span></div>
         <div class="site-stamp" aria-hidden="true">A DECENT<br>WORK IN<br><b>PROGRESS.</b></div>
         <div id="list-view" hidden></div>
         <div id="tooltip" role="tooltip" hidden></div>
         <div id="scene-notice" class="scene-notice" hidden></div>
+        <div id="flight-panel-drawer" class="flight-panel-drawer" hidden>
+        <button id="flight-panel-toggle" class="flight-panel-toggle" type="button" aria-label="Hide site panel" title="Hide site panel" aria-controls="flight-site" aria-expanded="true">»</button>
         <aside id="flight-site" class="flight-site" aria-label="Current construction site" hidden>
           <span id="flight-site-type" class="eyebrow">FLIGHT CONTROL</span>
           <h3 id="flight-site-title">Preparing the construction route…</h3>
@@ -100,6 +123,7 @@
           <details id="flight-dock-panel"><summary>Dock / finish line, evidence and dependencies</summary><div id="planning-dock"></div></details>
           <details id="flight-card-panel"><summary>What is being built here?</summary><p id="flight-metric-help">Buildings follow labeled steward milestones: Busking tower, Canopy foundation, Head/Market halls, BigNuten staging and future blueprints. Completed board cards add bounded floors; this is not a readiness percentage. Cranes reflect board activity, not people or money. Connection signals illustrate recorded integration paths, not actual traffic.</p><div id="flight-site-items"></div></details>
         </aside>
+        </div>
         <dialog id="supporter-checkout" aria-labelledby="supporter-checkout-title">
           <button class="dialog-close" aria-label="Close Supporter purchase">×</button>
           <div class="eyebrow">SUPPORT THIS PROJECT / BUY HERE</div>
@@ -117,6 +141,26 @@
           <p data-checkout-evidence></p>
           <p>Original art: The Jolly LaMa / A Decent Agency. A development keepsake,
             not an investment promise. No resale value or royalty enforcement guaranteed.</p>
+        </dialog>
+        <dialog id="historical-map-dialog" aria-labelledby="historical-map-title" aria-describedby="historical-map-summary">
+            <button class="dialog-close" aria-label="Close historical map archive">×</button>
+            <div class="eyebrow">FOUNDING MAPS / HISTORICAL ARCHIVE</div>
+            <h2 id="historical-map-title">Looking back to build forward.</h2>
+            <p>These are preserved as they were drawn. They are records of exploration, not current product specifications.</p>
+            <nav id="historical-map-picker" class="historical-map-picker" aria-label="Choose an archived map"></nav>
+            <article id="historical-map-content" class="historical-map-content" aria-live="polite">
+              <h3 id="historical-map-name"></h3>
+              <p id="historical-map-date" class="historical-map-date"></p>
+              <p id="historical-map-summary"></p>
+              <p id="historical-map-caution" class="historical-map-caution"></p>
+              <div class="historical-map-columns">
+                <section><h4>Threads in this map</h4><ul id="historical-map-themes"></ul></section>
+                <section><h4>Questions to carry forward</h4><ul id="historical-map-questions"></ul></section>
+              </div>
+              <section class="historical-map-paths"><h4>Possible paths into today’s work</h4><ul id="historical-map-links"></ul></section>
+              <a id="historical-map-fullsize" class="text-link" target="_blank" rel="noopener noreferrer">Open the full-resolution image ↗</a>
+              <figure class="historical-map-figure"><img id="historical-map-image" alt="" decoding="async"><figcaption id="historical-map-caption">Readable preview · open the full-resolution image for detail</figcaption></figure>
+            </article>
         </dialog>
       </div>
       <div id="flight-controls" class="flight-controls" role="group" aria-label="Ship controls" hidden>

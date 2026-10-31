@@ -40,7 +40,7 @@ export function buildCampus(group, site, model) {
   block(group, 0, 2, 15, width + 10, .5, 5, '#d0c8ae');
   for (const x of [-width / 2 - 4, width / 2 + 4]) tree(group, x, 10);
   for (let floor = 0; floor < model.floors; floor++) {
-    const h = model.height / model.floors, y = 2 + floor * h;
+    const h = model.plannedFloors ? 9 : model.height / model.floors, y = 2 + floor * h;
     const delivered = floor < model.deliveredFloors;
     const tint = delivered ? color : '#60748b';
     const w = Math.max(10, width - floor * (model.form === 'tower' ? 1.8 : model.form === 'foundation' ? 5 : 0));
@@ -50,7 +50,50 @@ export function buildCampus(group, site, model) {
       block(group, x, y + 2, 10.2, 2, Math.max(1, h - 4), .2, delivered ? '#fae5a0' : '#87e0e3');
     }
   }
-  if (model.form === 'tower') {
+  if (model.plannedFloors) {
+    // Outlined proposal levels are distinct from solid receipt-backed delivery.
+    for (let level = 0; level < model.plannedFloors; level++) {
+      const y = 2 + model.floors * 9 + level * 9, w = width - level * 1.5;
+      const outline = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w, 8, 20)),
+        new THREE.LineBasicMaterial({ color, transparent: true, opacity: .65 }));
+      outline.position.set(0, y + 4, 0); group.add(outline);
+      block(group, 0, y, 0, w, .35, 20, '#386b8a');
+      for (const side of [-1, 1]) block(group, side * (w / 2 - 1), y + 1, 10, 1, 1, 1, color);
+    }
+    const motif = model.plan.motif;
+    if (motif === 'observatory') {
+      const dome = new THREE.Mesh(new THREE.SphereGeometry(9, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2),
+        new THREE.MeshLambertMaterial({ color, wireframe: true }));
+      dome.position.y = model.height + 3; group.add(dome);
+      for (const x of [-width / 2, width / 2]) tree(group, x, -17, 1.3);
+    } else if (motif === 'bridge' || motif === 'exchange') {
+      for (const side of [-1, 1]) {
+        block(group, side * 9, model.height + 2, 0, 2, 8, 3, color);
+        block(group, side * 9, 2, 24, 8, 1, 10, color);
+      }
+      block(group, 0, model.height + 10, 0, 22, 1, 3, color);
+      if (motif === 'bridge') block(group, 0, 3, 24, 26, .6, 4, color);
+    } else if (motif === 'trail') {
+      for (let i = 0; i < 8; i++) {
+        const a = i * Math.PI / 4;
+        block(group, Math.cos(a) * (width / 2 + 4), 2 + i * .6, Math.sin(a) * 17, 4, .5, 4, color);
+      }
+      block(group, 0, model.height + 2, 0, .6, 10, .6, color);
+      block(group, 4, model.height + 8, 0, 8, 3, .4, color);
+    } else if (motif === 'settlements') {
+      for (const x of [-12, 0, 12]) {
+        block(group, x, 2, 25, 8, 3, 8, '#386b8a');
+        block(group, x, 5, 25, 6, .6, 6, color);
+      }
+      block(group, 0, model.height + 2, 0, width, 2, 24, color);
+      for (const x of [-10, 0, 10]) block(group, x, model.height + 4, 0, 2, 7, 3, color);
+    } else {
+      for (const x of [-10, 0, 10]) {
+        block(group, x, 3, 24, 7, 2, 6, color);
+        block(group, x, 5, 23, 5, 3, .5, '#87e0e3');
+      }
+    }
+  } else if (model.form === 'tower') {
     // Stage canopy, equalizer roofline and a plaza make the music campus recognizable.
     block(group, 0, 2, 24, width + 7, 2, 10, '#6a4c75');
     for (let x = -width / 2; x <= width / 2; x += 4) {

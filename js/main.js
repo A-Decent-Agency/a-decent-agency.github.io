@@ -14,13 +14,18 @@ import { renderCampusPlan } from './campus-plan.js';
 import { campusStructure } from './project-campus.js';
 import { projectMints } from './version-mints.js';
 import { mountSupporterCheckout } from './supporter-checkout-ui.js';
+import { HISTORICAL_MAPS } from './historical-maps.js';
+import { renderProjectRecall } from './project-recall.js';
+import { planningEntityKey, renderHumanPriorities } from './revival-plans.js';
 
 const $ = selector => document.querySelector(selector);
+$('#human-priorities').innerHTML = renderHumanPriorities();
 const tabs = [...document.querySelectorAll('[data-tab]')];
 const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { tab: 'flight', query: '', view: '', page: 0, reduced: reducedQuery.matches || navigator.connection?.saveData || false, list: reducedQuery.matches || matchMedia('(max-width: 620px)').matches || navigator.connection?.saveData || false, project: { items: [], views: [] } };
 let scene, sceneKind, sceneFailed = false, selected, detailOpener, editing, map, toastTimer, flightSites = [], flightIndex = 0;
 const scenes = new Map(), scenePromises = new Map(), sceneData = new WeakMap();
+let simpleMap = false;
 const dailyFlight = mountTodaysFlight({
   container: $('#daily-flight'),
   onDestination: id => {
@@ -59,6 +64,98 @@ $('#flight-dock-panel').addEventListener('toggle', () => {
   if ($('#flight-dock-panel').open && scenes.has('flight')) { scenes.get('flight').setPaused(true); updatePause(true); }
 });
 function notify(message) { $('#toast').textContent = message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,7500); }
+async function loadRecall() {
+  try {
+    const response = await fetch(new URL('../data/project-recall.json', import.meta.url));
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    $('#project-recall').innerHTML = renderProjectRecall(await response.json());
+  } catch (error) {
+    $('#project-recall').textContent = `Project recall unavailable: ${error.message}. The board and repository source links remain available; no new progress inferred.`;
+    notify(`Could not load project recall: ${error.message}`);
+  }
+}
+loadRecall();
+document.addEventListener('click', event => {
+  const button = event.target.closest('[data-human-site]');
+  if (!button) return;
+  selectTab('flight');
+  const index = flightSites.findIndex(site => planningEntityKey(site.project) === button.dataset.humanSite);
+  if (index < 0) { notify('This destination is not in the current filtered route. Clear route filters to visit it.'); return; }
+  chartSite(index);
+  $('#human-priorities-panel').open = false;
+});
+$('#project-recall').addEventListener('click', event => {
+  const button = event.target.closest('[data-recall-site]');
+  if (!button) return;
+  selectTab('flight');
+  const index = flightSites.findIndex(site => site.project?.repository?.toLowerCase() === button.dataset.recallSite.toLowerCase());
+  if (index < 0) { notify('This project is not in the current filtered route. Clear route filters to visit it.'); return; }
+  $('#flight-camera').value = 'flight'; $('#flight-camera').dispatchEvent(new Event('change'));
+  chartSite(index);
+  $('#project-recall-panel').open = false;
+});
+function renderHistoricalMap(map) {
+  $('#historical-map-name').textContent = map.title;
+  $('#historical-map-date').textContent = map.date;
+  $('#historical-map-summary').textContent = map.summary;
+  $('#historical-map-caution').textContent = map.caution;
+  $('#historical-map-image').src = new URL(map.preview, import.meta.url).href;
+  $('#historical-map-image').alt = map.alt;
+  $('#historical-map-fullsize').href = map.image;
+  $('#historical-map-fullsize').textContent = map.localPDF ? 'Open the original PDF locally / full drawing viewer ↗' : 'Open the full-resolution image ↗';
+  $('#historical-map-caption').textContent = map.localPDF ? 'Original first-page overview. Choose the SmartHome PDF in the viewer for all ten pages and full drawing detail; no upload.' : 'Readable preview · open the full-resolution image for detail';
+  $('#historical-map-themes').replaceChildren(...map.themes.map(text => {
+    const item = document.createElement('li'); item.textContent = text; return item;
+  }));
+  $('#historical-map-questions').replaceChildren(...map.openQuestions.map(text => {
+    const item = document.createElement('li'); item.textContent = text; return item;
+  }));
+  $('#historical-map-links').replaceChildren(...map.paths.map(path => {
+    const item = document.createElement('li'), link = document.createElement('a'), note = document.createElement('small');
+    link.href = path.url; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = path.label;
+    note.textContent = path.note; item.append(link, note);
+    if (path.repository) {
+      const visit = document.createElement('button');
+      visit.type = 'button'; visit.dataset.historicalRepository = path.repository;
+      visit.textContent = 'Visit this project in today’s street';
+      visit.disabled = !flightSites.some(site => site.project?.repository?.toLowerCase() === path.repository.toLowerCase());
+      if (visit.disabled) visit.title = 'This project is not in the currently filtered route. The source link remains available.';
+      visit.addEventListener('click', () => {
+        selectTab('flight');
+        const index = flightSites.findIndex(site => site.project?.repository?.toLowerCase() === path.repository.toLowerCase());
+        if (index < 0) { notify('This historical signpost is not in the current route. Clear route filters and try again.'); return; }
+        $('#historical-map-dialog').close();
+        $('#flight-camera').value = 'flight';
+        $('#flight-camera').dispatchEvent(new Event('change'));
+        chartSite(index);
+      });
+      item.append(visit);
+    }
+    return item;
+  }));
+  for (const button of $('#historical-map-picker').querySelectorAll('[data-historical-map]')) {
+    button.setAttribute('aria-pressed', String(button.dataset.historicalMap === map.id));
+  }
+}
+for (const map of HISTORICAL_MAPS) {
+  const button = document.createElement('button');
+  button.type = 'button'; button.dataset.historicalMap = map.id; button.textContent = map.title; button.setAttribute('aria-pressed', 'false');
+  button.addEventListener('click', () => renderHistoricalMap(map));
+  $('#historical-map-picker').append(button);
+}
+function openHistoricalMap(id = 'decent-agency-early-plan') {
+  const historicalMap = HISTORICAL_MAPS.find(map => map.id === id);
+  if (!historicalMap) throw new Error(`Unknown historical map: ${id}`);
+  renderHistoricalMap(historicalMap);
+  $('#historical-map-dialog').showModal();
+}
+$('#historical-map-image').addEventListener('error', () => notify('Historical map image unavailable. The map description and source links are still available.'));
+$('#historical-open').addEventListener('click', () => openHistoricalMap());
+$('#historical-turn').addEventListener('click', () => {
+  const camera = $('#flight-camera');
+  camera.value = camera.value === 'past' ? 'flight' : 'past';
+  camera.dispatchEvent(new Event('change'));
+});
 try { map = loadMap(); } catch { map={schemaVersion:1,nodes:[],links:[]};notify('Browser storage is unavailable or contains an invalid map. It has not been overwritten. Export your work to keep a copy.'); }
 function persist() { try {saveMap(map);} catch {notify('Could not save in this browser. Your map remains in memory: download JSON to keep it.');} }
 function openHouse() { $('#house-status').textContent='';$('#house-dialog').showModal(); }
@@ -124,10 +221,11 @@ function showFlightSite(site, index = 0) {
   $('#flight-destination').value = site?.id || '';
   $('#flight-previous').disabled = !flightSites.length || index <= 0;
   $('#flight-next').disabled = !flightSites.length || index >= flightSites.length - 1;
-  $('#flight-site-type').textContent = site ? `${site.project ? 'PROJECT OFFRAMP' : site.type === 'milestone' ? 'LEGACY CHECKPOINT' : '🚧 WORKSTREAM YARD'} / ${site.horizon}` : 'FLIGHT CONTROL';
+  $('#flight-site-type').textContent = site ? `${site.project?.entityId ? 'INDEPENDENT INFRASTRUCTURE' : site.project ? 'PROJECT OFFRAMP' : site.type === 'milestone' ? 'LEGACY CHECKPOINT' : '🚧 WORKSTREAM YARD'} / ${site.horizon}` : 'FLIGHT CONTROL';
   $('#flight-site-title').textContent = site?.title || 'No construction sites match this view';
   $('#flight-site-dates').textContent = site ? site.start || site.target
     ? `${site.start || 'Start unset'} → ${site.target || 'Target unset'} · tentative GitHub dates`
+    : site.project?.entityId ? 'Shared infrastructure · source repository is not product ownership'
     : site.project ? 'Project district · architectural milestone and source evidence below' : 'Undated staging area · no dates invented' : 'Change the search or Project view filter.';
   $('#flight-site-metrics').textContent = site ? site.project
     ? `${campusStructure(site, progressFeed).buildCranes} build cranes · ${campusStructure(site, progressFeed).deliveredFloors} clean version floors · Board only: ${site.phase} · ${site.active} active · ${site.done}/${site.total} Done · ${site.blocked} blocked`
@@ -147,19 +245,33 @@ function chartSite(index) {
 }
 function render() {
   const own=state.tab==='own',flight=state.tab==='flight',items=visibleItems(),pages=spatialPages(items,state.tab);
+  const studio = own && !simpleMap;
+  $('#studio-panel').hidden = !studio;
+  $('#simple-map-tools').hidden = !simpleMap;
+  $('#studio-help').hidden = simpleMap;
+  $('#studio-toggle').setAttribute('aria-pressed', String(simpleMap));
+  $('#studio-toggle').textContent = simpleMap ? 'Return to diagram studio' : 'Use simple node map';
+  if (studio && !$('#studio-frame').hasAttribute('src')) $('#studio-frame').src = './studio/';
+  $('#workspace').classList.toggle('studio-mode', studio);
+  document.querySelector('.office').classList.toggle('studio-view', studio);
+  $('#search').disabled = studio;
+  $('#mode-button').disabled = studio;
+  $('#motion-button').disabled = studio;
   state.page=Math.max(0,Math.min(state.page,pages-1));
   const list=state.list||sceneFailed;
   document.documentElement.dataset.reduced=String(state.reduced);
   document.documentElement.dataset.view=state.tab;
   $('#mode-button').textContent=list?'◇ 3D space':'☷ 2D list';$('#mode-button').setAttribute('aria-pressed',String(list));
   $('#motion-button').textContent=state.reduced?'◌ Motion off':'◌ Motion on';$('#motion-button').setAttribute('aria-pressed',String(state.reduced));
-  $('#scene').hidden=list;$('#list-view').hidden=!list;$('#workspace').classList.toggle('list-mode',list);
+  $('#scene').hidden=studio||list;$('#list-view').hidden=studio||!list;$('#workspace').classList.toggle('list-mode',!studio&&list);
   $('#view-title').textContent=VIEWS[state.tab][0];$('#view-description').textContent=VIEWS[state.tab][1];
-  $('#item-count').textContent=`${items.length} ${own?'NODES':'ITEMS'}`;
+  $('#item-count').textContent=studio?'LOCAL FILES / NO UPLOAD':`${items.length} ${own?'NODES':'ITEMS'}`;
   $('#editor-tools').hidden=!own;$('#project-view').disabled=own;
   document.querySelector('.office').classList.toggle('construction-view', flight);
   $('#flight-tools').hidden=!flight;$('#flight-site').hidden=!flight;$('#flight-controls').hidden=!flight||list;
+  $('#flight-panel-drawer').hidden=!flight;
   $('#daily-flight-panel').hidden=!flight;
+  $('#historical-reminder').hidden=!flight;
   $('#planning-change-summary').hidden=!flight;
   if (!flight) { $('#flight-identity-panel').open = false; }
   if (flight) {
@@ -179,6 +291,7 @@ function render() {
   $('#scene').setAttribute('aria-label', flight ? 'Construction route. Focus the canvas to steer; use destination selection or 2D list without flight.' : 'Interactive 3D planning board. Drag to orbit, scroll to zoom; choose 2D list for keyboard-accessible cards.');
   const legend=state.tab==='passports'?Object.entries(ROLE_COLORS):state.tab==='catalog'?[['Shared solution','#71e6d0'],['Standard','#aa8bea'],['Decision','#e5c583']]:Object.entries(COLORS);
   $('.legend').replaceChildren(...legend.map(([label,color])=>{const span=document.createElement('span'),dot=document.createElement('i');dot.style.background=color;span.append(dot,document.createTextNode(label));return span;}));
+  if (studio) { scene?.setActive(false); return; }
   if(list){showList(items);scene?.setActive(false);}else {
     const kind = flight ? 'flight' : 'board';
     if (scene && sceneKind === kind) {
@@ -188,6 +301,7 @@ function render() {
       scene.setMotion(state.reduced);
     } else { scene?.setActive(false); startScene(); }
   }
+  $('#studio-toggle').onclick = () => { closeDetail(); simpleMap = !simpleMap; render(); };
 }
 function selectTab(tab) {
   if(!VIEWS[tab])return;
@@ -219,6 +333,8 @@ function updatePause(paused) {
 }
 $('#scene').addEventListener('flightpause', event => updatePause(event.detail));
 $('#campus-plan').addEventListener('click', event => {
+  const archive = event.target.closest('[data-revival-archive]');
+  if (archive) openHistoricalMap(archive.dataset.revivalArchive);
   const destination = event.target.closest('[data-campus-site]');
   if (destination) chartSite(flightSites.findIndex(site => site.id === destination.dataset.campusSite));
   const job = event.target.closest('[data-campus-item]');
@@ -227,9 +343,19 @@ $('#campus-plan').addEventListener('click', event => {
     if (item) openDetail(item);
   }
 });
-$('#flight-camera').addEventListener('change', event => scenes.get('flight')?.setCamera(event.target.value));
+function syncHistoricalCamera(mode) {
+  const lookingBack = mode === 'past';
+  $('#historical-turn').setAttribute('aria-pressed', String(lookingBack));
+  $('#historical-turn').textContent = lookingBack ? '→ Return to the road' : '↶ Turn around / look back';
+}
+$('#flight-camera').addEventListener('change', event => {
+  scenes.get('flight')?.setCamera(event.target.value);
+  syncHistoricalCamera(event.target.value);
+});
 $('#flight-zoom').addEventListener('input', event => scenes.get('flight')?.setZoom(event.target.value));
 $('#scene').addEventListener('camerazoom', event => { $('#flight-zoom').value = event.detail; });
+$('#scene').addEventListener('cameramode', event => syncHistoricalCamera(event.detail));
+$('#scene').addEventListener('historicalmap', event => openHistoricalMap(event.detail));
 $('#immersive-camera').onclick = () => {
   const camera = $('#flight-camera');
   camera.selectedIndex = (camera.selectedIndex + 1) % camera.options.length;
@@ -245,11 +371,21 @@ for (const [id, factor] of [['#immersive-zoom-in', .8], ['#immersive-zoom-out', 
     zoom.dispatchEvent(new Event('input'));
   };
 }
-$('#immersive-panel').onclick = () => {
+function toggleSitePanel() {
   const hidden = $('#workspace').classList.toggle('panel-hidden');
   $('#immersive-panel').setAttribute('aria-pressed', String(!hidden));
   $('#immersive-panel').textContent = hidden ? 'Show site panel' : 'Hide site panel';
-};
+  $('#flight-panel-toggle').textContent = hidden ? '«' : '»';
+  $('#flight-panel-toggle').setAttribute('aria-label', hidden ? 'Show site panel' : 'Hide site panel');
+  $('#flight-panel-toggle').title = hidden ? 'Show site panel' : 'Hide site panel';
+  $('#flight-site').inert = hidden;
+  if (hidden) $('#flight-panel-toggle').focus({ preventScroll: true });
+  for (const id of ['#immersive-panel', '#flight-panel-toggle']) {
+    $(id).setAttribute('aria-expanded', String(!hidden));
+  }
+}
+$('#immersive-panel').onclick = toggleSitePanel;
+$('#flight-panel-toggle').onclick = toggleSitePanel;
 function updateFullscreen() {
   const active = document.fullscreenElement === $('#workspace') || $('#workspace').classList.contains('immersive');
   $('#immersive-tools').hidden = !active;

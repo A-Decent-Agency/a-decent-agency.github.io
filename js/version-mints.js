@@ -2,7 +2,7 @@ import { escapeHTML as esc } from './markdown.js';
 import { isDeliveredVersion, isVersionStorefront, mintArtworkPath, supporterPriceLabel } from './progress-feed.js';
 
 export function projectMints(site, feed) {
-  if (!site?.project) return [];
+  if (!site?.project || site.project.entityId) return [];
   const repository = site.project.repository;
   const observation = feed?.repositories?.find(entry => entry.repository.toLowerCase() === repository.toLowerCase());
   return (observation?.versions || []).filter(version => isDeliveredVersion(version, repository)).map(version => ({

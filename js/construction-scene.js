@@ -1,12 +1,13 @@
 import * as THREE from 'three';
 import { COLORS } from './model.js';
-import { constructionSites, routePoint, flightStep, FLIGHT_BOUNDS } from './construction-model.js';
+import { constructionSites, routePoint, flightStep, pastCameraOffset, FLIGHT_BOUNDS } from './construction-model.js';
 import { siteIdentity, PROJECT_MURALS } from './site-identities.js';
 import { campusStructure } from './project-campus.js';
 import { buildCampus } from './campus-buildings.js';
 import { campusConnections, campusPriority } from './campus-graph.js';
 import { projectMints } from './version-mints.js';
 import { mintArtworkPath, supporterPriceLabel } from './progress-feed.js';
+import { HISTORICAL_MAPS } from './historical-maps.js';
 
 const lineMaterial = color => new THREE.LineBasicMaterial({ color });
 function lines(points, color) {
@@ -133,7 +134,11 @@ export class ConstructionScene {
         const rect = container.getBoundingClientRect(), ray = new THREE.Raycaster();
         ray.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), this.camera);
         const hit = ray.intersectObjects(this.targets)[0];
-        if (hit?.object.userData.purchaseUrl) {
+        if (hit?.object.userData.historicalMap) {
+          this.setPaused(true);
+          this.container.dispatchEvent(new CustomEvent('flightpause', { detail: true }));
+          this.container.dispatchEvent(new CustomEvent('historicalmap', { detail: hit.object.userData.historicalMap }));
+        } else if (hit?.object.userData.purchaseUrl) {
           this.setPaused(true);
           this.container.dispatchEvent(new CustomEvent('flightpause', { detail: true }));
           this.onMint?.(hit.object.userData.purchaseUrl);
@@ -163,7 +168,7 @@ export class ConstructionScene {
     this.keys.clear(); this.target = null;
     this.sites.forEach(site => {
       const campus = new THREE.Group(); campus.position.set(site.position.x + (site.index % 2 ? 77 : -77), site.position.y - 22, site.position.z);
-      if (site.project) this.campuses.set(site.project.repository.toLowerCase(), campus);
+      if (site.project) this.campuses.set(site.id, campus);
       const color = site.blocked ? COLORS.Blocked : site.active ? COLORS['In Progress'] : site.done === site.total ? COLORS.Done : COLORS.Todo;
       const pad = new THREE.Mesh(new THREE.CylinderGeometry(27 * site.scale, 27 * site.scale, 1, 6), new THREE.MeshBasicMaterial({ color: '#211a30' }));
       pad.userData.index = site.index; campus.add(pad); this.targets.push(pad);
@@ -235,11 +240,13 @@ export class ConstructionScene {
       }
       const title = textSprite(`${site.project ? 'EXIT ' + (site.index + 1) : site.type === 'milestone' ? 'LEGACY CHECKPOINT' : 'WORKSTREAM'} / ${site.title}`, tint, site.project ? 80 : 52);
       title.position.set(0, site.project ? -4 : 32, 22); title.userData.index = site.index; this.targets.push(title); campus.add(title);
-      const count = textSprite(site.type === 'milestone' ? `SOURCE STATUS / ${site.items[0]?.fields?.Status || 'UNSET'} / NOT A COMPLETION SCORE`
+      const count = textSprite(site.project?.entityId ? 'EXISTING ROUTER / LEDGER RECONCILIATION PENDING'
+        : site.type === 'milestone' ? `SOURCE STATUS / ${site.items[0]?.fields?.Status || 'UNSET'} / NOT A COMPLETION SCORE`
         : `${site.visibleCranes ?? site.cranes} BUILD CRANES / ${site.active} ACTIVE / ${site.done} DONE / ${site.total} CARDS`, '#e5c583', 40);
       count.position.set(0, -10, 22); campus.add(count);
       const identity = siteIdentity(site);
-      const sign = textSprite(identity.projects.length
+      const sign = textSprite(site.project?.entityId ? 'INDEPENDENT INFRASTRUCTURE / SOURCE IN ARTFI'
+        : identity.projects.length
         ? `PUBLIC REPO REFERENCES / ${identity.projects.map(project => project.name).join(' / ')}`
         :         identity.kind === 'milestone' ? 'LEGACY PLAN / NOT A REPOSITORY' : 'WORKSTREAM / NO PROJECT IDENTITY ESTABLISHED',
       identity.fallback.color, 34);
@@ -250,6 +257,15 @@ export class ConstructionScene {
       }
       this.group.add(campus);
       if (site.project) {
+        if (structure.plan) {
+          const proposal = textSprite(`${structure.plannedFloors} PROPOSED LEVELS / NOT DELIVERED`, tint, 40);
+          proposal.position.set(0, structure.height + 20, 0); campus.add(proposal);
+          structure.plan.stages.forEach((stage, index) => {
+            const label = textSprite(`PLAN ${index + 1} / ${stage.title}`, tint, 30);
+            label.position.set(0, 7 + structure.floors * 9 + index * 9, 11);
+            label.scale.multiplyScalar(.65); campus.add(label);
+          });
+        }
         if (structure.observation) {
           const observation = structure.observation;
           const label = observation.state !== 'available' ? 'GITHUB OBSERVATION UNAVAILABLE'
@@ -302,17 +318,66 @@ export class ConstructionScene {
     this.group.children.at(-1)?.computeLineDistances?.();
     for (const link of this.connections) {
       const fromSite = this.sites.find(site => site.id === link.from), toSite = this.sites.find(site => site.id === link.to);
-      const a = fromSite?.project ? this.campuses.get(fromSite.project.repository.toLowerCase()) : null;
-      const b = toSite?.project ? this.campuses.get(toSite.project.repository.toLowerCase()) : null;
+      const a = fromSite?.project ? this.campuses.get(fromSite.id) : null;
+      const b = toSite?.project ? this.campuses.get(toSite.id) : null;
       const from = (a?.position || new THREE.Vector3(fromSite.position.x, fromSite.position.y - 20, fromSite.position.z)).clone().add(new THREE.Vector3(0, 12, 0));
       const to = (b?.position || new THREE.Vector3(toSite.position.x, toSite.position.y - 20, toSite.position.z)).clone().add(new THREE.Vector3(0, 12, 0));
       const color = campusPriority(fromSite) === 'Blocked' || campusPriority(toSite) === 'Blocked' ? '#ee92af' : link.proposed ? '#b297da' : '#71e6d0';
       this.addSignal(new THREE.QuadraticBezierCurve3(from, from.clone().lerp(to, .5).add(new THREE.Vector3(0, 42, 0)), to), color, link);
     }
+    this.addHistoricalArchive();
     this.selected = Math.max(0, this.sites.findIndex(site => site.id === previous));
     this.state = { progress: this.selected, x: 0, y: 0 }; this.onSite(this.sites[this.selected], this.selected);
     this.highlightSite(this.sites[this.selected]?.id);
     this.invalidate();
+  }
+  addHistoricalArchive() {
+    const archive = new THREE.Group();
+    archive.position.z = 360;
+    const height = 66, gap = 20;
+    const widths = HISTORICAL_MAPS.map(map => height * map.aspect);
+    this.archiveWidth = widths.reduce((sum, width) => sum + width, 0) + gap * (widths.length - 1);
+    let left = -(widths.reduce((sum, width) => sum + width, 0) + gap * (widths.length - 1)) / 2;
+    HISTORICAL_MAPS.forEach((map, index) => {
+      const width = widths[index], poster = new THREE.Group();
+      poster.position.x = left + width / 2;
+      left += width + gap;
+      const frame = new THREE.Mesh(
+        new THREE.BoxGeometry(width + 4, height + 4, 2),
+        new THREE.MeshBasicMaterial({ color: '#e5c583' }),
+      );
+      poster.add(frame);
+      const backing = new THREE.Mesh(
+        new THREE.PlaneGeometry(width + 1, height + 1),
+        new THREE.MeshBasicMaterial({ color: '#14111d', side: THREE.DoubleSide }),
+      );
+      backing.position.z = 1.1; poster.add(backing);
+      const image = new THREE.Mesh(
+        new THREE.PlaneGeometry(width, height),
+        new THREE.MeshBasicMaterial({ color: '#333044', side: THREE.DoubleSide }),
+      );
+      image.position.z = 1.2;
+      image.userData.historicalMap = map.id;
+      this.targets.push(image); poster.add(image);
+      const title = textSprite(map.title, '#e5c583', 28);
+      title.position.set(0, height / 2 + 13, 0); poster.add(title);
+      const date = textSprite('SELECT TO READ / ARCHIVAL DRAFT', '#b8f3e6', 20);
+      date.position.set(0, -height / 2 - 12, 0); poster.add(date);
+      new THREE.TextureLoader().load(new URL(map.preview, import.meta.url).href, texture => {
+        if (!archive.parent) { texture.dispose(); return; }
+        texture.colorSpace = THREE.SRGBColorSpace;
+        image.material.map = texture; image.material.color.set('#ffffff'); image.material.needsUpdate = true;
+        this.invalidate();
+      }, undefined, () => {
+        if (archive.parent) this.container.dispatchEvent(new CustomEvent('artworkerror', {
+          detail: `${map.title}: archive poster unavailable; use “Read the old maps” for the accessible archive.`,
+        }));
+      });
+      archive.add(poster);
+    });
+    const heading = textSprite('FOUNDING MAPS / TURN BACK IN TIME', '#71e6d0', 40);
+    heading.position.set(0, -62, 0); archive.add(heading);
+    this.group.add(archive);
   }
   addSignal(curve, color, link = null) {
     const material = link?.proposed ? new THREE.LineDashedMaterial({ color, dashSize: 5, gapSize: 6, transparent: true, opacity: .3 })
@@ -323,7 +388,10 @@ export class ConstructionScene {
     this.group.add(packet); this.signals.push({ curve, packet, line, link });
   }
   setCamera(mode) {
-    this.cameraMode = mode; this.keys.clear(); this.target = null; this.invalidate();
+    this.cameraMode = mode; this.keys.clear(); this.target = null;
+    if (mode === 'past') { this.azimuth = 0; this.elevation = .28; }
+    this.container.dispatchEvent(new CustomEvent('cameramode', { detail: mode }));
+    this.invalidate();
   }
   setZoom(value) { this.zoom = Number(value); this.invalidate(); }
   highlightTask(id) {
@@ -398,6 +466,14 @@ export class ConstructionScene {
       this.camera.up.set(0, 1, 0);
       this.camera.position.set(point.x + this.state.x * .65, point.y + this.state.y * .7 + 62 * this.zoom, point.z + 170 * this.zoom);
       this.camera.lookAt(ahead.x + this.state.x * .35 - 25, ahead.y + this.state.y * .35, ahead.z - 35);
+    } else if (this.cameraMode === 'past') {
+      const center = new THREE.Vector3(0, 10, 360);
+      const fitRadius = this.archiveWidth / (2 * Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2)) * this.camera.aspect) * 1.15;
+      const radius = Math.max(210, fitRadius) * this.zoom;
+      const offset = pastCameraOffset(radius, this.azimuth, this.elevation);
+      this.camera.up.set(0, 1, 0);
+      this.camera.position.copy(center).add(new THREE.Vector3(offset.x, offset.y, offset.z));
+      this.camera.lookAt(center);
     } else {
       const site = this.sites[this.selected], center = site?.position || point;
       const target = new THREE.Vector3(center.x + (site?.index % 2 ? 77 : -77), center.y, center.z);

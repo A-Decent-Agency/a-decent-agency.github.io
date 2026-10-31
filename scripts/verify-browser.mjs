@@ -67,7 +67,7 @@ try {
   await page.locator('#project-view').selectOption('');
   await page.locator('#about-button').click();assert.equal(await page.locator('#about-dialog').isVisible(),true);await page.locator('#about-dialog .dialog-close').click();
 
-  await tab('own');assert.equal(await count(),'3 NODES');
+  await tab('own');await page.locator('#studio-toggle').click();assert.equal(await count(),'3 NODES');
   await page.locator('#add-node').click();
   await page.locator('#node-form [name=title]').fill('A verified possibility');
   await page.locator('#node-form [name=notes]').fill('<script>alert("not executable")</script>\n**Safe notes**');
@@ -78,7 +78,7 @@ try {
   assert.equal(await page.locator('#detail-content script').count(),0);
   await page.getByRole('button',{name:'Edit node',exact:true}).click();
   await page.locator('#node-form [name=title]').fill('A tended possibility');await page.locator('#node-form button[type=submit]').click();
-  await page.reload();await page.waitForSelector('#scene canvas');await tab('own');assert.equal(await count(),'4 NODES');
+  await page.reload();await page.waitForSelector('#scene canvas');await tab('own');await page.locator('#studio-toggle').click();assert.equal(await count(),'4 NODES');
   const before = await page.evaluate(()=>JSON.parse(localStorage.getItem('decent-office-map-v1')).nodes[0]);
   const ownBox = await page.locator('#scene').boundingBox(), ownScale = ownBox.height / (65 * 1.08);
   const px=ownBox.x+ownBox.width/2+before.x*ownScale,py=ownBox.y+ownBox.height/2-before.y*ownScale;

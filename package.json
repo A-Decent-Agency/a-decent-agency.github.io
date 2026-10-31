@@ -3,5 +3,6 @@
   "private": true,
   "type": "module",
   "engines": { "node": ">=20" },
-  "scripts": { "test": "node --test", "sync": "node scripts/export-project.mjs" }
+  "scripts": { "test": "node --test", "sync": "node scripts/export-project.mjs", "vendor:studio": "node scripts/vendor-studio.mjs" },
+  "devDependencies": { "pdfjs-dist": "5.4.296" }
 }

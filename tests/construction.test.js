@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { constructionSites, siteMetrics, flightStep, routePoint, FLIGHT_BOUNDS, snapshotFreshness } from '../js/construction-model.js';
+import { constructionSites, siteMetrics, flightStep, routePoint, pastCameraOffset, FLIGHT_BOUNDS, snapshotFreshness } from '../js/construction-model.js';
 
 const item = (id, status = 'Todo', extra = {}) => ({ id, title: id, fields: { Status: status, Kind: 'Task', Workstream: 'Shared work', ...extra } });
 test('cranes follow explicit board activity and footprint follows workload, never inferred completion', () => {
@@ -54,6 +54,17 @@ test('free steering stays in the route corridor and progress cannot escape its e
   assert.equal(Math.abs(routePoint(0).z), 0);
   assert.equal(routePoint(2).z, -220);
   assert.equal(flightStep({ progress: 0, x: 0, y: 0 }, new Set(['w']), .05, 0).progress, 0);
+});
+test('past camera stands behind the route and faces the archive while retaining orbit distance', () => {
+  const radius = 210, target = { x: 0, y: 10, z: 360 };
+  const offset = pastCameraOffset(radius, 0, .28);
+  assert.ok(offset.z < 0, 'camera starts on the route side of the archive');
+  assert.ok(target.z + offset.z > 0, 'camera stays behind the starting route');
+  assert.ok(offset.y > 0);
+  assert.ok(Math.abs(Math.hypot(offset.x, offset.y, offset.z) - radius) < 1e-9);
+  const orbit = pastCameraOffset(radius, Math.PI / 2, .28);
+  assert.ok(orbit.x > 0);
+  assert.ok(Math.abs(orbit.z) < 1e-12);
 });
 test('real public snapshot remains the sole source, with no omissions or private-detail reconstruction', async () => {
   const snapshot = JSON.parse(await readFile(new URL('../data/project.json', import.meta.url)));

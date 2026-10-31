@@ -16,3 +16,15 @@ Third-party software loaded at runtime (not vendored):
   Served optionally by Google Fonts; their respective copyrights apply.
 
 This NOTICE is informational and does not modify the Apache-2.0 license.
+
+Vendored diagram and document engines:
+- draw.io v32.6.9, revision dcd4f1ba3e8ebca47286ec2524e866a05b04afcd.
+  Copyright JGraph Ltd / draw.io Ltd and draw.io AG and contributors.
+  Apache-2.0. See vendor/drawio/LICENSE and vendor/drawio/README.md
+  for the upstream stencil/icon terms and third-party notices.
+  Independently integrated; no affiliation or endorsement is claimed.
+  Office changes: restrictive network CSP, local-only boot configuration,
+  disabled service worker, title, and omission of unused integrations.
+- Mozilla PDF.js 5.4.296. Copyright Mozilla Foundation and contributors.
+  Apache-2.0; see vendor/pdfjs/LICENSE. Font and decoder notices are kept
+  alongside their assets in standard_fonts/, cmaps/, and wasm/.

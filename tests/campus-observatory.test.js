@@ -36,7 +36,8 @@ test('all public Canopy graph endpoints have contextual sites; private cards ret
   assert.ok(!sites.some(site => site.project?.repository === 'private/hidden'));
   assert.ok(sites.filter(site => !site.items.length).every(site => site.phase === 'Context / no mapped jobs' && site.cranes === 0));
   const links = campusConnections(sites, null);
-  assert.equal(links.length, CANOPY.connections.length);
+  assert.equal(links.filter(link => link.kind !== 'revival proposal').length, CANOPY.connections.length);
+  assert.ok(links.filter(link => link.kind === 'revival proposal').every(link => link.proposed && link.state === 'proposed'));
   assert.ok(links.some(link => link.proposed && link.state === 'proposed'));
   assert.ok(links.some(link => !link.proposed && link.state === 'observed'));
 });

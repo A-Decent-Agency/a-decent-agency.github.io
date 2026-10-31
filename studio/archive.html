@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Historical map / Decent Planning Office</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./studio.css">
+  <script type="module" src="./archive.js"></script>
+</head>
+<body>
+  <header><a href="../index.html">A Decent Agency / return to the road</a><h1>The road before the street.</h1><p>Original PDF drawing, symbols, and spacing. A window onto the map, not a giant bitmap.</p></header>
+  <nav class="tools" aria-label="Historical map controls">
+    <label class="file-button">Open original PDF locally<input id="pdf-file" type="file" accept=".pdf,application/pdf"></label>
+    <label>Page <select id="page" disabled aria-label="PDF page"></select></label>
+    <button id="zoom-in" disabled aria-label="Zoom in">Zoom +</button>
+    <button id="zoom-out" disabled aria-label="Zoom out">Zoom -</button>
+    <button id="fit" disabled>Fit page</button>
+    <button id="close" disabled>Close local file</button>
+    <a href="./index.html">Make your own editable map</a>
+  </nav>
+  <p id="status" role="status">Choose the SmartHome 4.0 PDF from your computer. It is not uploaded or saved in browser storage.</p>
+  <div class="viewer"><canvas id="page-canvas" tabindex="0" role="img" aria-label="Historical PDF drawing. Drag to pan, scroll to zoom, arrow keys to pan, plus and minus to zoom, zero to fit."></canvas></div>
+  <p class="viewer-note">Drag to pan. Scroll or use +/- to zoom; arrow keys pan; 0 fits the page. Zoom is centered on the pointer. The rendering canvas never exceeds 2 million pixels, regardless of the PDF's page dimensions. This bounds the output bitmap, not all PDF parsing/image memory. Files are limited to 80 MB; very complex pages may still take time.</p>
+  <details class="help"><summary>Original map, present-day connections</summary><p>The SmartHome 4.0 archive contains ten pages: SmartHome/SimSiddhi; code camp and onboarding; Jukebox code and notes; home environmental monitoring; DooBetter/GeoRewards; an Arduino course; beehive monitoring; UmbrellaAcademy contract planning; a transaction reference; and drone imaging/software workflow notes.</p><p>These are historical plans and implementation artifacts, not a claim that every proposal shipped. The original source stays unchanged. Viewing the PDF does not reconstruct editable Lucid objects. A later source import can recover those separately, and we can annotate descendants without rewriting the historical document.</p><p>PDF links, embedded scripts, forms, and attachments are not activated here. Rendering uses the bundled Apache-2.0 <a href="../vendor/pdfjs/LICENSE">PDF.js</a> engine; no external viewer or CDN.</p></details>
+</body>
+</html>

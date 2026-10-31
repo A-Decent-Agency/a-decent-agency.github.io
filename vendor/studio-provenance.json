@@ -1,0 +1,19 @@
+{
+  "drawio": {
+    "version": "32.6.9",
+    "revision": "dcd4f1ba3e8ebca47286ec2524e866a05b04afcd",
+    "runtimeSHA256": "b4b89c4b779949efe4a6bc0a5a17942880eaa53332a4247b6057f3b0e3259765",
+    "source": "https://github.com/jgraph/drawio/tree/dcd4f1ba3e8ebca47286ec2524e866a05b04afcd",
+    "license": "Apache-2.0; see bundled README for stencil/icon terms",
+    "modifications": [
+      "Network-restricting CSP",
+      "Local-only PreConfig/PostConfig",
+      "Page title",
+      "Omitted unused integrations"
+    ]
+  },
+  "pdfjs": {
+    "version": "5.4.296",
+    "license": "Apache-2.0"
+  }
+}
