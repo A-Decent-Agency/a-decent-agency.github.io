@@ -84,11 +84,87 @@ export function campusStructure(site, feed) {
   const codeBytes = observation?.codeBytes;
   const size = codeBytes == null ? 1 : Math.min(1.65, .85 + Math.log10(1 + codeBytes / 10000) * .22);
   const width = (form === 'foundation' ? 43 : form === 'hall' ? 36 : form === 'tower' ? 23 : 30) * size;
-  const messy = active.length > 0 || !deliveredFloors && form !== 'entrance';
-  const buildCranes = messy && site.items.length ? Math.max(1, site.cranes || 0) : 0;
-  return { form, floors, deliveredFloors, plannedFloors, plan, versions, completed, remaining, active, codeBytes, observation, messy, buildCranes,
-    height: plannedFloors ? (floors + plannedFloors) * 9 : form === 'tower' ? floors * 9 : form === 'foundation' ? floors * 6 : Math.max(8, floors * 9),
-    width,
+  const baseHeight = form === 'tower' ? floors * 9 : form === 'foundation' ? floors * 6 : Math.max(8, floors * 9);
+  const skeleton = issueSkeleton(observation?.structures, { width, baseTop: floors ? baseHeight : 0, baseFloors: floors, side: site.index % 2 ? 1 : -1 });
+  const proposalBase = Math.max(floors ? baseHeight : 0, skeleton.top);
+  const openSkeleton = [...skeleton.levels, ...skeleton.grounds].some(structure => structure.open > 0);
+  const messy = active.length > 0 || openSkeleton || !deliveredFloors && form !== 'entrance' && !skeleton.finished;
+  const buildCranes = messy && (site.items.length || openSkeleton) ? Math.max(1, site.cranes || 0) : 0;
+  return { form, floors, deliveredFloors, plannedFloors, plan, proposalBase, versions, completed, remaining, active, codeBytes, observation, messy, buildCranes,
+    baseHeight, height: plannedFloors ? proposalBase + plannedFloors * 9 : Math.max(baseHeight, skeleton.top), width, ...skeleton,
     label: site.project?.milestone || site.phase,
-    basis: `${site.project?.basis || 'Steward-selected architectural stage'}. ${versions.length} receipt-backed delivered version(s); ${remaining.length} remaining mapped jobs.${plannedFloors ? ` ${plannedFloors} outlined proposal levels; they do not alter board status or delivered-floor counts.` : ''} Public language bytes scale footprint logarithmically, not value or readiness.` };
+    basis: `${site.project?.basis || 'Steward-selected architectural stage'}. ${versions.length} receipt-backed delivered version(s); ${remaining.length} remaining mapped jobs. ${skeleton.levels.length + skeleton.grounds.length ? `${skeleton.finishedCount}/${skeleton.levels.length + skeleton.grounds.length} planned structures finished from public milestone issue counts. ` : ''}${plannedFloors ? `${plannedFloors} outlined proposal levels; they do not alter board status or delivered-floor counts. ` : ''}Public language bytes scale footprint logarithmically, not value or readiness.` };
+}
+
+export const LEVEL_HEIGHT = 9;
+// A main tower holds at most MAIN_TOWER_STORIES stories (base floors + planned levels); further levels sprawl into
+// satellite towers on fractal cul-de-sacs, adapting DecentCanopy's scripts/spiral.js placeBranch / angleOffsets layout.
+export const MAIN_TOWER_STORIES = 12, SATELLITE_STORIES = 6, LOTS_PER_CULDESAC = 3, SATELLITE_WIDTH = 16;
+// Grounds sit behind the tower, clear of the level signs (left), service yard (right) and plan sign (front left).
+const GROUNDS_SLOTS = [() => [-16, -46], () => [16, -46], w => [-(w / 2 + 26), -38], w => [w / 2 + 32, -42], () => [0, -72], w => [-(w / 2 + 26), -64]];
+export function angleOffsets(count, spread) {
+  if (count <= 1) return [0];
+  return Array.from({ length: count }, (_, index) => -spread / 2 + spread / (count - 1) * index);
+}
+// Cul-de-sacs form a binary branch tree in breadth-first order, branching outward (side = +1 right, -1 left) and
+// behind the campus so the highway, plaza, service yard and grounds slots stay clear. Each bulb holds three lots.
+export function culDeSacLayout(lotCount, { side = 1, width = 30 } = {}) {
+  const count = Math.ceil(Math.max(0, lotCount) / LOTS_PER_CULDESAC);
+  if (!count) return { culdesacs: [], roads: [], lots: [] };
+  const gate = { x: side * (width / 2 + 6), z: -26 }, junction = { x: side * (width / 2 + 46), z: -26 };
+  const roads = [{ x1: gate.x, z1: gate.z, x2: junction.x, z2: junction.z }], culdesacs = [];
+  for (let index = 0; index < count; index++) {
+    const parent = index ? culdesacs[Math.floor((index - 1) / 2)] : null, from = parent || junction;
+    const siblings = parent ? Math.min(2, count - (2 * parent.index + 1)) : 1;
+    const angle = parent ? parent.angle + angleOffsets(siblings, 1.4)[(index - 1) % 2] : -Math.PI / 2 + side * .3;
+    const depth = parent ? parent.depth + 1 : 0, length = 66 * Math.pow(.9, depth);
+    const x = from.x + Math.cos(angle) * length, z = from.z + Math.sin(angle) * length;
+    culdesacs.push({ index, depth, angle, x, z, radius: 11, branches: Math.max(0, Math.min(2, count - (2 * index + 1))) });
+    roads.push({ x1: from.x, z1: from.z, x2: x, z2: z });
+  }
+  const lots = culdesacs.flatMap(bulb => (bulb.branches ? [-2.2, 2.2, 1.3] : [-1.3, 0, 1.3])
+    .map(turn => ({ culdesac: bulb.index, x: bulb.x + Math.cos(bulb.angle + turn) * (bulb.radius + 13),
+      z: bulb.z + Math.sin(bulb.angle + turn) * (bulb.radius + 13) }))).slice(0, lotCount);
+  return { culdesacs, roads, lots };
+}
+// Each public issue in a planned milestone is one structural bay; closed issues clad their bay. Counts are planning evidence, not quality.
+export function issueSkeleton(structures, { width = 30, baseTop = 0, baseFloors = 0, side = 1 } = {}) {
+  const shape = structure => {
+    const total = structure.open + structure.closed;
+    const bays = Math.max(1, Math.min(16, total));
+    return { ...structure, total, bays,
+      cladBays: !total ? 0 : !structure.open ? bays : Math.min(bays - 1, Math.max(structure.closed ? 1 : 0, Math.round(bays * structure.closed / total))),
+      finished: total > 0 && structure.open === 0,
+      stage: !total ? 'Outlined / no issues yet' : structure.open === 0 ? 'Finished' : structure.closed ? 'Under construction' : 'Skeleton' };
+  };
+  const list = Array.isArray(structures) ? structures : [];
+  const planned = list.filter(structure => structure.kind === 'level').sort((a, b) => a.order - b.order || a.number - b.number).map(shape);
+  const mainCount = Math.max(0, MAIN_TOWER_STORIES - baseFloors);
+  const main = planned.slice(0, mainCount).map((structure, index) => ({ ...structure, tower: 0, x: 0, z: 0,
+    y: 2 + baseTop + index * LEVEL_HEIGHT, width: Math.max(12, width * .82 - index * 1.4) }));
+  const overflow = planned.slice(mainCount);
+  const satellites = Array.from({ length: Math.ceil(overflow.length / SATELLITE_STORIES) }, (_, index) => overflow.slice(index * SATELLITE_STORIES, (index + 1) * SATELLITE_STORIES));
+  const sortedGrounds = list.filter(structure => structure.kind === 'grounds').sort((a, b) => a.order - b.order || a.number - b.number).map(shape);
+  const extraGrounds = sortedGrounds.slice(GROUNDS_SLOTS.length);
+  const sprawl = culDeSacLayout(satellites.length + extraGrounds.length, { side, width });
+  const towers = satellites.map((stories, index) => {
+    const { x, z, culdesac } = sprawl.lots[index];
+    const levels = stories.map((structure, story) => ({ ...structure, tower: index + 1, x, z, culdesac,
+      y: 2 + story * LEVEL_HEIGHT, width: SATELLITE_WIDTH }));
+    return { index: index + 1, x, z, culdesac, levels, top: 2 + levels.length * LEVEL_HEIGHT,
+      name: `L${levels[0].order}${levels.length > 1 ? `–L${levels.at(-1).order}` : ''}`,
+      finishedCount: levels.filter(level => level.finished).length, finished: levels.every(level => level.finished) };
+  });
+  const grounds = sortedGrounds.map((shaped, index) => {
+    const lot = index < GROUNDS_SLOTS.length ? null : sprawl.lots[satellites.length + index - GROUNDS_SLOTS.length];
+    const [x, z] = lot ? [lot.x, lot.z] : GROUNDS_SLOTS[index](width);
+    return { ...shaped, x, z, ...(lot ? { culdesac: lot.culdesac } : {}),
+      size: lot ? 10 : 11 + Math.min(6, shaped.bays * .5), height: 6 + Math.min(8, shaped.bays) };
+  });
+  const levels = [...main, ...towers.flatMap(tower => tower.levels)];
+  const all = [...levels, ...grounds];
+  return { levels, grounds, towers, culdesacs: sprawl.culdesacs, roads: sprawl.roads,
+    finishedCount: all.filter(structure => structure.finished).length,
+    finished: all.length > 0 && all.every(structure => structure.finished),
+    top: main.length ? baseTop + main.length * LEVEL_HEIGHT : 0 };
 }

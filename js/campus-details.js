@@ -1,6 +1,7 @@
 import { escapeHTML as esc } from './markdown.js';
 import { campusStructure } from './project-campus.js';
 import { CANOPY } from './canopy-registry.js';
+import { canopyCity } from './canopy-city.js';
 import { ENS_ARTWORK_OBSERVATION, PROJECT_MURALS } from './site-identities.js';
 import { renderVersionMints } from './version-mints.js';
 
@@ -28,6 +29,8 @@ export function renderCampusDetails(site, feed) {
     ${mural ? `<figure class="campus-mural"><img src="${esc(mural.url)}" alt="${esc(mural.alt)}" loading="lazy" referrerpolicy="no-referrer" data-project-mural><figcaption>${link(mural.source, 'Project artwork')} · The Jolly LaMa / A Decent Agency · ${link(mural.license, 'CC BY 4.0')} (unmodified)</figcaption></figure>` : ''}
     <p>${link(`https://github.com/${repository}`, 'Repository')} · ${link(`https://github.com/${repository}/issues`, 'Issues and next work')}</p>
     <p>${model.codeBytes == null ? 'Public code-size observation unavailable; neutral footprint retained.' : `${model.codeBytes.toLocaleString()} public language bytes (GitHub Linguist), not lines of code, effort or value.`}</p>
+    ${renderIssueSkeleton(model, repository, link)}
+    ${repository === 'TheJollyLaMa/DecentCanopy' ? renderCanopyCity(feed, link) : ''}
     <details open><summary>Delivered version floors (${model.versions.length})</summary>
       <p>Clean floors require version-matched published Supporter mint receipts. Source-reported verification, not a new independent chain audit. Release prose or prepared artwork alone creates no delivered floor.</p>
       <ul>${model.versions.map(version => `<li>${link(version.url, version.tag)} · token ${esc(version.tokenId)} / Base · ${link(version.evidenceUrl, 'Mint receipt')} · ${link(`https://basescan.org/tx/${version.mintTxHash}`, 'Transaction')}</li>`).join('') || '<li>No eligible mint receipt observed. Steward architecture remains labeled, not promoted to minted delivery.</li>'}</ul>
@@ -44,4 +47,22 @@ export function renderCampusDetails(site, feed) {
     <details><summary>Connected infrastructure (${connections.length})</summary>
       <p>Signals illustrate recorded integration paths, not live network traffic or payments. A line does not imply every feature is compatible.</p>
       <ul>${connections.map(connection => `<li>${link(connection.url, connection.label)}<small>${esc(connection.from)} → ${esc(connection.to)}</small></li>`).join('') || '<li>No public integration path recorded in this feed.</li>'}</ul></details>`;
+}
+
+function renderIssueSkeleton(model, repository, link) {
+  const row = structure => `<li data-structure="${esc(structure.kind)}"><b>${structure.kind === 'level' ? `Level ${esc(structure.order)}` : 'Grounds'} · ${esc(structure.name)}</b>${structure.tower ? ` <small>Tower ${structure.tower + 1}, cul-de-sac ${structure.culdesac + 1}</small>` : structure.culdesac !== undefined ? ` <small>Cul-de-sac ${structure.culdesac + 1}</small>` : ''}
+    — ${esc(structure.stage)} · ${structure.closed}/${structure.total} issues closed · ${link(structure.url, 'Milestone issues')}</li>`;
+  const count = model.levels.length + model.grounds.length;
+  return `<details open class="issue-skeleton"><summary>Planned structures (${model.finishedCount}/${count} finished)</summary>
+    <p>Each tower level and grounds structure is a public GitHub milestone. Every issue in it is one structural bay: open issues show bare steel, closed issues clad their bay, and a structure looks finished when all its issues are closed. A main tower holds up to 12 stories; further levels sprawl into six-story satellite towers on branching cul-de-sacs, and grounds beyond six nearby slots move onto cul-de-sac lots. Issue counts are planning evidence, not a quality or readiness score.</p>
+    ${count ? `${model.levels.length ? `<h5>Tower levels</h5><ul>${model.levels.map(row).join('')}</ul>` : ''}
+      ${model.grounds.length ? `<h5>Grounds and nearby structures</h5><ul>${model.grounds.map(row).join('')}</ul>` : ''}`
+      : `<p>No planned structures observed yet. Stewards add one by creating a milestone named <code>Level N: …</code> or <code>Grounds: …</code> in ${link(`https://github.com/${repository}/milestones`, 'the repository milestones')} and assigning its issues.</p>`}
+  </details>`;
+}
+function renderCanopyCity(feed, link) {
+  const city = canopyCity(CANOPY, feed, { root: 'TheJollyLaMa/DecentCanopy' });
+  return `<details class="canopy-city"><summary>Top-down canopy city (${city.nodes.length} projects)</summary>
+    <p>The roof canopy is a fractal map of the curated Canopy registry: branches follow mapped connections outward from DecentCanopy, and unconnected projects branch from the hub. Mini-building height follows observed planned structures; steel caps mark open ones; grey translucent buildings are not yet observed. Select one to fly to its site. Another steward's registry in the same shape would render their own city.</p>
+    <ul>${city.nodes.map(node => `<li>${link(`https://github.com/${node.repository}`, node.name)} — ${node.observed ? `${node.finished}/${node.planned} planned structures finished` : 'not observed by the office'}</li>`).join('')}</ul></details>`;
 }

@@ -3,6 +3,9 @@ on:
   schedule:
     - cron: '17 * * * *'
   workflow_dispatch:
+  # Observed repositories call notify-planning-office.yml on issue, PR, milestone, release and push activity.
+  repository_dispatch:
+    types: [repo-changed]
 permissions:
   contents: write
 concurrency:
@@ -12,6 +15,11 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - name: Record trigger
+        env:
+          SOURCE: ${{ github.event.client_payload.repository }}
+          ACTIVITY: ${{ github.event.client_payload.event }}
+        run: echo "Triggered by ${GITHUB_EVENT_NAME} ${SOURCE:-} ${ACTIVITY:-}"
       - name: Check project read secret
         id: token
         env:

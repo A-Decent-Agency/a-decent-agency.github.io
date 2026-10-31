@@ -200,9 +200,38 @@ The double-arrow tab on the **left edge of the site panel** slides it offscreen 
 
 The **Human needs / cultural beacons** disclosure and each campus's relevant lenses connect livelihood, health, joy, language/learning, essentials, refuge, connection and continuity. These overlapping steward-directed associations are not universal rankings, credit eligibility rules or evidence of outcomes. BigNuten remains primary, router financial visibility needs attention now, DLend is the next scoped revamp, and the other revivals remain staged discovery.
 
+Supplemental proposal levels sit above existing milestone-driven main-tower levels, without replacing their closed-issue cladding, grounds buildings or fractal satellite streets. Mainline Canopy roof-city navigation, stable site/card addresses, published snapshots and repository-triggered sync remain intact. Integration acceptance covers both existing site sharing and the archive/studio/new towers.
+
 The larger canvas has **Ship / highway**, **City / orbit**, **Top-down site plan** and **Whole universe / atlas** cameras, zoom controls, and drag-to-orbit outside ship mode (also usable with motion off). Fullscreen expands the scene with in-canvas destination/camera/panel controls. Unsupported native fullscreen uses an explicitly labeled expanded-window mode; failures are surfaced. Escape exits fullscreen. Each campus has a physical 2D job-board sign and an accessible 2D connection/job plan using the same published item IDs, Project/Component, Status and Priority metadata; selecting a job opens its source details and emphasizes its building's connection lines.
 
 The **Past / old plans** camera points behind the starting route to an archival gallery. A persistent reminder offers **Turn around / look back** and **Return to the road**; the posters open an accessible archive with readable previews, full-resolution map links, historical context, privacy caveats, questions, and links to current related issues. Compact previews keep the 3D scene light, and full-resolution images are not decoded until opened from their links. The archive preserves the user-supplied `DecentAgency.pdf` and `A Decent and Jolly Maslow Hierarchy.pdf` as image reproductions, not the original PDFs. The complex map's “rd13 · 10 Mar 2022” label and PDF export date are both retained as provenance clues, not a claim that every diagram label is current. Its wallet/NFT-gated mapping, token, personal-data, and simulation concepts are explicitly historical proposals—not current product, privacy, governance, or payout commitments. Links to Canopy, BigNuten, DecentCalendar, Busking, BabelBet, and JollySimSiddhi point to existing projects/issues; they do not imply those proposals have been delivered.
+
+### Direct building addresses
+
+Every project building, milestone checkpoint and workstream yard has a stable
+`?site=<site ID>` address, independent of its position along the road. Use **Share
+site** in the site panel or **Share site / card** in a public card's side panel.
+The sharing dialog provides a selectable URL and a **Copy link** button; blocked
+clipboard access leaves the address visible with an explicit error. Card links
+add `&card=<published card ID>` to open the card at its site.
+
+For example, [DecentHead](https://a-decent-agency.github.io/?site=project%3Athejollylama%2Fdecenthead)
+and the [DCal public blueprint checkpoint](https://a-decent-agency.github.io/?site=PVTI_lADODD7ovc4Bn91hzhELHuo)
+can be opened directly. DCal's checkpoint is the approved public plan, not a
+completed standalone Calendar campus.
+
+Links resolve after the public snapshot loads, clear local search/view filters,
+and select the same site in 3D or the mobile/reduced-motion 2D view. Back/Forward
+restores shared destinations. A missing site/card is reported explicitly without
+recovering withheld data. Shared URLs preserve the current deployment path
+(including IPFS subpaths), but exclude other query parameters, wallet state and
+local-editor data. Recipients see the latest public roadmap, not the sender's
+snapshot. A local editor node cannot be shared by URL; use its JSON export.
+
+Validate link resolution with `node --test tests/site-links.test.js`.
+For desktop/3D and mobile/2D browser acceptance, serve the site and run
+`OFFICE_URL=http://127.0.0.1:8000/ node scripts/verify-site-links.mjs` with
+Playwright available (`PLAYWRIGHT_MODULE` may point to an existing installation).
 
 The public Canopy map is imported from `data/agency-map.json` at `9a8777e8f0e7dbfaa65352b0f00fd5fbce5d7d99`, with all 24 public-endpoint relationships and their types/evidence/caveats preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
 
@@ -217,6 +246,41 @@ Public activity is automatically collected hourly into `data/progress.json`; the
 With steward approval, `scripts/align-planning.mjs --apply` adds public-allowlisted **Project**, **Component**, **Delivery version** and **Priority** text fields, keeping Status/Horizon/dates and existing visible columns. Components initially reuse explicit Workstream values (not inferred code ownership); unknown mappings remain shared yards. Priority translates the existing Horizon, not an invented achievement score. Delivery version is populated only for portfolio editions with mint evidence, not retroactively attributed to every task. Private/redacted records do not receive or publish these new fields.
 
 The script is dry-run by default and must be run against a freshly exported board. It reconciles the shipped M1 reuse desk to Done and M2 public activity to In Progress, with source links and remaining full-acceptance gaps; it does not close M2 just because the bounded observer shipped. It also corrects the whole-library Portfolio view filter and exposes the new fields in supported board/table views. GitHub's roadmap API does not support visible-field columns; it still uses those same underlying items/status/outcomes. Dates are retained as planning windows, not fabricated actual completion dates. Alignment is an explicit steward operation, never part of the hourly read-only observation workflow.
+
+
+### Issue skeletons: planned levels and grounds
+
+Every observed public repository can plan its building with ordinary GitHub milestones. The observer reads only titles and open/closed issue counts.
+
+- `Level N: <name>` stacks a tower level, in N order, above any delivered version floors.
+- `Grounds: <name>` raises a nearby structure behind the tower (six nearby slots; more move onto cul-de-sac lots).
+- Other milestones are ignored, so existing release milestones keep working.
+
+Each issue in a planned milestone is one structural **bay**, with up to 16 bays per level and 8 per grounds structure. Open issues show bare steel on a concrete deck. Each closed issue clads one bay in the project color. A structure looks **finished** (solid glass, lit windows, roof) only when it has at least one issue and none remain open. An empty milestone stays an outline. Open structures keep build cranes on site. The site panel lists every level and grounds structure with its stage, closed/total count and a link to its milestone issues.
+
+To plan a project: create the milestones, assign each planned issue to exactly one, then close issues as work lands. The next sync (or a manual run of **Sync GitHub Project snapshot**) updates the building. Issue counts are planning evidence, not a quality, readiness or funding score. Finished levels never create receipt-backed version floors.
+
+### Sprawl: cul-de-sacs when a tower is full
+
+A main tower holds at most 12 stories (base floors plus planned levels). Further levels become six-story **satellite towers** on cul-de-sacs that branch outward and behind the campus, away from the highway. Each cul-de-sac has three lots; extra cul-de-sacs branch from the previous ones as a small fractal tree. Every level still appears in the side panel with its tower and cul-de-sac. The layout is pure and tested in `js/project-campus.js` (`culDeSacLayout`, `issueSkeleton`); its branching adapts DecentCanopy's `scripts/spiral.js` `placeBranch` / `angleOffsets` pattern.
+
+### The Canopy city
+
+DecentCanopy's roof carries a top-down city of the curated Canopy registry (`js/canopy-registry.js`, imported from DecentCanopy `data/agency-map.json`). Branches follow mapped connections outward from DecentCanopy; each disconnected cluster branches from the hub. Every branch gets an angular wedge in proportion to its leaves. Mini-building height follows observed planned structures; steel caps mark open ones; grey buildings are not observed yet. Selecting one flies to its site. Use the **Top** camera on DecentCanopy for the canopy view.
+
+`canopyCity(registry, feed, { root })` in `js/canopy-city.js` accepts any registry with the same `{ projects, connections }` shape, so another steward's agency map could render their own close-up city. The office does not fetch third-party registries today.
+
+### Automatic updates from observed repositories
+
+**Sync GitHub Project snapshot** runs hourly and also accepts a `repository_dispatch` of type `repo-changed`. Observed repositories send one through the reusable `.github/workflows/notify-planning-office.yml` workflow when issues, PRs, milestones, releases or default-branch pushes change. Bursts collapse into one pending sync.
+
+To wire a repository:
+
+1. Copy `templates/notify-planning-office.yml` to its `.github/workflows/`.
+2. Add the repository secret `OFFICE_DISPATCH_TOKEN`: a fine-grained personal access token whose resource owner is A-Decent-Agency, limited to `a-decent-agency.github.io`, with **Contents: Read and write**. Store it only as a GitHub secret.
+3. Add the repository to `REPOSITORIES` in `js/progress-feed.js` so the observer includes it.
+
+Without the secret (and for fork PRs, which receive no secrets) the notifier logs a notice and skips; the hourly sync still catches up. The payload names only the repository and event type.
 
 ## Run locally
 
@@ -546,7 +610,7 @@ The exporter queries GraphQL directly, paginates project items, preserves the pr
 
 ### Scheduled refresh
 
-`.github/workflows/sync-project.yml` runs hourly (at minute 17), or with **Run workflow**. GitHub can delay schedules. Without the project credential it emits a notice and skips the private board export, while the public repository observer still runs using the workflow token. A failed board export is reported separately and does not block public observation. It tests the result and commits **only** changed `data/project.json` and `data/progress.json`, using `GITHUB_TOKEN`'s `contents: write` for the commit, and includes the Copilot co-author trailer. Public collection checks visibility first; an unconfirmed or private repository has its old details withheld. Other API errors retain confirmed-public observations with an explicit unavailable label.
+`.github/workflows/sync-project.yml` runs hourly (at minute 17), when an observed repository sends a `repo-changed` dispatch (see *Automatic updates*), or with **Run workflow**. GitHub can delay schedules. Without the project credential it emits a notice and skips the private board export, while the public repository observer still runs using the workflow token. A failed board export is reported separately and does not block public observation. It tests the result and commits **only** changed `data/project.json` and `data/progress.json`, using `GITHUB_TOKEN`'s `contents: write` for the commit, and includes the Copilot co-author trailer. Public collection checks visibility first; an unconfirmed or private repository has its old details withheld. Other API errors retain confirmed-public observations with an explicit unavailable label.
 
 The browser checks that published snapshot every five minutes while visible,
 on return to the tab, or with **Refresh plan**. Sites, dates, crane counts and card
@@ -604,6 +668,7 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/scene.js` — pinned Three.js scene, controls, spatial views, picking and dragging.
 - `js/construction-scene.js`, `js/construction-model.js` — bounded ship flight, source-derived construction sites and crane/workload rules.
 - `js/project-campus.js`, `js/campus-details.js`, `js/campus-buildings.js` — explicit public repository grouping, receipt-backed version floors, distinctive architecture and source-backed disclosures.
+- `js/canopy-city.js` — data-driven top-down city of an agency-map registry, shown on DecentCanopy's roof.
 - `js/campus-graph.js`, `js/campus-plan.js`, `js/canopy-registry.js` — typed Canopy/board connections and the same-data 2D site/job plan.
 - `js/progress-feed.js`, `scripts/sync-progress.mjs`, `data/progress.json` — bounded public GitHub observation, validation and approved integration paths.
 - `js/model.js` — view filters, color semantics, date and relationship parsing.
@@ -611,7 +676,8 @@ The helper exercises each real-data 3D/2D view; hover/click; filters/pagination;
 - `js/editor.js` — versioned map validation/storage, import/export.
 - `js/project.js`, `scripts/export-project.mjs` — shared GraphQL exporter/privacy boundary and Node entry point.
 - `data/project.json` — the real public project snapshot.
-- `.github/workflows/sync-project.yml` — hourly/manual public observation and optional private-board snapshot sync.
+- `.github/workflows/sync-project.yml` — hourly/dispatched/manual public observation and optional private-board snapshot sync.
+- `.github/workflows/notify-planning-office.yml`, `templates/notify-planning-office.yml` — reusable notifier and the caller each observed repository installs.
 - `tests/*.test.js`, `scripts/verify-browser.mjs`, `scripts/verify-flight.mjs`, `scripts/verify-highway.mjs`, `scripts/verify-observatory.mjs` — focused unit/acceptance checks.
 - `.nojekyll`, `package.json`, `LICENSE`, `NOTICE`, `README.md` — publishing, metadata and documentation.
 

@@ -114,6 +114,8 @@
         <aside id="flight-site" class="flight-site" aria-label="Current construction site" hidden>
           <span id="flight-site-type" class="eyebrow">FLIGHT CONTROL</span>
           <h3 id="flight-site-title">Preparing the construction route…</h3>
+          <button id="share-site" type="button" disabled>Share site</button>
+          <p id="site-link-status" role="status" hidden></p>
           <div id="campus-artwork"></div>
           <p id="flight-site-dates"></p>
           <p id="flight-site-metrics"></p>
@@ -188,7 +190,17 @@
 
   <dialog id="node-dialog" aria-labelledby="node-title"><button class="dialog-close" aria-label="Close node form">×</button><h2 id="node-title">Make a little possibility.</h2><form id="node-form"><label>Title<input name="title" required maxlength="160" placeholder="What should exist?"></label><label>Kind<input name="kind" maxlength="60" value="Idea"></label><label>Color<input name="color" type="color" value="#9f83ff"></label><label>Notes<textarea name="notes" rows="5" maxlength="4000" placeholder="The beginning of a decent Frankenstein…"></textarea></label><button class="accent-button" type="submit">Save node ↗</button></form></dialog>
   <dialog id="link-dialog" aria-labelledby="link-title"><button class="dialog-close" aria-label="Close link form">×</button><h2 id="link-title">Find a crossover.</h2><form id="link-form"><label>From<select name="from" required></select></label><label>To<select name="to" required></select></label><button type="submit" class="accent-button">Link nodes ↗</button></form></dialog>
-  <aside id="detail-panel" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden><button id="close-detail" aria-label="Close card details">×</button><div id="detail-content"></div></aside>
+  <aside id="detail-panel" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden><button id="close-detail" aria-label="Close card details">×</button><button id="share-card" type="button" hidden>Share site / card</button><div id="detail-content"></div></aside>
+  <dialog id="share-dialog" aria-labelledby="share-title">
+    <button class="dialog-close" aria-label="Close sharing">×</button>
+    <h2 id="share-title">Share this site</h2>
+    <p id="share-description"></p>
+    <label>Direct address<input id="share-address" type="url" readonly></label>
+    <p>Links contain only published site/card identifiers, not your filters, wallet session or local map. Recipients see the latest public roadmap, not a frozen copy.</p>
+    <button id="copy-site-address" type="button">Copy link</button>
+    <a id="open-site-address" target="_blank" rel="noopener noreferrer">Open link in a new tab</a>
+    <p id="share-status" role="status"></p>
+  </dialog>
   <div id="toast" role="status" hidden></div>
 </body>
 </html>

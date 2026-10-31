@@ -100,6 +100,22 @@ test('human priorities are overlapping cultural lenses with distinct entity navi
   assert.match(router, /data-human-priority="continuity"/);
   assert.doesNotMatch(router, /data-human-priority="health"/);
 });
+test('supplemental proposals preserve mainline issue skeletons and sit above rather than replacing them', () => {
+  const site = constructionSites([{ id: 'lending', title: 'Lending', repository: 'TheJollyLaMa/ArtFi', fields: {} }])[0];
+  const structures = [
+    { kind: 'level', order: 1, title: 'Existing level', total: 2, closed: 1, open: 1 },
+    { kind: 'grounds', order: 1, title: 'Existing grounds', total: 1, closed: 1, open: 0 },
+  ];
+  const feed = { repositories: [{ repository: site.project.repository, structures }] };
+  const model = campusStructure(site, feed);
+  assert.equal(model.levels.length, 1);
+  assert.equal(model.grounds.length, 1);
+  assert.equal(model.plannedFloors, 5);
+  assert.equal(model.proposalBase, model.top);
+  assert.equal(model.height, model.top + 45);
+  assert.equal(model.finishedCount, 1);
+  assert.equal(model.deliveredFloors, 0);
+});
 test('monthly recall keeps public source counts distinct from deployment and local work', async () => {
   const value = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url)));
   assert.equal(validateRecall(value), value);

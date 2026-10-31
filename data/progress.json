@@ -1,120 +1,249 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-25T21:52:08.142Z",
+  "checkedAt": "2026-10-31T07:03:40.295Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:22Z",
+      "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
       "codeBytes": 79189,
       "versions": [],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentAgency/milestone/1"
+        }
+      ]
     },
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-25T14:44:30Z",
-      "release": null,
+      "pushedAt": "2026-10-31T01:41:47Z",
+      "release": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
+        "publishedAt": "2026-10-26T00:12:09Z"
+      },
       "mergedPulls": [
         {
-          "number": 287,
-          "title": "Bring DJuke, DBusk and DVert widgets up to date with seamless playlist fixes",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/287",
-          "mergedAt": "2026-10-24T18:56:59Z"
+          "number": 300,
+          "title": "Fix DBusker earnings context overflow",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/300",
+          "mergedAt": "2026-10-29T22:25:33Z"
         },
         {
-          "number": 286,
-          "title": "Make paid DJuke playlist transitions seamless",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/286",
-          "mergedAt": "2026-10-24T18:18:18Z"
+          "number": 299,
+          "title": "Advert tallies: include paid-queue adverts and archive versioned journals",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/299",
+          "mergedAt": "2026-10-29T01:06:43Z"
         },
         {
-          "number": 285,
-          "title": "Fix paid playlist continuity and preloaded radio handoffs",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/285",
-          "mergedAt": "2026-10-24T13:32:43Z"
+          "number": 298,
+          "title": "Main search dropdown + advert vote tallies",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/298",
+          "mergedAt": "2026-10-29T01:00:52Z"
         },
         {
-          "number": 283,
-          "title": "Keep stale radio play promises from stopping the next recording",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/283",
-          "mergedAt": "2026-10-24T11:27:58Z"
+          "number": 297,
+          "title": "Retry transient Pinata uploads and surface failed NFT requests",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/297",
+          "mergedAt": "2026-10-28T23:49:00Z"
         },
         {
-          "number": 281,
-          "title": "Extract DVert controllers for standalone shared-session widgets",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/281",
-          "mergedAt": "2026-10-24T11:14:03Z"
+          "number": 296,
+          "title": "Add artist and/or song search to the archive drawer",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/296",
+          "mergedAt": "2026-10-28T23:48:57Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4120375,
-      "versions": [],
-      "versionsTruncated": false
+      "codeBytes": 4474910,
+      "versions": [
+        {
+          "tag": "v1.0.0",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
+          "publishedAt": "2026-10-26T00:12:09Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "75",
+          "mintTxHash": "0x7f34b88b601c68c6f66e131f56b5b376e654c3bb836173ded8a4ab67546381ce",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 12,
+          "storefront": {
+            "purchaseUrl": "https://thejollylama.github.io/DecentHead/supporter/buy.html?chainId=8453&escrow=0x31b07b83e99A9bdF379bf40225b8A80d3804C89d&listingId=5&priceUSDC=100000000",
+            "escrow": "0x31b07b83e99A9bdF379bf40225b8A80d3804C89d",
+            "listingId": "5",
+            "priceUSDC": "100000000",
+            "frontUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-front.png",
+            "backUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-back.png",
+            "evidenceUrl": "https://github.com/TheJollyLaMa/DecentBusking/releases/download/v1.0.0/supporter-minted.json",
+            "frontSHA256": "e39cbab34de8e4479b4adcaebd30b313bfc4a2f6b1815587bd26efea7c1ff9fc",
+            "backSHA256": "e006cc359910c7a03e5d592b190736e94499bf44c6b25f4b662798c389edabff"
+          }
+        }
+      ],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 2,
+          "kind": "grounds",
+          "order": 2,
+          "name": "Rocket arcade",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/2"
+        },
+        {
+          "number": 3,
+          "kind": "grounds",
+          "order": 3,
+          "name": "3D jukebox stage",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/3"
+        },
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "DBusker community guide",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/1"
+        }
+      ]
     },
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-25T21:42:24Z",
+      "pushedAt": "2026-10-31T06:56:00Z",
       "release": null,
       "mergedPulls": [
         {
-          "number": 44,
-          "title": "Make the Agency overview a reuse-first build desk",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/44",
-          "mergedAt": "2026-10-24T14:29:50Z"
+          "number": 49,
+          "title": "Record partial BigNuten Level 5 delivery",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/49",
+          "mergedAt": "2026-10-29T12:19:33Z"
         },
         {
-          "number": 43,
-          "title": "Mount pinned standalone DBusk radio widget in Canopy",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/43",
-          "mergedAt": "2026-10-24T11:33:54Z"
+          "number": 48,
+          "title": "Record BigNuten Level 4 health foundation",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/48",
+          "mergedAt": "2026-10-29T01:50:26Z"
         },
         {
-          "number": 42,
-          "title": "Consolidate creator maps and add ordered map dropdown",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/42",
-          "mergedAt": "2026-10-23T18:20:39Z"
+          "number": 47,
+          "title": "BigNuten: Level 3 'Recovery and privacy' evidence",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/47",
+          "mergedAt": "2026-10-29T00:28:36Z"
         },
         {
-          "number": 41,
-          "title": "Accept nullable Busking evidence without enabling balances",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/41",
-          "mergedAt": "2026-10-23T17:48:56Z"
+          "number": 46,
+          "title": "BigNuten: Level 2 'Scrub and test' evidence",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/46",
+          "mergedAt": "2026-10-28T23:48:31Z"
         },
         {
-          "number": 40,
-          "title": "Harden GitHub connector revocation recovery",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/40",
-          "mergedAt": "2026-10-23T16:02:47Z"
+          "number": 45,
+          "title": "BigNuten: Level 1 'Land and stabilize' evidence",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/45",
+          "mergedAt": "2026-10-28T22:42:05Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1266112,
+      "codeBytes": 1266116,
       "versions": [],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 5,
+          "kind": "grounds",
+          "order": 5,
+          "name": "Integration bridges",
+          "open": 2,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/5"
+        },
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Community rewards setup",
+          "open": 2,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/1"
+        },
+        {
+          "number": 2,
+          "kind": "level",
+          "order": 2,
+          "name": "Reusable project platform",
+          "open": 6,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/2"
+        },
+        {
+          "number": 3,
+          "kind": "level",
+          "order": 3,
+          "name": "ArtFi funding layer",
+          "open": 6,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/3"
+        },
+        {
+          "number": 4,
+          "kind": "level",
+          "order": 4,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/4"
+        }
+      ]
     },
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:22:12Z",
+      "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
         "tag": "v2.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentHead/releases/tag/v2.0.0",
         "publishedAt": "2026-10-21T21:28:52Z"
       },
       "mergedPulls": [
+        {
+          "number": 32,
+          "title": "Support frozen 100-USDC supporter release terms",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/32",
+          "mergedAt": "2026-10-26T00:09:59Z"
+        },
         {
           "number": 31,
           "title": "Support 100-edition product releases without rewriting legacy manifests",
@@ -138,16 +267,10 @@
           "title": "Add ENS avatar and header art",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/28",
           "mergedAt": "2026-10-22T18:08:01Z"
-        },
-        {
-          "number": 26,
-          "title": "Accept Studio evidence in verified Supporter announcements",
-          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/26",
-          "mergedAt": "2026-10-22T03:08:04Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2851368,
+      "codeBytes": 2856254,
       "versions": [
         {
           "tag": "v2.0.0",
@@ -172,20 +295,38 @@
           }
         }
       ],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Multilingual host adapter",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/milestone/1"
+        }
+      ]
     },
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-25T09:20:53Z",
+      "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
         "tag": "v0.3.1",
         "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
         "publishedAt": "2026-10-22T02:26:31Z"
       },
       "mergedPulls": [
+        {
+          "number": 70,
+          "title": "Bind supporter minting to reviewed supply and USDC price",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/70",
+          "mergedAt": "2026-10-26T00:09:47Z"
+        },
         {
           "number": 69,
           "title": "Release USDC-only DJuke v0.5 with incremental playlist fees",
@@ -209,16 +350,10 @@
           "title": "feat: DJuke v0.4 playlist lane, tiered pricing, 24-song cap",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/66",
           "mergedAt": "2026-10-22T17:04:47Z"
-        },
-        {
-          "number": 65,
-          "title": "feat: DJuke v0.4 named playlists",
-          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/65",
-          "mergedAt": "2026-10-22T15:43:59Z"
         }
       ],
       "issues": null,
-      "codeBytes": 955107,
+      "codeBytes": 960208,
       "versions": [
         {
           "tag": "v0.3.1",
@@ -243,58 +378,162 @@
           }
         }
       ],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "DecentNFT v0.3",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/milestone/1"
+        }
+      ]
     },
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-23T06:15:59Z",
+      "pushedAt": "2026-10-29T14:41:07Z",
       "release": null,
       "mergedPulls": [
         {
-          "number": 344,
-          "title": "Adopt standard Supporter DNFT release workflows",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/344",
-          "mergedAt": "2026-10-23T06:15:58Z"
+          "number": 388,
+          "title": "Add accessible local-only Quest Mode (partial #209)",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/388",
+          "mergedAt": "2026-10-29T14:40:54Z"
         },
         {
-          "number": 332,
-          "title": "Modernize payroll with ART and BNUT support",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/332",
-          "mergedAt": "2026-09-30T08:26:42Z"
+          "number": 387,
+          "title": "Add Genie Community Guide and read-only challenge coach",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/387",
+          "mergedAt": "2026-10-29T14:15:14Z"
         },
         {
-          "number": 333,
-          "title": "Default BigNuten to Base with selectable Optimism fallback",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/333",
-          "mergedAt": "2026-09-18T14:55:51Z"
+          "number": 386,
+          "title": "Add privacy-safe Genie issue drafts and issue templates",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/386",
+          "mergedAt": "2026-10-29T14:00:08Z"
         },
         {
-          "number": 331,
-          "title": "Add Pinata-backed IPFS provider and unified storage status UI",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/331",
-          "mergedAt": "2026-08-24T16:46:32Z"
+          "number": 384,
+          "title": "Anchor immutable final post-settlement receipts",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/384",
+          "mergedAt": "2026-10-29T13:24:23Z"
         },
         {
-          "number": 329,
-          "title": "Decouple backup layer from web3.storage — provider-agnostic StorageProvider interface with content-addressed snapshots",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/329",
-          "mergedAt": "2026-08-18T08:01:39Z"
+          "number": 385,
+          "title": "Add source-only ranked payout ties",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/385",
+          "mergedAt": "2026-10-29T13:15:04Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1669279,
+      "codeBytes": 2458309,
       "versions": [],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 7,
+          "kind": "grounds",
+          "order": 7,
+          "name": "Genie guide house",
+          "open": 2,
+          "closed": 3,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/7"
+        },
+        {
+          "number": 8,
+          "kind": "grounds",
+          "order": 8,
+          "name": "Contributor workshop",
+          "open": 8,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/8"
+        },
+        {
+          "number": 9,
+          "kind": "grounds",
+          "order": 9,
+          "name": "Legacy DeFi salvage yard",
+          "open": 18,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/9"
+        },
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Land and stabilize",
+          "open": 0,
+          "closed": 3,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/1"
+        },
+        {
+          "number": 2,
+          "kind": "level",
+          "order": 2,
+          "name": "Scrub and test",
+          "open": 0,
+          "closed": 7,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/2"
+        },
+        {
+          "number": 3,
+          "kind": "level",
+          "order": 3,
+          "name": "Recovery and privacy",
+          "open": 0,
+          "closed": 3,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/3"
+        },
+        {
+          "number": 4,
+          "kind": "level",
+          "order": 4,
+          "name": "Health foundation",
+          "open": 0,
+          "closed": 22,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/4"
+        },
+        {
+          "number": 5,
+          "kind": "level",
+          "order": 5,
+          "name": "Commitment club",
+          "open": 4,
+          "closed": 2,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/5"
+        },
+        {
+          "number": 6,
+          "kind": "level",
+          "order": 6,
+          "name": "Release crown",
+          "open": 3,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/6"
+        }
+      ]
     },
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:24:20Z",
+      "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
         "tag": "v0.2.0",
         "url": "https://github.com/A-Decent-Agency/DecentJukebox/releases/tag/v0.2.0",
@@ -352,14 +591,36 @@
           }
         }
       ],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Album studio",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/milestone/1"
+        },
+        {
+          "number": 2,
+          "kind": "level",
+          "order": 2,
+          "name": "Juke the Squid",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/milestone/2"
+        }
+      ]
     },
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:24:36Z",
+      "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
         "tag": "v0.2.0",
         "url": "https://github.com/A-Decent-Agency/DBuskRadio/releases/tag/v0.2.0",
@@ -423,14 +684,15 @@
           }
         }
       ],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": []
     },
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-24T19:31:33Z",
+      "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
         "tag": "v0.2.1",
         "url": "https://github.com/A-Decent-Agency/DVert/releases/tag/v0.2.1",
@@ -494,16 +756,35 @@
           }
         }
       ],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": []
     },
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-10-25T21:52:08.142Z",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
       "error": "",
-      "pushedAt": "2026-10-25T19:06:23Z",
+      "pushedAt": "2026-10-31T00:52:43Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 14,
+          "title": "Living map: cul-de-sac sprawl, Canopy city and repo-triggered sync",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/14",
+          "mergedAt": "2026-10-27T18:02:05Z"
+        },
+        {
+          "number": 13,
+          "title": "Issue skeletons: milestone levels and grounds that finish as issues close",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/13",
+          "mergedAt": "2026-10-27T15:54:41Z"
+        },
+        {
+          "number": 12,
+          "title": "Honor release-backed supporter prices throughout the map",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/12",
+          "mergedAt": "2026-10-26T00:09:47Z"
+        },
         {
           "number": 11,
           "title": "Enable same-page Supporter purchases beside project sites",
@@ -515,30 +796,209 @@
           "title": "Add project mint galleries with verified purchase links",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/10",
           "mergedAt": "2026-10-25T17:06:20Z"
-        },
-        {
-          "number": 9,
-          "title": "Create an artful campus observatory with version-backed floors",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/9",
-          "mergedAt": "2026-10-25T16:25:45Z"
-        },
-        {
-          "number": 7,
-          "title": "Build a living project highway for the Agency planning office",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/7",
-          "mergedAt": "2026-10-25T15:25:32Z"
-        },
-        {
-          "number": 5,
-          "title": "Add explicit public identities for construction site signs",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/5",
-          "mergedAt": "2026-10-23T17:36:22Z"
         }
       ],
       "issues": null,
-      "codeBytes": 348077,
+      "codeBytes": 401383,
       "versions": [],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "grounds",
+          "order": 1,
+          "name": "DecentCalendar v1 planning pavilion",
+          "open": 3,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/milestone/1"
+        }
+      ]
+    },
+    {
+      "repository": "TheJollyLaMa/DecentSubscriptions",
+      "state": "available",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
+      "error": "",
+      "pushedAt": "2026-10-27T18:02:47Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null,
+      "codeBytes": 33671,
+      "versions": [],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentSubscriptions/milestone/1"
+        }
+      ]
+    },
+    {
+      "repository": "TheJollyLaMa/DecentPilgrimages",
+      "state": "available",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
+      "error": "",
+      "pushedAt": "2026-10-27T18:02:50Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null,
+      "codeBytes": 67099,
+      "versions": [],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/1"
+        }
+      ]
+    },
+    {
+      "repository": "TheJollyLaMa/DecentEscrow",
+      "state": "available",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
+      "error": "",
+      "pushedAt": "2026-10-27T18:02:52Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null,
+      "codeBytes": 57941,
+      "versions": [],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentEscrow/milestone/1"
+        }
+      ]
+    },
+    {
+      "repository": "TheJollyLaMa/DecentInvoice",
+      "state": "available",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
+      "error": "",
+      "pushedAt": "2026-10-27T18:02:55Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null,
+      "codeBytes": 21003,
+      "versions": [],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentInvoice/milestone/1"
+        }
+      ]
+    },
+    {
+      "repository": "TheJollyLaMa/DecentAirdrop",
+      "state": "available",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
+      "error": "",
+      "pushedAt": "2026-10-27T18:02:58Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null,
+      "codeBytes": 54105,
+      "versions": [],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Reliable sends",
+          "open": 2,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentAirdrop/milestone/1"
+        },
+        {
+          "number": 2,
+          "kind": "level",
+          "order": 2,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/DecentAirdrop/milestone/2"
+        }
+      ]
+    },
+    {
+      "repository": "TheJollyLaMa/Decent_NDA",
+      "state": "available",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
+      "error": "",
+      "pushedAt": "2026-10-27T18:03:01Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null,
+      "codeBytes": 38917,
+      "versions": [],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/Decent_NDA/milestone/1"
+        }
+      ]
+    },
+    {
+      "repository": "TheJollyLaMa/Decent_UCAN_Play",
+      "state": "available",
+      "checkedAt": "2026-10-31T07:03:40.295Z",
+      "error": "",
+      "pushedAt": "2026-10-27T18:03:03Z",
+      "release": null,
+      "mergedPulls": [],
+      "issues": null,
+      "codeBytes": 11545,
+      "versions": [],
+      "versionsTruncated": false,
+      "structures": [
+        {
+          "number": 1,
+          "kind": "level",
+          "order": 1,
+          "name": "Supporter release workflows",
+          "open": 1,
+          "closed": 0,
+          "state": "open",
+          "url": "https://github.com/TheJollyLaMa/Decent_UCAN_Play/milestone/1"
+        }
+      ]
     }
   ],
   "connections": [

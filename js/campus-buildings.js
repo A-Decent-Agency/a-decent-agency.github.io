@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { LEVEL_HEIGHT, SATELLITE_WIDTH } from './project-campus.js';
 
 function block(group, x, y, z, w, h, d, color, glass = false) {
   group.userData.buildingBlocks.push({ x, y: y + h / 2, z, w, h, d, color, glass });
@@ -33,6 +34,56 @@ function terrace(group, width, y, color) {
     planter.position.set(x, y + 3, 7); group.add(planter);
   }
 }
+const STEEL = '#e0b867', SLAB = '#4f5768';
+// Open bays show bare steel; each closed issue clads one bay; a finished structure becomes solid project-colored floor space.
+function skeletonBox(group, cx, y, cz, w, h, d, bays, clad, finished, color) {
+  block(group, cx, y, cz, w, .5, d, finished ? '#e6d8be' : SLAB);
+  if (finished) {
+    block(group, cx, y + .5, cz, w - .6, h - 1, d - .6, color, true);
+    for (let x = cx - w / 2 + 2; x < cx + w / 2 - 1; x += 4) block(group, x, y + 2, cz + d / 2 - .2, 1.6, Math.max(1, h - 4), .2, '#fae5a0');
+    block(group, cx, y + h - .5, cz, w, .5, d, color);
+    return;
+  }
+  const bay = w / bays;
+  for (let i = 0; i <= bays; i++) for (const z of [cz - d / 2, cz + d / 2]) block(group, cx - w / 2 + i * bay, y + .5, z, .45, h - .5, .45, STEEL);
+  for (const x of [cx - w / 2, cx + w / 2]) block(group, x, y + .5, cz, .45, h - .5, .45, STEEL);
+  for (const z of [cz - d / 2, cz + d / 2]) block(group, cx, y + h - .5, z, w, .45, .45, STEEL);
+  for (const x of [cx - w / 2, cx + w / 2]) block(group, x, y + h - .5, cz, .45, .45, d, STEEL);
+  for (let i = 0; i < clad; i++) {
+    const x = cx - w / 2 + (i + .5) * bay;
+    for (const z of [cz - d / 2, cz + d / 2]) block(group, x, y + .6, z, bay - .6, h - 1.4, .25, color, true);
+  }
+}
+function road(group, x1, z1, x2, z2) {
+  const length = Math.hypot(x2 - x1, z2 - z1);
+  const strip = new THREE.Mesh(new THREE.BoxGeometry(length, .3, 6), new THREE.MeshLambertMaterial({ color: '#3a4352' }));
+  strip.position.set((x1 + x2) / 2, 1.3, (z1 + z2) / 2); strip.rotation.y = -Math.atan2(z2 - z1, x2 - x1); group.add(strip);
+}
+// Satellite towers ring fractal cul-de-sacs once a main tower is full; same bay rules as the main tower.
+function buildSprawl(group, model, color) {
+  for (const segment of model.roads || []) road(group, segment.x1, segment.z1, segment.x2, segment.z2);
+  for (const bulb of model.culdesacs || []) {
+    const disc = new THREE.Mesh(new THREE.CylinderGeometry(bulb.radius, bulb.radius, .35, 24), new THREE.MeshLambertMaterial({ color: '#3a4352' }));
+    disc.position.set(bulb.x, 1.35, bulb.z); group.add(disc);
+    const island = new THREE.Mesh(new THREE.CylinderGeometry(bulb.radius * .35, bulb.radius * .35, .8, 16), new THREE.MeshLambertMaterial({ color: '#3d987d' }));
+    island.position.set(bulb.x, 1.6, bulb.z); group.add(island);
+  }
+  for (const tower of model.towers || []) {
+    block(group, tower.x, 1.2, tower.z, SATELLITE_WIDTH + 4, .6, 16, '#d0c8ae');
+    for (const level of tower.levels) skeletonBox(group, tower.x, level.y, tower.z, level.width, LEVEL_HEIGHT - .4, 12, level.bays, level.cladBays, level.finished, color);
+    if (tower.finished) block(group, tower.x, tower.top, tower.z, SATELLITE_WIDTH * .6, 2.5, 8, color);
+  }
+}
+function buildSkeleton(group, model, color) {
+  for (const level of model.levels.filter(level => !level.tower)) skeletonBox(group, 0, level.y, 0, level.width, LEVEL_HEIGHT - .4, 18, level.bays, level.cladBays, level.finished, color);
+  buildSprawl(group, model, color);
+  for (const structure of model.grounds) {
+    const { x, z, size, height } = structure;
+    block(group, x, 1.2, z, size + 3, .6, size + 3, '#d0c8ae');
+    skeletonBox(group, x, 1.8, z, size, height, size * .8, Math.min(8, structure.bays), Math.min(8, structure.cladBays), structure.finished, color);
+    if (structure.finished) block(group, x, 1.8 + height, z, size * .6, 2, size * .5, color);
+  }
+}
 export function buildCampus(group, site, model) {
   group.userData.buildingBlocks = [];
   const color = site.project?.color || '#8ba3bd', width = model.width;
@@ -40,7 +91,7 @@ export function buildCampus(group, site, model) {
   block(group, 0, 2, 15, width + 10, .5, 5, '#d0c8ae');
   for (const x of [-width / 2 - 4, width / 2 + 4]) tree(group, x, 10);
   for (let floor = 0; floor < model.floors; floor++) {
-    const h = model.plannedFloors ? 9 : model.height / model.floors, y = 2 + floor * h;
+    const h = model.baseHeight / model.floors, y = 2 + floor * h;
     const delivered = floor < model.deliveredFloors;
     const tint = delivered ? color : '#60748b';
     const w = Math.max(10, width - floor * (model.form === 'tower' ? 1.8 : model.form === 'foundation' ? 5 : 0));
@@ -53,7 +104,7 @@ export function buildCampus(group, site, model) {
   if (model.plannedFloors) {
     // Outlined proposal levels are distinct from solid receipt-backed delivery.
     for (let level = 0; level < model.plannedFloors; level++) {
-      const y = 2 + model.floors * 9 + level * 9, w = width - level * 1.5;
+      const y = 2 + model.proposalBase + level * 9, w = width - level * 1.5;
       const outline = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w, 8, 20)),
         new THREE.LineBasicMaterial({ color, transparent: true, opacity: .65 }));
       outline.position.set(0, y + 4, 0); group.add(outline);
@@ -127,13 +178,14 @@ export function buildCampus(group, site, model) {
   } else {
     block(group, 0, 2, 0, width * .7, .4, 18, '#386b8a');
     for (let x = -width / 3; x <= width / 3; x += 6) block(group, x, 2, 0, .35, .45, 18, '#98cadd');
-    if (model.form === 'staging') {
+    if (model.form === 'staging' && !model.levels?.length) {
       for (const x of [-9, 9]) {
         const dome = new THREE.Mesh(new THREE.SphereGeometry(6, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshLambertMaterial({ color: '#bd9bd5', wireframe: true }));
         dome.position.set(x, 2, 0); group.add(dome);
       }
     }
   }
+  if (model.levels?.length || model.grounds?.length) buildSkeleton(group, model, color);
   // Work in progress occupies a separate service yard, never the delivered version floors.
   const messy = model.messy;
   if (messy) {

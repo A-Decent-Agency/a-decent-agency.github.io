@@ -89,6 +89,12 @@ html[data-view="flight"] .intro h1 > span { margin-left: .25em; }
 #workspace.list-mode .historical-reminder { position: static; order: -1; max-width: none; margin: 12px; }
 .flight-site .eyebrow { font-size: 8px; color: var(--gold); line-height: 1.8; }
 .flight-site h3 { font-size: 17px; margin: 10px 0; overflow-wrap: anywhere; }
+.flight-site #share-site { margin-bottom: 12px; }
+#share-card { margin-bottom: 16px; }
+#share-address { width: 100%; }
+#share-dialog p, #share-dialog a { overflow-wrap: anywhere; }
+#share-dialog #open-site-address { display: inline-block; margin: 12px 0; }
+#site-link-status { color: var(--gold); }
 .flight-site p { font-size: 10px; line-height: 1.7; color: var(--muted); margin-bottom: 10px; }
 .flight-site #flight-site-metrics { color: var(--cyan); }
 .campus-stage { color: var(--gold); font-size: 14px; font-weight: 700; line-height: 1.5; }

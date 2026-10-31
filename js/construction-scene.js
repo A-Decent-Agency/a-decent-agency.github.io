@@ -3,6 +3,8 @@ import { COLORS } from './model.js';
 import { constructionSites, routePoint, flightStep, pastCameraOffset, FLIGHT_BOUNDS } from './construction-model.js';
 import { siteIdentity, PROJECT_MURALS } from './site-identities.js';
 import { campusStructure } from './project-campus.js';
+import { canopyCity, CITY_LIFT, CITY_RADIUS } from './canopy-city.js';
+import { CANOPY } from './canopy-registry.js';
 import { buildCampus } from './campus-buildings.js';
 import { campusConnections, campusPriority } from './campus-graph.js';
 import { projectMints } from './version-mints.js';
@@ -10,6 +12,7 @@ import { mintArtworkPath, supporterPriceLabel } from './progress-feed.js';
 import { HISTORICAL_MAPS } from './historical-maps.js';
 
 const lineMaterial = color => new THREE.LineBasicMaterial({ color });
+const CANOPY_HOST = 'TheJollyLaMa/DecentCanopy';
 function lines(points, color) {
   const geometry = new THREE.BufferGeometry().setFromPoints(points.map(point => new THREE.Vector3(...point)));
   return new THREE.LineSegments(geometry, lineMaterial(color));
@@ -161,8 +164,39 @@ export class ConstructionScene {
     });
     this.group.clear();
   }
+  // DecentCanopy's roof carries a top-down city of the Canopy registry; each mini building flies to its project site.
+  addCanopyCity(campus, city, y) {
+    const canopy = new THREE.Group(); canopy.position.y = y; campus.add(canopy);
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 3.4, CITY_LIFT, 8), new THREE.MeshLambertMaterial({ color: '#6d4c43' }));
+    trunk.position.y = -CITY_LIFT / 2; canopy.add(trunk);
+    const crown = new THREE.Mesh(new THREE.CylinderGeometry(CITY_RADIUS + 7, CITY_RADIUS + 4, 1.2, 40),
+      new THREE.MeshLambertMaterial({ color: '#2f6f55', transparent: true, opacity: .82 }));
+    canopy.add(crown);
+    const at = key => city.nodes.find(node => node.key === key);
+    for (const edge of city.edges) {
+      const a = at(edge.from), b = at(edge.to);
+      canopy.add(lines([[a.x, .9, a.z], [b.x, .9, b.z]], '#c9e7a7'));
+    }
+    for (const link of city.links) {
+      const a = at(link.from), b = at(link.to);
+      const line = lines([[a.x, 3, a.z], [b.x, 3, b.z]], '#71e6d0'); line.material.transparent = true; line.material.opacity = .45; canopy.add(line);
+    }
+    for (const node of city.nodes) {
+      const open = node.planned > node.finished, target = this.sites.find(site => site.project?.repository.toLowerCase() === node.key);
+      const mini = new THREE.Mesh(new THREE.BoxGeometry(node.root ? 5 : 3.4, node.height, node.root ? 5 : 3.4),
+        new THREE.MeshLambertMaterial({ color: node.observed ? node.color : '#8ba3bd', transparent: !node.observed, opacity: node.observed ? 1 : .6 }));
+      mini.position.set(node.x, .6 + node.height / 2, node.z); canopy.add(mini);
+      if (open) {
+        const steel = new THREE.Mesh(new THREE.BoxGeometry(3.8, 1.6, 3.8), new THREE.MeshBasicMaterial({ color: '#e0b867', wireframe: true }));
+        steel.position.set(node.x, .6 + node.height + .8, node.z); canopy.add(steel);
+      }
+      const label = textSprite(node.planned ? `${node.name} ${node.finished}/${node.planned}` : node.name, node.observed ? node.color : '#a89eb9', 11);
+      label.position.set(node.x, node.height + 4.5, node.z); canopy.add(label);
+      if (target) for (const object of [mini, label]) { object.userData.index = target.index; this.targets.push(object); }
+    }
+  }
   setData(items, tab, page, links, feed, options) {
-    const previous = this.sites[this.selected]?.id;
+    const previous = options?.siteId || this.sites[this.selected]?.id;
     this.clear(); this.sites = constructionSites(items, options); this.targets = []; this.signals = []; this.campuses = new Map();
     this.connections = campusConnections(this.sites, feed);
     this.keys.clear(); this.target = null;
@@ -176,12 +210,29 @@ export class ConstructionScene {
         const a = index / 6 * Math.PI * 2; return new THREE.Vector3(Math.cos(a) * 16 * site.scale, .7, Math.sin(a) * 16 * site.scale);
       })), lineMaterial(color)); campus.add(ring);
       const structure = campusStructure(site, feed), tint = site.project?.color || color;
+      const city = site.project?.repository === CANOPY_HOST ? canopyCity(CANOPY, feed, { root: CANOPY_HOST }) : null;
+      // With a roof city, crown signs and artwork stand beside the canopy so the top-down view stays clear.
+      const roof = structure.height + (city ? CITY_LIFT : 0), aside = city ? -(CITY_RADIUS + 34) : 0;
       if (site.project) {
         buildCampus(campus, site, structure);
+        if (city) this.addCanopyCity(campus, city, structure.height + CITY_LIFT);
         site.visibleCranes = structure.buildCranes;
+        const progress = item => `${item.closed}/${item.total} ISSUES`;
+        for (const tower of structure.towers) {
+          const sign = textSprite(`TOWER ${tower.index + 1} / ${tower.name} / ${tower.finished ? 'FINISHED' : `${tower.finishedCount}/${tower.levels.length} LEVELS FINISHED`}`, tower.finished ? tint : '#e0b867', 30);
+          sign.position.set(tower.x, tower.top + 7, tower.z); campus.add(sign);
+        }
+        for (const level of structure.levels.filter(level => !level.tower)) {
+          const sign = textSprite(`L${level.order} ${level.name.toUpperCase()} / ${level.finished ? 'FINISHED' : progress(level)}`, level.finished ? tint : '#e0b867', 30);
+          sign.position.set(-level.width / 2 - 13, level.y + 4.5, 0); campus.add(sign);
+        }
+        for (const ground of structure.grounds) {
+          const sign = textSprite(`${ground.name.toUpperCase()} / ${ground.finished ? 'FINISHED' : progress(ground)}`, ground.finished ? tint : '#e0b867', 28);
+          sign.position.set(ground.x, ground.height + 9, ground.z); campus.add(sign);
+        }
         const plan = sitePlanSprite(site); plan.position.set(-structure.width / 2 - 16, 13, 18);
         plan.userData.index = site.index; this.targets.push(plan); campus.add(plan);
-        const crown = textSprite(site.project.milestone, tint, 62); crown.position.set(0, structure.height + 15, 0); campus.add(crown);
+        const crown = textSprite(site.project.milestone, tint, 62); crown.position.set(aside, roof + 15, 0); campus.add(crown);
         const editions = projectMints(site, feed);
         editions.forEach((version, index) => {
           const display = new THREE.Group();
@@ -262,7 +313,7 @@ export class ConstructionScene {
           proposal.position.set(0, structure.height + 20, 0); campus.add(proposal);
           structure.plan.stages.forEach((stage, index) => {
             const label = textSprite(`PLAN ${index + 1} / ${stage.title}`, tint, 30);
-            label.position.set(0, 7 + structure.floors * 9 + index * 9, 11);
+            label.position.set(0, 7 + structure.proposalBase + index * 9, 11);
             label.scale.multiplyScalar(.65); campus.add(label);
           });
         }
@@ -272,7 +323,7 @@ export class ConstructionScene {
             : observation.release ? `RELEASE / ${observation.release.tag}` : 'PUBLIC GITHUB ACTIVITY / OBSERVED';
           const activity = textSprite(label, observation.state === 'available' ? '#71e6d0' : '#ee92af', 38);
           activity.scale.multiplyScalar(1.4);
-          activity.position.set(0, structure.height + 24, 0); campus.add(activity);
+          activity.position.set(aside, roof + 24, 0); campus.add(activity);
         }
         const from = new THREE.Vector3(site.position.x, site.position.y - 18, site.position.z + 35);
         const to = campus.position.clone().add(new THREE.Vector3(0, 2, 24));
@@ -288,7 +339,7 @@ export class ConstructionScene {
             if (!campus.parent) { texture.dispose(); return; }
             texture.colorSpace = THREE.SRGBColorSpace;
             const sign = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false }));
-            sign.scale.set(24, 24, 1); sign.position.set(0, structure.height + 44, 0); campus.add(sign); this.invalidate();
+            sign.scale.set(24, 24, 1); sign.position.set(aside, roof + 44, 0); campus.add(sign); this.invalidate();
           }, undefined, () => {
             if (campus.parent) this.container.dispatchEvent(new CustomEvent('artworkerror', { detail: `${site.title}: artwork unavailable; project sign retained.` }));
           });
@@ -408,12 +459,12 @@ export class ConstructionScene {
     }
     this.invalidate();
   }
-  goTo(index) {
+  goTo(index, { immediate = false } = {}) {
     if (!this.sites.length) return;
     const at = Math.max(0, Math.min(this.sites.length - 1, index));
     this.selected = at; this.keys.clear(); this.onSite(this.sites[at], at);
     this.highlightSite(this.sites[at].id);
-    if (this.reduced || this.paused) { this.state = { progress: at, x: 0, y: 0 }; this.target = null; }
+    if (immediate || this.reduced || this.paused) { this.state = { progress: at, x: 0, y: 0 }; this.target = null; }
     else this.target = at;
     this.invalidate();
   }
