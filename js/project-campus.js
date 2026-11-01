@@ -19,7 +19,7 @@ export const LANDMARKS = [
   { repository: 'A-Decent-Agency/a-decent-agency.github.io', name: 'Agency Office', form: 'hall', color: '#baa2e8',
     milestone: 'Planning observatory / shared jobs and project map' },
   ...REVIVAL_PLANS.map(plan => ({ repository: plan.repository, name: plan.name, form: 'planning-tower', color: plan.color,
-    milestone: `${plan.district} / proposed revival`, basis: 'Steward-directed planning tower · 31 Oct 2026; schematic levels are proposals, not releases' })),
+    milestone: `${plan.district} / ${plan.focus}`, basis: `Steward-directed planning tower · ${plan.directedAt || '31 Oct 2026'}; schematic levels are proposals, not releases` })),
 ];
 
 export function publicRepository(item) {
