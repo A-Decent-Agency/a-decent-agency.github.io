@@ -6,6 +6,38 @@ Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, acco
 
 ## October recall and the next five planning towers
 
+### November teams: Pilgrimages V1 and BabelBet preparation
+
+Steward direction on **1 November 2026** gives the existing Pilgrimages and
+BabelBet towers distinct scopes, worker responsibilities and public acceptance
+jobs. Pilgrimages is a **Base V1 build**: versioned contracts, organizer-approved
+rewards, an optional-location journey, shared Decent Head/wallet/IPFS, admin and
+personal ankhs, opt-in radio, bunny-hop onboarding and an optional server-side
+helper. Legacy Optimism obligations require reconciliation before migration.
+Source verification does not promise warning-free wallet simulation.
+
+BabelBet is **preparation only**: update the shared experience and contributor
+instructions, quarantine provider/watcher entrypoints and retain future game
+decisions. No official or unofficial Duolingo access, new challenge engine,
+wager or payout contract is authorized.
+
+Each tower shows workers and an **integration overseer**, linked to real public
+issues and milestones. These are acceptance responsibilities, not paid
+appointments, automatic agents or delivered-version evidence. Both projects
+prepare the existing accepted-work payroll queue/receipt pipeline, with financial
+activation left steward-gated. Newcomers can participate freely; paid work
+requires agreed acceptance, private contributor registration, funding approval
+and a verified settlement receipt. Assistant setup likewise does not activate
+an external service.
+
+Public jobs: [Pilgrimages](https://github.com/TheJollyLaMa/DecentPilgrimages/issues)
+and [BabelBet](https://github.com/TheJollyLaMa/BabelBet/issues). Planned levels
+remain outlined until real acceptance and release evidence exists. Source
+project exports and observer snapshots keep their own timestamps.
+Both repositories are in the Office's explicit public observation allowlist;
+their real GitHub milestone issues form structural bays separately from the
+outlined vision levels. A failed observation stays unavailable, never completed.
+
 The **October recall** disclosure reconciles fourteen selected public repositories
 with current GitHub source evidence: October merged PRs, issue closures, open
 issues, in-flight PRs and recent release tags. Each entry records its observation

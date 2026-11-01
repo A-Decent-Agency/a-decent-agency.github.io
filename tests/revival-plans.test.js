@@ -47,6 +47,31 @@ test('proposal levels cannot create delivered floors, change board jobs, or iden
     assert.equal(renderRevivalPlan({}), '');
   }
 });
+test('November teams distinguish Base V1, preparation-only and steward activation gates', () => {
+  const pilgrimage = REVIVAL_PLANS.find(plan => plan.name === 'DecentPilgrimages');
+  const babelbet = REVIVAL_PLANS.find(plan => plan.name === 'BabelBet');
+  assert.equal(pilgrimage.directedAt, '1 Nov 2026');
+  assert.equal(babelbet.directedAt, pilgrimage.directedAt);
+  assert.match(pilgrimage.focus, /Base V1/);
+  assert.match(pilgrimage.caution, /organizer approval controls rewards/);
+  assert.match(pilgrimage.caution, /does not guarantee warning-free/);
+  assert.match(babelbet.focus, /preparation only/);
+  assert.match(babelbet.caution, /Neither official nor unofficial Duolingo/);
+  assert.match(babelbet.caution, /do not build a game/);
+  for (const plan of [pilgrimage, babelbet]) {
+    const site = constructionSites([], { includeContext: true }).find(site => site.project?.repository === plan.repository);
+    const html = renderRevivalPlan(site);
+    assert.match(html, /data-revival-team/);
+    assert.match(html, /Integration overseer/);
+    assert.match(html, /Queue preparation is not payment/);
+    assert.match(html, /not paid appointments or autonomous background services/);
+    assert.equal(campusStructure(site).deliveredFloors, 0);
+    for (const member of plan.team) {
+      assert.match(html, new RegExp(`/issues/${member.job}"`));
+      assert.ok(plan.sources.some(entry => entry.url.endsWith(`/issues/${member.job}`)));
+    }
+  }
+});
 test('proposed crossovers are dashed evidence with an integration acceptance test, not observed relationships', () => {
   const sites = constructionSites([], { includeContext: true });
   const links = campusConnections(sites, null).filter(link => link.kind === 'revival proposal');

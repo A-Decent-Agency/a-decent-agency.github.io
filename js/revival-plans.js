@@ -65,27 +65,39 @@ export const REVIVAL_PLANS = [
   },
   {
     repository: 'TheJollyLaMa/DecentPilgrimages', name: 'DecentPilgrimages', district: 'Journey and local welcome trail',
-    color: '#e4c18b', motif: 'trail', focus: 'Discovery / staged revival',
+    color: '#e4c18b', motif: 'trail', focus: 'Next delivery / Base V1 build', directedAt: '1 Nov 2026',
     intent: 'Make purposeful travel a route into local connection: places, missions, welcome, sponsor support and a record of what was learned or contributed.',
     observed: 'The public browser/Leaflet and Solidity project models sponsor token pools, locations, participant allowlists and claims. Its package test command is a placeholder. Source presence is not verified physical presence, correct deployed accounting or pilot readiness.',
     historical: 'SmartHome page 5 describes DooBetter cycling, QR onboarding and GeoRewards at places along a route. This is a thematic crossover into Pilgrimages, not proven repository ancestry or a claim that browser coordinates are trusted location evidence.',
     archive: { id: 'smarthome-4', page: 5 },
-    caution: 'Do not publish private travel traces or imply spoofable browser location proves presence. Decide reservation/claim accounting, participant rules, consent and dispute handling before funded journeys. No automatic geofenced payouts are introduced by this plan.',
+    caution: 'Browser location is optional onboarding guidance, never proof of presence; organizer approval controls rewards. Preserve old Optimism obligations while preparing a newly versioned Base contract. No private travel traces, live migration, assistant activation or payroll execution without explicit steward approval. Verified source does not guarantee warning-free wallet simulation or reputation.',
     sources: [
       source('TheJollyLaMa/DecentPilgrimages', '7b97c4ae045a2b54cfa1dccdf4bfcace2eb6f15f', 'public/contracts/DecentPilgrimage.sol', 'Existing sponsor/location/claim model'),
       source('TheJollyLaMa/DecentPilgrimages', '7b97c4ae045a2b54cfa1dccdf4bfcace2eb6f15f', 'public/scripts/main.js', 'Existing map and claim interface'),
       issue('TheJollyLaMa/DecentPilgrimages', 1, 'Open Supporter workflow / no journey acceptance implied'),
+      issue('TheJollyLaMa/DecentPilgrimages', 2, 'Base contract worker / approved claims'),
+      issue('TheJollyLaMa/DecentPilgrimages', 3, 'Decent experience worker / newcomer journey'),
+      issue('TheJollyLaMa/DecentPilgrimages', 4, 'Contributor operations / gated payroll and helper'),
+      issue('TheJollyLaMa/DecentPilgrimages', 5, 'V1 overseer / acceptance and migration gate'),
+    ],
+    team: [
+      { role: 'Contract worker', job: 2, responsibility: 'Version Base contracts, conserve sponsor allocations, implement organizer-approved claims and prove local-EVM behavior.' },
+      { role: 'Experience worker', job: 3, responsibility: 'Adapt shared Head, wallet/IPFS, admin and personal ankhs, contextual motion, radio and bunny-hop onboarding.' },
+      { role: 'Contributor operations', job: 4, responsibility: 'Wire accepted-work queue and verified receipts with steward-gated payroll; configure an optional server-side helper only after consent.' },
+      { role: 'Integration overseer', job: 5, responsibility: 'Review worker evidence, test the newcomer journey and reconcile old contracts before asking the steward to authorize deployment.' },
     ],
     stages: [
-      step('inventory', 'Inventory routes, missions and existing contracts', 'Select a harmless example journey and reconcile source/ABI/deployment versions before accepting funds.', 'A read-only fixture map loads; deployment unknowns are visible and no wallet request occurs on load.'),
-      step('accounting', 'Sponsor reservations and claim lifecycle', 'Specify who owns each pool, how reservations work, claim eligibility and unused-fund recovery.', 'Tests conserve assets across add/remove/claim/refund and reject duplicate or invalid claims.'),
-      step('presence', 'Location consent and presence policy', 'Choose whether welcome/mission confirmation needs a host, attestation or only self-report; minimize stored location.', 'Declined geolocation retains useful itinerary access; self-report is never labeled independently verified presence.'),
-      step('welcome', 'Local hosts, learning and opportunities', 'Connect journeys to CodeCamp, local projects and opt-in DLend opportunities without making travel a debt requirement.', 'One example route shows sponsor terms, accessible alternatives and a non-financial way to participate.'),
-      step('pilot', 'Bounded journey pilot and portable record', 'Test a small route with a clear sponsor budget, receipt trail and user-owned journey export.', 'Participants can export records and distinguish reserved, claimed, confirmed and unavailable amounts.'),
+      step('inventory', 'Reconcile legacy contracts and configure Base', 'Preserve legacy Optimism source/obligations; prepare a reproducible version, ABI and verification path for Base and Base Sepolia.', 'A wallet-optional fixture loads; absent deployment, wrong chain and source-version mismatch cannot enable writes.'),
+      step('accounting', 'Sponsor reservations and organizer-approved claims', 'Separate funding, reserved allocations, participant approvals, confirmed claims and unused-fund recovery.', 'Local-EVM tests conserve assets and reject unauthorized approvals, duplicate claims and recovery of reserved funds.'),
+      step('presence', 'Optional location and personal recovery', 'Use browser location only as opted-in journey guidance; retain useful itinerary access and user-owned profile/export controls.', 'Declined geolocation still permits onboarding; private coordinates are never automatically published or sent to an assistant.'),
+      step('welcome', 'Shared Decent welcome and contributor route', 'Adapt Head, IPFS, left admin/right personal ankhs, contextual confirmations, DBusk radio, bunny-hop help and gated payroll instructions.', 'A newcomer completes a wallet-free tour, identifies accepted paid work versus free participation, and sees no payment celebration without a confirmed receipt.'),
+      step('pilot', 'Overseer acceptance and Base migration gate', 'Integrate workers, optional disabled-by-default server-side helper and a bounded journey pilot before steward-authorized activation.', 'Browser and contract evidence distinguish local build, verified deployment, Supporter mint and contributor payout; no activation is inferred from setup.'),
     ],
     connections: [
       { to: 'TheJollyLaMa/ArtFi', label: 'Local opportunity on a journey', test: 'Separate travel participation from borrowing and reveal repayment terms.' },
       { to: 'TheJollyLaMa/AJollyDecentCodeCamp', label: 'Travel and learn / reproducible local projects', test: 'A journey task links to a usable lesson without requiring location publication.' },
+      { to: 'TheJollyLaMa/DecentHead', label: 'Pinned shared wallet, IPFS and header experience', test: 'Verify host permissions, account/chain changes, export consent and declined signatures in Pilgrimages.' },
+      { to: 'A-Decent-Agency/DBuskRadio', label: 'Opt-in journey radio', test: 'A visitor chooses to load radio; no autoplay or third-party embed request occurs before that choice.' },
     ],
   },
   {
@@ -114,29 +126,39 @@ export const REVIVAL_PLANS = [
   },
   {
     repository: 'TheJollyLaMa/BabelBet', name: 'BabelBet', district: 'Language and cooperative commitment exchange',
-    color: '#efa0c1', motif: 'bridge', focus: 'Discovery / staged revival',
+    color: '#efa0c1', motif: 'bridge', focus: 'Next / preparation only', directedAt: '1 Nov 2026',
     intent: 'Make language practice social, accountable and useful across communities. Economic opportunity comes from communication, skills and collaboration; staking is an optional mechanism to evaluate, not a guarantee of prosperity.',
     observed: 'The committed prototype has invitation/accept/counter routes, ERC1155 challenge tokens and a cron watcher using an unofficial Duolingo API. Its README still lists payout contracts, watcher and tests as unfinished. Legacy identity/credential coupling is not a pattern to carry into a revived service.',
     historical: 'The supplied BabelBet use-case diagram shows on-device challenge terms, counter/accept, challenge-token creation with staked funds, active/history lookup, a daily watcher, and term-based payouts. Aave/yield is a separate historical branch. The diagram is intent, not execution evidence.',
     archive: { id: 'babelbet-use-case', page: 1 },
-    caution: 'Begin without real stakes. Decide fair streak evidence, time zones, outages, cancellation, disputes and accessible participation before money. Do not put passwords or personal email on-chain. Keep yield disabled until a separate decision, risk review and tested asset-conservation policy; revival does not authorize a betting launch.',
+    caution: 'Preparation only: do not build a game, oracle, wagering flow or new payout contract. Neither official nor unofficial Duolingo endpoints may be contacted by runtime, tests or CI. Provider permission, etiquette, evidence/outage policy and economic decisions precede a separately approved build. No on-chain passwords/private email, yield, stakes or payroll activation.',
     sources: [
       source('TheJollyLaMa/BabelBet', 'dbd3dd4719c2638b23167a1d762a3b03f7b99a22', 'README.md', 'Original challenge flow and unfinished tests/payouts'),
       source('TheJollyLaMa/BabelBet', 'dbd3dd4719c2638b23167a1d762a3b03f7b99a22', 'contracts/ChallengeToken.sol', 'Historical ERC1155 challenge representation'),
       source('TheJollyLaMa/BabelBet', 'dbd3dd4719c2638b23167a1d762a3b03f7b99a22', 'index.js', 'Historical watcher / not a supported production oracle'),
       issue('TheJollyLaMa/BabelBet', 1, 'Open Supporter workflow / not a challenge-engine release'),
+      issue('TheJollyLaMa/BabelBet', 2, 'Preparation worker / shared Decent experience'),
+      issue('TheJollyLaMa/BabelBet', 3, 'Gated contributor payroll and provider etiquette'),
+      issue('TheJollyLaMa/BabelBet', 4, 'Preparation overseer / offline and build gates'),
+    ],
+    team: [
+      { role: 'Preparation worker', job: 2, responsibility: 'Refresh the shared Decent shell and newcomer experience while keeping every provider, wager and legacy watcher disabled.' },
+      { role: 'Contributor operations', job: 3, responsibility: 'Prepare steward-reviewed payroll queues/receipts and explain free participation, accepted work and future provider etiquette.' },
+      { role: 'Integration overseer', job: 4, responsibility: 'Prove the no-Duolingo boundary and shared UI behavior; retain unresolved game decisions for a separately authorized build.' },
     ],
     stages: [
-      step('terms', 'Invite, counter and agree terms', 'Restore the social use case as a fixture-based, no-money flow with explicit participants and shared terms.', 'Both players agree to identical versioned terms; decline, counter and expiry have understandable states.'),
-      step('evidence', 'Language-practice evidence and outage policy', 'Evaluate supported data access and user consent; model streak intervals and unavailable evidence independently of payouts.', 'Time zones, missed data, provider outage and disputed evidence never silently count as failure or success.'),
-      step('challenge', 'Challenge library and durable lifecycle', 'Separate agreed, active, awaiting evidence, disputed and finalized challenges with portable histories.', 'A restart restores the same challenge state; private credentials are absent from files, logs and chain metadata.'),
-      step('settle', 'Test-only settlement and receipt rules', 'Adapt receipt/replay/accounting patterns from Busking and BigNuten, not legacy payout shortcuts.', 'Synthetic assets conserve value; retries cannot pay twice; disputes and cancellations retain an explicit exit path.'),
-      step('opportunity', 'Language-to-local-opportunity pilot', 'Connect learners, hosts and cooperative projects; test whether people gain useful contacts and practical work.', 'A no-stakes pilot produces a consentful language exchange and documented opportunity; yield stays a separate undecided branch.'),
+      step('terms', 'Shared Decent preparation shell', 'Adapt supported Head, wallet/IPFS, ankhs, about/help, contextual reduced-motion decoration and opt-in DBusk radio.', 'The wallet-optional preparation shell works without connecting a provider, starting a challenge or requesting a stake.'),
+      step('evidence', 'Disable provider access and document etiquette', 'Quarantine legacy watcher/provider entrypoints; record permission, supported access, rate limits, caching, backoff and outage prerequisites.', 'Runtime, tests and CI make no official or unofficial Duolingo calls, including when legacy environment flags are present.'),
+      step('challenge', 'Personal profile and bunny-hop onboarding', 'Offer user-owned profile/export recovery and explain historical versus currently supported surfaces; do not implement a new challenge lifecycle.', 'A newcomer can restore a synthetic profile and identify unavailable game features without providing credentials or publishing personal information.'),
+      step('settle', 'Steward-gated contributor payroll preparation', 'Adapt accepted-work queue validation and verified-receipt workflow without deploying a game payout engine or activating transfers.', 'An empty queue validates; unapproved work and absent funding never appear paid, and instructions explain private contributor registration.'),
+      step('opportunity', 'Overseer acceptance and future build gate', 'Validate the preparation package and preserve evidence trust, disputes, cancellation and economic decisions as future work.', 'Browser smoke and no-provider tests pass; no game, oracle, live wager, AI service or payout is claimed launched.'),
     ],
     connections: [
       { to: 'TheJollyLaMa/BigNuten_Vanilla', label: 'Candidate challenge lifecycle and receipt patterns', test: 'Adapt source-only engine tests without assuming live deploy or identical assets.' },
       { to: 'TheJollyLaMa/DecentPilgrimages', label: 'Language practice and local welcome on journeys', test: 'A non-wagering exchange works without public travel traces.' },
       { to: 'TheJollyLaMa/AJollyDecentCodeCamp', label: 'Learn together / cooperative accountability', test: 'One free practice cohort uses agreed terms without a betting requirement.' },
+      { to: 'TheJollyLaMa/DecentHead', label: 'Shared Decent preparation shell', test: 'Verify wallet-optional help, lifecycle cleanup and user-owned IPFS/export consent in BabelBet.' },
+      { to: 'A-Decent-Agency/DBuskRadio', label: 'Opt-in preparation radio', test: 'Radio stays unloaded until a visitor explicitly chooses it; no autoplay accompanies onboarding.' },
     ],
   },
 ];
@@ -209,8 +231,9 @@ export function renderHumanPriorities(project = null) {
     return plan?.name || (value === 'A-Decent-Agency/a-decent-agency.github.io' ? 'Agency Office' : value.split('/')[1]);
   };
   return `<section class="human-priorities"><p>Overlapping human-needs lenses, not a universal ranking, financial eligibility score or proof of outcomes.
-    BigNuten remains the primary build; router visibility needs attention now; DLend is the next scoped revamp.
-    The other campuses are staged discovery, not a promise to launch everything at once.</p>
+    BigNuten's existing build and router work retain their evidence and gates. Pilgrimages is a steward-selected Base V1 build;
+    BabelBet is preparation only, with no Duolingo access or new game. The other campuses retain their staged plans,
+    not a promise to launch everything at once.</p>
     <ul>${needs.map(need => `<li data-human-priority="${need.id}"><h4>${esc(need.title)}</h4><p>${esc(need.direction)}</p>
       <div class="campus-neighbors">${need.projects.map(value => `<button type="button" data-human-site="${esc(value.toLowerCase())}">${esc(name(value))}</button>`).join('')}</div></li>`).join('')}</ul>
     <p>These associations are planning direction, not tested integrations. Continuity and accessible participation apply across all domains.</p></section>`;
@@ -226,12 +249,17 @@ export function renderRevivalPlan(site) {
   if (!plan) return '';
   return `<section class="revival-plan" data-revival-plan="${esc(plan.entityId ? planningEntityKey(plan) : plan.repository)}">
     <h4>${esc(plan.district)} / proposed buildout</h4>
-    <p><b>${esc(plan.focus)}</b> / steward direction recorded 31 Oct 2026. Not scheduled board jobs or delivered floors.</p>
+    <p><b>${esc(plan.focus)}</b> / steward direction recorded ${esc(plan.directedAt || '31 Oct 2026')}. Proposed levels are not delivered floors.</p>
     <p>${esc(plan.intent)}</p>
     <details open><summary>Existing work to recover</summary><p>${esc(plan.observed)}</p></details>
     <details open><summary>Founding-map intention</summary><p>${esc(plan.historical)}</p>
       ${plan.archive ? `<button data-revival-archive="${esc(plan.archive.id)}">Read the original historical map</button>` : ''}
       ${plan.archive?.id === 'smarthome-4' ? `<a href="./studio/archive.html?page=${plan.archive.page}" target="_blank" rel="noopener noreferrer">Open local PDF at page ${plan.archive.page}</a>` : ''}</details>
+    ${plan.team ? `<details open data-revival-team><summary>Workers and overseer / public acceptance jobs</summary>
+      <p>Roles describe the scoped work, not paid appointments or autonomous background services. Contributors agree acceptance terms with the steward before beginning paid work.</p>
+      <ul>${plan.team.map(member => `<li><b>${esc(member.role)}</b> — ${esc(member.responsibility)}
+        <a href="https://github.com/${esc(plan.repository)}/issues/${member.job}" target="_blank" rel="noopener noreferrer">Acceptance job #${member.job}</a></li>`).join('')}</ul>
+      <p>Queue preparation is not payment. The steward approves contributor registration and funding; only verified transaction receipts prove settlement.</p></details>` : ''}
     <ol class="revival-stages">${plan.stages.map((stage, index) => `<li data-revival-stage="${esc(stage.id)}"><b>Plan level ${index + 1} / ${esc(stage.title)}</b><small>PROPOSED / not delivered</small>
       <p>${esc(stage.outcome)}</p><p><strong>Acceptance:</strong> ${esc(stage.test)}</p></li>`).join('')}</ol>
     <p class="revival-caution">${esc(plan.caution)}</p>
