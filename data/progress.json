@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-01T17:10:03.165Z",
+  "checkedAt": "2026-11-01T20:10:05.999Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -30,7 +30,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-31T01:41:47Z",
       "release": {
@@ -133,11 +133,29 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
-      "pushedAt": "2026-11-01T16:55:46Z",
+      "pushedAt": "2026-11-01T19:55:34Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 52,
+          "title": "Update BigNuten Genie access and consent reuse evidence",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/52",
+          "mergedAt": "2026-11-01T19:44:20Z"
+        },
+        {
+          "number": 51,
+          "title": "Place Pilgrimages V1 and BabelBet preparation in Next",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/51",
+          "mergedAt": "2026-11-01T17:54:16Z"
+        },
+        {
+          "number": 50,
+          "title": "Record BigNuten reviewed nutrition capability",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/50",
+          "mergedAt": "2026-11-01T17:22:00Z"
+        },
         {
           "number": 49,
           "title": "Record partial BigNuten Level 5 delivery",
@@ -149,28 +167,10 @@
           "title": "Record BigNuten Level 4 health foundation",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/48",
           "mergedAt": "2026-10-29T01:50:26Z"
-        },
-        {
-          "number": 47,
-          "title": "BigNuten: Level 3 'Recovery and privacy' evidence",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/47",
-          "mergedAt": "2026-10-29T00:28:36Z"
-        },
-        {
-          "number": 46,
-          "title": "BigNuten: Level 2 'Scrub and test' evidence",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/46",
-          "mergedAt": "2026-10-28T23:48:31Z"
-        },
-        {
-          "number": 45,
-          "title": "BigNuten: Level 1 'Land and stabilize' evidence",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/45",
-          "mergedAt": "2026-10-28T22:42:05Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1266116,
+      "codeBytes": 1268115,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -229,7 +229,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -312,7 +312,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -395,44 +395,44 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
-      "pushedAt": "2026-11-01T17:06:29Z",
+      "pushedAt": "2026-11-01T19:57:19Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 396,
+          "title": "Normalize nutrition search evidence URL comparisons",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/396",
+          "mergedAt": "2026-11-01T19:57:20Z"
+        },
+        {
+          "number": 395,
+          "title": "Gate Genie assistants, not ordinary health tracking",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/395",
+          "mergedAt": "2026-11-01T19:25:54Z"
+        },
+        {
+          "number": 393,
+          "title": "Wire deployed nutrition service into the published app",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/393",
+          "mergedAt": "2026-11-01T17:52:26Z"
+        },
+        {
+          "number": 392,
+          "title": "Add Genie nutrition review and private search service",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/392",
+          "mergedAt": "2026-11-01T17:23:59Z"
+        },
         {
           "number": 388,
           "title": "Add accessible local-only Quest Mode (partial #209)",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/388",
           "mergedAt": "2026-10-29T14:40:54Z"
-        },
-        {
-          "number": 387,
-          "title": "Add Genie Community Guide and read-only challenge coach",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/387",
-          "mergedAt": "2026-10-29T14:15:14Z"
-        },
-        {
-          "number": 386,
-          "title": "Add privacy-safe Genie issue drafts and issue templates",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/386",
-          "mergedAt": "2026-10-29T14:00:08Z"
-        },
-        {
-          "number": 384,
-          "title": "Anchor immutable final post-settlement receipts",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/384",
-          "mergedAt": "2026-10-29T13:24:23Z"
-        },
-        {
-          "number": 385,
-          "title": "Add source-only ranked payout ties",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/385",
-          "mergedAt": "2026-10-29T13:15:04Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2458309,
+      "codeBytes": 2549565,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -531,7 +531,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
@@ -618,7 +618,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
@@ -690,7 +690,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
@@ -762,11 +762,17 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
-      "pushedAt": "2026-11-01T10:36:06Z",
+      "pushedAt": "2026-11-01T17:54:15Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 18,
+          "title": "Build Pilgrimages V1 and BabelBet preparation planning teams",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/18",
+          "mergedAt": "2026-11-01T17:54:16Z"
+        },
         {
           "number": 14,
           "title": "Living map: cul-de-sac sprawl, Canopy city and repo-triggered sync",
@@ -790,16 +796,10 @@
           "title": "Enable same-page Supporter purchases beside project sites",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/11",
           "mergedAt": "2026-10-25T17:25:50Z"
-        },
-        {
-          "number": 10,
-          "title": "Add project mint galleries with verified purchase links",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/10",
-          "mergedAt": "2026-10-25T17:06:20Z"
         }
       ],
       "issues": null,
-      "codeBytes": 512488,
+      "codeBytes": 514171,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -818,7 +818,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -843,9 +843,9 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
-      "pushedAt": "2026-10-27T18:02:50Z",
+      "pushedAt": "2026-11-01T19:25:10Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -908,7 +908,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -933,7 +933,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -958,7 +958,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -993,7 +993,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1018,7 +1018,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-01T17:10:03.165Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1043,9 +1043,9 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-01T17:09:48.182Z",
+      "checkedAt": "2026-11-01T20:10:05.999Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:16Z",
+      "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
