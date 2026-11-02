@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-02T03:01:13.851Z",
+  "checkedAt": "2026-11-02T03:42:08.265Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -30,9 +30,9 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
-      "pushedAt": "2026-10-31T01:41:47Z",
+      "pushedAt": "2026-11-02T03:37:33Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
@@ -133,11 +133,23 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
-      "pushedAt": "2026-11-02T02:59:42Z",
+      "pushedAt": "2026-11-02T03:40:49Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 55,
+          "title": "Document BigNuten food-specific cup and serving conversions",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/55",
+          "mergedAt": "2026-11-02T03:39:57Z"
+        },
+        {
+          "number": 54,
+          "title": "Document BigNuten direct-fill nutrition and shared food references",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/54",
+          "mergedAt": "2026-11-02T03:01:45Z"
+        },
         {
           "number": 53,
           "title": "Record BigNuten cited nutrition rollout and acceptance limits",
@@ -155,22 +167,10 @@
           "title": "Place Pilgrimages V1 and BabelBet preparation in Next",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/51",
           "mergedAt": "2026-11-01T17:54:16Z"
-        },
-        {
-          "number": 50,
-          "title": "Record BigNuten reviewed nutrition capability",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/50",
-          "mergedAt": "2026-11-01T17:22:00Z"
-        },
-        {
-          "number": 49,
-          "title": "Record partial BigNuten Level 5 delivery",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/49",
-          "mergedAt": "2026-10-29T12:19:33Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1268446,
+      "codeBytes": 1269881,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -229,7 +229,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -312,7 +312,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -395,11 +395,23 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
-      "pushedAt": "2026-11-02T02:55:45Z",
+      "pushedAt": "2026-11-02T03:36:15Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 402,
+          "title": "Target nutrition searches at missing household portion weights",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/402",
+          "mergedAt": "2026-11-02T03:36:16Z"
+        },
+        {
+          "number": 401,
+          "title": "Fix cup and serving nutrition scaling with food-specific measures",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/401",
+          "mergedAt": "2026-11-02T03:25:24Z"
+        },
         {
           "number": 399,
           "title": "Fill nutrition directly and reuse shared community food facts",
@@ -417,22 +429,10 @@
           "title": "Normalize nutrition search evidence URL comparisons",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/396",
           "mergedAt": "2026-11-01T19:57:20Z"
-        },
-        {
-          "number": 395,
-          "title": "Gate Genie assistants, not ordinary health tracking",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/395",
-          "mergedAt": "2026-11-01T19:25:54Z"
-        },
-        {
-          "number": 393,
-          "title": "Wire deployed nutrition service into the published app",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/393",
-          "mergedAt": "2026-11-01T17:52:26Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2574352,
+      "codeBytes": 2593559,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -531,7 +531,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
@@ -618,7 +618,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
@@ -690,7 +690,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
@@ -762,9 +762,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
-      "pushedAt": "2026-11-02T00:52:34Z",
+      "pushedAt": "2026-11-02T03:01:29Z",
       "release": null,
       "mergedPulls": [
         {
@@ -818,7 +818,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -843,7 +843,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-11-01T19:25:10Z",
       "release": null,
@@ -908,7 +908,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -933,7 +933,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -958,7 +958,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -993,7 +993,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1018,7 +1018,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1043,7 +1043,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-02T03:01:13.851Z",
+      "checkedAt": "2026-11-02T03:42:08.265Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
