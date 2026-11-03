@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-03T09:39:56.005Z",
+  "checkedAt": "2026-11-03T13:37:47.614Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,7 +35,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-11-02T19:52:41Z",
       "release": {
@@ -153,9 +153,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
-      "pushedAt": "2026-11-03T09:26:37Z",
+      "pushedAt": "2026-11-03T13:26:00Z",
       "release": null,
       "mergedPulls": [
         {
@@ -274,7 +274,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -362,7 +362,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -450,11 +450,33 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
-      "pushedAt": "2026-11-03T02:22:44Z",
-      "release": null,
+      "pushedAt": "2026-11-03T13:26:37Z",
+      "release": {
+        "tag": "v3.3.0",
+        "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/tag/v3.3.0",
+        "publishedAt": "2026-11-03T11:49:16Z"
+      },
       "mergedPulls": [
+        {
+          "number": 418,
+          "title": "Add guarded Discord artwork refresh workflow",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/418",
+          "mergedAt": "2026-11-03T13:05:50Z"
+        },
+        {
+          "number": 417,
+          "title": "Show bundled Supporter art when the IPFS gateway fails",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/417",
+          "mergedAt": "2026-11-03T12:43:49Z"
+        },
+        {
+          "number": 416,
+          "title": "Enable the live v3.3.0 Base Supporter DNFT purchase",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/416",
+          "mergedAt": "2026-11-03T12:28:34Z"
+        },
         {
           "number": 413,
           "title": "Prevent wallet connection from hiding original health records",
@@ -466,29 +488,34 @@
           "title": "Add pinned Base Supporter Token card to About",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/407",
           "mergedAt": "2026-11-02T23:45:03Z"
-        },
-        {
-          "number": 411,
-          "title": "Part of #391: Add local wallet profile continuity",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/411",
-          "mergedAt": "2026-11-02T23:20:25Z"
-        },
-        {
-          "number": 408,
-          "title": "Research experiments: Learn → Plan → Track → Check",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/408",
-          "mergedAt": "2026-11-02T23:12:08Z"
-        },
-        {
-          "number": 410,
-          "title": "Add local gut-health tracking",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/410",
-          "mergedAt": "2026-11-02T23:02:35Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2792854,
-      "versions": [],
+      "codeBytes": 2801708,
+      "versions": [
+        {
+          "tag": "v3.3.0",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/tag/v3.3.0",
+          "publishedAt": "2026-11-03T11:49:16Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/download/v3.3.0/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "76",
+          "mintTxHash": "0x1217db9afef09f789e249e77fbca4d14ed085acf55cdb3dd04b6b1bdafa189bf",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 12,
+          "storefront": {
+            "purchaseUrl": "https://thejollylama.github.io/DecentHead/supporter/buy.html?chainId=8453&escrow=0x31b07b83e99A9bdF379bf40225b8A80d3804C89d&listingId=6",
+            "escrow": "0x31b07b83e99A9bdF379bf40225b8A80d3804C89d",
+            "listingId": "6",
+            "priceUSDC": "10000000",
+            "frontUrl": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/download/v3.3.0/supporter-front.png",
+            "backUrl": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/download/v3.3.0/supporter-back.png",
+            "evidenceUrl": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/download/v3.3.0/supporter-minted.json",
+            "frontSHA256": "07c273c791c59415a04b6c61ae85c72b539bb319f0e29cf9c804793e70795fc8",
+            "backSHA256": "93cbf0097e6ac0fdeab8c26a43cef0d77c583816fc5ac045da413ca158f8172a"
+          }
+        }
+      ],
       "versionsTruncated": false,
       "structures": [
         {
@@ -496,12 +523,12 @@
           "kind": "grounds",
           "order": 7,
           "name": "Genie guide house",
-          "open": 2,
-          "closed": 3,
+          "open": 0,
+          "closed": 5,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/7",
           "closures": {
-            "completed": 3,
+            "completed": 5,
             "notPlanned": 0,
             "unknown": 0
           }
@@ -616,12 +643,12 @@
           "kind": "level",
           "order": 6,
           "name": "Release crown",
-          "open": 2,
-          "closed": 1,
+          "open": 0,
+          "closed": 3,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/6",
           "closures": {
-            "completed": 1,
+            "completed": 3,
             "notPlanned": 0,
             "unknown": 0
           }
@@ -631,7 +658,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-11-03T02:52:03Z",
       "release": {
@@ -728,7 +755,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-11-03T02:52:06Z",
       "release": {
@@ -800,7 +827,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-11-03T02:52:05Z",
       "release": {
@@ -872,9 +899,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
-      "pushedAt": "2026-11-03T03:00:49Z",
+      "pushedAt": "2026-11-03T09:40:20Z",
       "release": null,
       "mergedPulls": [
         {
@@ -933,7 +960,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -963,7 +990,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-11-03T01:30:44Z",
       "release": null,
@@ -1053,7 +1080,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -1083,7 +1110,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -1113,7 +1140,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -1158,7 +1185,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1188,7 +1215,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1218,7 +1245,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-03T09:39:56.005Z",
+      "checkedAt": "2026-11-03T13:37:47.614Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
