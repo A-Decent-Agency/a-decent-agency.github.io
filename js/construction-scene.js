@@ -46,6 +46,7 @@ function textSprite(text, color = '#eee9f6', size = 24) {
   ctx.fillText(row, 512, y);
   const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
   const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false }));
+  sprite.userData.wayfinding = true;
   sprite.scale.set(size, size * 160 / 1024, 1); return sprite;
 }
 function sitePlanSprite(site) {
@@ -378,6 +379,7 @@ export class ConstructionScene {
       this.addSignal(new THREE.QuadraticBezierCurve3(from, from.clone().lerp(to, .5).add(new THREE.Vector3(0, 42, 0)), to), color, link);
     }
     this.addHistoricalArchive();
+    this.updateLandmarkLabels();
     this.selected = Math.max(0, this.sites.findIndex(site => site.id === previous));
     this.state = { progress: this.selected, x: 0, y: 0 }; this.onSite(this.sites[this.selected], this.selected);
     this.highlightSite(this.sites[this.selected]?.id);
@@ -442,8 +444,15 @@ export class ConstructionScene {
   setCamera(mode) {
     this.cameraMode = mode; this.keys.clear(); this.target = null;
     if (mode === 'past') { this.azimuth = 0; this.elevation = .28; }
+    if (mode === 'landmark') { this.azimuth = .25; this.elevation = .45; }
+    this.updateLandmarkLabels();
     this.container.dispatchEvent(new CustomEvent('cameramode', { detail: mode }));
     this.invalidate();
+  }
+  updateLandmarkLabels() {
+    this.group.traverse(object => {
+      if (object.userData.wayfinding) object.visible = this.cameraMode !== 'landmark';
+    });
   }
   setZoom(value) { this.zoom = Number(value); this.invalidate(); }
   highlightTask(id) {
@@ -529,8 +538,9 @@ export class ConstructionScene {
     } else {
       const site = this.sites[this.selected], center = site?.position || point;
       const target = new THREE.Vector3(center.x + (site?.index % 2 ? 77 : -77), center.y, center.z);
+      if (this.cameraMode === 'landmark') { target.y -= 14; target.z += 24; }
       const top = this.cameraMode === 'top', elevation = top ? Math.PI / 2 : this.elevation;
-      const radius = 190 * this.zoom;
+      const radius = (this.cameraMode === 'landmark' ? 100 : 190) * this.zoom;
       this.camera.up.set(0, top ? 0 : 1, top ? -1 : 0);
       this.camera.position.copy(target).add(new THREE.Vector3(Math.sin(this.azimuth) * Math.cos(elevation) * radius, Math.sin(elevation) * radius, Math.cos(this.azimuth) * Math.cos(elevation) * radius));
       this.camera.lookAt(target);

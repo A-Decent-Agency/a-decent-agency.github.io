@@ -216,9 +216,42 @@ Price support alone does not mean Busking is minted, listed or ENS-deployed.
 
 ## Project highway / living construction
 
-The landing flight now passes recognizable project offramps before the shared milestone/workstream districts: Agency entrance, Busking tower, Head and Market halls, Canopy's broad foundation, BigNuten staging, and later public repository blueprints. Matching uses explicit public repository references or reviewed portfolio identities, never guessed private names or arbitrary title keywords. Every board card still appears exactly once. Private/redacted portfolios stay in unbranded shared yards.
+The landing road now contains **project destinations only**: actual public-repository campuses and the independently modeled settlements entity. Shared operating standards, milestones and unassigned cards live at the **Town Hall planning desk**, not as jargon-heavy highway construction sites. Milestones with explicit public project ownership live inside that project. Calendar's reviewed public blueprint now belongs to its explicitly referenced public repository campus. Matching never guesses private names or ownership from title keywords. Every board card still appears exactly once; private/redacted records retain their original redaction and are not reclassified as private project identities. Old checkpoint/workstream links resolve to the containing project or Town Hall rather than breaking.
 
-Architecture is a labeled steward milestone, not a calculated completion percentage. Busking's “Version 1 construction complete” records the steward's 25 October direction, **not** an invented GitHub v1 release. The performance tower has a stage and equalizer roofline; Canopy has planted terraces; Head a gateway pavilion; Market stalls/awnings; BigNuten a domed raw-campus plan. These are original procedural designs using Three.js primitives, not copied game assets.
+Architecture is a labeled steward milestone, not a calculated completion percentage. Busking's “Version 1 construction complete” records the steward's 25 October direction, **not** an invented GitHub v1 release. The performance tower has a stage and equalizer roofline; Canopy has planted terraces; Head a gateway pavilion; Market stalls/awnings. These are original procedural designs using Three.js primitives, not copied game assets.
+
+### Visitor-ready city landmarks
+
+The November art pass adds recognizable public-project frontages and grounds:
+BigNuten's gym/training/nutrition campus, the Office's Town Hall, a Pilgrimages
+temple, a DJuke music museum, Busking's concert venue and street-performance corner,
+Invoice/Escrow/NDA business or legal offices, a DBuskRadio listening station and a
+DVert design studio. Head and Market retain their gateway/market identities.
+These are artistic metaphors, not physical facilities, verified product features,
+legal protections, custody assurances or funding claims. Accessible sidepanel
+landmark descriptions preserve that distinction in both 3D and the mobile list.
+
+Decorative boxes share the existing per-campus instanced batches. No new remote
+models, fonts, textures, animation loops or runtime dependencies are introduced.
+The main evidence-driven tower, outlined proposal levels, issue skeletons, satellite
+streets, job cards, mint receipts and checkout gates remain separate and unchanged.
+`js/campus-art.js` matches exact public repository identities, not title keywords
+or private cards. `scripts/verify-city-art.mjs` measures geometry budgets,
+checks that building generation never mutates evidence, and captures desktop
+views while checking the 375/320px fallback. Run with the same `OFFICE_URL`,
+`PLAYWRIGHT_MODULE` and `SCREENSHOT_DIR` options as the existing browser checks.
+Use **Street / landmark close-up** for the frontages: it focuses on the grounds and
+temporarily hides floating wayfinding text, without removing evidence or jobs.
+Other cameras restore those labels. The panel can still tuck away for a clean view.
+
+The three widget campuses link pinned, published clone/adaptation guides and their
+existing ENS/mint/listing snapshots. DJuke (`djuke.decentagency.eth`, token 72),
+DVert (`dvert.decentagency.eth`, token 73) and DBuskRadio
+(`dbusk.decentagency.eth`, token 74) already have independent repositories and
+Supporter editions. No duplicates are minted or registered. October 24 release
+evidence is not a new live resolution/stock check; the existing receipt-bound
+checkout rechecks terms. Clones must replace original support identities/config,
+retain attribution, and test lifecycle, consent and their host adapters.
 
 Only version-matched published Supporter mint receipts produce **clean delivered floors**. Head, Market and the three standalone widgets have observed receipt-backed floors; a release tag, preparation manifest or stale release prose is insufficient. Current active/blocked jobs occupy separate scaffolded yards with crates and barriers, while clean editions retain landscaping and no build cranes unless a new active job starts. Further minted versions add floors, capped at twelve visible floors; details retain the actual observed edition list. The latest twenty releases are examined; a full page is labeled partial. Receipt data is source-reported verification, **not a new independent chain audit**, a funding balance or proof of project-wide completeness.
 
@@ -265,7 +298,7 @@ For desktop/3D and mobile/2D browser acceptance, serve the site and run
 `OFFICE_URL=http://127.0.0.1:8000/ node scripts/verify-site-links.mjs` with
 Playwright available (`PLAYWRIGHT_MODULE` may point to an existing installation).
 
-The public Canopy map is imported from `data/agency-map.json` at `7e677f9fac52b264bfccded58a5d0f4f7a2e48e9`, with 30 public project references and all 30 public-endpoint relationships, their independent entity IDs, types/evidence/caveats and dated briefs preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
+The public Canopy map is imported from `data/agency-map.json` at `e41315387960dc73e32f500ca6a2cb582f3b02f8`, with 31 public project references and all 30 public-endpoint relationships, their independent entity IDs, types/evidence/caveats and dated briefs preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
 
 Sidepanels immediately show bounded pinned project artwork with source/license credit. Canopy uses its full ENS avatar, Head/Market their project-owned ENS artwork, and Busking its hat plus original busker mural (also on its 3D stage). Public Ethereum mainnet avatar text records were read without a wallet connection on 2026-10-25: Head/Market point to IPFS images; Agency/Canopy/Busking point to mutable avatar-service URLs. The UI records this provenance and uses reviewed immutable repository artwork rather than automatically following arbitrary services or assuming prepared ENS metadata is live. No ENS writes occur.
 
@@ -342,7 +375,7 @@ Three.js **0.169.0**, OrbitControls, and ethers **6.13.4** come from the pinned 
 The office uses a checked-in, privacy-filtered snapshot of [DecentAgency — Agency Marathon](https://github.com/orgs/A-Decent-Agency/projects/3), project node `PVT_kwDODD7ovc4Bn91h`. The source project is private: visitors do **not** need access or a token to view the public snapshot. GitHub source links may require access.
 
 - **Board:** Todo / In Progress / Done / Blocked, six spatial cards per column per page. Pagination keeps dense boards usable; the 2D list always contains **all** matching items.
-- **Construction flight (landing view):** an actual perspective flight corridor through the GitHub roadmap. Explicit public repository campuses come first, with the core landmarks ahead of future blueprints. Remaining dated milestones follow in Start/Target order; undated milestones and unassigned workstream yards follow in Horizon order. Every matching public item appears exactly once. Grouping does not invent milestone dependencies. Route spacing is navigational, not proportional to time, effort, or budget. Select any site, use previous/next, or click its 3D sign to chart an approach. Open **What is being built here?** to inspect its real cards.
+- **Construction flight (landing view):** a perspective highway of project campuses and the independent router. Shared planning work is organized inside Town Hall; explicitly owned milestones stay inside their project. Every matching public item appears exactly once. Original card dates/status remain in the board, roadmap and detail views; technical milestone names do not become extra road destinations. Grouping does not invent dependencies. Spacing is navigational, not proportional to time, effort or budget. Select a project or click its sign, then inspect its source cards.
 - **Roadmap:** milestones positioned by Start (or Target if Start is missing), duration lines to Target, a UTC today marker, and an undated staging area. Dates are plans, not promises.
 - **Workstreams / Canopy:** orbit clusters by Workstream, eight spatial cards per cluster per page. Dependency lines are solid cyan; crossovers are dashed gold. Parsing recognizes milestone identifiers (`M1`), linked item URLs, and repository-name arrows (`decent-canopy -> big-nuten`). Prose is retained in the side panel, not guessed into edges. Only endpoints on the current spatial page are connected.
 - **Repo passports:** Portfolio cards colored by Role (legend below the scene), sized and raised by Baseline met count.

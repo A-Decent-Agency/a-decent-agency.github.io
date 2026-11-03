@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const base = process.env.OFFICE_URL || 'http://127.0.0.1:18791/';
 const dcal = 'PVTI_lADODD7ovc4Bn91hzhELHuo';
+const calendar = 'project:thejollylama/decentcalendar';
 const head = 'project:thejollylama/decenthead';
 const market = 'project:thejollylama/decentmarket';
 const address = (site, card) => {
@@ -21,7 +22,7 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(address(dcal));
-    await page.waitForFunction(id => document.querySelector('#flight-destination').value === id, dcal);
+    await page.waitForFunction(id => document.querySelector('#flight-destination').value === id, calendar);
     assert.match(await page.locator('#flight-site-title').innerText(), /DecentCalendar/);
     const heading = await page.locator('#flight-site-title').boundingBox();
     assert.ok(heading.y >= 0 && heading.y < (mobile ? 844 : 1000), 'shared destination must be visible without hunting down the page');
@@ -30,12 +31,12 @@ try {
       assert.match(await page.locator('#mode-button').innerText(), /2D list/);
     }
     await page.locator('#share-site').click();
-    assert.equal(await page.locator('#share-address').inputValue(), address(dcal));
+    assert.equal(await page.locator('#share-address').inputValue(), address(calendar));
     await page.evaluate(() => {
       Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async value => { window.copiedSiteLink = value; } } });
     });
     await page.locator('#copy-site-address').click();
-    assert.equal(await page.evaluate(() => window.copiedSiteLink), address(dcal));
+    assert.equal(await page.evaluate(() => window.copiedSiteLink), address(calendar));
     assert.equal(await page.locator('#share-status').innerText(), 'Link copied.');
     await page.evaluate(() => {
       Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async () => { throw new Error('Permission denied'); } } });
@@ -44,7 +45,7 @@ try {
     assert.match(await page.locator('#share-status').innerText(), /Could not copy.*Permission denied/);
     await page.locator('#share-dialog .dialog-close').click();
 
-    await page.locator('#flight-site-items button').first().click();
+    await page.locator('#flight-site-items button').filter({ hasText: 'DecentCalendar v1 blueprint' }).click();
     await page.locator('#share-card').click();
     const cardLink = await page.locator('#share-address').inputValue();
     assert.equal(new URL(cardLink).searchParams.get('card'), dcal);
@@ -64,7 +65,7 @@ try {
 
     await page.locator('#search').fill('no matching projects');
     await page.goto(address(dcal));
-    await page.waitForFunction(id => document.querySelector('#flight-destination').value === id, dcal);
+    await page.waitForFunction(id => document.querySelector('#flight-destination').value === id, calendar);
     assert.equal(await page.locator('#search').inputValue(), '');
     if (!mobile) {
       await page.locator('#mode-button').click();

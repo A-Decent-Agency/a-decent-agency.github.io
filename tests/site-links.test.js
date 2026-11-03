@@ -48,8 +48,32 @@ test('every real published site is addressable, including the approved DCal chec
       assert.equal(resolveSiteAddress(cardLink, route).card.id, card.id);
     }
   }
-  const dcal = route.find(site => site.id === 'PVTI_lADODD7ovc4Bn91hzhELHuo');
+  const dcal = resolveSiteAddress('https://office.test/?site=PVTI_lADODD7ovc4Bn91hzhELHuo', route).site;
   assert.ok(dcal);
   assert.match(dcal.title, /DecentCalendar/);
-  assert.equal(dcal.project, undefined, 'do not invent a public repository campus from a private portfolio');
+  assert.equal(dcal.project.repository, 'TheJollyLaMa/DecentCalendar', 'explicit public repository record now owns the project campus');
+  assert.equal(dcal.items.filter(item => item.id === 'PVTI_lADODD7ovc4Bn91hzhELHuo').length, 1);
+  const legacyWorkstream = resolveSiteAddress('https://office.test/?site=workstream%3AStandards%20and%20reuse', route);
+  assert.equal(legacyWorkstream.site.id, 'project:a-decent-agency/a-decent-agency.github.io');
+});
+
+test('legacy links accept only cards that belonged to that old checkpoint or workstream', () => {
+  const route = [
+    { id: 'project:owner/office', aliases: ['checkpoint', 'workstream:Shared work'], items: [
+      { id: 'checkpoint', fields: { Kind: 'Milestone', Workstream: 'Shared work' } },
+      { id: 'unrelated', fields: { Kind: 'Task', Workstream: 'Other work' } }
+    ] },
+    { id: 'project:owner/app', aliases: [], items: [
+      { id: 'app-task', fields: { Kind: 'Task', Workstream: 'Shared work' } }
+    ] }
+  ];
+  const resolve = (site, card) => resolveSiteAddress(siteAddress('https://office.test/', site, card), route);
+  assert.equal(resolve('workstream:Shared work', 'app-task').site.id, 'project:owner/app');
+  assert.equal(resolve('checkpoint', 'checkpoint').card.id, 'checkpoint');
+  assert.ok(resolve('checkpoint', 'app-task').error);
+  assert.ok(resolve('checkpoint', 'unrelated').error);
+  assert.ok(resolve('workstream:Shared work', 'unrelated').error);
+  assert.ok(resolve('workstream:Shared work', 'checkpoint').error);
+  assert.ok(resolve('workstream:Shared work', 'removed').error);
+  assert.ok(resolve('project:owner/office', 'app-task').error);
 });

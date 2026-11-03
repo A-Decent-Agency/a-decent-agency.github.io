@@ -24,7 +24,7 @@ export function renderCampusPlan(site, sites, feed) {
     if (!groups.has(component)) groups.set(component, []);
     groups.get(component).push(item);
   }
-  return `<section class="campus-plan">${site.project ? `<details><summary>Human needs / cultural beacons</summary>${renderHumanPriorities(site.project)}</details>` : ''}${renderRevivalPlan(site)}<h4>Site plan / same published jobs, in 2D</h4>${diagram}
+  return `<section class="campus-plan">${site.planningItems?.length ? '<p>Town Hall planning desk: shared milestones, operating standards and unassigned cards live here, not as pretend project construction sites. Original titles, dates, status and source links are retained below.</p>' : ''}${site.project ? `<details><summary>Human needs / cultural beacons</summary>${renderHumanPriorities(site.project)}</details>` : ''}${renderRevivalPlan(site)}<h4>Site plan / same published jobs, in 2D</h4>${diagram}
     <p>Solid: recorded integration / dependency. Dashed: proposed crossover, not shipped compatibility. Select a job to illuminate this building's connections.</p>
     <div class="campus-neighbors">${neighbors.map(node => `<button data-campus-site="${esc(node.id)}">${esc(node.title)} / ${esc(campusPriority(node))}</button>`).join('')}</div>
     <details><summary>Connection evidence (${connections.length})</summary><ul>${connections.map(link => `<li><b>${esc(link.kind)} / ${esc(link.state)}</b> ${esc(link.label)}

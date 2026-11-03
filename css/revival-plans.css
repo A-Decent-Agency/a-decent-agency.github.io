@@ -24,3 +24,8 @@
 .evidence-state[data-state="in-flight"] { color: #fcd34d; border-color: #b48b36; }
 .evidence-state[data-state="planned"] { color: #d8b4fe; border-color: #a777cd; }
 .project-recall-grid li { padding: 9px 0; line-height: 1.65; border-bottom: 1px solid #82749744; }
+.campus-art-brief { padding: 14px; margin: 12px 0; border: 1px solid #82749766; border-radius: 9px; background: #211c32; }
+.campus-art-brief h4 { margin: 8px 0; color: #f0d7a1; font-size: 15px; }
+.campus-art-brief small { display: block; line-height: 1.6; color: #bdb1cc; }
+.campus-widget { padding: 14px 0; border-bottom: 1px solid #82749766; }
+.campus-widget h4 { color: #71e6d0; font-size: 15px; }

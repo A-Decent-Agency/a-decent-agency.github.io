@@ -20,6 +20,16 @@ export const LANDMARKS = [
     milestone: 'Planning observatory / shared jobs and project map' },
   ...REVIVAL_PLANS.map(plan => ({ repository: plan.repository, name: plan.name, form: 'planning-tower', color: plan.color,
     milestone: `${plan.district} / ${plan.focus}`, basis: `Steward-directed planning tower · ${plan.directedAt || '31 Oct 2026'}; schematic levels are proposals, not releases` })),
+  { repository: 'A-Decent-Agency/DecentJukebox', name: 'DecentJukebox / DJuke', form: 'blueprint', color: '#e6ae83',
+    milestone: 'Reusable music widget / museum frontage', basis: 'Artistic music museum; clone and support evidence remain separate from visual identity' },
+  { repository: 'A-Decent-Agency/DBuskRadio', name: 'DBuskRadio', form: 'blueprint', color: '#64d8d0',
+    milestone: 'Opt-in radio widget / listening station', basis: 'Artistic radio station; broadcast props do not imply live playback or a configured Supporter listing' },
+  { repository: 'A-Decent-Agency/DVert', name: 'DVert', form: 'blueprint', color: '#f6bc75',
+    milestone: 'Reusable advertising widget / design studio', basis: 'Artistic media studio; exhibit panels are not real advertisements or impression accounting' },
+  ...[
+    ['DecentInvoice', 'Invoice business office'], ['DecentEscrow', 'Escrow business office'], ['Decent_NDA', 'NDA law office']
+  ].map(([name, district]) => ({ repository: `TheJollyLaMa/${name}`, name, form: 'blueprint', color: '#aebed6',
+    milestone: `${district} / public project inventory`, basis: 'Business-office art direction, not legal, accounting, custody or deployed-feature assurance' })),
 ];
 
 export function publicRepository(item) {
@@ -38,7 +48,6 @@ export function publicRepository(item) {
 export function projectSites(items, { includeContext = false } = {}) {
   const groups = new Map();
   for (const item of items) {
-    if (item.fields?.Kind === 'Milestone') continue;
     const repository = publicRepository(item);
     if (!repository) continue;
     const key = repository.toLowerCase();

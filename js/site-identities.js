@@ -115,6 +115,10 @@ export function itemIdentity(item) {
 export function siteIdentity(site) {
   if (privateItem(site)) return generic('private', 'Private / redacted site');
   if (site?.type === 'milestone') return generic('milestone', site.title || 'Milestone');
+  if (site?.type === 'repository' && site.project?.repository && !site.project.entityId) {
+    const identity = itemIdentity({ repository: site.project.repository });
+    if (identity.kind === 'repository') return identity;
+  }
   if (!Array.isArray(site?.items)) return itemIdentity(site);
   const projects = new Map();
   for (const item of site.items) {

@@ -1,8 +1,12 @@
-import { dateNumber } from './model.js';
 import { projectSites } from './project-campus.js';
 
 export const FLIGHT_BOUNDS = { lateral: 24, vertical: 16, spacing: 110 };
-const horizons = ['Now', 'Next', 'Later', 'Inventory'];
+const OFFICE_REPOSITORY = 'A-Decent-Agency/a-decent-agency.github.io';
+const OFFICE_ID = `project:${OFFICE_REPOSITORY.toLowerCase()}`;
+// Reviewed Calendar blueprint belongs to the project, not its Office issue-host repository.
+const PROJECT_CHECKPOINTS = new Map([
+  ['PVTI_lADODD7ovc4Bn91hzhELHuo', 'project:thejollylama/decentcalendar']
+]);
 export function siteMetrics(items) {
   const total = items.length;
   const active = items.filter(item => item.fields?.Status === 'In Progress').length;
@@ -16,26 +20,31 @@ export function siteMetrics(items) {
 export function constructionSites(items, options) {
   const campuses = projectSites(items, options);
   const assigned = new Set(campuses.flatMap(site => site.items.map(item => item.id)));
-  const milestones = items.filter(item => item.fields?.Kind === 'Milestone');
-  const sites = milestones.map(item => ({ id: item.id, title: item.title, type: 'milestone', items: [item],
-    start: item.fields?.Start || '', target: item.fields?.Target || '', horizon: item.fields?.Horizon || 'Inventory' }));
-  const groups = new Map();
-  for (const item of items.filter(item => item.fields?.Kind !== 'Milestone' && !assigned.has(item.id))) {
-    const workstream = item.fields?.Workstream || 'Unassigned';
-    if (!groups.has(workstream)) groups.set(workstream, []);
-    groups.get(workstream).push(item);
+  const shared = items.filter(item => !assigned.has(item.id));
+  if (shared.length && !campuses.some(site => site.id === OFFICE_ID)) {
+    const office = projectSites([], { includeContext: true }).find(site => site.id === OFFICE_ID);
+    campuses.push(office);
   }
-  for (const [name, members] of groups) {
-    sites.push({ id: `workstream:${name}`, title: name, type: 'workstream', items: members, start: '', target: '',
-      horizon: horizons.find(horizon => members.some(item => item.fields?.Horizon === horizon)) || 'Inventory' });
+  const office = campuses.find(site => site.id === OFFICE_ID);
+  if (office) {
+    office.items.push(...shared);
+    office.planningItems = shared.map(item => item.id);
   }
-  sites.sort((a, b) => {
-    const ad = dateNumber(a.start) ?? dateNumber(a.target), bd = dateNumber(b.start) ?? dateNumber(b.target);
-    if (ad !== null && bd !== null) return ad - bd || a.id.localeCompare(b.id);
-    if (ad !== null || bd !== null) return ad !== null ? -1 : 1;
-    return horizons.indexOf(a.horizon) - horizons.indexOf(b.horizon) || a.title.localeCompare(b.title);
-  });
-  return [...campuses, ...sites].map((site, index) => ({ ...site, ...siteMetrics(site.items), index, position: routePoint(index) }));
+  for (const [cardId, destination] of PROJECT_CHECKPOINTS) {
+    const target = campuses.find(site => site.id === destination);
+    const source = campuses.find(site => site.items.some(item => item.id === cardId && !item.private && !item.bodyRedacted));
+    if (!target || !source || source === target) continue;
+    const index = source.items.findIndex(item => item.id === cardId);
+    target.items.push(...source.items.splice(index, 1));
+  }
+  for (const site of campuses) {
+    site.aliases = site.items.filter(item => item.fields?.Kind === 'Milestone').map(item => item.id);
+  }
+  // Old workstream addresses continue to reach Town Hall, but are no longer road destinations.
+  if (office) office.aliases.push(...new Set(items.filter(item => item.fields?.Kind !== 'Milestone')
+    .map(item => `workstream:${item.fields?.Workstream || 'Unassigned'}`)));
+  return campuses.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title))
+    .map((site, index) => ({ ...site, ...siteMetrics(site.items), index, position: routePoint(index) }));
 }
 export function routePoint(progress) {
   return { x: Math.sin(progress * .85) * 32, y: Math.sin(progress * .47) * 9, z: -progress * FLIGHT_BOUNDS.spacing };

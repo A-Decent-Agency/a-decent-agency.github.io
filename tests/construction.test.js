@@ -16,33 +16,33 @@ test('cranes follow explicit board activity and footprint follows workload, neve
   const barelyStarted = siteMetrics(Array.from({ length: 25 }, (_, i) => item(`${i}`)));
   assert.equal(barelyStarted.cranes, 1, 'a large backlog is not a busy construction site');
 });
-test('construction route partitions every public card once and follows real roadmap dates', () => {
+test('road destinations are projects; shared checkpoints stay inside Town Hall with dates intact', () => {
   const items = [item('late', 'Todo', { Kind: 'Milestone', Start: '2027-01-01' }),
     item('early', 'In Progress', { Kind: 'Milestone', Target: '2026-10-23' }),
     item('undated', 'Todo', { Kind: 'Milestone', Horizon: 'Now' }),
     item('task'), item('private', 'Todo', { Workstream: '' })];
   const sites = constructionSites(items);
-  assert.deepEqual(sites.slice(0, 2).map(site => site.id), ['early', 'late']);
-  assert.equal(sites[0].start, '');
-  assert.equal(sites[0].target, '2026-10-23');
-  assert.equal(sites.find(site => site.id === 'undated').target, '');
-  assert.equal(sites.find(site => site.type === 'workstream').start, '');
+  assert.equal(sites.length, 1);
+  assert.equal(sites[0].project.repository, 'A-Decent-Agency/a-decent-agency.github.io');
+  assert.equal(sites[0].items.find(item => item.id === 'early').fields.Target, '2026-10-23');
+  assert.equal(sites[0].items.find(item => item.id === 'late').fields.Start, '2027-01-01');
+  assert.ok(sites[0].aliases.includes('early'));
+  assert.ok(sites[0].aliases.includes('workstream:Shared work'));
   assert.deepEqual(sites.flatMap(site => site.items.map(item => item.id)).sort(), items.map(item => item.id).sort());
-  assert.equal(sites.find(site => site.title === 'Unassigned').items[0].id, 'private');
+  assert.ok(sites[0].planningItems.includes('private'));
   assert.ok(sites.every((site, i) => site.position.z === -i * FLIGHT_BOUNDS.spacing));
 });
-test('snapshot changes dynamically rebuild cranes, statuses, dates and route destinations', () => {
+test('shared checkpoint changes update Town Hall workload without creating robot-language exits', () => {
   const original = [item('mile', 'Todo', { Kind: 'Milestone', Start: '2026-11-01' }), item('task')];
   const first = constructionSites(original);
   const changed = structuredClone(original);
   changed[0].fields.Status = 'Done'; changed[0].fields.Start = '2026-12-01';
   changed.push(item('new-mile', 'In Progress', { Kind: 'Milestone', Start: '2026-10-23' }));
   const second = constructionSites(changed);
-  assert.equal(first.find(site => site.id === 'mile').cranes, 1);
-  assert.equal(second.find(site => site.id === 'mile').cranes, 0);
-  assert.equal(second[0].id, 'new-mile');
+  assert.equal(first[0].cranes, 1);
+  assert.equal(second.length, 1);
   assert.equal(second[0].active, 1);
-  assert.equal(second.find(site => site.id === 'mile').start, '2026-12-01');
+  assert.equal(second[0].items.find(item => item.id === 'mile').fields.Start, '2026-12-01');
 });
 test('free steering stays in the route corridor and progress cannot escape its endpoints', () => {
   let state = { progress: 0, x: 0, y: 0 };
@@ -68,14 +68,21 @@ test('past camera stands behind the route and faces the archive while retaining 
 });
 test('real public snapshot remains the sole source, with no omissions or private-detail reconstruction', async () => {
   const snapshot = JSON.parse(await readFile(new URL('../data/project.json', import.meta.url)));
+  const original = structuredClone(snapshot);
   const sites = constructionSites(snapshot.items);
-  assert.equal(sites.filter(site => site.type === 'milestone').length, snapshot.items.filter(item => item.fields.Kind === 'Milestone').length);
+  assert.ok(sites.every(site => site.project));
+  assert.equal(sites.filter(site => site.type === 'milestone' || site.type === 'workstream').length, 0);
   assert.equal(sites.reduce((count, site) => count + site.total, 0), snapshot.items.length);
   assert.deepEqual(sites.flatMap(site => site.items.map(item => item.id)).sort(), snapshot.items.map(item => item.id).sort());
   for (const site of sites) for (const entry of site.items.filter(item => item.private)) {
     assert.equal(entry.repository, '');
     assert.equal(entry.body, '');
   }
+  assert.deepEqual(snapshot, original, 'grouping does not rewrite, reorder or mutate original board records');
+  const filtered = snapshot.items.filter(item => item.fields.Kind === 'Milestone');
+  const filteredSites = constructionSites(filtered);
+  assert.deepEqual(filteredSites.flatMap(site => site.items.map(item => item.id)).sort(), filtered.map(item => item.id).sort());
+  assert.ok(filteredSites.every(site => /^(project:|entity:)/.test(site.id)));
 });
 test('freshness describes last changed snapshot, not a false real-time guarantee', () => {
   const now = Date.parse('2026-10-23T12:00:00Z');

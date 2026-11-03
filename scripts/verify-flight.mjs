@@ -113,10 +113,11 @@ try {
   assert.ok(activeFrames >= 5 && activeFrames <= 37, `flight rate bound: ${activeFrames}`);
   await page.locator('#flight-pause').click();
   assert.equal(await page.locator('#flight-pause').getAttribute('aria-pressed'), 'true');
-  const big = expected.find(site => site.type === 'workstream' && site.active > 1);
+  const big = expected.find(site => site.project && site.active > 1);
+  assert.ok(big, 'a real project with active work exercises crane scaling');
   await page.locator('#flight-destination').selectOption(big.id);
   assert.equal(await page.locator('#flight-site-title').innerText(), big.title);
-  assert.match(await page.locator('#flight-site-metrics').innerText(), new RegExp(`${big.cranes} cranes`));
+  assert.match(await page.locator('#flight-site-metrics').innerText(), new RegExp(`${big.cranes} build cranes`));
   await page.locator('#flight-dock-panel > summary').click();
   assert.match(await page.locator('#planning-dock').innerText(), /Remaining actual cards/);
   assert.match(await page.locator('#planning-dock').innerText(), /Dependencies and crossovers are quoted/);
@@ -166,7 +167,10 @@ try {
   assert.match(await page.locator('#flight-site-title').innerText(), /No construction/);
   await page.locator('#search').fill('');
   await page.locator('#project-view').selectOption('kind:Milestone');
-  assert.equal(await page.locator('#flight-destination option').count(), fixture.items.filter(item => item.fields.Kind === 'Milestone').length);
+  const checkpoints = fixture.items.filter(item => item.fields.Kind === 'Milestone');
+  assert.equal(await page.locator('#flight-destination option').count(), constructionSites(checkpoints).length);
+  assert.ok((await page.locator('#flight-destination option').evaluateAll(options => options.map(option => option.value)))
+    .every(id => id.startsWith('project:') || id.startsWith('entity:')), 'filtered checkpoints remain inside project destinations');
   await page.locator('#project-view').selectOption('');
   for (const tab of ['board', 'roadmap', 'canopy', 'passports', 'catalog', 'own', 'flight']) {
     await page.locator(`[data-tab="${tab}"]`).click();

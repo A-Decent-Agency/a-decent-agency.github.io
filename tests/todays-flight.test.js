@@ -165,7 +165,7 @@ test('UI uses plain text, has named buttons, calls read-only navigation and supp
     assert.ok(button.attributes['aria-label'].includes(source.title));
     button.listeners.click();
   }
-  assert.equal(destination, 'workstream:Shared infrastructure');
+  assert.equal(destination, 'project:a-decent-agency/a-decent-agency.github.io');
   assert.equal(opened, source);
   assert.equal(ui.update([]).stops.length, 0);
   assert.equal(descendants(container).filter(node => node.tag === 'button').length, 0);

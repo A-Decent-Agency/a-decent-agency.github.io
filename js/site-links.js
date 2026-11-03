@@ -19,10 +19,16 @@ export function resolveSiteAddress(base, sites) {
     || params.getAll('site').length !== 1 || params.getAll('card').length > 1) {
     return { error: 'This site link is invalid. Choose a destination from Chart a course.' };
   }
-  const site = sites.find(site => site.id === siteId);
+  const canonical = sites.find(site => site.id === siteId);
+  const legacy = canonical ? null : sites.find(site => site.aliases?.includes(siteId));
+  const legacyCardSite = legacy && cardId !== null ? siteForCard(sites, cardId) : null;
+  const legacyCard = legacyCardSite?.items.find(item => item.id === cardId);
+  const legacyCardMatches = legacyCard && (legacyCard.id === siteId
+    || legacyCard.fields?.Kind !== 'Milestone' && siteId === `workstream:${legacyCard.fields?.Workstream || 'Unassigned'}`);
+  const site = canonical || (legacyCardMatches ? legacyCardSite : legacy);
   if (!site) return { error: 'This shared site is not in the current public roadmap. It may have been removed or withheld; no private details have been recovered.' };
   const card = cardId === null ? null : site.items.find(item => item.id === cardId);
-  if (cardId !== null && !card) return { site, error: 'The site is available, but this shared card is no longer published at it.' };
+  if (cardId !== null && (!card || legacy && !legacyCardMatches)) return { site, error: 'The site is available, but this shared card is no longer published at it.' };
   return { site, card };
 }
 

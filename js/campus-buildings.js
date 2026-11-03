@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import { LEVEL_HEIGHT, SATELLITE_WIDTH } from './project-campus.js';
+import { buildCivicLandmark } from './civic-landmarks.js';
+import { buildTrainingLandmark } from './training-landmark.js';
+import { buildWidgetLandmark } from './widget-landmarks.js';
 
 function block(group, x, y, z, w, h, d, color, glass = false) {
   group.userData.buildingBlocks.push({ x, y: y + h / 2, z, w, h, d, color, glass });
@@ -35,7 +38,7 @@ function terrace(group, width, y, color) {
   }
 }
 const STEEL = '#e0b867', SLAB = '#4f5768';
-// Open bays show bare steel; each closed issue clads one bay; a finished structure becomes solid project-colored floor space.
+// Only credited completed closures clad bays; decorative frontages never change this evidence.
 function skeletonBox(group, cx, y, cz, w, h, d, bays, clad, finished, color) {
   block(group, cx, y, cz, w, .5, d, finished ? '#e6d8be' : SLAB);
   if (finished) {
@@ -90,6 +93,10 @@ export function buildCampus(group, site, model) {
   block(group, 0, 1, 0, width + 12, .9, 35, '#435566');
   block(group, 0, 2, 15, width + 10, .5, 5, '#d0c8ae');
   for (const x of [-width / 2 - 4, width / 2 + 4]) tree(group, x, 10);
+  const helpers = { block, tree };
+  const themed = buildTrainingLandmark(group, site, model, helpers)
+    || buildCivicLandmark(group, site, model, helpers)
+    || buildWidgetLandmark(group, site, model, helpers);
   for (let floor = 0; floor < model.floors; floor++) {
     const h = model.baseHeight / model.floors, y = 2 + floor * h;
     const delivered = floor < model.deliveredFloors;
@@ -144,7 +151,7 @@ export function buildCampus(group, site, model) {
         block(group, x, 5, 23, 5, 3, .5, '#87e0e3');
       }
     }
-  } else if (model.form === 'tower') {
+  } else if (!themed && model.form === 'tower') {
     // Stage canopy, equalizer roofline and a plaza make the music campus recognizable.
     block(group, 0, 2, 24, width + 7, 2, 10, '#6a4c75');
     for (let x = -width / 2; x <= width / 2; x += 4) {
@@ -152,7 +159,7 @@ export function buildCampus(group, site, model) {
     }
     block(group, 0, 11, 23, width + 10, 1, 13, color);
     for (const x of [-width / 2, width / 2]) block(group, x, 3, 23, 1, 9, 1, '#ecd6af');
-  } else if (model.form === 'hall') {
+  } else if (!themed && model.form === 'hall') {
     const gateway = site.project.repository.endsWith('/DecentHead');
     if (gateway) {
       for (const x of [-width / 2, width / 2]) block(group, x, 2, 0, 4, model.height + 8, 24, color);
@@ -168,14 +175,14 @@ export function buildCampus(group, site, model) {
       const roof = new THREE.Mesh(new THREE.CylinderGeometry(0, width * .6, 7, 4), new THREE.MeshLambertMaterial({ color: '#8b5778' }));
       roof.scale.z = .55; roof.rotation.y = Math.PI / 4; roof.position.y = model.height + 6; group.add(roof);
     }
-  } else if (model.form === 'foundation') {
+  } else if (!themed && model.form === 'foundation') {
     for (let i = 0; i < 4; i++) tree(group, -width / 2 + 4 + i * (width - 8) / 3, -15, 1.2);
-  } else if (model.form === 'entrance') {
+  } else if (!themed && model.form === 'entrance') {
     for (const x of [-width / 2, width / 2]) block(group, x, 2, 0, 2, 22, 3, color);
     block(group, 0, 23, 0, width + 5, 2, 4, color);
     const dome = new THREE.Mesh(new THREE.SphereGeometry(9, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshLambertMaterial({ color, transparent: true, opacity: .65 }));
     dome.position.set(0, 9, -3); group.add(dome);
-  } else {
+  } else if (!themed) {
     block(group, 0, 2, 0, width * .7, .4, 18, '#386b8a');
     for (let x = -width / 3; x <= width / 3; x += 6) block(group, x, 2, 0, .35, .45, 18, '#98cadd');
     if (model.form === 'staging' && !model.levels?.length) {
