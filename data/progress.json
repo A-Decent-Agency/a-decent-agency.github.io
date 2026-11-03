@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-03T17:53:41.576Z",
+  "checkedAt": "2026-11-03T23:28:42.860Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,15 +35,21 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
-      "pushedAt": "2026-11-03T16:19:07Z",
+      "pushedAt": "2026-11-03T22:12:53Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
         "publishedAt": "2026-10-26T00:12:09Z"
       },
       "mergedPulls": [
+        {
+          "number": 309,
+          "title": "Keep DVert panel steady during background refreshes",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/309",
+          "mergedAt": "2026-11-03T22:12:53Z"
+        },
         {
           "number": 308,
           "title": "Show recipient names in payroll confirmations",
@@ -67,16 +73,10 @@
           "title": "Advert tallies: include paid-queue adverts and archive versioned journals",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/299",
           "mergedAt": "2026-10-29T01:06:43Z"
-        },
-        {
-          "number": 298,
-          "title": "Main search dropdown + advert vote tallies",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/298",
-          "mergedAt": "2026-10-29T01:00:52Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4485483,
+      "codeBytes": 4491269,
       "versions": [
         {
           "tag": "v1.0.0",
@@ -153,9 +153,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
-      "pushedAt": "2026-11-03T17:41:27Z",
+      "pushedAt": "2026-11-03T23:25:50Z",
       "release": null,
       "mergedPulls": [
         {
@@ -274,7 +274,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:41Z",
       "release": {
@@ -362,7 +362,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-03T15:36:30Z",
       "release": {
@@ -450,7 +450,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-03T13:26:37Z",
       "release": {
@@ -658,7 +658,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:03Z",
       "release": {
@@ -755,7 +755,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:15Z",
       "release": {
@@ -827,7 +827,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:34Z",
       "release": {
@@ -899,9 +899,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
-      "pushedAt": "2026-11-03T15:30:58Z",
+      "pushedAt": "2026-11-03T17:54:04Z",
       "release": null,
       "mergedPulls": [
         {
@@ -960,7 +960,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -990,7 +990,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-03T01:30:44Z",
       "release": null,
@@ -1080,7 +1080,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -1110,7 +1110,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -1140,7 +1140,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -1185,7 +1185,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1215,7 +1215,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1245,7 +1245,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-03T17:53:41.576Z",
+      "checkedAt": "2026-11-03T23:28:42.860Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
