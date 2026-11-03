@@ -96,6 +96,30 @@ export function buildTrainingLandmark(group, site, model, { block, tree } = {}) 
       box(span / 2 - 3 + tile * .45, 2.14, z + (tile % 2 ? .3 : -.3), .4, .035, .6, c.line);
     }
   }
+  // Conditioning corner between the gym and kiosk: heavy-bag frame and stacked plyo boxes.
+  const bagX = span * .17;
+  for (const x of [bagX - 1.6, bagX + 1.6]) box(x, 2.15, 20.6, .25, 5.2, .25, c.steel);
+  box(bagX, 7.35, 20.6, 3.5, .25, .3, c.steel);
+  box(bagX - .8, 3.6, 20.6, 1.1, 3.4, 1.1, c.track);
+  box(bagX - .8, 7, 20.6, .1, .35, .1, c.line);
+  box(bagX + .9, 2.15, 19.6, 1.3, .9, 1.3, c.purple);
+  box(bagX + .9, 3.05, 19.6, 1.1, .7, 1.1, c.mint);
+  box(bagX + .9, 3.75, 19.6, .9, .5, .9, c.fruit);
+
+  // Kettlebell row on the rubber strip, ascending in size.
+  for (let i = 0; i < 4; i++) {
+    const x = span * .09 + i * 1.05, size = .45 + i * .12;
+    box(x, 2.14, 25.2, size, size, size, i % 2 ? c.steel : c.purple);
+    box(x, 2.14 + size, 25.2, size * .7, .12, .12, c.line);
+  }
+
+  // Drinking fountain and lane-start flags beside the sprint track.
+  box(-span / 2 + 4, 2, 28.2, .7, 2.4, .7, c.steel);
+  box(-span / 2 + 4, 4.4, 28.2, 1, .25, 1, c.water, true);
+  for (const z of [29.6, 33.6]) {
+    box(-span / 2 + 1.2, 2, z, .14, 5.2, .14, c.line);
+    box(-span / 2 + 1.75, 6.2, z, 1, .7, .06, z < 31 ? c.mint : c.purple);
+  }
   if (typeof tree === 'function') {
     for (const x of [-span / 2 + 2, span / 2 - 2]) tree(group, x, 20.3, .55);
   }

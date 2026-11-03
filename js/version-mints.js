@@ -11,6 +11,22 @@ export function projectMints(site, feed) {
   }));
 }
 
+// The newest approved storefront edition becomes the campus billboard and the panel's support card.
+export function featuredEdition(site, feed) {
+  return projectMints(site, feed).filter(version => version.storefront)
+    .sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)))[0] || null;
+}
+
+export function renderSupportCallout(site, feed) {
+  const version = featuredEdition(site, feed);
+  if (!version) return '';
+  const store = version.storefront;
+  return `<section class="support-callout" aria-label="Support ${esc(site.title)}"><span class="eyebrow">SUPPORTER DNFT / ${esc(version.tag)}</span>
+    <img src="${mintArtworkPath(store, 'front')}" alt="${esc(site.title)} ${esc(version.tag)} Supporter edition front" loading="lazy" referrerpolicy="no-referrer" data-mint-art>
+    <button type="button" class="mint-buy" data-mint-checkout="${esc(store.purchaseUrl)}">Support ${esc(site.title)} · ${supporterPriceLabel(store.priceUSDC)} on Base</button>
+    <small>Base token ${esc(version.tokenId)} · listing ${esc(store.listingId)} · published evidence; checkout rechecks live price and stock. Supports the builders; not equity, yield or a product claim.</small></section>`;
+}
+
 export function renderVersionMints(site, feed) {
   if (!site?.project) return '';
   const versions = projectMints(site, feed);

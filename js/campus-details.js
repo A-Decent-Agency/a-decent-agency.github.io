@@ -3,9 +3,9 @@ import { campusStructure } from './project-campus.js';
 import { CANOPY } from './canopy-registry.js';
 import { canopyCity } from './canopy-city.js';
 import { ENS_ARTWORK_OBSERVATION, PROJECT_MURALS } from './site-identities.js';
-import { renderVersionMints } from './version-mints.js';
+import { renderSupportCallout, renderVersionMints } from './version-mints.js';
 import { campusArt } from './campus-art.js';
-import { renderWidgetProject } from './widget-projects.js';
+import { renderWidgetProject, widgetProject } from './widget-projects.js';
 
 export function renderCampusDetails(site, feed) {
   if (!site?.project) return site?.type === 'milestone'
@@ -26,7 +26,7 @@ export function renderCampusDetails(site, feed) {
   const mural = PROJECT_MURALS[repository];
   const connections = (feed?.connections || []).filter(link => [link.from.toLowerCase(), link.to.toLowerCase()].includes(repository.toLowerCase()));
   const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
-  return `${art ? `<section class="campus-art-brief"><span class="eyebrow">CITY LANDMARK</span><h4>${esc(art.name)}</h4><p>${esc(art.description)}</p><small>Art direction only / not a physical facility, feature delivery, legal protection or funding claim. Issue structures and receipt-backed floors retain their separate evidence rules.</small></section>` : ''}${renderWidgetProject(site, feed)}${renderReviewedBrief(site.project)}<details class="campus-editions"><summary>Supporter editions / receipt-backed evidence</summary>${renderVersionMints(site, feed)}</details><div class="campus-stage">${esc(model.label)}</div><details><summary>Architecture / evidence rules</summary><p>${esc(model.basis)}</p></details>
+  return `${art ? `<section class="campus-art-brief"><span class="eyebrow">CITY LANDMARK</span><h4>${esc(art.name)}</h4><p>${esc(art.description)}</p><small>Art direction only / not a physical facility, feature delivery, legal protection or funding claim. Issue structures and receipt-backed floors retain their separate evidence rules.</small></section>` : ''}${widgetProject(site.project) ? '' : renderSupportCallout(site, feed)}${renderWidgetProject(site, feed)}${renderReviewedBrief(site.project)}<details class="campus-editions"><summary>Supporter editions / receipt-backed evidence</summary>${renderVersionMints(site, feed)}</details><div class="campus-stage">${esc(model.label)}</div><details><summary>Architecture / evidence rules</summary><p>${esc(model.basis)}</p></details>
     ${identity?.ens ? `<p>Recorded ENS identity: <b>${esc(identity.ens)}</b>.</p>` : ''}
     ${avatarRecord ? `<details><summary>ENS artwork provenance / observed ${ENS_ARTWORK_OBSERVATION.observedAt}</summary><p>${esc(avatarRecord)}. Mainnet avatar text read without a wallet connection. Project-owned, commit-pinned artwork is displayed instead of following mutable avatar-service URLs automatically.</p></details>` : ''}
     ${mural ? `<figure class="campus-mural"><img src="${esc(mural.url)}" alt="${esc(mural.alt)}" loading="lazy" referrerpolicy="no-referrer" data-project-mural><figcaption>${link(mural.source, 'Project artwork')} · The Jolly LaMa / A Decent Agency · ${link(mural.license, 'CC BY 4.0')} (unmodified)</figcaption></figure>` : ''}

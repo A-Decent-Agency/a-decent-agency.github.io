@@ -176,7 +176,8 @@ test('imported briefs expose current evidence without opening historical or tech
   const site = sites.find(site => site.project?.repository === 'TheJollyLaMa/BigNuten_Vanilla');
   const html = renderCampusDetails(site, null);
   assert.match(html, /CURATED REVIEW \/ 2026-11-03/);
-  assert.equal((html.match(/class="evidence-state"/g) || []).length, 3);
+  assert.equal((html.match(/class="evidence-state"/g) || []).length, 4);
+  assert.match(html, /v3.3.0 Supporter DNFT live on Base/);
   assert.match(html, /MERGED SOURCE/);
   assert.match(html, /PLANNED \/ NOT DELIVERED/);
   assert.match(html, /#412/);

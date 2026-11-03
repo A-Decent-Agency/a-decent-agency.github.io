@@ -7,7 +7,7 @@ import { canopyCity, CITY_LIFT, CITY_RADIUS } from './canopy-city.js';
 import { CANOPY } from './canopy-registry.js';
 import { buildCampus } from './campus-buildings.js';
 import { campusConnections, campusPriority } from './campus-graph.js';
-import { projectMints } from './version-mints.js';
+import { featuredEdition, projectMints } from './version-mints.js';
 import { mintArtworkPath, supporterPriceLabel } from './progress-feed.js';
 import { HISTORICAL_MAPS } from './historical-maps.js';
 
@@ -235,10 +235,22 @@ export class ConstructionScene {
         const plan = sitePlanSprite(site); plan.position.set(-structure.width / 2 - 16, 13, 18);
         plan.userData.index = site.index; this.targets.push(plan); campus.add(plan);
         const crown = textSprite(site.project.milestone, tint, 62); crown.position.set(aside, roof + 15, 0); campus.add(crown);
-        const editions = projectMints(site, feed);
+        const featured = featuredEdition(site, feed);
+        const editions = projectMints(site, feed).sort((a, b) => (b.tag === featured?.tag) - (a.tag === featured?.tag));
         editions.forEach((version, index) => {
-          const display = new THREE.Group();
-          display.position.set(structure.width / 2 + 40 + index % 4 * 34, 16 + Math.floor(index / 4) * 36, -12);
+          const display = new THREE.Group(), billboard = version.tag === featured?.tag;
+          // The newest buyable edition stands as a raised roadside billboard; older editions shift past it.
+          const slot = featured && !billboard ? index + 1 : index;
+          display.position.set(structure.width / 2 + 40 + slot % 4 * 34 + (featured && !billboard ? 16 : 0), billboard ? 40 : 16 + Math.floor(slot / 4) * 36, -12);
+          if (billboard) {
+            display.scale.setScalar(1.7);
+            const header = textSprite(`SUPPORT ${site.title.toUpperCase()} / SUPPORTER DNFT`, '#71e6d0', 34);
+            header.position.y = 25; display.add(header);
+            for (const side of [-1, 1]) {
+              const post = new THREE.Mesh(new THREE.BoxGeometry(.9, 24, .9), new THREE.MeshBasicMaterial({ color: '#293f50' }));
+              post.position.set(side * 9, -24, -.8); display.add(post);
+            }
+          }
           campus.add(display);
           const store = version.storefront;
           const label = textSprite(`${version.tag} / TOKEN ${version.tokenId}`, '#e5c583', 29);

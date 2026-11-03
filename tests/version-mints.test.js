@@ -8,7 +8,7 @@ import { createHash } from 'node:crypto';
 import { isProgressFeed, isVersionStorefront, SUPPORTER_ESCROW, SUPPORTER_NFT } from '../js/progress-feed.js';
 import { versionStorefront, collectProgress } from '../scripts/sync-progress.mjs';
 import { cacheMintArt } from '../scripts/cache-mint-art.mjs';
-import { projectMints, renderVersionMints } from '../js/version-mints.js';
+import { featuredEdition, projectMints, renderSupportCallout, renderVersionMints } from '../js/version-mints.js';
 import { renderCampusDetails } from '../js/campus-details.js';
 
 const repository = 'TheJollyLaMa/DecentHead', tag = 'v2.0.0';
@@ -145,4 +145,20 @@ test('observer attaches verified checkout and retains minted floors with explici
   assert.equal(kept.versions[0].storefront, undefined);
   assert.match(kept.versions[0].storefrontError, /checkout link withheld/);
   assert.ok(isProgressFeed(failure));
+});
+test('newest approved edition becomes the support callout; unapproved or absent storefronts invent none', () => {
+  const older = { ...version, tag: 'v1.0.0', publishedAt: '2026-10-01T00:00:00Z', storefront: undefined };
+  const both = { repositories: [{ repository, state: 'available', mergedPulls: [], versions: [older, { ...version, storefront: store }] }] };
+  assert.equal(featuredEdition(site, both).tag, tag);
+  const html = renderSupportCallout(site, both);
+  assert.match(html, /SUPPORTER DNFT \/ v2.0.0/);
+  assert.match(html, /Support DecentHead · 10 USDC on Base/);
+  assert.equal((html.match(/data-mint-checkout=/g) || []).length, 1);
+  assert.match(html, /not equity, yield/);
+  assert.match(renderCampusDetails(site, both), /class="support-callout"/);
+  const bare = structuredClone(feed); delete bare.repositories[0].versions[0].storefront;
+  assert.equal(featuredEdition(site, bare), null);
+  assert.equal(renderSupportCallout(site, bare), '');
+  assert.equal(renderSupportCallout(site, null), '');
+  assert.match(renderSupportCallout({ ...site, title: '<img onerror=x>' }, feed), /&lt;img/);
 });

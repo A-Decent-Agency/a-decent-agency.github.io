@@ -208,6 +208,13 @@ mobile startup, and no external requests/network writes during studio use.
 Supporter checkout accepts the release-evidenced 10 or 100 Base USDC price.
 The observer, 3D sign, sidepanel, dialog, exact approval, listing rechecks and
 confirmed purchase event use that same price. Existing editions remain 10 USDC.
+
+Each project's newest approved storefront edition stands as a raised roadside
+billboard beside its campus and appears as a **Support this build** card near the
+top of the sidepanel; older editions remain smaller cards. Both reuse the same
+validated storefront (no new checkout route), and nothing appears without one.
+BigNuten v3.3.0 (token 76, listing 6) is the first billboard on a non-widget
+health campus.
 100-USDC external routes explicitly carry `priceUSDC=100000000`; deploy the
 compatible Head checkout before publishing those routes. This adapts
 DecentHead's `scripts/supporter-metadata.mjs` / `scripts/supporter-protocol.mjs`
@@ -298,7 +305,7 @@ For desktop/3D and mobile/2D browser acceptance, serve the site and run
 `OFFICE_URL=http://127.0.0.1:8000/ node scripts/verify-site-links.mjs` with
 Playwright available (`PLAYWRIGHT_MODULE` may point to an existing installation).
 
-The public Canopy map is imported from `data/agency-map.json` at `e41315387960dc73e32f500ca6a2cb582f3b02f8`, with 31 public project references and all 30 public-endpoint relationships, their independent entity IDs, types/evidence/caveats and dated briefs preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
+The public Canopy map is imported from `data/agency-map.json` at `2ccb65cc3f49798e92ebe9f8b88e82fbb9b64d15`, with 31 public project references and all 30 public-endpoint relationships, their independent entity IDs, types/evidence/caveats and dated briefs preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
 
 Sidepanels immediately show bounded pinned project artwork with source/license credit. Canopy uses its full ENS avatar, Head/Market their project-owned ENS artwork, and Busking its hat plus original busker mural (also on its 3D stage). Public Ethereum mainnet avatar text records were read without a wallet connection on 2026-10-25: Head/Market point to IPFS images; Agency/Canopy/Busking point to mutable avatar-service URLs. The UI records this provenance and uses reviewed immutable repository artwork rather than automatically following arbitrary services or assuming prepared ENS metadata is live. No ENS writes occur.
 

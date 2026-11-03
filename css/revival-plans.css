@@ -29,3 +29,7 @@
 .campus-art-brief small { display: block; line-height: 1.6; color: #bdb1cc; }
 .campus-widget { padding: 14px 0; border-bottom: 1px solid #82749766; }
 .campus-widget h4 { color: #71e6d0; font-size: 15px; }
+.support-callout { display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid #82749766; }
+.support-callout img { width: 100%; max-width: 260px; border-radius: 8px; border: 1px solid #71e6d066; }
+.support-callout .mint-buy { justify-self: stretch; padding: 12px; border-radius: 6px; background: #28453e; color: #b8f3e6; font-size: 14px; font-weight: 700; }
+.support-callout small { color: #b8aecb; }

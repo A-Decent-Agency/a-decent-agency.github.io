@@ -41,7 +41,7 @@ test('actual emitted boxes are finite, positive, low, and clear of tower and pro
   for (const width of widths) {
     const { built, blocks, trees } = emit(site, { width });
     assert.equal(built, true);
-    assert.equal(blocks.length, 79, 'fixed-size instanced-box budget');
+    assert.equal(blocks.length, 101, 'fixed-size instanced-box budget');
     for (const b of blocks) {
       for (const key of ['x', 'y', 'z', 'w', 'h', 'd']) assert.ok(Number.isFinite(b[key]), key);
       assert.ok(b.w > 0 && b.h > 0 && b.d > 0);
@@ -61,7 +61,9 @@ test('actual emitted boxes are finite, positive, low, and clear of tower and pro
 
 test('landmark includes gym glazing, pull-up rig, weights, mats, hydration and three running lanes', () => {
   const { blocks } = emit();
-  assert.equal(blocks.filter(b => b.glass).length, 3);
+  assert.equal(blocks.filter(b => b.glass).length, 4, "gym glazing, kiosk water, fountain basin");
+  assert.equal(blocks.filter(b => b.color === "#b86854" && b.h === 3.4).length, 1, "heavy bag");
+  assert.equal(blocks.filter(b => b.y === 2.14 && b.z === 25.2).length, 4, "kettlebell row");
   assert.ok(blocks.some(b => b.y > 6 && b.color === '#bc96df'), 'roof dumbbell');
   assert.ok(blocks.some(b => b.y === 6.35 && b.w === 4.3), 'pull-up crossbar');
   assert.equal(blocks.filter(b => b.color === '#293f50' && b.h === 1.15).length, 4, 'barbell plates');
@@ -80,5 +82,5 @@ test('unsupported geometry and absent adapters fail without mutating input; opti
   const model = Object.freeze({ width: 30 });
   let count = 0;
   assert.equal(buildTrainingLandmark(group, candidate, model, { block: () => count++ }), true);
-  assert.equal(count, 79);
+  assert.equal(count, 101);
 });
