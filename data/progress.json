@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-02T18:29:55.782Z",
+  "checkedAt": "2026-11-03T01:38:55.591Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -30,15 +30,27 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
-      "pushedAt": "2026-11-02T03:37:33Z",
+      "pushedAt": "2026-11-02T19:52:41Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
         "publishedAt": "2026-10-26T00:12:09Z"
       },
       "mergedPulls": [
+        {
+          "number": 308,
+          "title": "Show recipient names in payroll confirmations",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/308",
+          "mergedAt": "2026-11-02T19:52:41Z"
+        },
+        {
+          "number": 307,
+          "title": "Prevent expired DeVert impressions blocking scheduler",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/307",
+          "mergedAt": "2026-11-02T19:44:30Z"
+        },
         {
           "number": 300,
           "title": "Fix DBusker earnings context overflow",
@@ -56,22 +68,10 @@
           "title": "Main search dropdown + advert vote tallies",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/298",
           "mergedAt": "2026-10-29T01:00:52Z"
-        },
-        {
-          "number": 297,
-          "title": "Retry transient Pinata uploads and surface failed NFT requests",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/297",
-          "mergedAt": "2026-10-28T23:49:00Z"
-        },
-        {
-          "number": 296,
-          "title": "Add artist and/or song search to the archive drawer",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/296",
-          "mergedAt": "2026-10-28T23:48:57Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4474910,
+      "codeBytes": 4485483,
       "versions": [
         {
           "tag": "v1.0.0",
@@ -133,9 +133,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
-      "pushedAt": "2026-11-02T18:29:12Z",
+      "pushedAt": "2026-11-03T01:25:50Z",
       "release": null,
       "mergedPulls": [
         {
@@ -229,7 +229,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -312,7 +312,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -395,44 +395,44 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
-      "pushedAt": "2026-11-02T10:58:17Z",
+      "pushedAt": "2026-11-02T23:45:02Z",
       "release": null,
       "mergedPulls": [
         {
-          "number": 404,
-          "title": "Auto-fill nutrition cards with practical Genie best estimates",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/404",
-          "mergedAt": "2026-11-02T10:58:15Z"
+          "number": 407,
+          "title": "Add pinned Base Supporter Token card to About",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/407",
+          "mergedAt": "2026-11-02T23:45:03Z"
         },
         {
-          "number": 402,
-          "title": "Target nutrition searches at missing household portion weights",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/402",
-          "mergedAt": "2026-11-02T03:36:16Z"
+          "number": 411,
+          "title": "Part of #391: Add local wallet profile continuity",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/411",
+          "mergedAt": "2026-11-02T23:20:25Z"
         },
         {
-          "number": 401,
-          "title": "Fix cup and serving nutrition scaling with food-specific measures",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/401",
-          "mergedAt": "2026-11-02T03:25:24Z"
+          "number": 408,
+          "title": "Research experiments: Learn → Plan → Track → Check",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/408",
+          "mergedAt": "2026-11-02T23:12:08Z"
         },
         {
-          "number": 399,
-          "title": "Fill nutrition directly and reuse shared community food facts",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/399",
-          "mergedAt": "2026-11-02T02:55:45Z"
+          "number": 410,
+          "title": "Add local gut-health tracking",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/410",
+          "mergedAt": "2026-11-02T23:02:35Z"
         },
         {
-          "number": 397,
-          "title": "Split cited nutrition search from structured card extraction",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/397",
-          "mergedAt": "2026-11-01T20:49:03Z"
+          "number": 409,
+          "title": "Triage npm audit advisories with scoped dependency fixes",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/409",
+          "mergedAt": "2026-11-02T22:54:57Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2586586,
+      "codeBytes": 2789319,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -451,8 +451,8 @@
           "kind": "grounds",
           "order": 8,
           "name": "Contributor workshop",
-          "open": 8,
-          "closed": 0,
+          "open": 0,
+          "closed": 8,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/8"
         },
@@ -461,8 +461,8 @@
           "kind": "grounds",
           "order": 9,
           "name": "Legacy DeFi salvage yard",
-          "open": 18,
-          "closed": 0,
+          "open": 0,
+          "closed": 18,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/9"
         },
@@ -511,8 +511,8 @@
           "kind": "level",
           "order": 5,
           "name": "Commitment club",
-          "open": 4,
-          "closed": 2,
+          "open": 0,
+          "closed": 6,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/5"
         },
@@ -521,8 +521,8 @@
           "kind": "level",
           "order": 6,
           "name": "Release crown",
-          "open": 3,
-          "closed": 0,
+          "open": 2,
+          "closed": 1,
           "state": "open",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/6"
         }
@@ -531,7 +531,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
@@ -618,7 +618,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
@@ -690,7 +690,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
@@ -762,9 +762,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
-      "pushedAt": "2026-11-02T11:14:43Z",
+      "pushedAt": "2026-11-02T18:30:15Z",
       "release": null,
       "mergedPulls": [
         {
@@ -818,7 +818,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -843,9 +843,9 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
-      "pushedAt": "2026-11-01T19:25:10Z",
+      "pushedAt": "2026-11-03T01:30:44Z",
       "release": null,
       "mergedPulls": [],
       "issues": null,
@@ -908,7 +908,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -933,7 +933,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -958,7 +958,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -993,7 +993,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1018,7 +1018,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1043,7 +1043,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-02T18:29:55.782Z",
+      "checkedAt": "2026-11-03T01:38:55.591Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
