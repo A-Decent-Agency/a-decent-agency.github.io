@@ -69,6 +69,8 @@ export function isStructure(value, repository) {
     && Number.isSafeInteger(value.order) && value.order >= 0 && value.order <= 9999
     && typeof value.name === 'string' && value.name.length > 0 && value.name.length <= 80
     && [value.open, value.closed].every(n => Number.isSafeInteger(n) && n >= 0 && n <= 10000)
+    && (value.closures === undefined || value.closures && ['completed', 'notPlanned', 'unknown'].every(key => Number.isSafeInteger(value.closures[key]) && value.closures[key] >= 0)
+      && value.closures.completed + value.closures.notPlanned + value.closures.unknown === value.closed)
     && ['open', 'closed'].includes(value.state) && value.url === `https://github.com/${repository}/milestone/${value.number}`;
 }
 export function isProgressFeed(value) {

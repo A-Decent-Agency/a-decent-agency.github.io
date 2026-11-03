@@ -18,6 +18,15 @@ try {
   await page.screenshot({ path: `${shots}/october-recall.png`, fullPage: true });
   await page.locator('#project-recall-panel > summary').click();
   await page.locator('#motion-button').click();
+  await page.locator('#flight-destination').selectOption('project:thejollylama/bignuten_vanilla');
+  await page.waitForFunction(() => document.querySelectorAll('#campus-details .evidence-state').length === 3);
+  assert.equal(await page.locator('#campus-details [data-state="merged"]').count(), 2);
+  assert.equal(await page.locator('#campus-details [data-state="planned"]').count(), 1);
+  assert.match(await page.locator('#campus-details').innerText(), /not cross-browser sync/);
+  await page.locator('#campus-details .issue-skeleton > summary').click();
+  assert.match(await page.locator('#campus-details .issue-skeleton').innerText(), /18 not planned/);
+  await page.screenshot({ path: `${shots}/current-big-nuten.png`, fullPage: true });
+  await page.locator('#campus-plan-panel > summary').click();
   for (const plan of REVIVAL_PLANS) {
     const value = `project:${plan.repository.toLowerCase()}`;
     await page.locator('#flight-destination').selectOption(value);
@@ -25,11 +34,13 @@ try {
     const campus = page.locator(`[data-revival-plan="${plan.repository}"]`);
     assert.equal(await campus.count(), 1);
     assert.equal(await campus.locator('[data-revival-stage]').count(), 5);
+    await campus.locator('details > summary').filter({ hasText: 'proposed levels / acceptance tests' }).click();
     assert.match(await campus.innerText(), /Acceptance:/);
     assert.match(await campus.innerText(), /PROPOSED \/ not delivered/);
     await page.locator('#flight-camera').selectOption('orbit');
     await page.waitForTimeout(100);
     await page.screenshot({ path: `${shots}/${plan.motif}-tower.png`, fullPage: true });
+    await campus.locator('details > summary').filter({ hasText: 'Founding-map intention' }).click();
     await campus.locator('[data-revival-archive]').click();
     assert.equal(await page.locator('#historical-map-dialog').isVisible(), true);
     await page.waitForFunction(() => {
@@ -44,7 +55,7 @@ try {
   await page.locator('#human-priorities [data-human-site="entity:decent-settlements-router"]').first().click();
   assert.equal(await page.locator('#flight-site-title').innerText(), 'DecentSettlementsRouter');
   assert.equal(await page.locator('[data-revival-plan="entity:decent-settlements-router"] [data-revival-stage]').count(), 5);
-  assert.equal(await page.locator('#campus-plan a[href="https://github.com/TheJollyLaMa/ArtFi/issues/62"]').count(), 1);
+  assert.equal(await page.locator('[data-revival-plan="entity:decent-settlements-router"] a[href="https://github.com/TheJollyLaMa/ArtFi/issues/62"]').count(), 1);
   await page.locator('#flight-camera').selectOption('orbit');
   await page.screenshot({ path: `${shots}/settlements-router-tower.png`, fullPage: true });
   await page.locator('#project-recall-panel > summary').click();
@@ -63,5 +74,5 @@ try {
   await mobile.locator('#project-recall-panel > summary').click();
   assert.equal(await mobile.locator('[data-recall-repository]').count(), 14);
   assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-  console.log('PASS: 14-project October recall, five revival towers plus independent router, eight human-needs lenses, original-map dialogs, DLend identity/navigation, four-map past camera, mobile overflow and no page errors.');
+  console.log('PASS: current BigNuten briefs and non-delivery closures, 14-project recall plus October archive, five revival towers plus independent router, eight human-needs lenses, original maps, DLend navigation, past camera, mobile overflow and no page errors.');
 } finally { await browser.close(); }

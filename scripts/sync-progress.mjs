@@ -73,6 +73,23 @@ export async function collectProgress({ fetcher = fetch, token = '', previous = 
       if (!Array.isArray(milestones)) throw new Error('Milestone observation has an invalid format');
       const structures = milestones.map(milestone => milestoneStructure(milestone, repository)).filter(Boolean)
         .sort((a, b) => a.kind.localeCompare(b.kind) || a.order - b.order || a.number - b.number).slice(0, MAX_STRUCTURES);
+      for (const structure of structures) {
+        const closures = { completed: 0, notPlanned: 0, unknown: 0 };
+        let observed = 0;
+        if (structure.closed) {
+          for (let page = 1; page <= 3; page++) {
+            const rows = await get(`repos/${repository}/issues?milestone=${structure.number}&state=closed&per_page=100&page=${page}`);
+            if (!Array.isArray(rows)) throw new Error('Milestone closure observation has an invalid format');
+            for (const row of rows) {
+              const reason = row.state_reason === 'completed' ? 'completed' : row.state_reason === 'not_planned' ? 'notPlanned' : 'unknown';
+              closures[reason]++; observed++;
+            }
+            if (rows.length < 100) break;
+          }
+          if (observed !== structure.closed) throw new Error('Milestone closure counts changed or exceeded observation bounds');
+        }
+        structure.closures = closures;
+      }
       const versions = [];
       for (const edition of releases.filter(value => !value.draft && !value.prerelease)) {
         const asset = edition.assets?.find(value => ['supporter-minted.json', 'supporter-mint-evidence.json'].includes(value.name));
@@ -99,7 +116,7 @@ export async function collectProgress({ fetcher = fetch, token = '', previous = 
       repositories.push({ ...blank, state: 'available', checkedAt: now, pushedAt: repo.pushed_at,
         codeBytes: Object.values(languages).reduce((sum, bytes) => sum + bytes, 0), versions, structures, versionsTruncated: releases.length === 20,
         release: release ? { tag: release.tag_name, url: release.html_url, publishedAt: release.published_at } : null,
-        mergedPulls: pulls.filter(pr => pr.merged_at).slice(0, 5).map(pr => ({
+        mergedPulls: pulls.filter(pr => pr.merged_at).sort((a, b) => b.merged_at.localeCompare(a.merged_at)).slice(0, 5).map(pr => ({
           number: pr.number, title: pr.title, url: pr.html_url, mergedAt: pr.merged_at,
         })) });
     } catch (error) {

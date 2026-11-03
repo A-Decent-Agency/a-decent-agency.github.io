@@ -15,3 +15,12 @@
 .human-priorities p { font-size: 12px; line-height: 1.7; }
 .human-priorities h4 { margin: 0 0 8px; color: #8de5d3; }
 .human-priorities button { white-space: normal; overflow-wrap: anywhere; }
+.campus-brief { padding: 14px 0; border-top: 1px solid var(--line); }
+.campus-updates { display: grid; gap: 14px; margin: 14px 0; }
+.campus-updates article { padding: 14px; background: #211c32; border: 1px solid #82749766; border-radius: 9px; }
+.campus-updates h5 { font-size: 13px; line-height: 1.5; margin: 10px 0; }
+.campus-updates ul { padding-left: 16px; }
+.evidence-state { display: inline-block; padding: 4px 6px; border: 1px solid #60a5fa; border-radius: 5px; color: #93c5fd; }
+.evidence-state[data-state="in-flight"] { color: #fcd34d; border-color: #b48b36; }
+.evidence-state[data-state="planned"] { color: #d8b4fe; border-color: #a777cd; }
+.project-recall-grid li { padding: 9px 0; line-height: 1.65; border-bottom: 1px solid #82749744; }

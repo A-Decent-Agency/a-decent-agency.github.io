@@ -145,11 +145,19 @@ test('monthly recall keeps public source counts distinct from deployment and loc
   const value = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url)));
   assert.equal(validateRecall(value), value);
   assert.equal(value.projects.length, 14);
+  assert.equal(value.schemaVersion, 2);
+  assert.ok(Date.parse(value.recentStart) < Date.parse(value.observedAt));
+  const bigNuten = value.projects.find(project => project.repository === 'TheJollyLaMa/BigNuten_Vanilla');
+  assert.ok(bigNuten.recentMerged.every(entry => Date.parse(entry.at) >= Date.parse(value.recentStart)));
   const html = renderProjectRecall(value);
   assert.equal((html.match(/data-recall-repository=/g) || []).length, 14);
   assert.match(html, /not proof of deployment/);
   assert.match(html, /not an edit of the older Project board/);
   assert.match(html, /mint.*deferred/);
+  const moved = structuredClone(value);
+  moved.projects[0].recentClosed = [{ title: 'Moved to financial epic', url: `https://github.com/${moved.projects[0].repository}/issues/1`, stateReason: 'not_planned' }];
+  assert.match(renderProjectRecall(moved), /Not planned \/ moved or declined; not delivery/);
+  assert.doesNotMatch(html, /local and unpublished/);
   assert.ok(value.projects.some(project => project.repository === 'TheJollyLaMa/BigNuten_Vanilla' && project.octoberMergedCount > 0));
   assert.ok(value.projects.every(project => project.openIssueCount === project.open.length + project.omittedOpen));
   const bad = structuredClone(value); bad.projects[0].merged[0].url = 'https://other.example/secret';
@@ -159,4 +167,20 @@ test('monthly recall keeps public source counts distinct from deployment and loc
   const escaped = structuredClone(value); escaped.projects[0].name = '<img onerror=bad>';
   assert.match(renderProjectRecall(escaped), /&lt;img/);
   assert.doesNotMatch(renderProjectRecall(escaped), /<img/);
+  const badWindow = structuredClone(value); badWindow.recentStart = 'no date';
+  assert.throws(() => validateRecall(badWindow), /window/);
+});
+
+test('imported briefs expose current evidence without opening historical or technical walls of text', () => {
+  const sites = constructionSites([{ id: 'big', title: 'BigNuten', repository: 'TheJollyLaMa/BigNuten_Vanilla', fields: { Kind: 'Portfolio' } }]);
+  const site = sites.find(site => site.project?.repository === 'TheJollyLaMa/BigNuten_Vanilla');
+  const html = renderCampusDetails(site, null);
+  assert.match(html, /CURATED REVIEW \/ 2026-11-03/);
+  assert.equal((html.match(/class="evidence-state"/g) || []).length, 3);
+  assert.match(html, /MERGED SOURCE/);
+  assert.match(html, /PLANNED \/ NOT DELIVERED/);
+  assert.match(html, /#412/);
+  assert.match(html, /No chain balances or verified deployment are inferred/);
+  assert.doesNotMatch(html, /<details open/);
+  assert.match(html, /Public activity has not been observed/);
 });

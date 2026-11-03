@@ -23,6 +23,7 @@ test('feed validation accepts structures and rejects foreign URLs, duplicates an
   const fetcher = async url => {
     const reply = value => ({ ok: true, status: 200, json: async () => value });
     if (url.includes('/milestones?')) return reply(url.includes(repository) ? milestones : []);
+    if (url.includes('/issues?milestone=2')) return reply(Array.from({ length: 3 }, () => ({ state_reason: 'completed' })));
     if (url.endsWith('/releases/latest')) return { ok: false, status: 404 };
     if (url.endsWith('/languages')) return reply({});
     if (url.includes('/pulls?') || url.endsWith('/releases?per_page=20')) return reply([]);
@@ -40,6 +41,8 @@ test('feed validation accepts structures and rejects foreign URLs, duplicates an
   assert.equal(isProgressFeed(duplicate), false);
   const negative = structuredClone(feed); negative.repositories[index].structures[0].open = -1;
   assert.equal(isProgressFeed(negative), false);
+  const mismatchedReasons = structuredClone(feed); mismatchedReasons.repositories[index].structures[0].closures.completed++;
+  assert.equal(isProgressFeed(mismatchedReasons), false);
   const legacy = structuredClone(feed); delete legacy.repositories[index].structures;
   assert.ok(isProgressFeed(legacy));
 });
@@ -64,6 +67,37 @@ test('issues are bays: skeleton, partial cladding and finished stages follow ope
   assert.equal(skeleton.top, 3 * LEVEL_HEIGHT);
   const nearlyDone = issueSkeleton([{ kind: 'level', order: 1, number: 1, name: 'x', open: 1, closed: 99 }]).levels[0];
   assert.ok(nearlyDone.cladBays < nearlyDone.bays, 'one open issue keeps a bare bay');
+});
+
+test('not-planned and unknown closures never finish or clad delivered work', () => {
+  const entries = [
+    { completed: 0, notPlanned: 8, unknown: 0 },
+    { completed: 2, notPlanned: 4, unknown: 0 },
+    { completed: 0, notPlanned: 0, unknown: 3 },
+    { completed: 3, notPlanned: 0, unknown: 0 }
+  ].map((closures, index) => ({ kind: 'level', order: index + 1, number: index + 1,
+    name: `Level ${index + 1}`, open: 0, closed: Object.values(closures).reduce((a, b) => a + b), closures }));
+  const model = issueSkeleton(entries);
+  assert.deepEqual(model.levels.map(level => level.finished), [false, false, false, true]);
+  assert.deepEqual(model.levels.map(level => level.cladBays), [0, 2, 0, 3]);
+  assert.equal(model.finishedCount, 1);
+});
+
+test('inconsistent milestone observation is unavailable, not a successful empty or finished tower', async () => {
+  const fetcher = async url => {
+    const reply = value => ({ ok: true, status: 200, json: async () => value });
+    if (url.includes('/milestones?')) return reply(url.includes(repository) ? [milestone(1, 'Level 1: Finance', 0, 3)] : []);
+    if (url.includes('/issues?milestone=1')) return reply([{ state_reason: 'not_planned' }]);
+    if (url.endsWith('/releases/latest')) return { ok: false, status: 404 };
+    if (url.endsWith('/languages')) return reply({});
+    if (url.includes('/pulls?') || url.endsWith('/releases?per_page=20')) return reply([]);
+    return reply({ private: false, visibility: 'public', pushed_at: '2026-11-03T00:00:00Z' });
+  };
+  const feed = await collectProgress({ fetcher, now: '2026-11-03T00:00:00Z' });
+  const entry = feed.repositories.find(value => value.repository === repository);
+  assert.equal(entry.state, 'unavailable');
+  assert.match(entry.error, /Public GitHub observation failed/);
+  assert.ok(isProgressFeed(feed));
 });
 
 test('campus height rises with planned levels, open structures raise cranes, finished skeleton calms the site', () => {

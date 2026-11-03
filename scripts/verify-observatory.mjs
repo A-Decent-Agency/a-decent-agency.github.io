@@ -16,6 +16,7 @@ try {
   await page.locator('#flight-destination').selectOption('project:thejollylama/decenthead');
   await page.waitForFunction(() => [...document.querySelectorAll('#campus-artwork img')].some(img => img.complete && img.naturalWidth > 0));
   assert.match(await page.locator('#campus-details').innerText(), /Delivered version floors \(1\)/);
+  await page.locator('#campus-details summary').filter({ hasText: /^Delivered version floors/ }).click();
   assert.match(await page.locator('#campus-details').innerText(), /token 70/);
   // A delivered hall needs no crane unless it has unfinished planned structures (open milestone issues).
   const metrics = await page.locator('#flight-site-metrics').innerText(), planned = metrics.match(/(\d+)\/(\d+) planned structures finished/);
@@ -47,6 +48,7 @@ try {
   await page.waitForFunction(() => !document.fullscreenElement && !document.querySelector('#workspace').classList.contains('immersive'));
   await page.locator('#flight-destination').selectOption('project:thejollylama/decentbusking');
   const jobs = await page.locator('#campus-plan [data-campus-item]').count();
+  await page.locator('#campus-plan-panel > summary').click();
   assert.equal(jobs, await page.locator('#flight-site-items button').count());
   await page.locator('#campus-plan [data-campus-item]').first().click();
   assert.ok(await page.locator('#detail-panel').isVisible());

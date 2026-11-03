@@ -1,15 +1,16 @@
 {
-  "schemaVersion": 1,
-  "observedAt": "2026-10-31T09:55:37.008Z",
+  "schemaVersion": 2,
+  "observedAt": "2026-11-03T02:16:23.402Z",
+  "recentStart": "2026-10-27T02:16:23.402Z",
   "periodStart": "2026-10-01T00:00:00Z",
   "periodEndExclusive": "2026-11-01T00:00:00Z",
-  "scope": "Fourteen public repositories selected for October recall; not the whole library. GitHub state is not deployment, payment or product acceptance.",
+  "scope": "Fourteen selected public repositories; recent evidence covers the preceding seven days, with October activity retained separately. Not the whole library. GitHub state is not deployment, payment or product acceptance.",
   "projects": [
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "name": "Planning Office",
-      "focus": "Active / local studio and archive awaiting review",
-      "observedAt": "2026-10-31T09:54:49.141Z",
+      "focus": "Published studio, historical archive and independent settlements planning",
+      "observedAt": "2026-11-03T02:16:26.480Z",
       "partial": false,
       "octoberMergedCount": 13,
       "octoberClosedCount": 1,
@@ -19,25 +20,29 @@
           "number": 14,
           "title": "Living map: cul-de-sac sprawl, Canopy city and repo-triggered sync",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/14",
-          "at": "2026-10-27T18:02:05Z"
+          "at": "2026-10-27T18:02:05Z",
+          "stateReason": "unknown"
         },
         {
           "number": 13,
           "title": "Issue skeletons: milestone levels and grounds that finish as issues close",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/13",
-          "at": "2026-10-27T15:54:41Z"
+          "at": "2026-10-27T15:54:41Z",
+          "stateReason": "unknown"
         },
         {
           "number": 12,
           "title": "Honor release-backed supporter prices throughout the map",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/12",
-          "at": "2026-10-26T00:09:47Z"
+          "at": "2026-10-26T00:09:47Z",
+          "stateReason": "unknown"
         },
         {
           "number": 11,
           "title": "Enable same-page Supporter purchases beside project sites",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/11",
-          "at": "2026-10-25T17:25:50Z"
+          "at": "2026-10-25T17:25:50Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -45,9 +50,34 @@
           "number": 8,
           "title": "Planning office: artful project campuses and version-backed site plans",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/issues/8",
-          "at": "2026-10-25T16:28:46Z"
+          "at": "2026-10-25T16:28:46Z",
+          "stateReason": "completed"
         }
       ],
+      "recentMerged": [
+        {
+          "number": 18,
+          "title": "Build Pilgrimages V1 and BabelBet preparation planning teams",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/18",
+          "at": "2026-11-01T17:54:16Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 14,
+          "title": "Living map: cul-de-sac sprawl, Canopy city and repo-triggered sync",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/14",
+          "at": "2026-10-27T18:02:05Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 13,
+          "title": "Issue skeletons: milestone levels and grounds that finish as issues close",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/13",
+          "at": "2026-10-27T15:54:41Z",
+          "stateReason": "unknown"
+        }
+      ],
+      "recentClosed": [],
       "open": [
         {
           "number": 17,
@@ -77,35 +107,39 @@
       "repository": "TheJollyLaMa/DecentBusking",
       "name": "DecentBusking",
       "focus": "Released / observe runtime and bounded follow-up",
-      "observedAt": "2026-10-31T09:54:56.296Z",
+      "observedAt": "2026-11-03T02:16:33.899Z",
       "partial": false,
       "octoberMergedCount": 153,
       "octoberClosedCount": 80,
-      "openIssueCount": 4,
+      "openIssueCount": 6,
       "merged": [
         {
           "number": 300,
           "title": "Fix DBusker earnings context overflow",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/300",
-          "at": "2026-10-29T22:25:33Z"
+          "at": "2026-10-29T22:25:33Z",
+          "stateReason": "unknown"
         },
         {
           "number": 299,
           "title": "Advert tallies: include paid-queue adverts and archive versioned journals",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/299",
-          "at": "2026-10-29T01:06:43Z"
+          "at": "2026-10-29T01:06:43Z",
+          "stateReason": "unknown"
         },
         {
           "number": 298,
           "title": "Main search dropdown + advert vote tallies",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/298",
-          "at": "2026-10-29T01:00:52Z"
+          "at": "2026-10-29T01:00:52Z",
+          "stateReason": "unknown"
         },
         {
           "number": 297,
           "title": "Retry transient Pinata uploads and surface failed NFT requests",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/297",
-          "at": "2026-10-28T23:49:00Z"
+          "at": "2026-10-28T23:49:00Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -113,22 +147,83 @@
           "number": 303,
           "title": "Prevent radio silence during unbooked live slots: up to four ads, then resume music",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/303",
-          "at": "2026-10-31T01:06:47Z"
+          "at": "2026-10-31T01:06:47Z",
+          "stateReason": "completed"
         },
         {
           "number": 73,
           "title": "Remint DecentBusking Supporter DNFTs for this release on Base",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/73",
-          "at": "2026-10-26T00:57:58Z"
+          "at": "2026-10-26T00:57:58Z",
+          "stateReason": "completed"
         },
         {
           "number": 289,
           "title": "Mint Supporter DNFT for v1.0.0",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/289",
-          "at": "2026-10-26T00:58:01Z"
+          "at": "2026-10-26T00:58:01Z",
+          "stateReason": "completed"
+        }
+      ],
+      "recentMerged": [
+        {
+          "number": 308,
+          "title": "Show recipient names in payroll confirmations",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/308",
+          "at": "2026-11-02T19:52:41Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 307,
+          "title": "Prevent expired DeVert impressions blocking scheduler",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/307",
+          "at": "2026-11-02T19:44:30Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 300,
+          "title": "Fix DBusker earnings context overflow",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/300",
+          "at": "2026-10-29T22:25:33Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 299,
+          "title": "Advert tallies: include paid-queue adverts and archive versioned journals",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/299",
+          "at": "2026-10-29T01:06:43Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 298,
+          "title": "Main search dropdown + advert vote tallies",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/298",
+          "at": "2026-10-29T01:00:52Z",
+          "stateReason": "unknown"
+        }
+      ],
+      "recentClosed": [
+        {
+          "number": 303,
+          "title": "Prevent radio silence during unbooked live slots: up to four ads, then resume music",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/303",
+          "at": "2026-10-31T01:06:47Z",
+          "stateReason": "completed"
         }
       ],
       "open": [
+        {
+          "number": 305,
+          "title": "Investigate and reduce unsustainable Alchemy costs: reconcile October invoice and audit RPC workloads",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/305",
+          "at": "2026-11-02T06:46:42Z"
+        },
+        {
+          "number": 304,
+          "title": "Separate walletless song comments from member-verified prize voting",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/304",
+          "at": "2026-11-01T14:08:53Z"
+        },
         {
           "number": 301,
           "title": "Admin: Invites & Promotions campaigns with capped rewards and referral tracking",
@@ -146,17 +241,17 @@
           "title": "Rocket game mode: 100-level NFT asteroid challenge with radio combat and weekly victory NFT",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/243",
           "at": "2026-10-27T16:00:50Z"
-        },
-        {
-          "number": 209,
-          "title": "Explore 3D animated jukebox for DJuke panel, single-play NFT cards, and context-themed side panels",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/issues/209",
-          "at": "2026-10-27T16:00:52Z"
         }
       ],
-      "omittedOpen": 0,
-      "openPullCount": 1,
+      "omittedOpen": 1,
+      "openPullCount": 2,
       "openPulls": [
+        {
+          "number": 306,
+          "title": "Explain why DJuke checkout is disabled beside Queue Song",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/306",
+          "at": "2026-11-02T03:37:44Z"
+        },
         {
           "number": 302,
           "title": "Add admin promotional campaigns and referral rewards",
@@ -176,7 +271,7 @@
       "repository": "TheJollyLaMa/DecentCanopy",
       "name": "DecentCanopy",
       "focus": "Active / evidence and ecosystem integration; mint deferred",
-      "observedAt": "2026-10-31T09:54:59.733Z",
+      "observedAt": "2026-11-03T02:16:37.068Z",
       "partial": false,
       "octoberMergedCount": 28,
       "octoberClosedCount": 0,
@@ -186,28 +281,70 @@
           "number": 49,
           "title": "Record partial BigNuten Level 5 delivery",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/49",
-          "at": "2026-10-29T12:19:33Z"
+          "at": "2026-10-29T12:19:33Z",
+          "stateReason": "unknown"
         },
         {
           "number": 48,
           "title": "Record BigNuten Level 4 health foundation",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/48",
-          "at": "2026-10-29T01:50:26Z"
+          "at": "2026-10-29T01:50:26Z",
+          "stateReason": "unknown"
         },
         {
           "number": 47,
           "title": "BigNuten: Level 3 'Recovery and privacy' evidence",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/47",
-          "at": "2026-10-29T00:28:36Z"
+          "at": "2026-10-29T00:28:36Z",
+          "stateReason": "unknown"
         },
         {
           "number": 46,
           "title": "BigNuten: Level 2 'Scrub and test' evidence",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/46",
-          "at": "2026-10-28T23:48:31Z"
+          "at": "2026-10-28T23:48:31Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [],
+      "recentMerged": [
+        {
+          "number": 56,
+          "title": "Record BigNuten best-estimate nutrition auto-fill",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/56",
+          "at": "2026-11-02T11:14:03Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 55,
+          "title": "Document BigNuten food-specific cup and serving conversions",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/55",
+          "at": "2026-11-02T03:39:57Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 54,
+          "title": "Document BigNuten direct-fill nutrition and shared food references",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/54",
+          "at": "2026-11-02T03:01:45Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 53,
+          "title": "Record BigNuten cited nutrition rollout and acceptance limits",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/53",
+          "at": "2026-11-01T20:55:14Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 52,
+          "title": "Update BigNuten Genie access and consent reuse evidence",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/52",
+          "at": "2026-11-01T19:44:20Z",
+          "stateReason": "unknown"
+        }
+      ],
+      "recentClosed": [],
       "open": [
         {
           "number": 34,
@@ -249,35 +386,39 @@
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "name": "BigNuten",
       "focus": "Primary buildout / health, recovery and participation",
-      "observedAt": "2026-10-31T09:55:06.532Z",
+      "observedAt": "2026-11-03T02:16:42.610Z",
       "partial": false,
       "octoberMergedCount": 28,
       "octoberClosedCount": 44,
-      "openIssueCount": 36,
+      "openIssueCount": 6,
       "merged": [
         {
           "number": 388,
           "title": "Add accessible local-only Quest Mode (partial #209)",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/388",
-          "at": "2026-10-29T14:40:54Z"
+          "at": "2026-10-29T14:40:54Z",
+          "stateReason": "unknown"
         },
         {
           "number": 387,
           "title": "Add Genie Community Guide and read-only challenge coach",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/387",
-          "at": "2026-10-29T14:15:14Z"
+          "at": "2026-10-29T14:15:14Z",
+          "stateReason": "unknown"
         },
         {
           "number": 386,
           "title": "Add privacy-safe Genie issue drafts and issue templates",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/386",
-          "at": "2026-10-29T14:00:08Z"
+          "at": "2026-10-29T14:00:08Z",
+          "stateReason": "unknown"
         },
         {
           "number": 384,
           "title": "Anchor immutable final post-settlement receipts",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/384",
-          "at": "2026-10-29T13:24:23Z"
+          "at": "2026-10-29T13:24:23Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -285,33 +426,110 @@
           "number": 355,
           "title": "Genie challenge coach (read-only)",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/355",
-          "at": "2026-10-29T14:15:16Z"
+          "at": "2026-10-29T14:15:16Z",
+          "stateReason": "completed"
         },
         {
           "number": 353,
           "title": "Genie community-guide mode and shared guide content",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/353",
-          "at": "2026-10-29T14:15:16Z"
+          "at": "2026-10-29T14:15:16Z",
+          "stateReason": "completed"
         },
         {
           "number": 354,
           "title": "Genie issue-filing helper and issue templates",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/354",
-          "at": "2026-10-29T14:00:10Z"
+          "at": "2026-10-29T14:00:10Z",
+          "stateReason": "completed"
+        }
+      ],
+      "recentMerged": [
+        {
+          "number": 407,
+          "title": "Add pinned Base Supporter Token card to About",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/407",
+          "at": "2026-11-02T23:45:03Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 411,
+          "title": "Part of #391: Add local wallet profile continuity",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/411",
+          "at": "2026-11-02T23:20:25Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 408,
+          "title": "Research experiments: Learn → Plan → Track → Check",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/408",
+          "at": "2026-11-02T23:12:08Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 410,
+          "title": "Add local gut-health tracking",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/410",
+          "at": "2026-11-02T23:02:35Z",
+          "stateReason": "unknown"
+        },
+        {
+          "number": 409,
+          "title": "Triage npm audit advisories with scoped dependency fixes",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/409",
+          "at": "2026-11-02T22:54:57Z",
+          "stateReason": "unknown"
+        }
+      ],
+      "recentClosed": [
+        {
+          "number": 342,
+          "title": "Feature: Define explicit lifecycle for funded requests and bounty work",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/342",
+          "at": "2026-11-03T01:34:44Z",
+          "stateReason": "not_planned"
+        },
+        {
+          "number": 340,
+          "title": "Feature: Clarify treasury coverage, reservations, and verified payments",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/340",
+          "at": "2026-11-03T01:34:42Z",
+          "stateReason": "not_planned"
+        },
+        {
+          "number": 338,
+          "title": "Feature: Make bounty payroll replay-safe and receipt-verified",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/338",
+          "at": "2026-11-03T01:34:40Z",
+          "stateReason": "not_planned"
+        },
+        {
+          "number": 337,
+          "title": "Epic: Adapt DecentBusking buildout patterns for BigNuten rewards and data",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/337",
+          "at": "2026-11-03T01:34:38Z",
+          "stateReason": "not_planned"
+        },
+        {
+          "number": 336,
+          "title": "Deploy Base DeFi and StreakBet integrations",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/336",
+          "at": "2026-11-03T01:34:35Z",
+          "stateReason": "not_planned"
         }
       ],
       "open": [
         {
-          "number": 389,
-          "title": "Feature: SIBO / gut-health tracker with hydrogen and methane breath logs (FoodMarble AIRE 2)",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/389",
-          "at": "2026-10-30T22:28:17Z"
+          "number": 412,
+          "title": "Epic: BigNuten financial build — Base DeFi, commitment settlement, treasury & payroll",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/412",
+          "at": "2026-11-03T02:03:22Z"
         },
         {
-          "number": 376,
-          "title": "Triage npm audit advisories (43 reported by npm ci)",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/376",
-          "at": "2026-10-29T01:41:03Z"
+          "number": 391,
+          "title": "Feature: Cross-browser profile continuity, wallet isolation and single-writer takeover",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/391",
+          "at": "2026-11-03T01:48:33Z"
         },
         {
           "number": 345,
@@ -320,28 +538,35 @@
           "at": "2026-10-27T15:58:35Z"
         },
         {
-          "number": 342,
-          "title": "Feature: Define explicit lifecycle for funded requests and bounty work",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/342",
-          "at": "2026-10-27T15:58:54Z"
+          "number": 286,
+          "title": "🎓 Latest Research: YouTube → Transcription → AI Context Pipeline for Genie Chat",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/286",
+          "at": "2026-10-27T15:58:39Z"
         },
         {
-          "number": 340,
-          "title": "Feature: Clarify treasury coverage, reservations, and verified payments",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/340",
-          "at": "2026-10-27T15:58:52Z"
+          "number": 281,
+          "title": "Release & Mint v3.3.0: Live Mirror, ENS, and DecentNFT Provenance",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/issues/281",
+          "at": "2026-10-27T15:58:33Z"
         }
       ],
-      "omittedOpen": 31,
-      "openPullCount": 0,
-      "openPulls": [],
+      "omittedOpen": 1,
+      "openPullCount": 1,
+      "openPulls": [
+        {
+          "number": 413,
+          "title": "Prevent wallet connection from hiding original health records",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/413",
+          "at": "2026-11-03T02:13:05Z"
+        }
+      ],
       "releases": []
     },
     {
       "repository": "TheJollyLaMa/DecentHead",
       "name": "DecentHead",
       "focus": "Shared infrastructure / host adapters and release kit",
-      "observedAt": "2026-10-31T09:55:10.508Z",
+      "observedAt": "2026-11-03T02:16:45.454Z",
       "partial": false,
       "octoberMergedCount": 9,
       "octoberClosedCount": 1,
@@ -351,25 +576,29 @@
           "number": 32,
           "title": "Support frozen 100-USDC supporter release terms",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/32",
-          "at": "2026-10-26T00:09:59Z"
+          "at": "2026-10-26T00:09:59Z",
+          "stateReason": "unknown"
         },
         {
           "number": 31,
           "title": "Support 100-edition product releases without rewriting legacy manifests",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/31",
-          "at": "2026-10-24T19:22:12Z"
+          "at": "2026-10-24T19:22:12Z",
+          "stateReason": "unknown"
         },
         {
           "number": 30,
           "title": "Add reusable Supporter DNFT kit for any Decent dapp",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/30",
-          "at": "2026-10-23T06:12:29Z"
+          "at": "2026-10-23T06:12:29Z",
+          "stateReason": "unknown"
         },
         {
           "number": 29,
           "title": "Pin release site at Supporter prep; gate Discord on ENS",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/29",
-          "at": "2026-10-23T05:33:55Z"
+          "at": "2026-10-23T05:33:55Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -377,9 +606,12 @@
           "number": 25,
           "title": "Mint Supporter DNFT for v2.0.0",
           "url": "https://github.com/TheJollyLaMa/DecentHead/issues/25",
-          "at": "2026-10-22T09:35:12Z"
+          "at": "2026-10-22T09:35:12Z",
+          "stateReason": "completed"
         }
       ],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [
         {
           "number": 27,
@@ -403,7 +635,7 @@
       "repository": "TheJollyLaMa/DecentMarket",
       "name": "DecentMarket",
       "focus": "Shared infrastructure / storefront and receipts",
-      "observedAt": "2026-10-31T09:55:13.801Z",
+      "observedAt": "2026-11-03T02:16:48.704Z",
       "partial": false,
       "octoberMergedCount": 21,
       "octoberClosedCount": 1,
@@ -413,25 +645,29 @@
           "number": 70,
           "title": "Bind supporter minting to reviewed supply and USDC price",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/70",
-          "at": "2026-10-26T00:09:47Z"
+          "at": "2026-10-26T00:09:47Z",
+          "stateReason": "unknown"
         },
         {
           "number": 69,
           "title": "Release USDC-only DJuke v0.5 with incremental playlist fees",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/69",
-          "at": "2026-10-23T17:46:12Z"
+          "at": "2026-10-23T17:46:12Z",
+          "stateReason": "unknown"
         },
         {
           "number": 67,
           "title": "Rehearse the DJuke playlist worker against deployed v0.4 contracts",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/67",
-          "at": "2026-10-23T05:37:18Z"
+          "at": "2026-10-23T05:37:18Z",
+          "stateReason": "unknown"
         },
         {
           "number": 68,
           "title": "Pin release site at Supporter prep; adopt Head ENS gate",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/68",
-          "at": "2026-10-23T05:36:34Z"
+          "at": "2026-10-23T05:36:34Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -439,9 +675,12 @@
           "number": 64,
           "title": "DJuke playlist contract (#62) collides with live DJuke v0.3 — rebase as v0.4 on direct settlement",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/issues/64",
-          "at": "2026-10-22T15:44:00Z"
+          "at": "2026-10-22T15:44:00Z",
+          "stateReason": "completed"
         }
       ],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [
         {
           "number": 47,
@@ -477,7 +716,7 @@
       "repository": "A-Decent-Agency/DecentJukebox",
       "name": "DecentJukebox widget",
       "focus": "Reusable widget / integration maintenance",
-      "observedAt": "2026-10-31T09:55:16.615Z",
+      "observedAt": "2026-11-03T02:16:51.365Z",
       "partial": false,
       "octoberMergedCount": 4,
       "octoberClosedCount": 2,
@@ -487,25 +726,29 @@
           "number": 8,
           "title": "Freeze current playlist playback fixes for 100 supporter editions",
           "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/8",
-          "at": "2026-10-24T19:24:06Z"
+          "at": "2026-10-24T19:24:06Z",
+          "stateReason": "unknown"
         },
         {
           "number": 7,
           "title": "Keep supporter minting personal and Agency authority ENS-only",
           "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/7",
-          "at": "2026-10-24T12:48:43Z"
+          "at": "2026-10-24T12:48:43Z",
+          "stateReason": "unknown"
         },
         {
           "number": 5,
           "title": "Add key-free unsigned DJuke deployment planning",
           "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/5",
-          "at": "2026-10-24T11:51:11Z"
+          "at": "2026-10-24T11:51:11Z",
+          "stateReason": "unknown"
         },
         {
           "number": 4,
           "title": "Deliver cloneable DJuke widget with pinned USDC checkout source",
           "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/4",
-          "at": "2026-10-24T11:26:55Z"
+          "at": "2026-10-24T11:26:55Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -513,15 +756,19 @@
           "number": 9,
           "title": "Mint Supporter DNFT for v0.2.0",
           "url": "https://github.com/A-Decent-Agency/DecentJukebox/issues/9",
-          "at": "2026-10-24T20:00:17Z"
+          "at": "2026-10-24T20:00:17Z",
+          "stateReason": "completed"
         },
         {
           "number": 6,
           "title": "Mint Supporter DNFT for v0.1.0",
           "url": "https://github.com/A-Decent-Agency/DecentJukebox/issues/6",
-          "at": "2026-10-24T19:35:38Z"
+          "at": "2026-10-24T19:35:38Z",
+          "stateReason": "not_planned"
         }
       ],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [
         {
           "number": 2,
@@ -563,7 +810,7 @@
       "repository": "A-Decent-Agency/DBuskRadio",
       "name": "DBuskRadio widget",
       "focus": "Reusable widget / integration maintenance",
-      "observedAt": "2026-10-31T09:55:19.762Z",
+      "observedAt": "2026-11-03T02:16:54.016Z",
       "partial": false,
       "octoberMergedCount": 5,
       "octoberClosedCount": 3,
@@ -573,25 +820,29 @@
           "number": 7,
           "title": "Freeze seamless radio handoffs for 100 supporter editions",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/7",
-          "at": "2026-10-24T19:24:06Z"
+          "at": "2026-10-24T19:24:06Z",
+          "stateReason": "unknown"
         },
         {
           "number": 5,
           "title": "Polish radio product front and keep Agency control ENS-only",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/5",
-          "at": "2026-10-24T12:48:43Z"
+          "at": "2026-10-24T12:48:43Z",
+          "stateReason": "unknown"
         },
         {
           "number": 3,
           "title": "Align clone instructions and gates with the verified rollout",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/3",
-          "at": "2026-10-24T11:51:11Z"
+          "at": "2026-10-24T11:51:11Z",
+          "stateReason": "unknown"
         },
         {
           "number": 2,
           "title": "Validate actual media range payloads before release",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/2",
-          "at": "2026-10-24T11:38:27Z"
+          "at": "2026-10-24T11:38:27Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -599,21 +850,26 @@
           "number": 8,
           "title": "Mint Supporter DNFT for v0.2.0",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/issues/8",
-          "at": "2026-10-24T20:00:31Z"
+          "at": "2026-10-24T20:00:31Z",
+          "stateReason": "completed"
         },
         {
           "number": 6,
           "title": "Mint Supporter DNFT for v0.1.1",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/issues/6",
-          "at": "2026-10-24T19:35:47Z"
+          "at": "2026-10-24T19:35:47Z",
+          "stateReason": "not_planned"
         },
         {
           "number": 4,
           "title": "Mint Supporter DNFT for v0.1.0",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/issues/4",
-          "at": "2026-10-24T12:56:58Z"
+          "at": "2026-10-24T12:56:58Z",
+          "stateReason": "not_planned"
         }
       ],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [],
       "omittedOpen": 0,
       "openPullCount": 0,
@@ -635,7 +891,7 @@
       "repository": "A-Decent-Agency/DVert",
       "name": "DVert widget",
       "focus": "Reusable widget / integration maintenance",
-      "observedAt": "2026-10-31T09:55:22.901Z",
+      "observedAt": "2026-11-03T02:16:56.815Z",
       "partial": false,
       "octoberMergedCount": 5,
       "octoberClosedCount": 3,
@@ -645,25 +901,29 @@
           "number": 7,
           "title": "Remove stale draft label before first supporter mint",
           "url": "https://github.com/A-Decent-Agency/DVert/pull/7",
-          "at": "2026-10-24T19:31:21Z"
+          "at": "2026-10-24T19:31:21Z",
+          "stateReason": "unknown"
         },
         {
           "number": 5,
           "title": "Prepare current DVert snapshot for 100 supporter editions",
           "url": "https://github.com/A-Decent-Agency/DVert/pull/5",
-          "at": "2026-10-24T19:24:05Z"
+          "at": "2026-10-24T19:24:05Z",
+          "stateReason": "unknown"
         },
         {
           "number": 4,
           "title": "Separate personal supporter minting from Agency ENS control",
           "url": "https://github.com/A-Decent-Agency/DVert/pull/4",
-          "at": "2026-10-24T12:48:44Z"
+          "at": "2026-10-24T12:48:44Z",
+          "stateReason": "unknown"
         },
         {
           "number": 2,
           "title": "Add key-free independent DVert deployment plans",
           "url": "https://github.com/A-Decent-Agency/DVert/pull/2",
-          "at": "2026-10-24T11:51:11Z"
+          "at": "2026-10-24T11:51:11Z",
+          "stateReason": "unknown"
         }
       ],
       "closed": [
@@ -671,21 +931,26 @@
           "number": 8,
           "title": "Mint Supporter DNFT for v0.2.1",
           "url": "https://github.com/A-Decent-Agency/DVert/issues/8",
-          "at": "2026-10-24T20:00:24Z"
+          "at": "2026-10-24T20:00:24Z",
+          "stateReason": "completed"
         },
         {
           "number": 3,
           "title": "Mint Supporter DNFT for v0.1.0",
           "url": "https://github.com/A-Decent-Agency/DVert/issues/3",
-          "at": "2026-10-24T19:35:43Z"
+          "at": "2026-10-24T19:35:43Z",
+          "stateReason": "not_planned"
         },
         {
           "number": 6,
           "title": "Mint Supporter DNFT for v0.2.0",
           "url": "https://github.com/A-Decent-Agency/DVert/issues/6",
-          "at": "2026-10-24T19:35:41Z"
+          "at": "2026-10-24T19:35:41Z",
+          "stateReason": "not_planned"
         }
       ],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [],
       "omittedOpen": 0,
       "openPullCount": 0,
@@ -707,14 +972,22 @@
       "repository": "TheJollyLaMa/ArtFi",
       "name": "DecentLending / DLend (ArtFi)",
       "focus": "Next / steward-selected revamp",
-      "observedAt": "2026-10-31T09:55:25.804Z",
+      "observedAt": "2026-11-03T02:16:59.458Z",
       "partial": false,
       "octoberMergedCount": 0,
       "octoberClosedCount": 0,
-      "openIssueCount": 2,
+      "openIssueCount": 3,
       "merged": [],
       "closed": [],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [
+        {
+          "number": 62,
+          "title": "DecentSettlementsRouter: independent identity, public ledger and custody/migration makeover",
+          "url": "https://github.com/TheJollyLaMa/ArtFi/issues/62",
+          "at": "2026-10-31T11:01:49Z"
+        },
         {
           "number": 61,
           "title": "Adopt standard Supporter DNFT release workflows",
@@ -737,13 +1010,15 @@
       "repository": "TheJollyLaMa/jolly-sim-siddhi",
       "name": "JollySimSiddhi",
       "focus": "Discovery / staged revival",
-      "observedAt": "2026-10-31T09:55:28.187Z",
+      "observedAt": "2026-11-03T02:17:02.366Z",
       "partial": false,
       "octoberMergedCount": 0,
       "octoberClosedCount": 0,
       "openIssueCount": 1,
       "merged": [],
       "closed": [],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [
         {
           "number": 2,
@@ -760,15 +1035,41 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "name": "DecentPilgrimages",
-      "focus": "Discovery / staged revival",
-      "observedAt": "2026-10-31T09:55:30.965Z",
+      "focus": "Base V1 implementation PR open / deployment and migration gated",
+      "observedAt": "2026-11-03T02:17:05.272Z",
       "partial": false,
       "octoberMergedCount": 0,
       "octoberClosedCount": 0,
-      "openIssueCount": 1,
+      "openIssueCount": 5,
       "merged": [],
       "closed": [],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [
+        {
+          "number": 5,
+          "title": "V1 overseer: prove newcomer journey and approve Base migration readiness",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/issues/5",
+          "at": "2026-11-03T01:30:55Z"
+        },
+        {
+          "number": 4,
+          "title": "V1: steward-gated autopayroll, optional helper and contributor instructions",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/issues/4",
+          "at": "2026-11-01T19:27:12Z"
+        },
+        {
+          "number": 3,
+          "title": "V1: shared Decent Head, ankhs, journey onboarding and radio",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/issues/3",
+          "at": "2026-11-01T19:27:12Z"
+        },
+        {
+          "number": 2,
+          "title": "V1: version Base contracts with organizer-approved location rewards",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/issues/2",
+          "at": "2026-11-01T19:27:12Z"
+        },
         {
           "number": 1,
           "title": "Adopt standard Supporter DNFT release workflows",
@@ -777,21 +1078,30 @@
         }
       ],
       "omittedOpen": 0,
-      "openPullCount": 0,
-      "openPulls": [],
+      "openPullCount": 1,
+      "openPulls": [
+        {
+          "number": 6,
+          "title": "Build DecentPilgrimages Base V1 and guided Decent experience",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/pull/6",
+          "at": "2026-11-03T01:30:45Z"
+        }
+      ],
       "releases": []
     },
     {
       "repository": "TheJollyLaMa/AJollyDecentCodeCamp",
       "name": "A Jolly Decent CodeCamp",
       "focus": "Discovery / staged revival",
-      "observedAt": "2026-10-31T09:55:34.182Z",
+      "observedAt": "2026-11-03T02:17:07.654Z",
       "partial": false,
       "octoberMergedCount": 0,
       "octoberClosedCount": 0,
       "openIssueCount": 0,
       "merged": [],
       "closed": [],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [],
       "omittedOpen": 0,
       "openPullCount": 0,
@@ -801,15 +1111,35 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "name": "BabelBet",
-      "focus": "Discovery / staged revival",
-      "observedAt": "2026-10-31T09:55:37.008Z",
+      "focus": "Preparation PR open / game and provider activation out of scope",
+      "observedAt": "2026-11-03T02:17:10.162Z",
       "partial": false,
       "octoberMergedCount": 0,
       "octoberClosedCount": 0,
-      "openIssueCount": 1,
+      "openIssueCount": 4,
       "merged": [],
       "closed": [],
+      "recentMerged": [],
+      "recentClosed": [],
       "open": [
+        {
+          "number": 4,
+          "title": "Preparation overseer: validate offline boundary and record future build gates",
+          "url": "https://github.com/TheJollyLaMa/BabelBet/issues/4",
+          "at": "2026-11-01T19:27:12Z"
+        },
+        {
+          "number": 3,
+          "title": "Preparation: gated autopayroll and newcomer contribution/provider etiquette",
+          "url": "https://github.com/TheJollyLaMa/BabelBet/issues/3",
+          "at": "2026-11-01T19:27:12Z"
+        },
+        {
+          "number": 2,
+          "title": "Preparation: update shared Decent experience without building the game",
+          "url": "https://github.com/TheJollyLaMa/BabelBet/issues/2",
+          "at": "2026-11-01T19:27:12Z"
+        },
         {
           "number": 1,
           "title": "Adopt standard Supporter DNFT release workflows",
@@ -818,8 +1148,15 @@
         }
       ],
       "omittedOpen": 0,
-      "openPullCount": 0,
-      "openPulls": [],
+      "openPullCount": 1,
+      "openPulls": [
+        {
+          "number": 5,
+          "title": "Prepare BabelBet with the Decent experience and gated payroll",
+          "url": "https://github.com/TheJollyLaMa/BabelBet/pull/5",
+          "at": "2026-11-01T19:13:18Z"
+        }
+      ],
       "releases": []
     }
   ]

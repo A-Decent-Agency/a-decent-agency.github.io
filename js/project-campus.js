@@ -15,7 +15,7 @@ export const LANDMARKS = [
   { repository: 'TheJollyLaMa/DecentCanopy', name: 'DecentCanopy', form: 'foundation', color: '#74dfb4',
     milestone: 'Broad foundations / growing the network' },
   { repository: 'TheJollyLaMa/BigNuten_Vanilla', name: 'BigNuten', form: 'staging', color: '#cfaaef',
-    milestone: 'Next construction site / recovery acceptance ahead' },
+    milestone: 'Primary health build / local tools merged; finance and release gated' },
   { repository: 'A-Decent-Agency/a-decent-agency.github.io', name: 'Agency Office', form: 'hall', color: '#baa2e8',
     milestone: 'Planning observatory / shared jobs and project map' },
   ...REVIVAL_PLANS.map(plan => ({ repository: plan.repository, name: plan.name, form: 'planning-tower', color: plan.color,
@@ -48,7 +48,7 @@ export function projectSites(items, { includeContext = false } = {}) {
   if (includeContext) for (const project of [...CANOPY.projects,
     { repository: 'A-Decent-Agency/DBuskRadio' }, { repository: 'A-Decent-Agency/DVert' },
     { repository: 'A-Decent-Agency/a-decent-agency.github.io' }]) {
-    if (!groups.has(project.repository.toLowerCase())) groups.set(project.repository.toLowerCase(), { repository: project.repository, items: [] });
+    if (!project.entityId && !groups.has(project.repository.toLowerCase())) groups.set(project.repository.toLowerCase(), { repository: project.repository, items: [] });
   }
   const sites = [...groups.values()].map(group => {
     const index = LANDMARKS.findIndex(project => project.repository.toLowerCase() === group.repository.toLowerCase());
@@ -132,10 +132,14 @@ export function issueSkeleton(structures, { width = 30, baseTop = 0, baseFloors 
   const shape = structure => {
     const total = structure.open + structure.closed;
     const bays = Math.max(1, Math.min(16, total));
+    const credited = structure.closures?.completed ?? structure.closed;
+    const deferred = (structure.closures?.notPlanned || 0) + (structure.closures?.unknown || 0);
+    const finished = total > 0 && structure.open === 0 && deferred === 0;
     return { ...structure, total, bays,
-      cladBays: !total ? 0 : !structure.open ? bays : Math.min(bays - 1, Math.max(structure.closed ? 1 : 0, Math.round(bays * structure.closed / total))),
-      finished: total > 0 && structure.open === 0,
-      stage: !total ? 'Outlined / no issues yet' : structure.open === 0 ? 'Finished' : structure.closed ? 'Under construction' : 'Skeleton' };
+      cladBays: !total ? 0 : finished ? bays : Math.min(bays - 1, Math.max(credited ? 1 : 0, Math.round(bays * credited / total))),
+      finished,
+      stage: deferred ? 'Moved, declined or unverified / not delivered' : !total ? 'Outlined / no issues yet'
+        : finished ? structure.closures ? 'Closed as completed / acceptance still required' : 'Finished' : credited ? 'Under construction' : 'Skeleton' };
   };
   const list = Array.isArray(structures) ? structures : [];
   const planned = list.filter(structure => structure.kind === 'level').sort((a, b) => a.order - b.order || a.number - b.number).map(shape);

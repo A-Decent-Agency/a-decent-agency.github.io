@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-03T01:38:55.591Z",
+  "checkedAt": "2026-11-03T02:17:17.362Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -23,14 +23,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentAgency/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentAgency/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-11-02T19:52:41Z",
       "release": {
@@ -106,7 +111,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/2"
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/2",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 3,
@@ -116,7 +126,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/3"
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/3",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 1,
@@ -126,16 +141,21 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
-      "pushedAt": "2026-11-03T01:25:50Z",
+      "pushedAt": "2026-11-03T01:55:31Z",
       "release": null,
       "mergedPulls": [
         {
@@ -182,7 +202,12 @@
           "open": 2,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/5"
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/5",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 1,
@@ -192,7 +217,12 @@
           "open": 2,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 2,
@@ -202,7 +232,12 @@
           "open": 6,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/2"
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/2",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 3,
@@ -212,7 +247,12 @@
           "open": 6,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/3"
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/3",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 4,
@@ -222,14 +262,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/4"
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/milestone/4",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:33Z",
       "release": {
@@ -305,14 +350,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentHead/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentHead/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:35Z",
       "release": {
@@ -388,16 +438,21 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentMarket/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
-      "pushedAt": "2026-11-02T23:45:02Z",
+      "pushedAt": "2026-11-03T02:13:02Z",
       "release": null,
       "mergedPulls": [
         {
@@ -444,7 +499,12 @@
           "open": 2,
           "closed": 3,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/7"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/7",
+          "closures": {
+            "completed": 3,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 8,
@@ -454,7 +514,12 @@
           "open": 0,
           "closed": 8,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/8"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/8",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 8,
+            "unknown": 0
+          }
         },
         {
           "number": 9,
@@ -464,7 +529,12 @@
           "open": 0,
           "closed": 18,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/9"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/9",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 18,
+            "unknown": 0
+          }
         },
         {
           "number": 1,
@@ -474,7 +544,12 @@
           "open": 0,
           "closed": 3,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/1",
+          "closures": {
+            "completed": 3,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 2,
@@ -484,7 +559,12 @@
           "open": 0,
           "closed": 7,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/2"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/2",
+          "closures": {
+            "completed": 7,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 3,
@@ -494,7 +574,12 @@
           "open": 0,
           "closed": 3,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/3"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/3",
+          "closures": {
+            "completed": 3,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 4,
@@ -504,7 +589,12 @@
           "open": 0,
           "closed": 22,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/4"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/4",
+          "closures": {
+            "completed": 21,
+            "notPlanned": 1,
+            "unknown": 0
+          }
         },
         {
           "number": 5,
@@ -514,7 +604,12 @@
           "open": 0,
           "closed": 6,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/5"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/5",
+          "closures": {
+            "completed": 2,
+            "notPlanned": 4,
+            "unknown": 0
+          }
         },
         {
           "number": 6,
@@ -524,14 +619,19 @@
           "open": 2,
           "closed": 1,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/6"
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/milestone/6",
+          "closures": {
+            "completed": 1,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:40Z",
       "release": {
@@ -601,7 +701,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/A-Decent-Agency/DecentJukebox/milestone/1"
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 2,
@@ -611,14 +716,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/A-Decent-Agency/DecentJukebox/milestone/2"
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/milestone/2",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:43Z",
       "release": {
@@ -690,7 +800,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:45Z",
       "release": {
@@ -762,9 +872,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
-      "pushedAt": "2026-11-02T18:30:15Z",
+      "pushedAt": "2026-11-03T01:39:10Z",
       "release": null,
       "mergedPulls": [
         {
@@ -811,14 +921,19 @@
           "open": 3,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/milestone/1"
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -836,14 +951,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentSubscriptions/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentSubscriptions/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-11-03T01:30:44Z",
       "release": null,
@@ -861,7 +981,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/4"
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/4",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 1,
@@ -871,7 +996,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 2,
@@ -881,7 +1011,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/2"
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/2",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 3,
@@ -891,7 +1026,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/3"
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/3",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 5,
@@ -901,14 +1041,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/5"
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/milestone/5",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -926,14 +1071,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentEscrow/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentEscrow/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -951,14 +1101,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentInvoice/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentInvoice/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -976,7 +1131,12 @@
           "open": 2,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentAirdrop/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/DecentAirdrop/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 2,
@@ -986,14 +1146,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/DecentAirdrop/milestone/2"
+          "url": "https://github.com/TheJollyLaMa/DecentAirdrop/milestone/2",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1011,14 +1176,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/Decent_NDA/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/Decent_NDA/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1036,14 +1206,19 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/Decent_UCAN_Play/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/Decent_UCAN_Play/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     },
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-03T01:38:55.591Z",
+      "checkedAt": "2026-11-03T02:17:17.362Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
@@ -1061,7 +1236,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BabelBet/milestone/2"
+          "url": "https://github.com/TheJollyLaMa/BabelBet/milestone/2",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 1,
@@ -1071,7 +1251,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BabelBet/milestone/1"
+          "url": "https://github.com/TheJollyLaMa/BabelBet/milestone/1",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         },
         {
           "number": 3,
@@ -1081,7 +1266,12 @@
           "open": 1,
           "closed": 0,
           "state": "open",
-          "url": "https://github.com/TheJollyLaMa/BabelBet/milestone/3"
+          "url": "https://github.com/TheJollyLaMa/BabelBet/milestone/3",
+          "closures": {
+            "completed": 0,
+            "notPlanned": 0,
+            "unknown": 0
+          }
         }
       ]
     }

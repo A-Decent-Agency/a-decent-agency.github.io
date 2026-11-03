@@ -182,7 +182,8 @@ export class ConstructionScene {
       const line = lines([[a.x, 3, a.z], [b.x, 3, b.z]], '#71e6d0'); line.material.transparent = true; line.material.opacity = .45; canopy.add(line);
     }
     for (const node of city.nodes) {
-      const open = node.planned > node.finished, target = this.sites.find(site => site.project?.repository.toLowerCase() === node.key);
+      const open = node.planned > node.finished, target = this.sites.find(site => node.entityId
+        ? site.id === node.key : !site.project?.entityId && site.project?.repository.toLowerCase() === node.key);
       const mini = new THREE.Mesh(new THREE.BoxGeometry(node.root ? 5 : 3.4, node.height, node.root ? 5 : 3.4),
         new THREE.MeshLambertMaterial({ color: node.observed ? node.color : '#8ba3bd', transparent: !node.observed, opacity: node.observed ? 1 : .6 }));
       mini.position.set(node.x, .6 + node.height / 2, node.z); canopy.add(mini);

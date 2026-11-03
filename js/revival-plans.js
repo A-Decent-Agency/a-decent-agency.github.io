@@ -67,7 +67,7 @@ export const REVIVAL_PLANS = [
     repository: 'TheJollyLaMa/DecentPilgrimages', name: 'DecentPilgrimages', district: 'Journey and local welcome trail',
     color: '#e4c18b', motif: 'trail', focus: 'Next delivery / Base V1 build', directedAt: '1 Nov 2026',
     intent: 'Make purposeful travel a route into local connection: places, missions, welcome, sponsor support and a record of what was learned or contributed.',
-    observed: 'The public browser/Leaflet and Solidity project models sponsor token pools, locations, participant allowlists and claims. Its package test command is a placeholder. Source presence is not verified physical presence, correct deployed accounting or pilot readiness.',
+    observed: 'Base V1 is implemented in open, deliberately unmerged PR #6, with 56 reported receiving tests and guided Head/atlas/radio integration. The legacy-main placeholder test script is not the state of that preparation branch. No Base deployment, identified legacy migration, funds, payroll or assistant activation is established.',
     historical: 'SmartHome page 5 describes DooBetter cycling, QR onboarding and GeoRewards at places along a route. This is a thematic crossover into Pilgrimages, not proven repository ancestry or a claim that browser coordinates are trusted location evidence.',
     archive: { id: 'smarthome-4', page: 5 },
     caution: 'Browser location is optional onboarding guidance, never proof of presence; organizer approval controls rewards. Preserve old Optimism obligations while preparing a newly versioned Base contract. No private travel traces, live migration, assistant activation or payroll execution without explicit steward approval. Verified source does not guarantee warning-free wallet simulation or reputation.',
@@ -79,6 +79,7 @@ export const REVIVAL_PLANS = [
       issue('TheJollyLaMa/DecentPilgrimages', 3, 'Decent experience worker / newcomer journey'),
       issue('TheJollyLaMa/DecentPilgrimages', 4, 'Contributor operations / gated payroll and helper'),
       issue('TheJollyLaMa/DecentPilgrimages', 5, 'V1 overseer / acceptance and migration gate'),
+      { label: 'Open Base V1 implementation PR / unmerged', url: 'https://github.com/TheJollyLaMa/DecentPilgrimages/pull/6' },
     ],
     team: [
       { role: 'Contract worker', job: 2, responsibility: 'Version Base contracts, conserve sponsor allocations, implement organizer-approved claims and prove local-EVM behavior.' },
@@ -128,7 +129,7 @@ export const REVIVAL_PLANS = [
     repository: 'TheJollyLaMa/BabelBet', name: 'BabelBet', district: 'Language and cooperative commitment exchange',
     color: '#efa0c1', motif: 'bridge', focus: 'Next / preparation only', directedAt: '1 Nov 2026',
     intent: 'Make language practice social, accountable and useful across communities. Economic opportunity comes from communication, skills and collaboration; staking is an optional mechanism to evaluate, not a guarantee of prosperity.',
-    observed: 'The committed prototype has invitation/accept/counter routes, ERC1155 challenge tokens and a cron watcher using an unofficial Duolingo API. Its README still lists payout contracts, watcher and tests as unfinished. Legacy identity/credential coupling is not a pattern to carry into a revived service.',
+    observed: 'The historical prototype has invitation/accept/counter routes, ERC1155 challenge tokens and an unofficial Duolingo watcher. Open, deliberately unmerged PR #5 adds shared Head/ankhs, local recovery, consent-only radio and gated contributor preparation, with 16 reported receiving tests; its branch quarantines legacy provider/watcher entrypoints. No new game, oracle, wager, payout, provider or AI activation is established. Legacy identity/credential coupling is not a pattern to revive.',
     historical: 'The supplied BabelBet use-case diagram shows on-device challenge terms, counter/accept, challenge-token creation with staked funds, active/history lookup, a daily watcher, and term-based payouts. Aave/yield is a separate historical branch. The diagram is intent, not execution evidence.',
     archive: { id: 'babelbet-use-case', page: 1 },
     caution: 'Preparation only: do not build a game, oracle, wagering flow or new payout contract. Neither official nor unofficial Duolingo endpoints may be contacted by runtime, tests or CI. Provider permission, etiquette, evidence/outage policy and economic decisions precede a separately approved build. No on-chain passwords/private email, yield, stakes or payroll activation.',
@@ -140,6 +141,7 @@ export const REVIVAL_PLANS = [
       issue('TheJollyLaMa/BabelBet', 2, 'Preparation worker / shared Decent experience'),
       issue('TheJollyLaMa/BabelBet', 3, 'Gated contributor payroll and provider etiquette'),
       issue('TheJollyLaMa/BabelBet', 4, 'Preparation overseer / offline and build gates'),
+      { label: 'Open preparation PR / unmerged, not game launch', url: 'https://github.com/TheJollyLaMa/BabelBet/pull/5' },
     ],
     team: [
       { role: 'Preparation worker', job: 2, responsibility: 'Refresh the shared Decent shell and newcomer experience while keeping every provider, wager and legacy watcher disabled.' },
@@ -251,18 +253,18 @@ export function renderRevivalPlan(site) {
     <h4>${esc(plan.district)} / proposed buildout</h4>
     <p><b>${esc(plan.focus)}</b> / steward direction recorded ${esc(plan.directedAt || '31 Oct 2026')}. Proposed levels are not delivered floors.</p>
     <p>${esc(plan.intent)}</p>
-    <details open><summary>Existing work to recover</summary><p>${esc(plan.observed)}</p></details>
-    <details open><summary>Founding-map intention</summary><p>${esc(plan.historical)}</p>
+    <details><summary>Existing work / implementation boundaries</summary><p>${esc(plan.observed)}</p></details>
+    <details><summary>Founding-map intention</summary><p>${esc(plan.historical)}</p>
       ${plan.archive ? `<button data-revival-archive="${esc(plan.archive.id)}">Read the original historical map</button>` : ''}
       ${plan.archive?.id === 'smarthome-4' ? `<a href="./studio/archive.html?page=${plan.archive.page}" target="_blank" rel="noopener noreferrer">Open local PDF at page ${plan.archive.page}</a>` : ''}</details>
-    ${plan.team ? `<details open data-revival-team><summary>Workers and overseer / public acceptance jobs</summary>
+    ${plan.team ? `<details data-revival-team><summary>Workers and overseer / public acceptance jobs</summary>
       <p>Roles describe the scoped work, not paid appointments or autonomous background services. Contributors agree acceptance terms with the steward before beginning paid work.</p>
       <ul>${plan.team.map(member => `<li><b>${esc(member.role)}</b> — ${esc(member.responsibility)}
         <a href="https://github.com/${esc(plan.repository)}/issues/${member.job}" target="_blank" rel="noopener noreferrer">Acceptance job #${member.job}</a></li>`).join('')}</ul>
       <p>Queue preparation is not payment. The steward approves contributor registration and funding; only verified transaction receipts prove settlement.</p></details>` : ''}
-    <ol class="revival-stages">${plan.stages.map((stage, index) => `<li data-revival-stage="${esc(stage.id)}"><b>Plan level ${index + 1} / ${esc(stage.title)}</b><small>PROPOSED / not delivered</small>
-      <p>${esc(stage.outcome)}</p><p><strong>Acceptance:</strong> ${esc(stage.test)}</p></li>`).join('')}</ol>
-    <p class="revival-caution">${esc(plan.caution)}</p>
+    <details><summary>${plan.stages.length} proposed levels / acceptance tests</summary><ol class="revival-stages">${plan.stages.map((stage, index) => `<li data-revival-stage="${esc(stage.id)}"><b>Plan level ${index + 1} / ${esc(stage.title)}</b><small>PROPOSED / not delivered</small>
+      <p>${esc(stage.outcome)}</p><p><strong>Acceptance:</strong> ${esc(stage.test)}</p></li>`).join('')}</ol></details>
+    <details><summary>Limits and activation gates</summary><p class="revival-caution">${esc(plan.caution)}</p></details>
     <details><summary>Public source and existing issue signposts</summary><ul>${plan.sources.map(entry => `<li><a href="${esc(entry.url)}" target="_blank" rel="noopener noreferrer">${esc(entry.label)}</a></li>`).join('')}</ul></details>
   </section>`;
 }

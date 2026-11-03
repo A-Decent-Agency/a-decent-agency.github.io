@@ -5,15 +5,15 @@ import { LANDMARKS } from './project-campus.js';
 // scripts/spiral.js hubs and placeBranch, children fan outward from their parent, here inside leaf-weighted wedges.
 // Another steward's registry in the same shape yields their own close-up city; nothing here fetches third-party data.
 export const CITY_RADIUS = 46, CITY_LIFT = 14;
-const RING_RADII = [0, 22, 32, 40, 46];
+const RING_RADII = [0, 32, 40, 48, 56];
 
 export function canopyCity(registry, feed, { root, radius = CITY_RADIUS } = {}) {
   const seen = new Map();
   for (const project of registry?.projects || []) {
-    const key = project.repository?.toLowerCase();
-    if (key && !seen.has(key)) seen.set(key, { repository: project.repository, name: project.name || project.repository.split('/')[1] });
+    const key = project.entityId ? `entity:${project.entityId}` : project.repository?.toLowerCase();
+    if (key && !seen.has(key)) seen.set(key, { repository: project.repository, entityId: project.entityId, name: project.name || project.repository.split('/')[1] });
   }
-  const rootKey = (root || registry?.projects?.[0]?.repository || '').toLowerCase();
+  const rootKey = root ? root.toLowerCase() : seen.keys().next().value;
   if (!seen.has(rootKey)) return { nodes: [], edges: [], links: [] };
   const neighbors = new Map([...seen.keys()].map(key => [key, new Set()]));
   const links = [];
@@ -41,7 +41,7 @@ export function canopyCity(registry, feed, { root, radius = CITY_RADIUS } = {}) 
   const place = new Map();
   // Recursive wedges: every branch receives angular room in proportion to its leaves, so siblings never crowd.
   const branch = (key, from, to, depth) => {
-    const angle = (from + to) / 2, r = RING_RADII[Math.min(depth, RING_RADII.length - 1)] + Math.max(0, depth - RING_RADII.length + 1) * 6;
+    const angle = (from + to) / 2, r = RING_RADII[Math.min(depth, RING_RADII.length - 1)] + Math.max(0, depth - RING_RADII.length + 1) * 8;
     place.set(key, { x: depth ? Math.cos(angle) * r : 0, z: depth ? Math.sin(angle) * r : 0, depth });
     let start = from;
     for (const child of children.get(key)) {
@@ -53,11 +53,11 @@ export function canopyCity(registry, feed, { root, radius = CITY_RADIUS } = {}) 
   const extent = Math.max(1, ...[...place.values()].map(point => Math.hypot(point.x, point.z)));
   const scale = radius / extent;
   const nodes = [...seen.entries()].map(([key, project]) => {
-    const point = place.get(key), observation = feed?.repositories?.find(entry => entry.repository.toLowerCase() === key);
+    const point = place.get(key), observation = !project.entityId && feed?.repositories?.find(entry => entry.repository.toLowerCase() === key);
     const planned = (observation?.structures || []).filter(structure => structure.open + structure.closed > 0);
-    const finished = planned.filter(structure => structure.open === 0).length;
+    const finished = planned.filter(structure => structure.open === 0 && (!structure.closures || structure.closures.completed === structure.closed)).length;
     const landmark = LANDMARKS.find(value => value.repository.toLowerCase() === key);
-    return { key, repository: project.repository, name: project.name, x: point.x * scale, z: point.z * scale, depth: point.depth,
+    return { key, repository: project.repository, entityId: project.entityId, name: project.name, x: point.x * scale, z: point.z * scale, depth: point.depth,
       root: key === rootKey, observed: Boolean(observation), planned: planned.length, finished,
       height: 2 + Math.min(10, planned.length * 1.5) + (key === rootKey ? 3 : 0), color: landmark?.color || '#8ba3bd' };
   });

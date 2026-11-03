@@ -63,7 +63,7 @@ test('grounds beyond the six nearby slots move onto cul-de-sac lots after satell
 test('the Canopy city places every unique registry project as a fractal rooted at DecentCanopy', () => {
   const feed = { repositories: [{ repository: 'TheJollyLaMa/BigNuten_Vanilla', structures: [level(1, 0, 3), level(2, 2, 0), grounds(1, 0)] }] };
   const city = canopyCity(CANOPY, feed, { root: 'TheJollyLaMa/DecentCanopy' });
-  const unique = new Set(CANOPY.projects.map(project => project.repository.toLowerCase()));
+  const unique = new Set(CANOPY.projects.map(project => project.entityId ? `entity:${project.entityId}` : project.repository.toLowerCase()));
   assert.equal(city.nodes.length, unique.size);
   assert.equal(city.edges.length, unique.size - 1, 'a spanning tree');
   const root = city.nodes.find(node => node.root);
@@ -78,6 +78,23 @@ test('the Canopy city places every unique registry project as a fractal rooted a
   for (let a = 0; a < city.nodes.length; a++) for (let b = a + 1; b < city.nodes.length; b++) {
     assert.ok(Math.hypot(city.nodes[a].x - city.nodes[b].x, city.nodes[a].z - city.nodes[b].z) > 6, `${city.nodes[a].name} / ${city.nodes[b].name} collide`);
   }
+});
+
+test('router city keeps independent identity and never inherits source-repository delivery', () => {
+  const registry = { projects: [{ repository: 'a/hub' }, { repository: 'a/lend', name: 'Lending' },
+    { repository: 'a/lend', entityId: 'router', name: 'Router' }],
+  connections: [{ from: 'a/lend', to: 'entity:router', state: 'proposed' }] };
+  const city = canopyCity(registry, { repositories: [{ repository: 'a/lend',
+    structures: [{ open: 0, closed: 3, closures: { completed: 0, notPlanned: 3, unknown: 0 } }] }] });
+  assert.equal(city.nodes.length, 3);
+  const router = city.nodes.find(node => node.key === 'entity:router');
+  assert.equal(router.observed, false);
+  assert.equal(router.finished, 0);
+  assert.equal(router.planned, 0);
+  assert.equal(city.nodes.find(node => node.key === 'a/lend').finished, 0);
+  assert.ok(city.links.some(link => link.to === router.key && link.state === 'proposed'));
+  const entityFirst = canopyCity({ ...registry, projects: [...registry.projects].reverse() }, null);
+  assert.equal(entityFirst.nodes.find(node => node.root).key, 'entity:router');
 });
 
 test('any steward registry in the same shape yields its own city; missing roots render nothing', () => {

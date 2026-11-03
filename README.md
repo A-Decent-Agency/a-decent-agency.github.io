@@ -232,7 +232,7 @@ The double-arrow tab on the **left edge of the site panel** slides it offscreen 
 
 The **Human needs / cultural beacons** disclosure and each campus's relevant lenses connect livelihood, health, joy, language/learning, essentials, refuge, connection and continuity. These overlapping steward-directed associations are not universal rankings, credit eligibility rules or evidence of outcomes. BigNuten remains primary, router financial visibility needs attention now, DLend is the next scoped revamp, and the other revivals remain staged discovery.
 
-Supplemental proposal levels sit above existing milestone-driven main-tower levels, without replacing their closed-issue cladding, grounds buildings or fractal satellite streets. Mainline Canopy roof-city navigation, stable site/card addresses, published snapshots and repository-triggered sync remain intact. Integration acceptance covers both existing site sharing and the archive/studio/new towers.
+Supplemental proposal levels sit above existing milestone-driven main-tower levels, without replacing their issue-based structures, grounds buildings or fractal satellite streets. Mainline Canopy roof-city navigation, stable site/card addresses, published snapshots and repository-triggered sync remain intact. Integration acceptance covers both existing site sharing and the archive/studio/new towers.
 
 The larger canvas has **Ship / highway**, **City / orbit**, **Top-down site plan** and **Whole universe / atlas** cameras, zoom controls, and drag-to-orbit outside ship mode (also usable with motion off). Fullscreen expands the scene with in-canvas destination/camera/panel controls. Unsupported native fullscreen uses an explicitly labeled expanded-window mode; failures are surfaced. Escape exits fullscreen. Each campus has a physical 2D job-board sign and an accessible 2D connection/job plan using the same published item IDs, Project/Component, Status and Priority metadata; selecting a job opens its source details and emphasizes its building's connection lines.
 
@@ -265,7 +265,7 @@ For desktop/3D and mobile/2D browser acceptance, serve the site and run
 `OFFICE_URL=http://127.0.0.1:8000/ node scripts/verify-site-links.mjs` with
 Playwright available (`PLAYWRIGHT_MODULE` may point to an existing installation).
 
-The public Canopy map is imported from `data/agency-map.json` at `9a8777e8f0e7dbfaa65352b0f00fd5fbce5d7d99`, with all 24 public-endpoint relationships and their types/evidence/caveats preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
+The public Canopy map is imported from `data/agency-map.json` at `7e677f9fac52b264bfccded58a5d0f4f7a2e48e9`, with 30 public project references and all 30 public-endpoint relationships, their independent entity IDs, types/evidence/caveats and dated briefs preserved. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
 
 Sidepanels immediately show bounded pinned project artwork with source/license credit. Canopy uses its full ENS avatar, Head/Market their project-owned ENS artwork, and Busking its hat plus original busker mural (also on its 3D stage). Public Ethereum mainnet avatar text records were read without a wallet connection on 2026-10-25: Head/Market point to IPFS images; Agency/Canopy/Busking point to mutable avatar-service URLs. The UI records this provenance and uses reviewed immutable repository artwork rather than automatically following arbitrary services or assuming prepared ENS metadata is live. No ENS writes occur.
 
@@ -282,15 +282,26 @@ The script is dry-run by default and must be run against a freshly exported boar
 
 ### Issue skeletons: planned levels and grounds
 
-Every observed public repository can plan its building with ordinary GitHub milestones. The observer reads only titles and open/closed issue counts.
+Every observed public repository can plan its building with ordinary GitHub milestones. The observer reads titles, issue counts and bounded closed-issue reasons (up to 300 closures per milestone); inconsistent or over-limit observations are explicitly unavailable and retain prior public evidence when available.
 
 - `Level N: <name>` stacks a tower level, in N order, above any delivered version floors.
 - `Grounds: <name>` raises a nearby structure behind the tower (six nearby slots; more move onto cul-de-sac lots).
 - Other milestones are ignored, so existing release milestones keep working.
 
-Each issue in a planned milestone is one structural **bay**, with up to 16 bays per level and 8 per grounds structure. Open issues show bare steel on a concrete deck. Each closed issue clads one bay in the project color. A structure looks **finished** (solid glass, lit windows, roof) only when it has at least one issue and none remain open. An empty milestone stays an outline. Open structures keep build cranes on site. The site panel lists every level and grounds structure with its stage, closed/total count and a link to its milestone issues.
+Each issue in a planned milestone is one structural **bay**, with up to 16 bays per level and 8 per grounds structure. Open issues show bare steel on a concrete deck. Observed `completed` closures clad bays; `not_planned` or unknown closures do not count as delivered. A structure looks **finished** only when all nonzero issues closed as completed. Legacy feeds without closure reasons retain their original rendering but are labeled unverified in the panel. Completed GitHub state still does not establish product acceptance or deployment. An empty milestone stays an outline. The panel retains counts, reasons and milestone source links.
 
-To plan a project: create the milestones, assign each planned issue to exactly one, then close issues as work lands. The next sync (or a manual run of **Sync GitHub Project snapshot**) updates the building. Issue counts are planning evidence, not a quality, readiness or funding score. Finished levels never create receipt-backed version floors.
+To plan a project: create the milestones, assign each planned issue to exactly one, then close issues with the appropriate reason as work lands or moves. The next sync (or a manual run of **Sync GitHub Project snapshot**) updates the building. Issue counts are planning evidence, not a quality, readiness or funding score. Finished levels never create receipt-backed version floors.
+
+The November sweep reuses Canopy's reviewed current-state/next-action/update cards in
+the Office, deliberately pinned to the imported source revision. Independent entity
+IDs survive both the city graph and navigation without inheriting source-repository
+jobs or releases. Recent recall is a separate seven-day view; October totals remain
+an archive, and not-planned closures are explicitly not delivery. The compact panel
+shows dated briefs before optional technical, receipt, historical and five-level
+proposal disclosures. Run `node scripts/refresh-project-recall.mjs` for recall and
+`node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout [revision]`
+for a deliberate committed registry import. Publish that source before relying on
+its public evidence links.
 
 ### Sprawl: cul-de-sacs when a tower is full
 
