@@ -51,6 +51,9 @@ try {
     const campus = scene.campuses.get(site.id);
     const crowns = campus?.children.filter(object => object.name === 'voyager-rocket-crown');
     if (crowns?.length !== 1) throw new Error('Expected exactly one rocket tower crown');
+    if (!crowns[0].children.every(object => object.material.isMeshBasicMaterial)) {
+      throw new Error('Rocket colors must remain visible independent of scene lighting');
+    }
     globalThis.voyagerCampusAcceptance = { scene, host, card };
     const point = card.getWorldPosition(new THREE.Vector3()).project(scene.camera);
     return { x: (point.x + 1) * innerWidth / 2, y: (1 - point.y) * innerHeight / 2,

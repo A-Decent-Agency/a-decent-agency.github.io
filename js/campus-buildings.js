@@ -157,14 +157,14 @@ export function buildCampus(group, site, model) {
     const rocket = new THREE.Group();
     rocket.name = 'voyager-rocket-crown';
     const body = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, 7, 12),
-      new THREE.MeshLambertMaterial({ color: '#c8d6e2' }));
+      new THREE.MeshBasicMaterial({ color: '#c8d6e2' }));
     body.position.y = 4.5; rocket.add(body);
     const nose = new THREE.Mesh(new THREE.ConeGeometry(1.5, 3, 12),
-      new THREE.MeshLambertMaterial({ color: '#f2d168' }));
+      new THREE.MeshBasicMaterial({ color: '#f2d168' }));
     nose.position.y = 9.5; rocket.add(nose);
     for (const side of [-1, 1]) {
       const fin = new THREE.Mesh(new THREE.BoxGeometry(1, 3, 3),
-        new THREE.MeshLambertMaterial({ color: '#64dfb0' }));
+        new THREE.MeshBasicMaterial({ color: '#64dfb0' }));
       fin.position.set(side * 1.8, 2, 0); rocket.add(fin);
     }
     rocket.position.y = roof + 1; group.add(rocket);
