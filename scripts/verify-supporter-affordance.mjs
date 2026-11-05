@@ -91,8 +91,11 @@ try {
     await page.reload();
     await page.locator('#flight-destination').selectOption('project:thejollylama/decentcanopy');
     const button = page.locator('.support-callout .mint-art-buy');
-    assert.equal(await button.evaluate(e => getComputedStyle(e, '::after').animationName), 'none');
-    assert.equal(await button.evaluate(e => getComputedStyle(e).transform), 'none');
+    await button.waitFor({ state: 'visible' });
+    await page.waitForFunction(() => {
+      const e = document.querySelector('.support-callout .mint-art-buy');
+      return e?.isConnected && getComputedStyle(e, '::after').animationName === 'none' && getComputedStyle(e).transform === 'none';
+    });
     await button.click();
     await page.locator('#supporter-checkout').waitFor({ state: 'visible' });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
