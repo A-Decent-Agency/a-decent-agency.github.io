@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-05T13:13:25.064Z",
+  "checkedAt": "2026-11-05T18:48:24.621Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,15 +35,21 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
-      "pushedAt": "2026-11-03T22:12:53Z",
+      "pushedAt": "2026-11-05T16:45:40Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
         "publishedAt": "2026-10-26T00:12:09Z"
       },
       "mergedPulls": [
+        {
+          "number": 310,
+          "title": "Record GrannyLyn wallet-only trial invitation",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/310",
+          "mergedAt": "2026-11-05T16:45:38Z"
+        },
         {
           "number": 309,
           "title": "Keep DVert panel steady during background refreshes",
@@ -61,12 +67,6 @@
           "title": "Prevent expired DeVert impressions blocking scheduler",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/307",
           "mergedAt": "2026-11-02T19:44:30Z"
-        },
-        {
-          "number": 300,
-          "title": "Fix DBusker earnings context overflow",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/300",
-          "mergedAt": "2026-10-29T22:25:33Z"
         },
         {
           "number": 299,
@@ -153,15 +153,21 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
-      "pushedAt": "2026-11-05T13:12:45Z",
+      "pushedAt": "2026-11-05T18:40:53Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
         "publishedAt": "2026-11-05T11:33:17Z"
       },
       "mergedPulls": [
+        {
+          "number": 61,
+          "title": "Record GrannyLyn wallet-only trial invitation",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/61",
+          "mergedAt": "2026-11-05T16:45:48Z"
+        },
         {
           "number": 56,
           "title": "Record BigNuten best-estimate nutrition auto-fill",
@@ -185,16 +191,10 @@
           "title": "Record BigNuten cited nutrition rollout and acceptance limits",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/53",
           "mergedAt": "2026-11-01T20:55:14Z"
-        },
-        {
-          "number": 52,
-          "title": "Update BigNuten Genie access and consent reuse evidence",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/52",
-          "mergedAt": "2026-11-01T19:44:20Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1287616,
+      "codeBytes": 1353619,
       "versions": [
         {
           "tag": "v0.1.0",
@@ -301,7 +301,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-11-05T11:30:09Z",
       "release": {
@@ -389,9 +389,9 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
-      "pushedAt": "2026-11-03T15:36:30Z",
+      "pushedAt": "2026-11-05T14:36:43Z",
       "release": {
         "tag": "v0.3.1",
         "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
@@ -430,7 +430,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 960208,
+      "codeBytes": 970084,
       "versions": [
         {
           "tag": "v0.3.1",
@@ -477,15 +477,21 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
-      "pushedAt": "2026-11-05T13:03:42Z",
+      "pushedAt": "2026-11-05T16:51:34Z",
       "release": {
         "tag": "v3.3.0",
         "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/tag/v3.3.0",
         "publishedAt": "2026-11-03T11:49:16Z"
       },
       "mergedPulls": [
+        {
+          "number": 422,
+          "title": "Add White Rabbit tutorials and closed trial invitations",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/422",
+          "mergedAt": "2026-11-05T16:51:32Z"
+        },
         {
           "number": 421,
           "title": "Fix lunar tracking and make planetary simulation explicit",
@@ -509,16 +515,10 @@
           "title": "Enable the live v3.3.0 Base Supporter DNFT purchase",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/416",
           "mergedAt": "2026-11-03T12:28:34Z"
-        },
-        {
-          "number": 413,
-          "title": "Prevent wallet connection from hiding original health records",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/413",
-          "mergedAt": "2026-11-03T02:22:44Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2830093,
+      "codeBytes": 2906617,
       "versions": [
         {
           "tag": "v3.3.0",
@@ -685,7 +685,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:03Z",
       "release": {
@@ -782,7 +782,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:15Z",
       "release": {
@@ -854,7 +854,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:34Z",
       "release": {
@@ -926,9 +926,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
-      "pushedAt": "2026-11-05T13:03:45Z",
+      "pushedAt": "2026-11-05T13:33:31Z",
       "release": null,
       "mergedPulls": [
         {
@@ -963,7 +963,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 567433,
+      "codeBytes": 580740,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -987,7 +987,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -1017,15 +1017,21 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
-      "pushedAt": "2026-11-05T13:11:55Z",
+      "pushedAt": "2026-11-05T16:46:25Z",
       "release": {
         "tag": "v0.1.1",
         "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/tag/v0.1.1",
         "publishedAt": "2026-11-05T11:33:18Z"
       },
       "mergedPulls": [
+        {
+          "number": 9,
+          "title": "Add GrannyLyn to static pilgrimage wallet whitelist",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/pull/9",
+          "mergedAt": "2026-11-05T16:46:23Z"
+        },
         {
           "number": 6,
           "title": "Build DecentPilgrimages Base V1 and guided Decent experience",
@@ -1141,7 +1147,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -1171,7 +1177,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -1201,7 +1207,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -1246,7 +1252,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1276,7 +1282,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1306,7 +1312,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
@@ -1366,7 +1372,7 @@
     {
       "repository": "TheJollyLaMa/DecentCalendar",
       "state": "available",
-      "checkedAt": "2026-11-05T13:13:25.064Z",
+      "checkedAt": "2026-11-05T18:48:24.621Z",
       "error": "",
       "pushedAt": "2026-11-05T12:56:38Z",
       "release": {
