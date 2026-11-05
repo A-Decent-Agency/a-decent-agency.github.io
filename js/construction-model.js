@@ -39,6 +39,7 @@ export function constructionSites(items, options) {
   }
   for (const site of campuses) {
     site.aliases = site.items.filter(item => item.fields?.Kind === 'Milestone').map(item => item.id);
+    if (site.project?.repository === 'TheJollyLaMa/DecentVoyager') site.aliases.push('project:thejollylama/asteroid');
   }
   // Old workstream addresses continue to reach Town Hall, but are no longer road destinations.
   if (office) office.aliases.push(...new Set(items.filter(item => item.fields?.Kind !== 'Milestone')

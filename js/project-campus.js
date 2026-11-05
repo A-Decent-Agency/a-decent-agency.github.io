@@ -30,6 +30,9 @@ export const LANDMARKS = [
     ['DecentInvoice', 'Invoice business office'], ['DecentEscrow', 'Escrow business office'], ['Decent_NDA', 'NDA law office']
   ].map(([name, district]) => ({ repository: `TheJollyLaMa/${name}`, name, form: 'blueprint', color: '#aebed6',
     milestone: `${district} / public project inventory`, basis: 'Business-office art direction, not legal, accounting, custody or deployed-feature assurance' })),
+  { repository: 'TheJollyLaMa/DecentVoyager', name: 'Decent Voyager', form: 'tower', color: '#68d9e8',
+    milestone: 'v1.0.0 / cosmic flight launch tower',
+    basis: 'Launch-tower art direction; only the version-matched mint receipt creates a delivered floor. Office game widget remains proposed in issue #20.' },
 ];
 
 export function publicRepository(item) {
@@ -48,7 +51,9 @@ export function publicRepository(item) {
 export function projectSites(items, { includeContext = false } = {}) {
   const groups = new Map();
   for (const item of items) {
-    const repository = publicRepository(item);
+    const sourceRepository = publicRepository(item);
+    const repository = sourceRepository?.toLowerCase() === 'thejollylama/asteroid'
+      ? 'TheJollyLaMa/DecentVoyager' : sourceRepository;
     if (!repository) continue;
     const key = repository.toLowerCase();
     if (!groups.has(key)) groups.set(key, { repository, items: [] });

@@ -4,6 +4,29 @@
 
 Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, account, database, or application server. Apache-2.0.
 
+## Decent Voyager launch tower
+
+The Voyager campus uses the reviewed Canopy identity for
+[`TheJollyLaMa/DecentVoyager`](https://github.com/TheJollyLaMa/DecentVoyager).
+Its blue-green launch tower has a silver/yellow rocket crown; this is art direction,
+not twenty delivered building floors. One receipt-backed floor records v1.0.0,
+Base Supporter token **80**, escrow listing **10**, at **10 USDC**. The 3D billboard
+and sidepanel use the same checksum-verified front/back artwork and existing
+in-map checkout, which rechecks stock and price.
+
+Reuse: existing `projectMints`, `featuredEdition`, `renderSupportCallout`,
+`ConstructionScene` billboards and mint-art caching are retained. Supplemental
+Voyager mint evidence records the repo rename without changing frozen metadata.
+No new purchase protocol or contracts are added. The actual playable Office clone
+is tracked in [issue #20](https://github.com/A-Decent-Agency/a-decent-agency.github.io/issues/20);
+Busking adaptation pointers are on [issue #243](https://github.com/TheJollyLaMa/DecentBusking/issues/243).
+Neither widget is represented as delivered by the tower.
+Legacy Asteroid board references and campus bookmarks route to Voyager without
+rewriting historical board evidence. Run `node --test` for model checks and
+`node scripts/verify-voyager-campus.mjs` against a locally served Office for the
+real 3D raycast, artwork and sidepanel checkout acceptance test
+(`OFFICE_URL` optionally selects another served deployment).
+
 ## ENS website
 
 [planningoffice.decentagency.eth](https://planningoffice.decentagency.eth.limo)
