@@ -11,7 +11,8 @@ const ART = [
   ['TheJollyLaMa/DecentMarket', 'Market square', 'Colorful stalls and a shared trading courtyard.'],
   ['TheJollyLaMa/DecentHead', 'Shared gateway', 'An entrance pavilion for the reusable application header.'],
   ['A-Decent-Agency/DBuskRadio', 'Radio listening station', 'A broadcast-style booth and listening courtyard for the opt-in radio widget.'],
-  ['A-Decent-Agency/DVert', 'Advertising design studio', 'A modular media studio with exhibition panels for the reusable advertising widget.']
+  ['A-Decent-Agency/DVert', 'Advertising design studio', 'A modular media studio with exhibition panels for the reusable advertising widget.'],
+  ['TheJollyLaMa/DecentVoyager', 'Voyager launch tower', 'Blue-green glass, silver flight decks and a yellow-tipped rocket crown beside the v1.0.0 Supporter billboard. The end-of-track playable widget remains planned in Office issue #20.']
 ];
 
 export function campusArt(project) {

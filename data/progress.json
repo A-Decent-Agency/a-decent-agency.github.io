@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-05T18:48:24.621Z",
+  "checkedAt": "2026-11-05T21:48:42.571Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
@@ -1546,6 +1546,66 @@
           }
         }
       ]
+    },
+    {
+      "repository": "TheJollyLaMa/DecentVoyager",
+      "state": "available",
+      "checkedAt": "2026-11-05T21:48:42.571Z",
+      "error": "",
+      "pushedAt": "2026-11-05T21:38:25Z",
+      "release": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/TheJollyLaMa/DecentVoyager/releases/tag/v1.0.0",
+        "publishedAt": "2026-11-05T21:10:31Z"
+      },
+      "mergedPulls": [
+        {
+          "number": 4,
+          "title": "List Decent Voyager v1.0.0 Supporter DNFT",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/4",
+          "mergedAt": "2026-11-05T21:16:25Z"
+        },
+        {
+          "number": 3,
+          "title": "Decent Voyager v1: charge weapons, Sector II, supporter vaults, pilots, arena, contracts",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/3",
+          "mergedAt": "2026-11-05T21:09:09Z"
+        },
+        {
+          "number": 2,
+          "title": "Galactic Gauntlet: 10 levels, 3 difficulties, Decent shell and DNFT victory stamps",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/2",
+          "mergedAt": "2026-11-05T21:08:48Z"
+        }
+      ],
+      "issues": null,
+      "codeBytes": 991860,
+      "versions": [
+        {
+          "tag": "v1.0.0",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/releases/tag/v1.0.0",
+          "publishedAt": "2026-11-05T21:10:31Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/DecentVoyager/releases/download/v1.0.0/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "80",
+          "mintTxHash": "0xf77e1813a37bbb31a7afb54fb0fbe2df26996e917e076d050718d1e45f9f17a5",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 9758,
+          "storefront": {
+            "purchaseUrl": "https://thejollylama.github.io/DecentHead/supporter/buy.html?chainId=8453&escrow=0x31b07b83e99A9bdF379bf40225b8A80d3804C89d&listingId=10",
+            "escrow": "0x31b07b83e99A9bdF379bf40225b8A80d3804C89d",
+            "listingId": "10",
+            "priceUSDC": "10000000",
+            "frontUrl": "https://github.com/TheJollyLaMa/DecentVoyager/releases/download/v1.0.0/supporter-front.png",
+            "backUrl": "https://github.com/TheJollyLaMa/DecentVoyager/releases/download/v1.0.0/supporter-back.png",
+            "evidenceUrl": "https://github.com/TheJollyLaMa/DecentVoyager/releases/download/v1.0.0/supporter-minted.json",
+            "frontSHA256": "91c4b8dbc6273f91ac11a4c5a81ea0345dd93b2d52fcf7015892cb8001ba7d46",
+            "backSHA256": "26e4b2769ac85eb466c74d32fc8f08f403755d058d9bfe74168d1fadf6e7ec43"
+          }
+        }
+      ],
+      "structures": [],
+      "versionsTruncated": false
     }
   ],
   "connections": [

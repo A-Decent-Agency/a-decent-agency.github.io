@@ -16,6 +16,8 @@ const entries = [
   ['market', 'DecentMarket', 'MK', '#f3ce76', '76afe7491cee4767048b2270dfe9dd8135984006',
     'img/ens/market-avatar.png', 'Prepared project identity artwork; not proof of published ENS',
     'data/market-ens.json', 'PVTI_lADODD7ovc4Bn91hzhCOH4g'],
+  ['voyager', 'DecentVoyager', 'DV', '#68d9e8', 'c6ae5845728c91f1c4ba28dbe806713e6dc4c9de',
+    'src/assets/brand/voyager-disc.png', 'Project Mandelblum disc', 'README.md', ''],
 ];
 
 const identities = entries.map(([id, name, monogram, color, revision, path, description, evidence, portfolioId]) => {
