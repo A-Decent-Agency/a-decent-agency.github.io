@@ -12,7 +12,7 @@ const ART = [
   ['TheJollyLaMa/DecentHead', 'Shared gateway', 'An entrance pavilion for the reusable application header.'],
   ['A-Decent-Agency/DBuskRadio', 'Radio listening station', 'A broadcast-style booth and listening courtyard for the opt-in radio widget.'],
   ['A-Decent-Agency/DVert', 'Advertising design studio', 'A modular media studio with exhibition panels for the reusable advertising widget.'],
-  ['TheJollyLaMa/DecentVoyager', 'Voyager launch tower', 'Blue-green glass, silver flight decks and a yellow-tipped rocket crown beside the v1.0.0 Supporter billboard. The end-of-track playable widget remains planned in Office issue #20.']
+  ['TheJollyLaMa/DecentVoyager', 'Voyager launch tower & battle spaceport', 'Silver runway, lit approach lanes, fighter hangars and a radar control tower beside the rocket crown and Supporter billboard. Incoming ships mark newly observed public reward requests; departures mark confirmed Base stamp/prize transfers. Mandelblum rocks, fragments and stray lasers are decorative. The end-of-track playable widget remains planned in Office issue #20.']
 ];
 
 export function campusArt(project) {
