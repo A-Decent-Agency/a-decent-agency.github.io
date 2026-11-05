@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-05T11:53:48.193Z",
+  "checkedAt": "2026-11-05T13:13:25.064Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,7 +35,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-11-03T22:12:53Z",
       "release": {
@@ -153,9 +153,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
-      "pushedAt": "2026-11-05T11:53:41Z",
+      "pushedAt": "2026-11-05T13:12:45Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
@@ -194,8 +194,31 @@
         }
       ],
       "issues": null,
-      "codeBytes": 1285307,
-      "versions": [],
+      "codeBytes": 1287616,
+      "versions": [
+        {
+          "tag": "v0.1.0",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
+          "publishedAt": "2026-11-05T11:33:17Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/DecentCanopy/releases/download/v0.1.0/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "79",
+          "mintTxHash": "0xde8d3fbf8dcc7f602e3c848c1eb4dd33bc582492fa68cb13864203c4aae7b041",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 12,
+          "storefront": {
+            "purchaseUrl": "https://thejollylama.github.io/DecentHead/supporter/buy.html?chainId=8453&escrow=0x31b07b83e99A9bdF379bf40225b8A80d3804C89d&listingId=9&priceUSDC=10000000",
+            "escrow": "0x31b07b83e99A9bdF379bf40225b8A80d3804C89d",
+            "listingId": "9",
+            "priceUSDC": "10000000",
+            "frontUrl": "https://github.com/TheJollyLaMa/DecentCanopy/releases/download/v0.1.0/supporter-front.png",
+            "backUrl": "https://github.com/TheJollyLaMa/DecentCanopy/releases/download/v0.1.0/supporter-back.png",
+            "evidenceUrl": "https://github.com/TheJollyLaMa/DecentCanopy/releases/download/v0.1.0/supporter-minted.json",
+            "frontSHA256": "4000df4e9fe670b9bd09dd13348bc973459d433e0c68dbaeb0aa940bdd37da78",
+            "backSHA256": "48f591263065a6a2acea8b560b3c03c0715c8541585700d4a2e12a7b14870309"
+          }
+        }
+      ],
       "versionsTruncated": false,
       "structures": [
         {
@@ -278,7 +301,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-11-05T11:30:09Z",
       "release": {
@@ -366,7 +389,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-11-03T15:36:30Z",
       "release": {
@@ -454,15 +477,21 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
-      "pushedAt": "2026-11-03T13:26:37Z",
+      "pushedAt": "2026-11-05T13:03:42Z",
       "release": {
         "tag": "v3.3.0",
         "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/tag/v3.3.0",
         "publishedAt": "2026-11-03T11:49:16Z"
       },
       "mergedPulls": [
+        {
+          "number": 421,
+          "title": "Fix lunar tracking and make planetary simulation explicit",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/421",
+          "mergedAt": "2026-11-05T13:03:40Z"
+        },
         {
           "number": 418,
           "title": "Add guarded Discord artwork refresh workflow",
@@ -486,16 +515,10 @@
           "title": "Prevent wallet connection from hiding original health records",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/413",
           "mergedAt": "2026-11-03T02:22:44Z"
-        },
-        {
-          "number": 407,
-          "title": "Add pinned Base Supporter Token card to About",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/407",
-          "mergedAt": "2026-11-02T23:45:03Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2801708,
+      "codeBytes": 2830093,
       "versions": [
         {
           "tag": "v3.3.0",
@@ -662,7 +685,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:03Z",
       "release": {
@@ -759,7 +782,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:15Z",
       "release": {
@@ -831,7 +854,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:34Z",
       "release": {
@@ -903,9 +926,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
-      "pushedAt": "2026-11-05T11:36:02Z",
+      "pushedAt": "2026-11-05T13:03:45Z",
       "release": null,
       "mergedPulls": [
         {
@@ -964,7 +987,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -994,9 +1017,9 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
-      "pushedAt": "2026-11-05T11:33:18Z",
+      "pushedAt": "2026-11-05T13:11:55Z",
       "release": {
         "tag": "v0.1.1",
         "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/tag/v0.1.1",
@@ -1011,8 +1034,31 @@
         }
       ],
       "issues": null,
-      "codeBytes": 370457,
-      "versions": [],
+      "codeBytes": 371791,
+      "versions": [
+        {
+          "tag": "v0.1.1",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/tag/v0.1.1",
+          "publishedAt": "2026-11-05T11:33:18Z",
+          "evidenceUrl": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/download/v0.1.1/supporter-minted.json",
+          "chainId": 8453,
+          "tokenId": "78",
+          "mintTxHash": "0xea8c501ab694cda30b31f9a0336af9ad3d31c1897de4e3f2e1f6af068cb11652",
+          "nftContract": "0xe63EC9f8228720bAAC2fD528C0A6d06B3Dc5439B",
+          "confirmations": 12,
+          "storefront": {
+            "purchaseUrl": "https://thejollylama.github.io/DecentHead/supporter/buy.html?chainId=8453&escrow=0x31b07b83e99A9bdF379bf40225b8A80d3804C89d&listingId=8&priceUSDC=10000000",
+            "escrow": "0x31b07b83e99A9bdF379bf40225b8A80d3804C89d",
+            "listingId": "8",
+            "priceUSDC": "10000000",
+            "frontUrl": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/download/v0.1.1/supporter-front.png",
+            "backUrl": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/download/v0.1.1/supporter-back.png",
+            "evidenceUrl": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/download/v0.1.1/supporter-minted.json",
+            "frontSHA256": "ce4e2cbc8cad1f04ef3890643c1f2e1cbb0b722be617f4dceca83da1ac2b08b9",
+            "backSHA256": "223a76eafb66dfa15e7e4c0c8ac995b4edf5a35310dacedb83e63b43e1323b8f"
+          }
+        }
+      ],
       "versionsTruncated": false,
       "structures": [
         {
@@ -1095,7 +1141,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -1125,7 +1171,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -1155,7 +1201,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -1200,7 +1246,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1230,7 +1276,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1260,7 +1306,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
@@ -1320,9 +1366,9 @@
     {
       "repository": "TheJollyLaMa/DecentCalendar",
       "state": "available",
-      "checkedAt": "2026-11-05T11:53:48.193Z",
+      "checkedAt": "2026-11-05T13:13:25.064Z",
       "error": "",
-      "pushedAt": "2026-11-05T11:51:12Z",
+      "pushedAt": "2026-11-05T12:56:38Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCalendar/releases/tag/v0.1.0",

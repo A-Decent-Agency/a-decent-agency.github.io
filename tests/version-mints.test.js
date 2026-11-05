@@ -42,6 +42,18 @@ test('observer and sidepanel bind the 100-USDC release price without relabeling 
   assert.match(renderVersionMints(site, feed), /10 USDC on Base/);
   assert.throws(() => versionStorefront(highReceipt, null, receipt, release, version, repository));
 });
+test('explicit 10-USDC receipts retain checked storefronts without changing historical routes', () => {
+  const explicit = structuredClone(receipt);
+  explicit.verification.purchaseUrl += '&priceUSDC=10000000';
+  const result = versionStorefront(explicit, null, explicit, release, version, repository);
+  assert.ok(isVersionStorefront(result, version, repository));
+  assert.equal(result.purchaseUrl, explicit.verification.purchaseUrl);
+  assert.ok(isVersionStorefront(store, version, repository));
+  for (const suffix of ['&priceUSDC=10000000', '&listingId=0', '&chainId=8453', '&unexpected=1']) {
+    assert.equal(isVersionStorefront({ ...result, purchaseUrl: result.purchaseUrl + suffix }, version, repository), false);
+  }
+  assert.equal(isVersionStorefront({ ...result, purchaseUrl: result.purchaseUrl.replace('priceUSDC=10000000', 'priceUSDC=100000000') }, version, repository), false);
+});
 test('checkout rejects foreign hosts, credentials, extra params, wrong chain/escrow/id/price and foreign artwork', () => {
   for (const bad of [
     { purchaseUrl: store.purchaseUrl.replace('thejollylama.github.io', 'evil.test') },

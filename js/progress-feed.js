@@ -34,8 +34,8 @@ export function isVersionStorefront(store, version, repository) {
   try {
     const url = new URL(store.purchaseUrl);
     return routes.includes(`${url.origin}${url.pathname}`) && !url.username && !url.password && !url.hash
-      && [...url.searchParams].length === (store.priceUSDC === '10000000' ? 3 : 4)
-      && (store.priceUSDC === '10000000' ? !url.searchParams.has('priceUSDC') : url.searchParams.get('priceUSDC') === store.priceUSDC)
+      && [...url.searchParams].length === (url.searchParams.has('priceUSDC') ? 4 : 3)
+      && (url.searchParams.has('priceUSDC') ? url.searchParams.get('priceUSDC') === store.priceUSDC : store.priceUSDC === '10000000')
       && url.searchParams.get('chainId') === '8453'
       && url.searchParams.get('escrow')?.toLowerCase() === store.escrow.toLowerCase()
       && url.searchParams.get('listingId') === store.listingId;
