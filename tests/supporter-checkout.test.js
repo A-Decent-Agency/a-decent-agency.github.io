@@ -76,7 +76,9 @@ test('purchase uses existing session, approves exactly 10 USDC, rechecks, buys o
 test('100-USDC edition binds route and live price, approves exactly 100000000 and verifies paid amount', async () => {
   const chosen = structuredClone(selection), store = chosen.version.storefront;
   store.priceUSDC = '100000000';
-  store.purchaseUrl += '&priceUSDC=100000000';
+  const route = new URL(store.purchaseUrl);
+  route.searchParams.set('priceUSDC', '100000000');
+  store.purchaseUrl = route.href;
   assert.ok(isVersionStorefront(store, chosen.version, chosen.repository));
   assert.equal(isVersionStorefront({ ...store, purchaseUrl: selection.version.storefront.purchaseUrl }, chosen.version, chosen.repository), false);
   assert.equal(isVersionStorefront({ ...store, purchaseUrl: store.purchaseUrl + '&priceUSDC=100000000' }, chosen.version, chosen.repository), false);

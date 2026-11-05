@@ -12,7 +12,7 @@ try {
   await page.locator('#flight-destination').selectOption('project:thejollylama/decentvoyager');
   const buy = page.locator('.support-callout .mint-buy');
   assert.match(await buy.innerText(), /10 USDC on Base/);
-  assert.match(await buy.getAttribute('data-mint-checkout'), /listingId=10/);
+  assert.match(await buy.getAttribute('data-mint-checkout'), /listingId=18/);
   await page.waitForFunction(() => {
     const image = document.querySelector('.support-callout img');
     return image?.complete && image.naturalWidth > 0;
@@ -44,7 +44,7 @@ try {
     if (!site) throw new Error('Voyager campus missing');
     scene.goTo(site.index, { immediate: true }); scene.setPaused(true); scene.tick(performance.now());
     const cards = scene.targets.filter(object => object.isMesh &&
-      object.userData.purchaseUrl && new URL(object.userData.purchaseUrl).searchParams.get('listingId') === '10');
+      object.userData.purchaseUrl && new URL(object.userData.purchaseUrl).searchParams.get('listingId') === '18');
     if (cards.length !== 1) throw new Error('Expected exactly one Voyager 3D Supporter card');
     const card = cards[0];
     const action = scene.targets.find(object => object.isSprite && object.userData.purchaseUrl === card.userData.purchaseUrl);

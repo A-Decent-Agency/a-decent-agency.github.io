@@ -38,10 +38,10 @@ test('Voyager has one launch tower and one receipt-backed floor, not twenty deli
   assert.match(identity.artwork.url, /\/[a-f0-9]{40}\/src\/assets\/brand\/voyager-disc.png$/);
 });
 
-test('Voyager front/back images and sidepanel buy actions use verified token 80 listing 10', () => {
+test('Voyager front/back images and sidepanel buy actions use verified token 80 replacement listing 18', () => {
   const version = featuredEdition(site, feed);
   assert.equal(version.tokenId, '80');
-  assert.equal(version.storefront.listingId, '10');
+  assert.equal(version.storefront.listingId, '18');
   for (const face of ['front', 'back']) {
     const checksum = version.storefront[`${face}SHA256`];
     const bytes = readFileSync(new URL(`../data/mint-art/${checksum}.png`, import.meta.url));
@@ -50,14 +50,14 @@ test('Voyager front/back images and sidepanel buy actions use verified token 80 
   }
   const card = renderSupportCallout(site, feed);
   assert.match(card, /10 USDC on Base/);
-  assert.match(card, /listingId=10/);
+  assert.match(card, /listingId=18/);
   assert.match(card, /token 80/);
   const gallery = renderVersionMints(site, feed);
   assert.equal((gallery.match(/data-mint-art/g) || []).length, 2);
   const panel = renderCampusDetails(site, feed);
   assert.match(panel, /Voyager launch tower/);
   assert.match(panel, /widget remains planned/);
-  assert.match(panel, /zero inventory|unfunded/);
+  assert.match(panel, /710 Supporter NFTs|funded|winning-flight claim/);
 });
 
 test('Voyager missing release evidence leaves support unavailable, never inventing a buy action', () => {

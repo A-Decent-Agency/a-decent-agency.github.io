@@ -10,9 +10,15 @@ The Voyager campus uses the reviewed Canopy identity for
 [`TheJollyLaMa/DecentVoyager`](https://github.com/TheJollyLaMa/DecentVoyager).
 Its blue-green launch tower has a silver/yellow rocket crown; this is art direction,
 not twenty delivered building floors. One receipt-backed floor records v1.0.0,
-Base Supporter token **80**, escrow listing **10**, at **10 USDC**. The 3D billboard
+Base Supporter token **80**, replacement escrow listing **18**, at **10 USDC**. The 3D billboard
 and sidepanel use the same checksum-verified front/back artwork and existing
 in-map checkout, which rechecks stock and price.
+
+The original mint remains historical listing 10. Supplemental
+`supporter-current-listing.json` evidence binds each reserve cutover to the same
+edition and price, replacement listing, reserve quantity and confirmed transaction
+hashes. Both 3D and sidepanel checkout consume the updated shared observation;
+invalid replacement evidence withholds checkout instead of retaining a stale route.
 
 Reuse: existing `projectMints`, `featuredEdition`, `renderSupportCallout`,
 `ConstructionScene` billboards and mint-art caching are retained. Supplemental
