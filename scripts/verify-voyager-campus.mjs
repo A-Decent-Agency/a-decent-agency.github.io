@@ -49,7 +49,8 @@ try {
     const card = cards[0];
     const action = scene.targets.find(object => object.isSprite && object.userData.purchaseUrl === card.userData.purchaseUrl);
     const campus = scene.campuses.get(site.id);
-    if (!campus?.getObjectByName('voyager-rocket-crown')) throw new Error('Rocket tower crown missing');
+    const crowns = campus?.children.filter(object => object.name === 'voyager-rocket-crown');
+    if (crowns?.length !== 1) throw new Error('Expected exactly one rocket tower crown');
     globalThis.voyagerCampusAcceptance = { scene, host, card };
     const point = card.getWorldPosition(new THREE.Vector3()).project(scene.camera);
     return { x: (point.x + 1) * innerWidth / 2, y: (1 - point.y) * innerHeight / 2,
