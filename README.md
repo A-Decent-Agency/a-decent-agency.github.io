@@ -4,6 +4,18 @@
 
 Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, account, database, or application server. Apache-2.0.
 
+## ENS website
+
+[planningoffice.decentagency.eth](https://planningoffice.decentagency.eth.limo)
+serves reviewed public build `6f142bd`, including generated, checksum-verified
+Supporter billboard artwork. Its civic-hall avatar/banner, description,
+repository and IPFS contenthash records belong to the DecentAgency owner.
+[Public deployment evidence](https://github.com/TheJollyLaMa/DecentCanopy/blob/main/data/ens-project-deployments.json)
+records the source commit, CID, artwork checksums and successful Ethereum receipts,
+independently verified on 2026-11-05. The public GitHub Pages site remains available.
+This is a dated IPFS snapshot, not automatic synchronization; later map/docs
+updates do not silently repoint ENS. Gateway caches and avatar/banner support vary.
+
 ## October recall and the next five planning towers
 
 ### November teams: Pilgrimages V1 and BabelBet preparation
@@ -310,7 +322,7 @@ For desktop/3D and mobile/2D browser acceptance, serve the site and run
 `OFFICE_URL=http://127.0.0.1:8000/ node scripts/verify-site-links.mjs` with
 Playwright available (`PLAYWRIGHT_MODULE` may point to an existing installation).
 
-The public Canopy map is imported from `data/agency-map.json` at `0159e1377b50036f671b5bd5a5688199c8faa03c`, with 31 public project references and all 30 public-endpoint relationships, their independent entity IDs, types/evidence/caveats and dated briefs preserved. Calendar v0.1.0 now has independently verified token 77 / listing 7 evidence; its optional development support does not certify booking settlement or production readiness. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
+The public Canopy map is imported from `data/agency-map.json` at `5c5d32a31ad2c081b5042f36fb055cc1dbae1e8b`, with 31 public project references and all 30 public-endpoint relationships, their independent entity IDs, types/evidence/caveats and dated briefs preserved. The four approved ENS websites have public transaction/artwork evidence. Calendar v0.1.0 has independently verified token 77 / listing 7 evidence; its optional development support does not certify booking settlement or production readiness. Proposed links are dashed; observed/reported history is not upgraded into a tested integration. The unfiltered route includes contextual public project sites so these endpoints remain visible; they do not create synthetic board tasks. Filtered routes include only actual matching cards. Private graph endpoints are not reconstructed. To deliberately review/import a newer public registry, run `node scripts/import-canopy-map.mjs /path/to/reviewed/Canopy-checkout`; this is not an automatic whole-library scan.
 
 Sidepanels immediately show bounded pinned project artwork with source/license credit. Canopy uses its full ENS avatar, Head/Market their project-owned ENS artwork, and Busking its hat plus original busker mural (also on its 3D stage). Public Ethereum mainnet avatar text records were read without a wallet connection on 2026-10-25: Head/Market point to IPFS images; Agency/Canopy/Busking point to mutable avatar-service URLs. The UI records this provenance and uses reviewed immutable repository artwork rather than automatically following arbitrary services or assuming prepared ENS metadata is live. No ENS writes occur.
 
