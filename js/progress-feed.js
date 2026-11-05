@@ -2,7 +2,8 @@ export const REPOSITORIES = ['TheJollyLaMa/DecentAgency', 'TheJollyLaMa/DecentBu
   'TheJollyLaMa/DecentMarket', 'TheJollyLaMa/BigNuten_Vanilla', 'A-Decent-Agency/DecentJukebox',
   'A-Decent-Agency/DBuskRadio', 'A-Decent-Agency/DVert', 'A-Decent-Agency/a-decent-agency.github.io',
   'TheJollyLaMa/DecentSubscriptions', 'TheJollyLaMa/DecentPilgrimages', 'TheJollyLaMa/DecentEscrow', 'TheJollyLaMa/DecentInvoice',
-  'TheJollyLaMa/DecentAirdrop', 'TheJollyLaMa/Decent_NDA', 'TheJollyLaMa/Decent_UCAN_Play', 'TheJollyLaMa/BabelBet'];
+  'TheJollyLaMa/DecentAirdrop', 'TheJollyLaMa/Decent_NDA', 'TheJollyLaMa/Decent_UCAN_Play', 'TheJollyLaMa/BabelBet',
+  'TheJollyLaMa/DecentCalendar'];
 export const CONNECTIONS = [
   { from: 'A-Decent-Agency/a-decent-agency.github.io', to: 'TheJollyLaMa/DecentCanopy', label: 'Planning office adapts Canopy provenance and public project-map patterns', url: 'https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/7' },
   { from: 'TheJollyLaMa/DecentHead', to: 'TheJollyLaMa/DecentMarket', label: 'Pinned shared header and session boundary', url: 'https://github.com/TheJollyLaMa/DecentMarket/pull/68' },

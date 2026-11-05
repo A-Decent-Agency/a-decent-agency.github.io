@@ -215,6 +215,11 @@ top of the sidepanel; older editions remain smaller cards. Both reuse the same
 validated storefront (no new checkout route), and nothing appears without one.
 BigNuten v3.3.0 (token 76, listing 6) is the first billboard on a non-widget
 health campus.
+
+Calendar, Pilgrimages and Canopy are included in the public release observer.
+Their campus billboards and Support cards use the same receipt and approved
+storefront checks; preparing a release or publishing art alone does not display
+a buy button or add a delivered floor.
 100-USDC external routes explicitly carry `priceUSDC=100000000`; deploy the
 compatible Head checkout before publishing those routes. This adapts
 DecentHead's `scripts/supporter-metadata.mjs` / `scripts/supporter-protocol.mjs`

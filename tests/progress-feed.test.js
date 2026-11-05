@@ -17,7 +17,7 @@ test('public observations are bounded and schema rejects foreign URLs and duplic
   const feed = await collectProgress({ fetcher: fake(), now });
   assert.ok(isProgressFeed(feed));
   assert.equal(feed.repositories.length, REPOSITORIES.length);
-  for (const repository of ['TheJollyLaMa/DecentPilgrimages', 'TheJollyLaMa/BabelBet']) {
+  for (const repository of ['TheJollyLaMa/DecentCalendar', 'TheJollyLaMa/DecentPilgrimages', 'TheJollyLaMa/DecentCanopy', 'TheJollyLaMa/BabelBet']) {
     assert.ok(feed.repositories.some(entry => entry.repository === repository));
   }
   const bad = structuredClone(feed); bad.repositories[0] = bad.repositories[1]; assert.equal(isProgressFeed(bad), false);

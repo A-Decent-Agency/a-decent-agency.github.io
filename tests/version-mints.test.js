@@ -162,3 +162,26 @@ test('newest approved edition becomes the support callout; unapproved or absent 
   assert.equal(renderSupportCallout(site, null), '');
   assert.match(renderSupportCallout({ ...site, title: '<img onerror=x>' }, feed), /&lt;img/);
 });
+
+for (const name of ['DecentCalendar', 'DecentPilgrimages', 'DecentCanopy']) {
+  test(`${name} campus support requires its own release-matched mint and storefront`, () => {
+    const repository = `TheJollyLaMa/${name}`;
+    const root = `https://github.com/${repository}/releases/download/${tag}/`;
+    const ownVersion = {
+      ...version, url: `https://github.com/${repository}/releases/tag/${tag}`,
+      evidenceUrl: `${root}supporter-minted.json`,
+      storefront: { ...store, frontUrl: `${root}supporter-front.png`,
+        backUrl: `${root}supporter-back.png`, evidenceUrl: `${root}supporter-minted.json` },
+    };
+    const ownSite = { ...site, title: name, project: { repository } };
+    const ownFeed = { repositories: [{ repository, state: 'available', mergedPulls: [], versions: [ownVersion] }] };
+    assert.equal(featuredEdition(ownSite, ownFeed).tokenId, version.tokenId);
+    assert.match(renderSupportCallout(ownSite, ownFeed), new RegExp(`Support ${name} · 10 USDC on Base`));
+    assert.equal(renderSupportCallout(ownSite, feed), '', 'another project cannot supply the campus edition');
+    delete ownVersion.storefront;
+    assert.equal(featuredEdition(ownSite, ownFeed), null, 'mint alone does not invent a sale');
+    assert.equal(renderSupportCallout(ownSite, ownFeed), '');
+    ownFeed.repositories[0].versions = [];
+    assert.equal(projectMints(ownSite, ownFeed).length, 0, 'unminted release adds no delivered edition');
+  });
+}
