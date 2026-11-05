@@ -17,6 +17,36 @@ function lines(points, color) {
   const geometry = new THREE.BufferGeometry().setFromPoints(points.map(point => new THREE.Vector3(...point)));
   return new THREE.LineSegments(geometry, lineMaterial(color));
 }
+function mintDecoration() {
+  const canvas = document.createElement('canvas'); canvas.width = canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+  for (const [index, color] of ['#55baff', '#ffe36b', '#64efac'].entries()) {
+    ctx.strokeStyle = ctx.shadowColor = color; ctx.shadowBlur = 20; ctx.lineWidth = 3;
+    const inset = 25 + index * 6;
+    ctx.strokeRect(inset, inset, 256 - inset * 2, 256 - inset * 2);
+  }
+  const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
+  const halo = new THREE.Mesh(new THREE.PlaneGeometry(38, 38), new THREE.MeshBasicMaterial({
+    map: texture, transparent: true, opacity: .8, depthWrite: false, side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending,
+  }));
+  const points = [], colors = [];
+  for (let i = 0; i < 12; i++) {
+    const angle = i * Math.PI / 6, radius = 14.5 / Math.max(Math.abs(Math.cos(angle)), Math.abs(Math.sin(angle)));
+    const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius;
+    const color = new THREE.Color(['#55baff', '#ffe36b', '#64efac'][i % 3]);
+    for (const point of [[x - .7, y, 0], [x + .7, y, 0], [x, y - 1.1, 0], [x, y + 1.1, 0]]) {
+      points.push(...point); colors.push(color.r, color.g, color.b);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+  geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  const sparkles = new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({
+    vertexColors: true, transparent: true, opacity: .8, depthWrite: false,
+  }));
+  return { halo, sparkles };
+}
 function crane(scale = 1) {
   const group = new THREE.Group(), points = [];
   const segment = (a, b) => points.push(a.map(n => n * scale), b.map(n => n * scale));
@@ -78,6 +108,7 @@ export class ConstructionScene {
     this.onMint = onMint;
     this.container = container; this.onSite = onSite; this.sites = []; this.state = { progress: 0, x: 0, y: 0 };
     this.active = false; this.reduced = false; this.paused = false; this.keys = new Set();
+    this.mintEffects = []; this.hoveredMint = null;
     this.scene = new THREE.Scene(); this.scene.background = new THREE.Color('#100e1d');
     this.routeFog = new THREE.Fog('#100e1d', 400, 1600); this.scene.fog = this.routeFog;
     this.camera = new THREE.PerspectiveCamera(58, 1, .1, 20000);
@@ -120,7 +151,15 @@ export class ConstructionScene {
       container.setPointerCapture(event.pointerId);
     });
     container.addEventListener('pointermove', event => {
-      if (!this.down) return;
+      if (!this.down) {
+        const hovered = this.pickTarget(event)?.object.userData.mintEffect || null;
+        if (hovered !== this.hoveredMint) {
+          this.hoveredMint = hovered;
+          this.renderer.domElement.style.cursor = hovered ? 'pointer' : '';
+          this.invalidate();
+        }
+        return;
+      }
       if (this.cameraMode !== 'flight') {
         this.azimuth += (event.clientX - this.down.x) * .006;
         this.elevation = THREE.MathUtils.clamp(this.elevation + (event.clientY - this.down.y) * .004, .12, 1.5);
@@ -135,9 +174,7 @@ export class ConstructionScene {
     });
     container.addEventListener('pointerup', event => {
       if (this.down && !this.down.dragged && Math.hypot(event.clientX - this.down.x, event.clientY - this.down.y) < 5) {
-        const rect = container.getBoundingClientRect(), ray = new THREE.Raycaster();
-        ray.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), this.camera);
-        const hit = ray.intersectObjects(this.targets)[0];
+        const hit = this.pickTarget(event);
         if (hit?.object.userData.historicalMap) {
           this.setPaused(true);
           this.container.dispatchEvent(new CustomEvent('flightpause', { detail: true }));
@@ -152,12 +189,21 @@ export class ConstructionScene {
     });
     container.addEventListener('pointercancel', () => { this.down = null; });
     container.addEventListener('lostpointercapture', () => { this.down = null; });
+    container.addEventListener('pointerleave', () => {
+      this.hoveredMint = null; this.renderer.domElement.style.cursor = ''; this.invalidate();
+    });
     container.addEventListener('wheel', event => {
       event.preventDefault(); this.zoom = THREE.MathUtils.clamp(this.zoom * (event.deltaY > 0 ? 1.1 : .9), .45, 3); this.invalidate();
       this.container.dispatchEvent(new CustomEvent('camerazoom', { detail: this.zoom }));
     }, { passive: false });
   }
+  pickTarget(event) {
+    const rect = this.container.getBoundingClientRect(), ray = new THREE.Raycaster();
+    ray.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), this.camera);
+    return ray.intersectObjects(this.targets || [])[0];
+  }
   clear() {
+    this.mintEffects = []; this.hoveredMint = null; this.renderer.domElement.style.cursor = '';
     this.group.traverse(object => {
       if (object.isInstancedMesh) object.dispose();
       object.geometry?.dispose();
@@ -262,8 +308,12 @@ export class ConstructionScene {
               ...Array.from({ length: 4 }, () => new THREE.MeshBasicMaterial({ color: '#71e6d0' })),
               new THREE.MeshBasicMaterial({ color: '#ffffff' }), new THREE.MeshBasicMaterial({ color: '#ffffff' }),
             ]);
-            display.add(card);
+            const pivot = new THREE.Group(), decoration = mintDecoration();
+            pivot.add(decoration.halo, decoration.sparkles, card); display.add(pivot);
+            const effect = { pivot, ...decoration, phase: this.mintEffects.length * .7 };
+            this.mintEffects.push(effect);
             for (const target of [card, action]) {
+              target.userData.mintEffect = effect;
               target.userData.index = site.index; target.userData.purchaseUrl = store.purchaseUrl; this.targets.push(target);
             }
             ['front', 'back'].forEach((face, faceIndex) => {
@@ -526,6 +576,15 @@ export class ConstructionScene {
       const t = this.reduced || this.paused ? .5 : (time / 4200 + index * .17) % 1;
       signal.packet.position.copy(signal.curve.getPoint(index % 2 ? 1 - t : t));
     }
+    for (const effect of this.mintEffects) {
+      const moving = !this.reduced && !this.paused, hovered = effect === this.hoveredMint;
+      const phase = moving ? time / 1800 + effect.phase : 0;
+      effect.pivot.rotation.y = moving ? Math.sin(phase) * (hovered ? .42 : .08) : 0;
+      effect.pivot.rotation.z = moving && hovered ? Math.sin(phase * .7) * .035 : 0;
+      effect.halo.material.opacity = hovered ? 1 : .8;
+      effect.sparkles.material.opacity = moving ? .55 + .35 * (Math.sin(phase) + 1) / 2 : .8;
+      effect.sparkles.rotation.z = moving ? Math.sin(phase * .6) * .025 : 0;
+    }
     this.ship.position.set(point.x + this.state.x, point.y + this.state.y, point.z + 27);
     this.ship.rotation.z = (Number(this.keys.has('a')) - Number(this.keys.has('d'))) * .4;
     this.flame.visible = steering || this.target != null;
@@ -558,6 +617,6 @@ export class ConstructionScene {
       this.camera.lookAt(target);
     }
     this.renderer.render(this.scene, this.camera);
-    if (!this.paused && !this.reduced && (steering || this.target != null || this.signals?.length)) this.timer = setTimeout(() => { this.timer = null; this.invalidate(); }, 1000 / (steering || this.target != null ? 30 : 12));
+    if (!this.paused && !this.reduced && (steering || this.target != null || this.signals?.length || this.mintEffects.length)) this.timer = setTimeout(() => { this.timer = null; this.invalidate(); }, 1000 / (steering || this.target != null ? 30 : 12));
   }
 }

@@ -559,6 +559,22 @@ including when its confirmation is uncertain. Inspect the transaction before ret
 Confirmed approvals remain in place if a later purchase is declined or fails.
 The dialog cannot close while a wallet request/confirmation is pending.
 
+Buyable Supporter artwork has a blue/yellow/green glow and slow sparkles, both
+beside the buildings and in the sidepanel. The 3D cards gently swivel at rest
+and turn a little more on hover, with a pointer cursor; labels and BUY signs
+remain still. Sidepanel artwork is also a labeled keyboard/touch purchase button
+using the same existing checkout, not a second payment path. Only editions with
+approved storefront evidence receive this purchase treatment. Motion off,
+reduced-motion preferences and paused flight keep the 3D decoration static;
+the sidepanel respects Motion off and reduced-motion preferences while retaining
+its static glow and visible focus outline. The 3D effect adds one small canvas
+halo and one colored line-sparkle batch per edition, without bloom, extra lights,
+dependencies or a faster render loop. It reuses the billboard/raycast and
+checkout surfaces in `js/construction-scene.js` and `js/version-mints.js` at
+`f92712d`. Run `scripts/verify-supporter-affordance.mjs` with `OFFICE_URL` and
+`PLAYWRIGHT_MODULE` to check all observed buyable cards, hover, motion gates,
+unchanged checkout targets, keyboard and narrow touch layouts.
+
 The public observer binds `supporter-minted.json` verification (Head/Market), or
 widget `supporter-listing-evidence.json` protocol evidence plus
 `supporter-release.json`, to the same repository/version, metadata, NFT, token and

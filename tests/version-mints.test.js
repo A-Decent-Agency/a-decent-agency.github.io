@@ -165,7 +165,8 @@ test('newest approved edition becomes the support callout; unapproved or absent 
   const html = renderSupportCallout(site, both);
   assert.match(html, /SUPPORTER DNFT \/ v2.0.0/);
   assert.match(html, /Support DecentHead · 10 USDC on Base/);
-  assert.equal((html.match(/data-mint-checkout=/g) || []).length, 1);
+  assert.equal((html.match(/data-mint-checkout=/g) || []).length, 2);
+  assert.match(html, /class="mint-art-buy".*aria-label="View \/ buy DecentHead/);
   assert.match(html, /not equity, yield/);
   assert.match(renderCampusDetails(site, both), /class="support-callout"/);
   const bare = structuredClone(feed); delete bare.repositories[0].versions[0].storefront;
@@ -173,6 +174,16 @@ test('newest approved edition becomes the support callout; unapproved or absent 
   assert.equal(renderSupportCallout(site, bare), '');
   assert.equal(renderSupportCallout(site, null), '');
   assert.match(renderSupportCallout({ ...site, title: '<img onerror=x>' }, feed), /&lt;img/);
+});
+test('both gallery faces are labeled keyboard purchase buttons only for approved storefronts', () => {
+  const html = renderVersionMints(site, feed);
+  assert.equal((html.match(/class="mint-art-buy"/g) || []).length, 2);
+  for (const face of ['front', 'back']) {
+    assert.ok(html.includes(`aria-label="View / buy DecentHead ${tag} Supporter edition ${face}"`));
+  }
+  assert.equal((html.match(/data-mint-checkout=/g) || []).length, 3);
+  const bare = structuredClone(feed); delete bare.repositories[0].versions[0].storefront;
+  assert.doesNotMatch(renderVersionMints(site, bare), /mint-art-buy|data-mint-checkout/);
 });
 
 for (const name of ['DecentCalendar', 'DecentPilgrimages', 'DecentCanopy']) {

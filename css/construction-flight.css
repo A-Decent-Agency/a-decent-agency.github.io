@@ -112,6 +112,19 @@ html[data-view="flight"] .intro h1 > span { margin-left: .25em; }
 .mint-faces figure { margin: 0; min-width: 0; }
 .mint-faces img { width: 100%; height: auto; border-radius: 6px; }
 .mint-faces figcaption { font-size: 10px; color: var(--muted); }
+.mint-art-buy { display: block; position: relative; width: 100%; max-width: 260px; padding: 0; margin: 4px 0; background: transparent; border: 1px solid #55baff; border-radius: 8px; cursor: pointer; box-shadow: -3px 0 12px #55baff80, 3px -2px 12px #ffe36b66, 0 4px 14px #64efac73; transition: transform .45s ease, box-shadow .3s ease; }
+.mint-art-buy img { display: block; border-radius: inherit; }
+.mint-art-buy::after { content: "\2726 \2727 \2726"; position: absolute; top: 5%; right: 4%; color: #ffe36b; font-size: 18px; letter-spacing: 3px; text-shadow: -3px 0 6px #55baff, 3px 2px 6px #64efac; pointer-events: none; animation: mint-sparkle 3.6s ease-in-out infinite alternate; }
+.mint-art-buy:focus-visible { outline: 3px solid #ffe36b; outline-offset: 5px; }
+.mint-art-buy:focus-visible, .mint-art-buy:hover { box-shadow: -4px 0 18px #55baffaa, 4px -3px 18px #ffe36b99, 0 5px 20px #64efacaa; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  html:not([data-reduced="true"]) .mint-art-buy:hover { transform: perspective(600px) rotateY(14deg) rotateZ(-2deg); }
+}
+@keyframes mint-sparkle { from { opacity: .55; transform: translateY(0) rotate(-5deg); } to { opacity: 1; transform: translateY(-2px) rotate(5deg); } }
+html[data-reduced="true"] .mint-art-buy, html[data-reduced="true"] .mint-art-buy::after { animation: none; transition: none; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .mint-art-buy, .mint-art-buy::after { animation: none; transition: none; transform: none; }
+}
 .version-mints .mint-buy { display: block; padding: 12px; margin-top: 12px; border-radius: 6px; background: #28453e; color: #b8f3e6; font-size: 13px; font-weight: 700; }
 #supporter-checkout { width: min(560px, calc(100vw - 32px)); max-height: 90dvh; overflow: auto; box-sizing: border-box; }
 #supporter-checkout [data-checkout-image] { display: block; width: min(100%, 300px); height: auto; margin: 12px auto; border-radius: 10px; }
