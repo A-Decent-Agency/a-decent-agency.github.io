@@ -29,7 +29,7 @@ export function isVersionStorefront(store, version, repository) {
   const assetRoot = `https://github.com/${repository}/releases/download/${encodeURIComponent(version.tag)}/`;
   if (store.frontUrl !== `${assetRoot}supporter-front.png` || store.backUrl !== `${assetRoot}supporter-back.png`
     || !/^[\da-f]{64}$/.test(store.frontSHA256) || !/^[\da-f]{64}$/.test(store.backSHA256)
-    || !['supporter-minted.json', 'supporter-listing-evidence.json'].some(name => store.evidenceUrl === assetRoot + name)) return false;
+    || !['supporter-minted.json', 'supporter-listing-evidence.json', 'supporter-current-listing.json'].some(name => store.evidenceUrl === assetRoot + name)) return false;
   const routes = ['DecentHead', 'DecentMarket'].map(name => `https://thejollylama.github.io/${name}/supporter/buy.html`);
   try {
     const url = new URL(store.purchaseUrl);

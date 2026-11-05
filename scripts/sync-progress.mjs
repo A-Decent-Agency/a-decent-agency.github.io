@@ -36,6 +36,22 @@ export function versionStorefront(receipt, listing, manifest, release, version, 
   return store;
 }
 
+export function currentStorefront(store, update, version, repository) {
+  if (update.schema !== 'supporter-listing-update/1' || update.repository !== repository ||
+      update.version !== version.tag || update.chainId !== 8453 || update.tokenId !== version.tokenId ||
+      update.nftContract?.toLowerCase() !== version.nftContract.toLowerCase() ||
+      update.escrow?.toLowerCase() !== store.escrow.toLowerCase() ||
+      update.previousListingId !== store.listingId || update.priceUSDC !== store.priceUSDC ||
+      !/^[1-9]\d*$/.test(update.available) || !/^[1-9]\d*$/.test(update.reserve) ||
+      ![update.relistTxHash, update.withdrawTxHash].every(hash => /^0x[\da-f]{64}$/i.test(hash))) {
+    throw new Error('Current listing does not match the historical edition and price');
+  }
+  const result = { ...store, listingId: update.listingId, purchaseUrl: update.purchaseUrl,
+    evidenceUrl: `https://github.com/${repository}/releases/download/${encodeURIComponent(version.tag)}/supporter-current-listing.json` };
+  if (!isVersionStorefront(result, version, repository)) throw new Error('Current listing checkout is invalid');
+  return result;
+}
+
 export function deliveredVersion(receipt, release, repository, evidenceUrl) {
   const mint = receipt?.verification || receipt?.transactions?.mint;
   if (receipt?.version !== release.tag_name || ![repository, repository.split('/')[1]].includes(receipt.repo)
@@ -107,7 +123,12 @@ export async function collectProgress({ fetcher = fetch, token = '', previous = 
           const listing = asset.name === 'supporter-minted.json' ? null : await readAsset('supporter-listing-evidence.json');
           const manifest = listing ? await readAsset('supporter-release.json') : receipt;
           version.storefront = versionStorefront(receipt, listing, manifest, edition, version, repository);
+          if (edition.assets.some(value => value.name === 'supporter-current-listing.json')) {
+            version.storefront = currentStorefront(version.storefront,
+              await readAsset('supporter-current-listing.json'), version, repository);
+          }
         } catch (error) {
+          delete version.storefront;
           version.storefrontError = 'Purchase evidence unavailable or mismatched; checkout link withheld. See the release for details.';
           console.error(`[Supporter storefront] ${repository}/${version.tag}: ${error.message}`);
         }

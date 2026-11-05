@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { isProgressFeed, isVersionStorefront, SUPPORTER_ESCROW, SUPPORTER_NFT } from '../js/progress-feed.js';
-import { versionStorefront, collectProgress } from '../scripts/sync-progress.mjs';
+import { versionStorefront, currentStorefront, collectProgress } from '../scripts/sync-progress.mjs';
 import { cacheMintArt } from '../scripts/cache-mint-art.mjs';
 import { featuredEdition, projectMints, renderSupportCallout, renderVersionMints } from '../js/version-mints.js';
 import { renderCampusDetails } from '../js/campus-details.js';
@@ -23,6 +23,22 @@ const release = { assets: ['supporter-front.png', 'supporter-back.png'].map((nam
 const site = { title: 'DecentHead', project: { repository }, items: [] };
 const store = versionStorefront(receipt, null, receipt, release, version, repository);
 const feed = { repositories: [{ repository, state: 'available', versions: [{ ...version, storefront: store }] }] };
+
+test('reserve listing evidence changes current checkout without rewriting the mint', () => {
+  const update = { schema: 'supporter-listing-update/1', repository, version: tag, chainId: 8453,
+    tokenId: '70', nftContract: SUPPORTER_NFT, escrow: SUPPORTER_ESCROW, previousListingId: '0',
+    listingId: '11', priceUSDC: store.priceUSDC, available: '900', reserve: '100',
+    relistTxHash: `0x${'2'.repeat(64)}`, withdrawTxHash: `0x${'3'.repeat(64)}`,
+    purchaseUrl: store.purchaseUrl.replace('listingId=0', 'listingId=11') };
+  const current = currentStorefront(store, update, version, repository);
+  assert.equal(current.listingId, '11');
+  assert.ok(isVersionStorefront(current, version, repository));
+  assert.equal(mint.listingId, '0', 'original mint stays unchanged');
+  for (const patch of [{ priceUSDC: '100000000' }, { previousListingId: '1' }, { tokenId: '75' },
+    { available: '0' }, { relistTxHash: 'pending' }, { purchaseUrl: 'https://evil.test' }]) {
+    assert.throws(() => currentStorefront(store, { ...update, ...patch }, version, repository));
+  }
+});
 
 test('published Head/Market receipt yields a bound Base purchase route and exact release artwork', () => {
   assert.ok(isVersionStorefront(store, version, repository));
