@@ -10,6 +10,8 @@ import { campusConnections, campusPriority } from './campus-graph.js';
 import { featuredEdition, projectMints } from './version-mints.js';
 import { mintArtworkPath, supporterPriceLabel } from './progress-feed.js';
 import { HISTORICAL_MAPS } from './historical-maps.js';
+import { buildVoyagerSpaceport } from './voyager-spaceport.js';
+import { VOYAGER_REPOSITORY } from './voyager-traffic.js';
 
 const lineMaterial = color => new THREE.LineBasicMaterial({ color });
 const CANOPY_HOST = 'TheJollyLaMa/DecentCanopy';
@@ -203,6 +205,11 @@ export class ConstructionScene {
     return ray.intersectObjects(this.targets || [])[0];
   }
   clear() {
+    if (this.spaceport) {
+      this.spaceportPending = this.spaceport.drain();
+      this.spaceport.dispose();
+      this.spaceport = null;
+    }
     this.mintEffects = []; this.hoveredMint = null; this.renderer.domElement.style.cursor = '';
     this.group.traverse(object => {
       if (object.isInstancedMesh) object.dispose();
@@ -263,6 +270,20 @@ export class ConstructionScene {
       const roof = structure.height + (city ? CITY_LIFT : 0), aside = city ? -(CITY_RADIUS + 34) : 0;
       if (site.project) {
         buildCampus(campus, site, structure);
+        if (site.project.repository === VOYAGER_REPOSITORY) {
+          this.spaceport = buildVoyagerSpaceport(campus, structure, {
+            invalidate: () => this.invalidate(),
+            onError: message => {
+              console.error('[Voyager spaceport]', message);
+              this.container.dispatchEvent(new CustomEvent('voyagerartworkerror', { detail: message }));
+            }
+          });
+          for (const kind of ['arrival', 'departure']) {
+            const count = this.spaceportPending?.[kind] || 0;
+            if (count) this.spaceport.enqueue(kind, count);
+          }
+          this.spaceportPending = null;
+        }
         if (city) this.addCanopyCity(campus, city, structure.height + CITY_LIFT);
         site.visibleCranes = structure.buildCranes;
         const progress = item => `${item.closed}/${item.total} ISSUES`;
@@ -541,6 +562,18 @@ export class ConstructionScene {
     this.invalidate();
   }
   reset() { this.goTo(0); }
+  enqueueVoyagerTraffic(kind, count) {
+    if (!['arrival', 'departure'].includes(kind) || !Number.isSafeInteger(count) || count < 0) {
+      throw new Error('Invalid Voyager traffic count');
+    }
+    if (this.spaceport) this.spaceport.enqueue(kind, count);
+    else {
+      this.spaceportPending = this.spaceportPending || { arrival: 0, departure: 0 };
+      if (!Number.isSafeInteger(this.spaceportPending[kind] + count)) throw new Error('Voyager traffic queue overflow');
+      this.spaceportPending[kind] += count;
+    }
+    this.invalidate();
+  }
   hold(key, value) { if (value && !this.paused && !this.reduced && this.active) this.keys.add(key); else this.keys.delete(key); this.invalidate(); }
   setPaused(value) { this.paused = value; this.keys.clear(); this.target = null; this.stop(); this.invalidate(); }
   setMotion(reduced) { this.reduced = reduced; this.keys.clear(); this.target = null; this.stop(); this.invalidate(); }
@@ -558,7 +591,8 @@ export class ConstructionScene {
   tick(time) {
     this.frame = null;
     if (!this.active || document.hidden) return;
-    const dt = this.last ? Math.min(.05, (time - this.last) / 1000) : 1 / 30; this.last = time;
+    const elapsed = this.last ? Math.min(.15, (time - this.last) / 1000) : 1 / 30;
+    const dt = Math.min(.05, elapsed); this.last = time;
     const steering = [...this.keys].some(key => key !== 'shift');
     if (!this.reduced && !this.paused) {
       if (steering) { this.target = null; this.state = flightStep(this.state, this.keys, dt, this.sites.length); }
@@ -570,6 +604,7 @@ export class ConstructionScene {
       }
     }
     const nearest = Math.round(this.state.progress);
+    this.spaceport?.update(elapsed, !this.reduced && !this.paused && this.cameraMode !== 'past');
     if (this.target == null && nearest !== this.selected) { this.selected = nearest; this.onSite(this.sites[nearest], nearest); this.highlightSite(this.sites[nearest]?.id); }
     const point = routePoint(this.state.progress), ahead = routePoint(this.state.progress + .5);
     for (const [index, signal] of (this.signals || []).entries()) {
@@ -617,6 +652,6 @@ export class ConstructionScene {
       this.camera.lookAt(target);
     }
     this.renderer.render(this.scene, this.camera);
-    if (!this.paused && !this.reduced && (steering || this.target != null || this.signals?.length || this.mintEffects.length)) this.timer = setTimeout(() => { this.timer = null; this.invalidate(); }, 1000 / (steering || this.target != null ? 30 : 12));
+    if (!this.paused && !this.reduced && (steering || this.target != null || this.signals?.length || this.mintEffects.length || this.spaceport)) this.timer = setTimeout(() => { this.timer = null; this.invalidate(); }, 1000 / (steering || this.target != null ? 30 : 12));
   }
 }

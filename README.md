@@ -6,6 +6,35 @@ Plain HTML, CSS, and browser ES modules. No framework, bundler, build step, acco
 
 ## Decent Voyager launch tower
 
+Voyager now has a **battle spaceport**: silver runway and approach lights,
+fighter hangars, radar control tower, parked ships and the original rocket crown.
+Occasional Mandelblum asteroids, fragments and stray lasers are decoration,
+not inferred battle telemetry. The Supporter billboard and checkout remain intact.
+
+While the page is visible, the read-only traffic observer checks Voyager's public
+stamp/Supporter queues and Base reward events every 30 seconds. **One new request
+means one incoming fighter; one confirmed stamp/prize/bundle event means one
+outgoing fighter.** Atomic NFT + BNut claims are a single departure. The first
+observation establishes a baseline without replaying old history. Three-block
+confirmation depth, contract/game-qualified event filters, bounded 500-block
+catch-up scans and identity deduplication protect against repeated fleets.
+Bursts wait behind six flight slots; pause/reduced motion retains the queue.
+Unavailable feeds show an explicit status; ambient ships never stand in for
+unobserved payouts. This visit-only observer is not a permanent event index or
+whole-ecosystem scanner; GitHub cache delays and deep chain reorganizations can
+affect observation. No wallet access, transaction signing or private referee
+endpoint is used. It observes queued rewards, not every flight-ticket request.
+
+Reuse: preserve `buildCampus`, `ConstructionScene`'s existing render/pause/clear
+lifecycle, `featuredEdition` checkout, and the pinned Voyager Mandelblum
+`src/assets/game/rock-1.png` at `fdac2a68dd587ec82ebca43eab59f154946209ea`
+(CC BY 4.0, The Jolly LaMa / A Decent Agency; see NOTICE). Event definitions
+match Voyager's deployed `VoyagerRewards`, legacy `VoyagerPrizes` and
+`VoyagerStamps` contracts; no game clone, new contract or reward issuer is added.
+Run `node --test tests/voyager-traffic.test.js` and
+`node scripts/verify-voyager-spaceport.mjs` (existing Playwright, `OFFICE_URL`
+optional) for baseline, dedupe, error/recovery, queue/motion and browser checks.
+
 The Voyager campus uses the reviewed Canopy identity for
 [`TheJollyLaMa/DecentVoyager`](https://github.com/TheJollyLaMa/DecentVoyager).
 Its blue-green launch tower has a silver/yellow rocket crown; this is art direction,

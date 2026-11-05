@@ -20,6 +20,7 @@ import { HISTORICAL_MAPS } from './historical-maps.js';
 import { renderProjectRecall } from './project-recall.js';
 import { planningEntityKey, renderHumanPriorities } from './revival-plans.js';
 import { siteAddress, resolveSiteAddress, siteForCard } from './site-links.js';
+import { mountVoyagerTraffic } from './voyager-traffic.js';
 
 const $ = selector => document.querySelector(selector);
 $('#human-priorities').innerHTML = renderHumanPriorities();
@@ -28,6 +29,13 @@ const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { tab: 'flight', query: '', view: '', page: 0, reduced: reducedQuery.matches || navigator.connection?.saveData || false, list: reducedQuery.matches || matchMedia('(max-width: 620px)').matches || navigator.connection?.saveData || false, project: { items: [], views: [] } };
 let scene, sceneKind, sceneFailed = false, selected, detailOpener, editing, map, toastTimer, flightSites = [], flightIndex = 0;
 const scenes = new Map(), scenePromises = new Map(), sceneData = new WeakMap();
+const voyagerTraffic = mountVoyagerTraffic({
+  getScene: () => scenes.get('flight'), statusElement: $('#voyager-traffic-status')
+});
+window.addEventListener('pagehide', event => { if (!event.persisted) voyagerTraffic.dispose(); });
+$('#scene').addEventListener('voyagerartworkerror', event => {
+  $('#voyager-art-status').textContent = event.detail;
+});
 let simpleMap = false;
 const dailyFlight = mountTodaysFlight({
   container: $('#daily-flight'),

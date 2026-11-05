@@ -20,13 +20,24 @@ export function renderCampusDetails(site, feed) {
     <a href="https://github.com/TheJollyLaMa/ArtFi/issues/62" target="_blank" rel="noopener noreferrer">the dedicated makeover issue</a>.
     Existing operation is steward-reported, not independently verified here.</p>`;
   const repository = site.project.repository;
+  const spaceport = repository === 'TheJollyLaMa/DecentVoyager' ? `<section class="campus-art-brief"><span class="eyebrow">BATTLE SPACEPORT / OBSERVED TRAFFIC</span>
+    <p>One arriving fighter per new public stamp or Supporter reward request. One departing fighter per confirmed
+    Base StampMinted, PrizeClaimed or RewardClaimed event. An atomic NFT + BNut bundle is one departure, not two.</p>
+    <p>Public queues and Base are checked every 30 seconds while this page is visible, with three-block confirmation
+    depth. First load establishes a baseline: old requests and historical payouts do not become a fleet.
+    Traffic is this visit's observation, not a complete ledger or a promise to fulfill requests.
+    Bursts queue behind six flight slots. Pause/reduced motion freezes flights; unavailable feeds are reported
+    above the flight deck, never replaced with fake payouts. Decorative rocks and lasers do not represent battle telemetry.</p>
+    <p><a href="https://github.com/TheJollyLaMa/DecentVoyager/blob/main/victory-stamps.json" target="_blank" rel="noopener noreferrer">Public stamp requests ↗</a> ·
+    <a href="https://github.com/TheJollyLaMa/DecentVoyager/blob/main/payroll-queue.json" target="_blank" rel="noopener noreferrer">Public Supporter requests ↗</a> ·
+    <a href="https://basescan.org/address/0xCa55A59BD2c15D0F11Ae5f7e7E96Bb58eb0B7DE5#events" target="_blank" rel="noopener noreferrer">Base reward events ↗</a></p></section>` : '';
   const art = campusArt(site.project);
   const identity = CANOPY.projects.find(project => !project.entityId && project.repository.toLowerCase() === repository.toLowerCase());
   const avatarRecord = ENS_ARTWORK_OBSERVATION.records[identity?.ens];
   const mural = PROJECT_MURALS[repository];
   const connections = (feed?.connections || []).filter(link => [link.from.toLowerCase(), link.to.toLowerCase()].includes(repository.toLowerCase()));
   const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
-  return `${art ? `<section class="campus-art-brief"><span class="eyebrow">CITY LANDMARK</span><h4>${esc(art.name)}</h4><p>${esc(art.description)}</p><small>Art direction only / not a physical facility, feature delivery, legal protection or funding claim. Issue structures and receipt-backed floors retain their separate evidence rules.</small></section>` : ''}${widgetProject(site.project) ? '' : renderSupportCallout(site, feed)}${renderWidgetProject(site, feed)}${renderReviewedBrief(site.project)}<details class="campus-editions"><summary>Supporter editions / receipt-backed evidence</summary>${renderVersionMints(site, feed)}</details><div class="campus-stage">${esc(model.label)}</div><details><summary>Architecture / evidence rules</summary><p>${esc(model.basis)}</p></details>
+  return `${art ? `<section class="campus-art-brief"><span class="eyebrow">CITY LANDMARK</span><h4>${esc(art.name)}</h4><p>${esc(art.description)}</p><small>Art direction only / not a physical facility, feature delivery, legal protection or funding claim. Issue structures and receipt-backed floors retain their separate evidence rules.</small></section>` : ''}${spaceport}${widgetProject(site.project) ? '' : renderSupportCallout(site, feed)}${renderWidgetProject(site, feed)}${renderReviewedBrief(site.project)}<details class="campus-editions"><summary>Supporter editions / receipt-backed evidence</summary>${renderVersionMints(site, feed)}</details><div class="campus-stage">${esc(model.label)}</div><details><summary>Architecture / evidence rules</summary><p>${esc(model.basis)}</p></details>
     ${identity?.ens ? `<p>Recorded ENS identity: <b>${esc(identity.ens)}</b>.</p>` : ''}
     ${avatarRecord ? `<details><summary>ENS artwork provenance / observed ${ENS_ARTWORK_OBSERVATION.observedAt}</summary><p>${esc(avatarRecord)}. Mainnet avatar text read without a wallet connection. Project-owned, commit-pinned artwork is displayed instead of following mutable avatar-service URLs automatically.</p></details>` : ''}
     ${mural ? `<figure class="campus-mural"><img src="${esc(mural.url)}" alt="${esc(mural.alt)}" loading="lazy" referrerpolicy="no-referrer" data-project-mural><figcaption>${link(mural.source, 'Project artwork')} · The Jolly LaMa / A Decent Agency · ${link(mural.license, 'CC BY 4.0')} (unmodified)</figcaption></figure>` : ''}
