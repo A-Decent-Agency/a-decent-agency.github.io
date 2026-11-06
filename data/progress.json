@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-05T22:57:11.363Z",
+  "checkedAt": "2026-11-06T00:23:07.827Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,7 +35,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-05T22:54:58.002Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-11-05T16:45:40Z",
       "release": {
@@ -153,15 +153,27 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-05T22:55:03.642Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
-      "pushedAt": "2026-11-05T18:40:53Z",
+      "pushedAt": "2026-11-05T23:55:40Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
         "publishedAt": "2026-11-05T11:33:17Z"
       },
       "mergedPulls": [
+        {
+          "number": 63,
+          "title": "Record funded Voyager reserves and replacement sale evidence",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/63",
+          "mergedAt": "2026-11-05T23:00:00Z"
+        },
+        {
+          "number": 62,
+          "title": "Record Decent Voyager v1 mint and proposed host integrations",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/62",
+          "mergedAt": "2026-11-05T21:58:15Z"
+        },
         {
           "number": 61,
           "title": "Record GrannyLyn wallet-only trial invitation",
@@ -179,22 +191,10 @@
           "title": "Document BigNuten food-specific cup and serving conversions",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/55",
           "mergedAt": "2026-11-02T03:39:57Z"
-        },
-        {
-          "number": 54,
-          "title": "Document BigNuten direct-fill nutrition and shared food references",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/54",
-          "mergedAt": "2026-11-02T03:01:45Z"
-        },
-        {
-          "number": 53,
-          "title": "Record BigNuten cited nutrition rollout and acceptance limits",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/53",
-          "mergedAt": "2026-11-01T20:55:14Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1353619,
+      "codeBytes": 1355567,
       "versions": [
         {
           "tag": "v0.1.0",
@@ -301,15 +301,27 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-05T22:54:55.025Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
-      "pushedAt": "2026-11-05T11:30:09Z",
+      "pushedAt": "2026-11-05T23:05:37Z",
       "release": {
         "tag": "v2.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentHead/releases/tag/v2.0.0",
         "publishedAt": "2026-10-21T21:28:52Z"
       },
       "mergedPulls": [
+        {
+          "number": 34,
+          "title": "Avoid rate-limited RPC polling in historical Supporter checkout",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/34",
+          "mergedAt": "2026-11-05T23:05:38Z"
+        },
+        {
+          "number": 33,
+          "title": "Preserve Supporter checkout across reserve listing cutovers",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/33",
+          "mergedAt": "2026-11-05T22:47:59Z"
+        },
         {
           "number": 32,
           "title": "Support frozen 100-USDC supporter release terms",
@@ -327,22 +339,10 @@
           "title": "Add reusable Supporter DNFT kit for any Decent dapp",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/30",
           "mergedAt": "2026-10-23T06:12:29Z"
-        },
-        {
-          "number": 29,
-          "title": "Pin release site at Supporter prep; gate Discord on ENS",
-          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/29",
-          "mergedAt": "2026-10-23T05:33:55Z"
-        },
-        {
-          "number": 28,
-          "title": "Add ENS avatar and header art",
-          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/28",
-          "mergedAt": "2026-10-22T18:08:01Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2864554,
+      "codeBytes": 2866703,
       "versions": [
         {
           "tag": "v2.0.0",
@@ -389,15 +389,27 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-05T22:54:56.493Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
-      "pushedAt": "2026-11-05T14:36:43Z",
+      "pushedAt": "2026-11-05T23:29:28Z",
       "release": {
         "tag": "v0.3.1",
         "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
         "publishedAt": "2026-10-22T02:26:31Z"
       },
       "mergedPulls": [
+        {
+          "number": 74,
+          "title": "Use current Head and Voyager Supporter reserve listings",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/74",
+          "mergedAt": "2026-11-05T22:59:54Z"
+        },
+        {
+          "number": 73,
+          "title": "Add Decent Voyager v1.0.0 Supporter release",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/73",
+          "mergedAt": "2026-11-05T21:18:57Z"
+        },
         {
           "number": 70,
           "title": "Bind supporter minting to reviewed supply and USDC price",
@@ -415,22 +427,10 @@
           "title": "Rehearse the DJuke playlist worker against deployed v0.4 contracts",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/67",
           "mergedAt": "2026-10-23T05:37:18Z"
-        },
-        {
-          "number": 68,
-          "title": "Pin release site at Supporter prep; adopt Head ENS gate",
-          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/68",
-          "mergedAt": "2026-10-23T05:36:34Z"
-        },
-        {
-          "number": 66,
-          "title": "feat: DJuke v0.4 playlist lane, tiered pricing, 24-song cap",
-          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/66",
-          "mergedAt": "2026-10-22T17:04:47Z"
         }
       ],
       "issues": null,
-      "codeBytes": 970084,
+      "codeBytes": 986768,
       "versions": [
         {
           "tag": "v0.3.1",
@@ -477,15 +477,21 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-05T22:54:59.734Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
-      "pushedAt": "2026-11-05T16:51:34Z",
+      "pushedAt": "2026-11-05T22:59:57Z",
       "release": {
         "tag": "v3.3.0",
         "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/tag/v3.3.0",
         "publishedAt": "2026-11-03T11:49:16Z"
       },
       "mergedPulls": [
+        {
+          "number": 424,
+          "title": "Use BigNuten Supporter reserve replacement listing",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/424",
+          "mergedAt": "2026-11-05T22:59:57Z"
+        },
         {
           "number": 422,
           "title": "Add White Rabbit tutorials and closed trial invitations",
@@ -509,16 +515,10 @@
           "title": "Show bundled Supporter art when the IPFS gateway fails",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/417",
           "mergedAt": "2026-11-03T12:43:49Z"
-        },
-        {
-          "number": 416,
-          "title": "Enable the live v3.3.0 Base Supporter DNFT purchase",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/416",
-          "mergedAt": "2026-11-03T12:28:34Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2906617,
+      "codeBytes": 2906656,
       "versions": [
         {
           "tag": "v3.3.0",
@@ -685,7 +685,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:03Z",
       "release": {
@@ -782,7 +782,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:15Z",
       "release": {
@@ -854,7 +854,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:34Z",
       "release": {
@@ -926,44 +926,44 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
-      "pushedAt": "2026-11-05T13:33:31Z",
+      "pushedAt": "2026-11-05T23:39:09Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 24,
+          "title": "Add Voyager battle spaceport and observed reward traffic",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/24",
+          "mergedAt": "2026-11-05T23:39:09Z"
+        },
+        {
+          "number": 23,
+          "title": "Use reserve-backed current Supporter listings throughout Office",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/23",
+          "mergedAt": "2026-11-05T23:01:24Z"
+        },
+        {
+          "number": 22,
+          "title": "Show one unobstructed Voyager rocket crown",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/22",
+          "mergedAt": "2026-11-05T22:02:20Z"
+        },
+        {
+          "number": 21,
+          "title": "Add Voyager launch tower and receipt-backed Supporter storefront",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/21",
+          "mergedAt": "2026-11-05T21:58:05Z"
+        },
         {
           "number": 18,
           "title": "Build Pilgrimages V1 and BabelBet preparation planning teams",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/18",
           "mergedAt": "2026-11-01T17:54:16Z"
-        },
-        {
-          "number": 14,
-          "title": "Living map: cul-de-sac sprawl, Canopy city and repo-triggered sync",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/14",
-          "mergedAt": "2026-10-27T18:02:05Z"
-        },
-        {
-          "number": 13,
-          "title": "Issue skeletons: milestone levels and grounds that finish as issues close",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/13",
-          "mergedAt": "2026-10-27T15:54:41Z"
-        },
-        {
-          "number": 12,
-          "title": "Honor release-backed supporter prices throughout the map",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/12",
-          "mergedAt": "2026-10-26T00:09:47Z"
-        },
-        {
-          "number": 11,
-          "title": "Enable same-page Supporter purchases beside project sites",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/11",
-          "mergedAt": "2026-10-25T17:25:50Z"
         }
       ],
       "issues": null,
-      "codeBytes": 580740,
+      "codeBytes": 627156,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -987,7 +987,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -1017,7 +1017,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-05T22:55:02.235Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-11-05T16:46:25Z",
       "release": {
@@ -1147,7 +1147,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -1177,7 +1177,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -1207,7 +1207,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -1252,7 +1252,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1282,7 +1282,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1312,7 +1312,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-05T18:48:24.621Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
@@ -1372,7 +1372,7 @@
     {
       "repository": "TheJollyLaMa/DecentCalendar",
       "state": "available",
-      "checkedAt": "2026-11-05T22:55:00.993Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
       "pushedAt": "2026-11-05T12:56:38Z",
       "release": {
@@ -1550,15 +1550,27 @@
     {
       "repository": "TheJollyLaMa/DecentVoyager",
       "state": "available",
-      "checkedAt": "2026-11-05T22:55:05.095Z",
+      "checkedAt": "2026-11-06T00:23:07.827Z",
       "error": "",
-      "pushedAt": "2026-11-05T21:38:25Z",
+      "pushedAt": "2026-11-05T23:05:42Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentVoyager/releases/tag/v1.0.0",
         "publishedAt": "2026-11-05T21:10:31Z"
       },
       "mergedPulls": [
+        {
+          "number": 7,
+          "title": "Record verified live mobile reward and ENS rollout",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/7",
+          "mergedAt": "2026-11-05T23:05:42Z"
+        },
+        {
+          "number": 6,
+          "title": "Add crisp mobile flight and funded atomic reward marathons",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/6",
+          "mergedAt": "2026-11-05T22:59:51Z"
+        },
         {
           "number": 4,
           "title": "List Decent Voyager v1.0.0 Supporter DNFT",
@@ -1579,7 +1591,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 991860,
+      "codeBytes": 1104503,
       "versions": [
         {
           "tag": "v1.0.0",
@@ -1604,8 +1616,8 @@
           }
         }
       ],
-      "structures": [],
-      "versionsTruncated": false
+      "versionsTruncated": false,
+      "structures": []
     }
   ],
   "connections": [
