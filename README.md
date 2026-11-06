@@ -51,10 +51,11 @@ invalid replacement evidence withholds checkout instead of retaining a stale rou
 
 Reuse: existing `projectMints`, `featuredEdition`, `renderSupportCallout`,
 `ConstructionScene` billboards and mint-art caching are retained. Supplemental
-Voyager's canonical repository is `TheJollyLaMa/DecentVoyager`. The original mint
-evidence still records the former repository identity. An in-place token #80
-metadata/artwork and sale-note correction is prepared but not yet confirmed;
-the original mint receipts and source archive remain historical evidence.
+Voyager's canonical repository is `TheJollyLaMa/DecentVoyager`. Its token #80
+metadata/artwork and active listing19 now use that identity, verified on Base.
+The corrected back artwork checksum and purchase route are recorded in the
+progress snapshot. Original mint receipts and source archive remain historical
+evidence, not rewritten transactions.
 No new purchase protocol or contracts are added. The actual playable Office clone
 is tracked in [issue #20](https://github.com/A-Decent-Agency/a-decent-agency.github.io/issues/20);
 Busking adaptation pointers are on [issue #243](https://github.com/TheJollyLaMa/DecentBusking/issues/243).

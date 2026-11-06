@@ -10,7 +10,7 @@ try {
   await page.locator('#flight-camera').selectOption('orbit');
   await page.locator('#flight-destination').selectOption('project:thejollylama/decentvoyager');
   assert.match(await page.locator('.campus-art-brief').first().innerText(), /spaceport/);
-  assert.match(await page.locator('.support-callout .mint-buy').getAttribute('data-mint-checkout'), /listingId=18/);
+  assert.match(await page.locator('.support-callout .mint-buy').getAttribute('data-mint-checkout'), /listingId=19/);
   const result = await page.evaluate(async () => {
     const [{ ConstructionScene }, { createVoyagerTraffic, REWARD_EVENTS, VOYAGER_GAME_ID }, project, feed] = await Promise.all([
       import('./js/construction-scene.js'), import('./js/voyager-traffic.js'),
