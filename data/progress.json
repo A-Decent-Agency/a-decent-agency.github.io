@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-06T15:58:48.647Z",
+  "checkedAt": "2026-11-06T21:34:42.000Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,7 +35,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-05T16:45:40Z",
       "release": {
@@ -153,9 +153,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
-      "pushedAt": "2026-11-06T15:55:05Z",
+      "pushedAt": "2026-11-06T21:25:47Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
@@ -301,7 +301,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-05T23:05:37Z",
       "release": {
@@ -389,7 +389,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-06T01:42:41Z",
       "release": {
@@ -477,15 +477,21 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
-      "pushedAt": "2026-11-06T02:24:31Z",
+      "pushedAt": "2026-11-06T19:41:23Z",
       "release": {
         "tag": "v3.3.0",
         "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/tag/v3.3.0",
         "publishedAt": "2026-11-03T11:49:16Z"
       },
       "mergedPulls": [
+        {
+          "number": 429,
+          "title": "Refine Ekadasi stories and tracker layout",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/429",
+          "mergedAt": "2026-11-06T19:41:21Z"
+        },
         {
           "number": 428,
           "title": "Expose visible Edit and Delete actions on food entries",
@@ -509,16 +515,10 @@
           "title": "Use BigNuten Supporter reserve replacement listing",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/424",
           "mergedAt": "2026-11-05T22:59:57Z"
-        },
-        {
-          "number": 422,
-          "title": "Add White Rabbit tutorials and closed trial invitations",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/422",
-          "mergedAt": "2026-11-05T16:51:32Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2941377,
+      "codeBytes": 2954252,
       "versions": [
         {
           "tag": "v3.3.0",
@@ -685,7 +685,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:03Z",
       "release": {
@@ -782,7 +782,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:15Z",
       "release": {
@@ -854,7 +854,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:34Z",
       "release": {
@@ -926,9 +926,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
-      "pushedAt": "2026-11-06T07:58:55Z",
+      "pushedAt": "2026-11-06T15:59:17Z",
       "release": null,
       "mergedPulls": [
         {
@@ -987,7 +987,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -1017,7 +1017,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-05T16:46:25Z",
       "release": {
@@ -1147,7 +1147,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -1177,7 +1177,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -1207,7 +1207,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -1252,7 +1252,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1282,7 +1282,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1312,7 +1312,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
@@ -1372,7 +1372,7 @@
     {
       "repository": "TheJollyLaMa/DecentCalendar",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
       "pushedAt": "2026-11-05T12:56:38Z",
       "release": {
@@ -1550,15 +1550,21 @@
     {
       "repository": "TheJollyLaMa/DecentVoyager",
       "state": "available",
-      "checkedAt": "2026-11-06T15:58:48.647Z",
+      "checkedAt": "2026-11-06T21:34:42.000Z",
       "error": "",
-      "pushedAt": "2026-11-06T11:19:31Z",
+      "pushedAt": "2026-11-06T20:45:46Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentVoyager/releases/tag/v1.0.0",
         "publishedAt": "2026-11-05T21:10:31Z"
       },
       "mergedPulls": [
+        {
+          "number": 14,
+          "title": "Sharpen 8-bit text, add Mini emblem and elephant escort",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/14",
+          "mergedAt": "2026-11-06T20:45:43Z"
+        },
         {
           "number": 13,
           "title": "Stop graphics-surface growth during long Voyager flights",
@@ -1582,16 +1588,10 @@
           "title": "Record verified Voyager token correction and refreshed ENS pin",
           "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/9",
           "mergedAt": "2026-11-06T01:41:56Z"
-        },
-        {
-          "number": 8,
-          "title": "Correct Voyager branding and canonical repository references",
-          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/8",
-          "mergedAt": "2026-11-06T01:19:31Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1178036,
+      "codeBytes": 1229976,
       "versions": [
         {
           "tag": "v1.0.0",
