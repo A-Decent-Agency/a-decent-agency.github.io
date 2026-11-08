@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-08T00:43:23.935Z",
+  "checkedAt": "2026-11-08T07:27:34.992Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,7 +35,7 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-07T23:23:25Z",
       "release": {
@@ -153,9 +153,9 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
-      "pushedAt": "2026-11-08T00:38:34Z",
+      "pushedAt": "2026-11-08T07:26:07Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
@@ -301,7 +301,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-05T23:05:37Z",
       "release": {
@@ -389,7 +389,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-06T01:42:41Z",
       "release": {
@@ -477,7 +477,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-06T19:41:23Z",
       "release": {
@@ -685,7 +685,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:03Z",
       "release": {
@@ -782,7 +782,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:15Z",
       "release": {
@@ -854,7 +854,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:34Z",
       "release": {
@@ -926,9 +926,9 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
-      "pushedAt": "2026-11-07T20:17:44Z",
+      "pushedAt": "2026-11-08T00:43:45Z",
       "release": null,
       "mergedPulls": [
         {
@@ -987,7 +987,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:47Z",
       "release": null,
@@ -1017,7 +1017,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-05T16:46:25Z",
       "release": {
@@ -1147,7 +1147,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:52Z",
       "release": null,
@@ -1177,7 +1177,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:55Z",
       "release": null,
@@ -1207,7 +1207,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:58Z",
       "release": null,
@@ -1252,7 +1252,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:01Z",
       "release": null,
@@ -1282,7 +1282,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-10-27T18:03:03Z",
       "release": null,
@@ -1312,7 +1312,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-01T19:13:17Z",
       "release": null,
@@ -1372,7 +1372,7 @@
     {
       "repository": "TheJollyLaMa/DecentCalendar",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-05T12:56:38Z",
       "release": {
@@ -1550,7 +1550,7 @@
     {
       "repository": "TheJollyLaMa/DecentVoyager",
       "state": "available",
-      "checkedAt": "2026-11-08T00:43:23.935Z",
+      "checkedAt": "2026-11-08T07:27:34.992Z",
       "error": "",
       "pushedAt": "2026-11-07T23:46:39Z",
       "release": {
