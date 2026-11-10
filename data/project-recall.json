@@ -1111,17 +1111,23 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "name": "BabelBet",
-      "focus": "Preparation PR open / game and provider activation out of scope",
-      "observedAt": "2026-11-03T02:17:10.162Z",
+      "focus": "DLang visual-scene and 3+ simultaneous-language design planned / preparation PR separate; provider and financial activation disabled",
+      "observedAt": "2026-11-10T13:26:13Z",
       "partial": false,
       "octoberMergedCount": 0,
       "octoberClosedCount": 0,
-      "openIssueCount": 4,
+      "openIssueCount": 5,
       "merged": [],
       "closed": [],
       "recentMerged": [],
       "recentClosed": [],
       "open": [
+        {
+          "number": 6,
+          "title": "Plan DLang: varied visual concepts, seek-and-find scenes and 3+ languages together",
+          "url": "https://github.com/TheJollyLaMa/BabelBet/issues/6",
+          "at": "2026-11-10T13:26:13Z"
+        },
         {
           "number": 4,
           "title": "Preparation overseer: validate offline boundary and record future build gates",

@@ -16,7 +16,7 @@ const repositories = [
   ['TheJollyLaMa/jolly-sim-siddhi', 'JollySimSiddhi', 'Discovery / staged revival'],
   ['TheJollyLaMa/DecentPilgrimages', 'DecentPilgrimages', 'Base V1 implementation PR open / deployment and migration gated'],
   ['TheJollyLaMa/AJollyDecentCodeCamp', 'A Jolly Decent CodeCamp', 'Discovery / staged revival'],
-  ['TheJollyLaMa/BabelBet', 'BabelBet', 'Preparation PR open / game and provider activation out of scope'],
+  ['TheJollyLaMa/BabelBet', 'BabelBet', 'DLang visual-scene and 3+ simultaneous-language design planned / preparation PR separate; provider and financial activation disabled'],
 ];
 async function api(path) {
   const { stdout } = await exec('gh', ['api', path], { maxBuffer: 10_000_000 });

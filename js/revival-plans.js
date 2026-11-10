@@ -127,13 +127,14 @@ export const REVIVAL_PLANS = [
   },
   {
     repository: 'TheJollyLaMa/BabelBet', name: 'BabelBet', district: 'Language and cooperative commitment exchange',
-    color: '#efa0c1', motif: 'bridge', focus: 'Next / preparation only', directedAt: '1 Nov 2026',
-    intent: 'Make language practice social, accountable and useful across communities. Economic opportunity comes from communication, skills and collaboration; staking is an optional mechanism to evaluate, not a guarantee of prosperity.',
+    color: '#efa0c1', motif: 'bridge', focus: 'Next / DLang design; existing build preparation only', directedAt: '10 Nov 2026',
+    intent: 'DLang (working title) evolves the BabelBet / DuoDuel language branch toward visual meaning: original seek-and-find scenes, many different visual exemplars of each concept, and a mode showing three or more languages simultaneously for the same object/concept. Design intent is planned, not a delivered game. Buddy accountability is separable from learning; the original two-friend $10 streak agreement is historical motivation, not a required stake.',
     observed: 'The historical prototype has invitation/accept/counter routes, ERC1155 challenge tokens and an unofficial Duolingo watcher. Open, deliberately unmerged PR #5 adds shared Head/ankhs, local recovery, consent-only radio and gated contributor preparation, with 16 reported receiving tests; its branch quarantines legacy provider/watcher entrypoints. No new game, oracle, wager, payout, provider or AI activation is established. Legacy identity/credential coupling is not a pattern to revive.',
     historical: 'The supplied BabelBet use-case diagram shows on-device challenge terms, counter/accept, challenge-token creation with staked funds, active/history lookup, a daily watcher, and term-based payouts. Aave/yield is a separate historical branch. The diagram is intent, not execution evidence.',
     archive: { id: 'babelbet-use-case', page: 1 },
-    caution: 'Preparation only: do not build a game, oracle, wagering flow or new payout contract. Neither official nor unofficial Duolingo endpoints may be contacted by runtime, tests or CI. Provider permission, etiquette, evidence/outage policy and economic decisions precede a separately approved build. No on-chain passwords/private email, yield, stakes or payroll activation.',
+    caution: 'Existing preparation scope: do not build a game, oracle, wagering flow or new payout contract under its acceptance. DLang #6 records a separate design direction and proposed prototype; implementation, starting languages and curriculum still need scoping. Use original/licensed scene art, not copied magazine illustrations or proprietary lessons. Neither official nor unofficial Duolingo endpoints may be contacted by runtime, tests or CI. No on-chain passwords/private email, yield, stakes or payroll activation.',
     sources: [
+      issue('TheJollyLaMa/BabelBet', 6, 'DLang intent / varied visual concepts, seek-and-find scenes and 3+ languages together'),
       source('TheJollyLaMa/BabelBet', 'dbd3dd4719c2638b23167a1d762a3b03f7b99a22', 'README.md', 'Original challenge flow and unfinished tests/payouts'),
       source('TheJollyLaMa/BabelBet', 'dbd3dd4719c2638b23167a1d762a3b03f7b99a22', 'contracts/ChallengeToken.sol', 'Historical ERC1155 challenge representation'),
       source('TheJollyLaMa/BabelBet', 'dbd3dd4719c2638b23167a1d762a3b03f7b99a22', 'index.js', 'Historical watcher / not a supported production oracle'),
@@ -153,7 +154,7 @@ export const REVIVAL_PLANS = [
       step('evidence', 'Disable provider access and document etiquette', 'Quarantine legacy watcher/provider entrypoints; record permission, supported access, rate limits, caching, backoff and outage prerequisites.', 'Runtime, tests and CI make no official or unofficial Duolingo calls, including when legacy environment flags are present.'),
       step('challenge', 'Personal profile and bunny-hop onboarding', 'Offer user-owned profile/export recovery and explain historical versus currently supported surfaces; do not implement a new challenge lifecycle.', 'A newcomer can restore a synthetic profile and identify unavailable game features without providing credentials or publishing personal information.'),
       step('settle', 'Steward-gated contributor payroll preparation', 'Adapt accepted-work queue validation and verified-receipt workflow without deploying a game payout engine or activating transfers.', 'An empty queue validates; unapproved work and absent funding never appear paid, and instructions explain private contributor registration.'),
-      step('opportunity', 'Overseer acceptance and future build gate', 'Validate the preparation package and preserve evidence trust, disputes, cancellation and economic decisions as future work.', 'Browser smoke and no-provider tests pass; no game, oracle, live wager, AI service or payout is claimed launched.'),
+      step('opportunity', 'DLang design and separate prototype gate', 'Scope an original/licensed scene, multiple visual exemplars and context-reviewed labels in at least three languages simultaneously; retain preparation acceptance separately.', 'Proposed prototype: recognize an unfamiliar exemplar, explore scene targets with keyboard/touch and display three or more languages together at 375px. Until built and tested, no game or learning outcome is claimed delivered.'),
     ],
     connections: [
       { to: 'TheJollyLaMa/BigNuten_Vanilla', label: 'Candidate challenge lifecycle and receipt patterns', test: 'Adapt source-only engine tests without assuming live deploy or identical assets.' },
@@ -234,7 +235,7 @@ export function renderHumanPriorities(project = null) {
   };
   return `<section class="human-priorities"><p>Overlapping human-needs lenses, not a universal ranking, financial eligibility score or proof of outcomes.
     BigNuten's existing build and router work retain their evidence and gates. Pilgrimages is a steward-selected Base V1 build;
-    BabelBet is preparation only, with no Duolingo access or new game. The other campuses retain their staged plans,
+    BabelBet's current build is preparation only; DLang is its planned visual-scene and simultaneous-multilingual direction, not a delivered game. Duolingo access remains disabled. The other campuses retain their staged plans,
     not a promise to launch everything at once.</p>
     <ul>${needs.map(need => `<li data-human-priority="${need.id}"><h4>${esc(need.title)}</h4><p>${esc(need.direction)}</p>
       <div class="campus-neighbors">${need.projects.map(value => `<button type="button" data-human-site="${esc(value.toLowerCase())}">${esc(name(value))}</button>`).join('')}</div></li>`).join('')}</ul>
