@@ -4,7 +4,7 @@
   "recentStart": "2026-10-27T02:16:23.402Z",
   "periodStart": "2026-10-01T00:00:00Z",
   "periodEndExclusive": "2026-11-01T00:00:00Z",
-  "scope": "Fourteen selected public repositories; recent evidence covers the preceding seven days, with October activity retained separately. Not the whole library. GitHub state is not deployment, payment or product acceptance.",
+  "scope": "Selected public repositories; recent evidence covers the preceding seven days, with October activity retained separately. DLang independently added November 10 with its own observation timestamp. Not the whole library. GitHub state is not deployment, payment or product acceptance.",
   "projects": [
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
@@ -1109,25 +1109,41 @@
       "releases": []
     },
     {
-      "repository": "TheJollyLaMa/BabelBet",
-      "name": "BabelBet",
-      "focus": "DLang visual-scene and 3+ simultaneous-language design planned / preparation PR separate; provider and financial activation disabled",
-      "observedAt": "2026-11-10T13:26:13Z",
+      "repository": "TheJollyLaMa/DLang",
+      "name": "DLang",
+      "focus": "Independent public preview: seven scenes, five seed languages, illustrated About/tutorial and local profiles. 22 receiving tests, 13 escrow tests and a local native-USDC Base-fork test pass. Payments disabled; contract not deployed, full transaction UI and steward operations still gates. Source: https://github.com/TheJollyLaMa/DLang ; preview: https://thejollylama.github.io/DLang/",
+      "observedAt": "2026-11-10T18:00:00Z",
       "partial": false,
       "octoberMergedCount": 0,
       "octoberClosedCount": 0,
-      "openIssueCount": 5,
+      "openIssueCount": 2,
       "merged": [],
       "closed": [],
       "recentMerged": [],
       "recentClosed": [],
       "open": [
-        {
-          "number": 6,
-          "title": "Plan DLang: varied visual concepts, seek-and-find scenes and 3+ languages together",
-          "url": "https://github.com/TheJollyLaMa/BabelBet/issues/6",
-          "at": "2026-11-10T13:26:13Z"
-        },
+        {"number": 1, "title": "Visual scenes and simultaneous multilingual learning / transferred plan", "url": "https://github.com/TheJollyLaMa/DLang/issues/1"},
+        {"number": 2, "title": "Consent-based LiveKit speech and conversation / backlog, not implemented", "url": "https://github.com/TheJollyLaMa/DLang/issues/2"}
+      ],
+      "omittedOpen": 0,
+      "openPullCount": 0,
+      "openPulls": [],
+      "releases": []
+    },
+    {
+      "repository": "TheJollyLaMa/BabelBet",
+      "name": "BabelBet",
+      "focus": "Historical sandbox / preparation PR separate; provider and financial activation disabled. Independent DLang plans moved to its own repository.",
+      "observedAt": "2026-11-10T13:26:13Z",
+      "partial": false,
+      "octoberMergedCount": 0,
+      "octoberClosedCount": 0,
+      "openIssueCount": 4,
+      "merged": [],
+      "closed": [],
+      "recentMerged": [],
+      "recentClosed": [],
+      "open": [
         {
           "number": 4,
           "title": "Preparation overseer: validate offline boundary and record future build gates",

@@ -73,28 +73,26 @@ test('November teams distinguish Base V1, preparation-only and steward activatio
     }
   }
 });
-test('DLang direction is planned visual learning with simultaneous languages, not a game release', async () => {
+test('DLang is an independent preview with launch gates, not a sandbox affiliation or funded release', async () => {
   const plan = REVIVAL_PLANS.find(plan => plan.repository === 'TheJollyLaMa/BabelBet');
-  assert.match(plan.intent, /BabelBet \/ DuoDuel/);
-  assert.match(plan.intent, /seek-and-find scenes/);
-  assert.match(plan.intent, /different visual exemplars/);
-  assert.match(plan.intent, /three or more languages simultaneously/);
-  assert.match(plan.intent, /planned, not a delivered game/);
-  assert.ok(plan.sources.some(source => source.url === 'https://github.com/TheJollyLaMa/BabelBet/issues/6'));
-  assert.ok(plan.stages.some(stage => /unfamiliar exemplar/.test(stage.test)));
+  assert.match(plan.intent, /independent DLang repository/);
+  assert.ok(plan.sources.some(source => source.url === 'https://github.com/TheJollyLaMa/DLang/issues/1'));
   assert.match(plan.caution, /original\/licensed scene art/);
   const site = constructionSites([], { includeContext: true })
     .find(site => site.project?.repository === plan.repository);
   const html = renderRevivalPlan(site);
   assert.match(html, /DLang/);
   assert.match(html, /PROPOSED \/ not delivered/);
-  assert.match(html, /issues\/6/);
+  assert.match(html, /DLang\/issues\/1/);
   assert.equal(campusStructure(site).deliveredFloors, 0);
-  const imported = CANOPY.projects.find(project => project.repository === plan.repository && project.name === 'BabelBet');
-  assert.ok(imported.updates.some(update => update.state === 'planned' && update.label.startsWith('DLang:')));
+  const imported = CANOPY.projects.find(project => project.repository === 'TheJollyLaMa/DLang');
+  assert.equal(imported.name, 'DLang');
+  assert.match(imported.currentState, /No contract deployed/);
+  assert.ok(imported.updates.some(update => update.evidence.some(link => link.url === 'https://thejollylama.github.io/DLang/')));
   const recall = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url), 'utf8'));
-  const recalled = recall.projects.find(project => project.repository === plan.repository);
-  assert.ok(recalled.open.some(issue => issue.number === 6 && issue.title.includes('DLang')));
+  const recalled = recall.projects.find(project => project.repository === 'TheJollyLaMa/DLang');
+  assert.match(recalled.focus, /Payments disabled/);
+  assert.ok(recalled.open.some(issue => issue.number === 2 && issue.title.includes('LiveKit')));
 });
 test('proposed crossovers are dashed evidence with an integration acceptance test, not observed relationships', () => {
   const sites = constructionSites([], { includeContext: true });
@@ -168,13 +166,13 @@ test('supplemental proposals preserve mainline issue skeletons and sit above rat
 test('monthly recall keeps public source counts distinct from deployment and local work', async () => {
   const value = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url)));
   assert.equal(validateRecall(value), value);
-  assert.equal(value.projects.length, 14);
+  assert.equal(value.projects.length, 15);
   assert.equal(value.schemaVersion, 2);
   assert.ok(Date.parse(value.recentStart) < Date.parse(value.observedAt));
   const bigNuten = value.projects.find(project => project.repository === 'TheJollyLaMa/BigNuten_Vanilla');
   assert.ok(bigNuten.recentMerged.every(entry => Date.parse(entry.at) >= Date.parse(value.recentStart)));
   const html = renderProjectRecall(value);
-  assert.equal((html.match(/data-recall-repository=/g) || []).length, 14);
+  assert.equal((html.match(/data-recall-repository=/g) || []).length, 15);
   assert.match(html, /not proof of deployment/);
   assert.match(html, /not an edit of the older Project board/);
   assert.match(html, /mint.*deferred/);
