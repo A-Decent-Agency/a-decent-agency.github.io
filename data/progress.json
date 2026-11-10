@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-10T09:58:16.347Z",
+  "checkedAt": "2026-11-10T17:55:15.299Z",
   "repositories": [
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -35,9 +35,9 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
-      "pushedAt": "2026-11-09T02:44:06Z",
+      "pushedAt": "2026-11-10T16:30:18Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
@@ -45,38 +45,38 @@
       },
       "mergedPulls": [
         {
-          "number": 317,
-          "title": "Isolate rehearsal checkpoints from daily archival",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/317",
-          "mergedAt": "2026-11-09T02:44:06Z"
+          "number": 323,
+          "title": "Allow verified private checkpoint writes to finish",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/323",
+          "mergedAt": "2026-11-10T16:30:16Z"
         },
         {
-          "number": 316,
-          "title": "Add isolated private audio rehearsal",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/316",
-          "mergedAt": "2026-11-09T02:41:22Z"
+          "number": 322,
+          "title": "Recognize delivered audio on either native peer connection",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/322",
+          "mergedAt": "2026-11-10T16:25:50Z"
         },
         {
-          "number": 315,
-          "title": "Add gated website live audio and guaranteed performer pilot",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/315",
-          "mergedAt": "2026-11-09T01:36:59Z"
+          "number": 321,
+          "title": "Give invited performers a wallet-linked practice stage",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/321",
+          "mergedAt": "2026-11-10T15:49:12Z"
         },
         {
-          "number": 314,
-          "title": "Add mirrored calendar reward worker",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/314",
-          "mergedAt": "2026-11-09T00:52:16Z"
+          "number": 320,
+          "title": "Welcome performers with a warm invitation and cosmic confirmation",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/320",
+          "mergedAt": "2026-11-10T15:33:27Z"
         },
         {
-          "number": 313,
-          "title": "Match DVert payment confirmations to DJuke side popouts",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/313",
-          "mergedAt": "2026-11-08T12:02:00Z"
+          "number": 319,
+          "title": "Show live invitations in Profile and clarify performer steps",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/319",
+          "mergedAt": "2026-11-10T13:58:52Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4772194,
+      "codeBytes": 4810650,
       "versions": [
         {
           "tag": "v1.0.0",
@@ -153,15 +153,21 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
-      "pushedAt": "2026-11-10T09:56:25Z",
+      "pushedAt": "2026-11-10T17:55:08Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
         "publishedAt": "2026-11-05T11:33:17Z"
       },
       "mergedPulls": [
+        {
+          "number": 67,
+          "title": "Record planned DLang visual-scene and multilingual direction",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/67",
+          "mergedAt": "2026-11-10T13:28:24Z"
+        },
         {
           "number": 66,
           "title": "Publish verified marathon releases and unified Siddhi direction",
@@ -185,16 +191,10 @@
           "title": "Record funded Voyager reserves and replacement sale evidence",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/63",
           "mergedAt": "2026-11-05T23:00:00Z"
-        },
-        {
-          "number": 62,
-          "title": "Record Decent Voyager v1 mint and proposed host integrations",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/62",
-          "mergedAt": "2026-11-05T21:58:15Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1360721,
+      "codeBytes": 1362476,
       "versions": [
         {
           "tag": "v0.1.0",
@@ -301,7 +301,7 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T23:44:34Z",
       "release": {
@@ -389,7 +389,7 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T10:16:14Z",
       "release": {
@@ -477,7 +477,7 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-06T19:41:23Z",
       "release": {
@@ -685,7 +685,7 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-03T15:35:03Z",
       "release": {
@@ -782,7 +782,7 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:15Z",
       "release": {
@@ -854,7 +854,7 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-03T15:31:34Z",
       "release": {
@@ -926,11 +926,17 @@
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
-      "pushedAt": "2026-11-10T02:12:55Z",
+      "pushedAt": "2026-11-10T13:29:01Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 27,
+          "title": "Plan DLang visual scenes and simultaneous multilingual learning",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/27",
+          "mergedAt": "2026-11-10T13:29:01Z"
+        },
         {
           "number": 26,
           "title": "Update Voyager tower to corrected artwork and listing19",
@@ -954,16 +960,10 @@
           "title": "Use reserve-backed current Supporter listings throughout Office",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/23",
           "mergedAt": "2026-11-05T23:01:24Z"
-        },
-        {
-          "number": 22,
-          "title": "Show one unobstructed Voyager rocket crown",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/22",
-          "mergedAt": "2026-11-05T22:02:20Z"
         }
       ],
       "issues": null,
-      "codeBytes": 627145,
+      "codeBytes": 628885,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -987,7 +987,7 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T23:38:04Z",
       "release": null,
@@ -1024,7 +1024,7 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-05T16:46:25Z",
       "release": {
@@ -1154,7 +1154,7 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T23:37:57Z",
       "release": null,
@@ -1191,7 +1191,7 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T23:38:01Z",
       "release": null,
@@ -1228,7 +1228,7 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T23:38:12Z",
       "release": null,
@@ -1280,7 +1280,7 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T23:38:08Z",
       "release": null,
@@ -1317,7 +1317,7 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-08T23:38:16Z",
       "release": null,
@@ -1360,7 +1360,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-09T00:31:48Z",
       "release": null,
@@ -1420,7 +1420,7 @@
     {
       "repository": "TheJollyLaMa/DecentCalendar",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-09T00:54:43Z",
       "release": {
@@ -1598,7 +1598,7 @@
     {
       "repository": "TheJollyLaMa/DecentVoyager",
       "state": "available",
-      "checkedAt": "2026-11-10T09:58:16.347Z",
+      "checkedAt": "2026-11-10T17:55:15.299Z",
       "error": "",
       "pushedAt": "2026-11-09T00:39:05Z",
       "release": {
