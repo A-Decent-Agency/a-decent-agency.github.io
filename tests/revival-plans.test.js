@@ -10,6 +10,7 @@ import { HISTORICAL_MAPS } from '../js/historical-maps.js';
 import { renderProjectRecall, validateRecall } from '../js/project-recall.js';
 import { projectMints } from '../js/version-mints.js';
 import { renderCampusDetails } from '../js/campus-details.js';
+import { CANOPY } from '../js/canopy-registry.js';
 
 test('five revival campuses have distinct named proposed stages, acceptance tests and original-map provenance', () => {
   assert.equal(REVIVAL_PLANS.length, 5);
@@ -51,7 +52,7 @@ test('November teams distinguish Base V1, preparation-only and steward activatio
   const pilgrimage = REVIVAL_PLANS.find(plan => plan.name === 'DecentPilgrimages');
   const babelbet = REVIVAL_PLANS.find(plan => plan.name === 'BabelBet');
   assert.equal(pilgrimage.directedAt, '1 Nov 2026');
-  assert.equal(babelbet.directedAt, pilgrimage.directedAt);
+  assert.equal(babelbet.directedAt, '10 Nov 2026');
   assert.match(pilgrimage.focus, /Base V1/);
   assert.match(pilgrimage.caution, /organizer approval controls rewards/);
   assert.match(pilgrimage.caution, /does not guarantee warning-free/);
@@ -71,6 +72,29 @@ test('November teams distinguish Base V1, preparation-only and steward activatio
       assert.ok(plan.sources.some(entry => entry.url.endsWith(`/issues/${member.job}`)));
     }
   }
+});
+test('DLang direction is planned visual learning with simultaneous languages, not a game release', async () => {
+  const plan = REVIVAL_PLANS.find(plan => plan.repository === 'TheJollyLaMa/BabelBet');
+  assert.match(plan.intent, /BabelBet \/ DuoDuel/);
+  assert.match(plan.intent, /seek-and-find scenes/);
+  assert.match(plan.intent, /different visual exemplars/);
+  assert.match(plan.intent, /three or more languages simultaneously/);
+  assert.match(plan.intent, /planned, not a delivered game/);
+  assert.ok(plan.sources.some(source => source.url === 'https://github.com/TheJollyLaMa/BabelBet/issues/6'));
+  assert.ok(plan.stages.some(stage => /unfamiliar exemplar/.test(stage.test)));
+  assert.match(plan.caution, /original\/licensed scene art/);
+  const site = constructionSites([], { includeContext: true })
+    .find(site => site.project?.repository === plan.repository);
+  const html = renderRevivalPlan(site);
+  assert.match(html, /DLang/);
+  assert.match(html, /PROPOSED \/ not delivered/);
+  assert.match(html, /issues\/6/);
+  assert.equal(campusStructure(site).deliveredFloors, 0);
+  const imported = CANOPY.projects.find(project => project.repository === plan.repository && project.name === 'BabelBet');
+  assert.ok(imported.updates.some(update => update.state === 'planned' && update.label.startsWith('DLang:')));
+  const recall = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url), 'utf8'));
+  const recalled = recall.projects.find(project => project.repository === plan.repository);
+  assert.ok(recalled.open.some(issue => issue.number === 6 && issue.title.includes('DLang')));
 });
 test('proposed crossovers are dashed evidence with an integration acceptance test, not observed relationships', () => {
   const sites = constructionSites([], { includeContext: true });
