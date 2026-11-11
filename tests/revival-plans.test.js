@@ -87,7 +87,8 @@ test('DLang is an independent preview with launch gates, not a sandbox affiliati
   assert.equal(campusStructure(site).deliveredFloors, 0);
   const imported = CANOPY.projects.find(project => project.repository === 'TheJollyLaMa/DLang');
   assert.equal(imported.name, 'DLang');
-  assert.match(imported.currentState, /No contract deployed/);
+  assert.match(imported.currentState, /No funded round or payments enabled/);
+  assert.match(imported.currentState, /Sourcify exactly matched/);
   assert.ok(imported.updates.some(update => update.evidence.some(link => link.url === 'https://thejollylama.github.io/DLang/')));
   const recall = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url), 'utf8'));
   const recalled = recall.projects.find(project => project.repository === 'TheJollyLaMa/DLang');
