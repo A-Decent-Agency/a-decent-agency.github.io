@@ -92,7 +92,9 @@ test('DLang is an independent preview with launch gates, not a sandbox affiliati
   assert.ok(imported.updates.some(update => update.evidence.some(link => link.url === 'https://thejollylama.github.io/DLang/')));
   const recall = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url), 'utf8'));
   const recalled = recall.projects.find(project => project.repository === 'TheJollyLaMa/DLang');
-  assert.match(recalled.focus, /Payments disabled/);
+  assert.match(recalled.focus, /payments disabled/i);
+  assert.match(recalled.focus, /1,095 reproducible/);
+  assert.match(recalled.focus, /36 receiving tests/);
   assert.ok(recalled.open.some(issue => issue.number === 2 && issue.title.includes('LiveKit')));
 });
 test('proposed crossovers are dashed evidence with an integration acceptance test, not observed relationships', () => {
