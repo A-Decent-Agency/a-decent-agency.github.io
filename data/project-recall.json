@@ -1111,7 +1111,7 @@
     {
       "repository": "TheJollyLaMa/DLang",
       "name": "DLang",
-      "focus": "Independent public preview: seven scenes, five seed languages, illustrated About/tutorial and local profiles. 22 receiving tests, 13 escrow tests and native-USDC Base-fork tests pass. Empty Base escrow deployed at 0xD0F666DF2dD23437F5e4d7eB975295b5885ee15E, exact Sourcify source match; actual fee 0.000013675070117090 ETH within cap. Payments disabled; no funded round. Full transaction UI, steward operations and curriculum acceptance remain gates. Source: https://github.com/TheJollyLaMa/DLang ; preview: https://thejollylama.github.io/DLang/",
+      "focus": "Independent public release: three flexible free practices per local day, 1,095 reproducible SVG compositions, 36 concepts/five seed languages, spaced self-review, forward-checked ENS avatar/banner plus local overrides and actual browser statistics. Tap-to-hear device speech, local microphone drafts, explicit public IPFS submission and steward-reviewed voice rotation; no approved recordings bundled. 36 receiving tests and 13 escrow tests pass. Live ENS and shared-IPFS origin/health pass; no signed production pin write claimed. Personal providers and exact-byte backup recovery tested with receiving fixtures. Weekly scoring unchanged, payments disabled and no funded round; curriculum review, transaction UI and steward operations remain gates. Release: https://github.com/TheJollyLaMa/DLang/commit/4f4a809 ; preview: https://thejollylama.github.io/DLang/",
       "observedAt": "2026-11-11T00:03:35Z",
       "partial": false,
       "octoberMergedCount": 0,
