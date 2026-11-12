@@ -1,15 +1,21 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-12T12:51:19.931Z",
+  "checkedAt": "2026-11-12T20:53:12.952Z",
   "repositories": [
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-12T12:10:13Z",
+      "pushedAt": "2026-11-12T17:05:23Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 32,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/32",
+          "mergedAt": "2026-11-12T17:05:23Z"
+        },
         {
           "number": 31,
           "title": "Populate every campus panel with dated public source work",
@@ -33,16 +39,10 @@
           "title": "Track independent DLang preview and remaining pilot gates",
           "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/28",
           "mergedAt": "2026-11-10T23:49:38Z"
-        },
-        {
-          "number": 27,
-          "title": "Plan DLang visual scenes and simultaneous multilingual learning",
-          "url": "https://github.com/A-Decent-Agency/a-decent-agency.github.io/pull/27",
-          "mergedAt": "2026-11-10T13:29:01Z"
         }
       ],
       "issues": null,
-      "codeBytes": 628924,
+      "codeBytes": 637921,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -66,15 +66,21 @@
     {
       "repository": "A-Decent-Agency/DBuskRadio",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-03T15:31:15Z",
+      "pushedAt": "2026-11-12T17:13:16Z",
       "release": {
         "tag": "v0.2.0",
         "url": "https://github.com/A-Decent-Agency/DBuskRadio/releases/tag/v0.2.0",
         "publishedAt": "2026-10-24T19:24:36Z"
       },
       "mergedPulls": [
+        {
+          "number": 9,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/9",
+          "mergedAt": "2026-11-12T17:13:16Z"
+        },
         {
           "number": 7,
           "title": "Freeze seamless radio handoffs for 100 supporter editions",
@@ -98,16 +104,10 @@
           "title": "Validate actual media range payloads before release",
           "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/2",
           "mergedAt": "2026-10-24T11:38:27Z"
-        },
-        {
-          "number": 1,
-          "title": "Add standalone DBusk radio widget with shared upstream provenance",
-          "url": "https://github.com/A-Decent-Agency/DBuskRadio/pull/1",
-          "mergedAt": "2026-10-24T11:30:11Z"
         }
       ],
       "issues": null,
-      "codeBytes": 59528,
+      "codeBytes": 63176,
       "versions": [
         {
           "tag": "v0.2.0",
@@ -138,15 +138,21 @@
     {
       "repository": "A-Decent-Agency/DVert",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-03T15:31:34Z",
+      "pushedAt": "2026-11-12T17:13:53Z",
       "release": {
         "tag": "v0.2.1",
         "url": "https://github.com/A-Decent-Agency/DVert/releases/tag/v0.2.1",
         "publishedAt": "2026-10-24T19:31:34Z"
       },
       "mergedPulls": [
+        {
+          "number": 9,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/A-Decent-Agency/DVert/pull/9",
+          "mergedAt": "2026-11-12T17:13:53Z"
+        },
         {
           "number": 7,
           "title": "Remove stale draft label before first supporter mint",
@@ -170,16 +176,10 @@
           "title": "Add key-free independent DVert deployment plans",
           "url": "https://github.com/A-Decent-Agency/DVert/pull/2",
           "mergedAt": "2026-10-24T11:51:11Z"
-        },
-        {
-          "number": 1,
-          "title": "Add cloneable DVert advertising widget and unsigned release inputs",
-          "url": "https://github.com/A-Decent-Agency/DVert/pull/1",
-          "mergedAt": "2026-10-24T11:26:58Z"
         }
       ],
       "issues": null,
-      "codeBytes": 97363,
+      "codeBytes": 100141,
       "versions": [
         {
           "tag": "v0.2.1",
@@ -210,7 +210,7 @@
     {
       "repository": "TheJollyLaMa/DecentAgency",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
       "pushedAt": "2026-10-27T18:02:26Z",
       "release": null,
@@ -240,15 +240,21 @@
     {
       "repository": "TheJollyLaMa/DecentCanopy",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-12T12:42:21Z",
+      "pushedAt": "2026-11-12T20:40:47Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCanopy/releases/tag/v0.1.0",
         "publishedAt": "2026-11-05T11:33:17Z"
       },
       "mergedPulls": [
+        {
+          "number": 73,
+          "title": "Add friendly link previews and remove duplicate About checkout",
+          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/73",
+          "mergedAt": "2026-11-12T17:05:33Z"
+        },
         {
           "number": 72,
           "title": "Keep creator mirror observations scoped to their projects",
@@ -272,16 +278,10 @@
           "title": "Record verified empty DLang Base escrow deployment",
           "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/69",
           "mergedAt": "2026-11-11T00:05:24Z"
-        },
-        {
-          "number": 68,
-          "title": "Give DLang its independent source, preview and launch gates",
-          "url": "https://github.com/TheJollyLaMa/DecentCanopy/pull/68",
-          "mergedAt": "2026-11-10T23:48:24Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1371666,
+      "codeBytes": 1377202,
       "versions": [
         {
           "tag": "v0.1.0",
@@ -388,15 +388,33 @@
     {
       "repository": "TheJollyLaMa/DecentBusking",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-11T02:07:50Z",
+      "pushedAt": "2026-11-12T17:14:20Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentBusking/releases/tag/v1.0.0",
         "publishedAt": "2026-10-26T00:12:09Z"
       },
       "mergedPulls": [
+        {
+          "number": 330,
+          "title": "Prevent mirror starvation and safely cancel deployment drains",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/330",
+          "mergedAt": "2026-11-12T17:14:21Z"
+        },
+        {
+          "number": 329,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/329",
+          "mergedAt": "2026-11-12T17:05:32Z"
+        },
+        {
+          "number": 328,
+          "title": "Protect paid playlists and drain radio before deployments",
+          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/328",
+          "mergedAt": "2026-11-12T17:04:15Z"
+        },
         {
           "number": 327,
           "title": "Add Friday live-radio advert handoffs and persistent artist stage",
@@ -408,28 +426,10 @@
           "title": "Explain private room entry and remove duplicated setup help",
           "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/326",
           "mergedAt": "2026-11-10T23:56:27Z"
-        },
-        {
-          "number": 325,
-          "title": "Add a friendly performer studio and safe headphone monitoring",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/325",
-          "mergedAt": "2026-11-10T23:43:10Z"
-        },
-        {
-          "number": 323,
-          "title": "Allow verified private checkpoint writes to finish",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/323",
-          "mergedAt": "2026-11-10T16:30:16Z"
-        },
-        {
-          "number": 322,
-          "title": "Recognize delivered audio on either native peer connection",
-          "url": "https://github.com/TheJollyLaMa/DecentBusking/pull/322",
-          "mergedAt": "2026-11-10T16:25:50Z"
         }
       ],
       "issues": null,
-      "codeBytes": 4865260,
+      "codeBytes": 4903633,
       "versions": [
         {
           "tag": "v1.0.0",
@@ -506,15 +506,21 @@
     {
       "repository": "TheJollyLaMa/BigNuten_Vanilla",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-06T19:41:23Z",
+      "pushedAt": "2026-11-12T17:18:11Z",
       "release": {
         "tag": "v3.3.0",
         "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/releases/tag/v3.3.0",
         "publishedAt": "2026-11-03T11:49:16Z"
       },
       "mergedPulls": [
+        {
+          "number": 433,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/433",
+          "mergedAt": "2026-11-12T17:18:12Z"
+        },
         {
           "number": 429,
           "title": "Refine Ekadasi stories and tracker layout",
@@ -538,16 +544,10 @@
           "title": "Track micronutrients and upgrade incomplete food cards",
           "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/425",
           "mergedAt": "2026-11-06T00:37:03Z"
-        },
-        {
-          "number": 424,
-          "title": "Use BigNuten Supporter reserve replacement listing",
-          "url": "https://github.com/TheJollyLaMa/BigNuten_Vanilla/pull/424",
-          "mergedAt": "2026-11-05T22:59:57Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2954252,
+      "codeBytes": 2956977,
       "versions": [
         {
           "tag": "v3.3.0",
@@ -714,15 +714,21 @@
     {
       "repository": "A-Decent-Agency/DecentJukebox",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-03T15:35:03Z",
+      "pushedAt": "2026-11-12T17:13:20Z",
       "release": {
         "tag": "v0.2.0",
         "url": "https://github.com/A-Decent-Agency/DecentJukebox/releases/tag/v0.2.0",
         "publishedAt": "2026-10-24T19:24:20Z"
       },
       "mergedPulls": [
+        {
+          "number": 10,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/A-Decent-Agency/DecentJukebox/pull/10",
+          "mergedAt": "2026-11-12T17:13:21Z"
+        },
         {
           "number": 8,
           "title": "Freeze current playlist playback fixes for 100 supporter editions",
@@ -749,7 +755,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 437800,
+      "codeBytes": 441993,
       "versions": [
         {
           "tag": "v0.2.0",
@@ -811,11 +817,17 @@
     {
       "repository": "TheJollyLaMa/TheGreenTeaParty",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:56Z",
+      "pushedAt": "2026-11-12T17:06:08Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 48,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/TheGreenTeaParty/pull/48",
+          "mergedAt": "2026-11-12T17:06:08Z"
+        },
         {
           "number": 45,
           "title": "Normalize registry-backed project defaults before fractal rendering",
@@ -839,16 +851,10 @@
           "title": "Unify root route into fractal-first app flow with inline Public Ledger",
           "url": "https://github.com/TheJollyLaMa/TheGreenTeaParty/pull/39",
           "mergedAt": "2026-08-12T16:06:14Z"
-        },
-        {
-          "number": 37,
-          "title": "Model typed/directional cross-project associations and surface context in spiral + ledger views",
-          "url": "https://github.com/TheJollyLaMa/TheGreenTeaParty/pull/37",
-          "mergedAt": "2026-08-12T09:37:45Z"
         }
       ],
       "issues": null,
-      "codeBytes": 420600,
+      "codeBytes": 423412,
       "versions": [],
       "versionsTruncated": false,
       "structures": []
@@ -856,11 +862,17 @@
     {
       "repository": "TheJollyLaMa/GreenTeaHut_01",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-05T16:45:55Z",
+      "pushedAt": "2026-11-12T17:05:58Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 47,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/GreenTeaHut_01/pull/47",
+          "mergedAt": "2026-11-12T17:05:58Z"
+        },
         {
           "number": 46,
           "title": "Record GrannyLyn wallet-only trial invitation",
@@ -884,16 +896,10 @@
           "title": "Add Base USDC treasury payroll to the Labor & Services panel",
           "url": "https://github.com/TheJollyLaMa/GreenTeaHut_01/pull/42",
           "mergedAt": "2026-10-12T13:15:42Z"
-        },
-        {
-          "number": 41,
-          "title": "Add root landing page for IPFS/static hosting",
-          "url": "https://github.com/TheJollyLaMa/GreenTeaHut_01/pull/41",
-          "mergedAt": "2026-09-10T15:03:23Z"
         }
       ],
       "issues": null,
-      "codeBytes": 491247,
+      "codeBytes": 495301,
       "versions": [],
       "versionsTruncated": false,
       "structures": []
@@ -901,11 +907,17 @@
     {
       "repository": "TheJollyLaMa/ArtFi",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-05T16:45:45Z",
+      "pushedAt": "2026-11-12T17:05:23Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 64,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/ArtFi/pull/64",
+          "mergedAt": "2026-11-12T17:05:23Z"
+        },
         {
           "number": 63,
           "title": "Record GrannyLyn wallet-only trial invitation",
@@ -929,16 +941,10 @@
           "title": "Upgrade settlement router to v2.1 and recover legacy fund allocations",
           "url": "https://github.com/TheJollyLaMa/ArtFi/pull/56",
           "mergedAt": "2026-09-27T07:58:27Z"
-        },
-        {
-          "number": 54,
-          "title": "Fix formatting of README header",
-          "url": "https://github.com/TheJollyLaMa/ArtFi/pull/54",
-          "mergedAt": "2026-09-27T07:27:01Z"
         }
       ],
       "issues": null,
-      "codeBytes": 523580,
+      "codeBytes": 524902,
       "versions": [],
       "versionsTruncated": false,
       "structures": []
@@ -946,7 +952,7 @@
     {
       "repository": "TheJollyLaMa/jolly-sim-siddhi",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
       "pushedAt": "2026-10-21T13:13:02Z",
       "release": null,
@@ -960,11 +966,18 @@
     {
       "repository": "TheJollyLaMa/Arduino_Smarthome",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-10-21T13:12:11Z",
+      "pushedAt": "2026-11-12T17:05:23Z",
       "release": null,
-      "mergedPulls": [],
+      "mergedPulls": [
+        {
+          "number": 2,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/Arduino_Smarthome/pull/2",
+          "mergedAt": "2026-11-12T17:05:24Z"
+        }
+      ],
       "issues": null,
       "codeBytes": 153674,
       "versions": [],
@@ -974,7 +987,7 @@
     {
       "repository": "cadCAD-org/cadCAD",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
       "pushedAt": "2024-04-19T13:58:36Z",
       "release": {
@@ -1023,7 +1036,7 @@
     {
       "repository": "TheJollyLaMa/UmbrellaAcademy",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
       "pushedAt": "2026-11-09T00:31:54Z",
       "release": null,
@@ -1037,7 +1050,7 @@
     {
       "repository": "TheJollyLaMa/AJollyDecentCodeCamp",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
       "pushedAt": "2026-11-09T00:31:53Z",
       "release": null,
@@ -1051,11 +1064,18 @@
     {
       "repository": "TheJollyLaMa/JollySandbox",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-09T00:31:53Z",
+      "pushedAt": "2026-11-12T17:06:03Z",
       "release": null,
-      "mergedPulls": [],
+      "mergedPulls": [
+        {
+          "number": 2,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/JollySandbox/pull/2",
+          "mergedAt": "2026-11-12T17:06:03Z"
+        }
+      ],
       "issues": null,
       "codeBytes": 46222,
       "versions": [],
@@ -1065,11 +1085,17 @@
     {
       "repository": "TheJollyLaMa/DecentSubscriptions",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T23:38:04Z",
+      "pushedAt": "2026-11-12T17:05:43Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 4,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentSubscriptions/pull/4",
+          "mergedAt": "2026-11-12T17:05:43Z"
+        },
         {
           "number": 3,
           "title": "Add prepaid subscription workspace and verified header controls",
@@ -1078,7 +1104,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 121722,
+      "codeBytes": 125859,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -1102,15 +1128,21 @@
     {
       "repository": "TheJollyLaMa/DecentPilgrimages",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-05T16:46:25Z",
+      "pushedAt": "2026-11-12T17:06:29Z",
       "release": {
         "tag": "v0.1.1",
         "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/releases/tag/v0.1.1",
         "publishedAt": "2026-11-05T11:33:18Z"
       },
       "mergedPulls": [
+        {
+          "number": 10,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentPilgrimages/pull/10",
+          "mergedAt": "2026-11-12T17:06:29Z"
+        },
         {
           "number": 9,
           "title": "Add GrannyLyn to static pilgrimage wallet whitelist",
@@ -1125,7 +1157,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 371791,
+      "codeBytes": 374672,
       "versions": [
         {
           "tag": "v0.1.1",
@@ -1232,15 +1264,21 @@
     {
       "repository": "TheJollyLaMa/DecentHead",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T23:44:34Z",
+      "pushedAt": "2026-11-12T17:05:37Z",
       "release": {
         "tag": "v2.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentHead/releases/tag/v2.0.0",
         "publishedAt": "2026-10-21T21:28:52Z"
       },
       "mergedPulls": [
+        {
+          "number": 36,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/36",
+          "mergedAt": "2026-11-12T17:05:37Z"
+        },
         {
           "number": 35,
           "title": "Verify provider connectivity before reporting IPFS ready",
@@ -1264,16 +1302,10 @@
           "title": "Support frozen 100-USDC supporter release terms",
           "url": "https://github.com/TheJollyLaMa/DecentHead/pull/32",
           "mergedAt": "2026-10-26T00:09:59Z"
-        },
-        {
-          "number": 31,
-          "title": "Support 100-edition product releases without rewriting legacy manifests",
-          "url": "https://github.com/TheJollyLaMa/DecentHead/pull/31",
-          "mergedAt": "2026-10-24T19:22:12Z"
         }
       ],
       "issues": null,
-      "codeBytes": 2880688,
+      "codeBytes": 2888598,
       "versions": [
         {
           "tag": "v2.0.0",
@@ -1320,15 +1352,21 @@
     {
       "repository": "TheJollyLaMa/DecentMarket",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T10:16:14Z",
+      "pushedAt": "2026-11-12T17:10:05Z",
       "release": {
         "tag": "v0.3.1",
         "url": "https://github.com/TheJollyLaMa/DecentMarket/releases/tag/v0.3.1",
         "publishedAt": "2026-10-22T02:26:31Z"
       },
       "mergedPulls": [
+        {
+          "number": 77,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/77",
+          "mergedAt": "2026-11-12T17:10:06Z"
+        },
         {
           "number": 76,
           "title": "Show loading progress immediately for Supporter NFT links",
@@ -1352,16 +1390,10 @@
           "title": "Add Decent Voyager v1.0.0 Supporter release",
           "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/73",
           "mergedAt": "2026-11-05T21:18:57Z"
-        },
-        {
-          "number": 70,
-          "title": "Bind supporter minting to reviewed supply and USDC price",
-          "url": "https://github.com/TheJollyLaMa/DecentMarket/pull/70",
-          "mergedAt": "2026-10-26T00:09:47Z"
         }
       ],
       "issues": null,
-      "codeBytes": 995927,
+      "codeBytes": 999922,
       "versions": [
         {
           "tag": "v0.3.1",
@@ -1408,11 +1440,17 @@
     {
       "repository": "TheJollyLaMa/DecentEscrow",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T23:37:57Z",
+      "pushedAt": "2026-11-12T17:05:37Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 3,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentEscrow/pull/3",
+          "mergedAt": "2026-11-12T17:05:37Z"
+        },
         {
           "number": 2,
           "title": "Add generalized escrow workspace and verified header controls",
@@ -1421,7 +1459,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 135465,
+      "codeBytes": 138073,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -1445,11 +1483,17 @@
     {
       "repository": "TheJollyLaMa/DecentInvoice",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T23:38:01Z",
+      "pushedAt": "2026-11-12T17:05:38Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 3,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentInvoice/pull/3",
+          "mergedAt": "2026-11-12T17:05:39Z"
+        },
         {
           "number": 2,
           "title": "Add generalized invoice workspace and verified header controls",
@@ -1458,7 +1502,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 96209,
+      "codeBytes": 98827,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -1482,11 +1526,17 @@
     {
       "repository": "TheJollyLaMa/DecentAirdrop",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T23:38:12Z",
+      "pushedAt": "2026-11-12T17:05:28Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 5,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentAirdrop/pull/5",
+          "mergedAt": "2026-11-12T17:05:28Z"
+        },
         {
           "number": 4,
           "title": "Preserve exact airdrop amounts and add verified header controls",
@@ -1495,7 +1545,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 95918,
+      "codeBytes": 97210,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -1534,15 +1584,27 @@
     {
       "repository": "TheJollyLaMa/DecentCalendar",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-12T11:29:50Z",
+      "pushedAt": "2026-11-12T17:05:32Z",
       "release": {
         "tag": "v0.1.0",
         "url": "https://github.com/TheJollyLaMa/DecentCalendar/releases/tag/v0.1.0",
         "publishedAt": "2026-11-05T11:24:34Z"
       },
       "mergedPulls": [
+        {
+          "number": 39,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentCalendar/pull/39",
+          "mergedAt": "2026-11-12T17:05:33Z"
+        },
+        {
+          "number": 38,
+          "title": "Point About DecentCanopy tile to its landing page",
+          "url": "https://github.com/TheJollyLaMa/DecentCalendar/pull/38",
+          "mergedAt": "2026-11-12T16:19:52Z"
+        },
         {
           "number": 37,
           "title": "Replace About dropdowns with an imagery-led walkthrough",
@@ -1560,22 +1622,10 @@
           "title": "Fix DCal checkout after gift-stock reallocation",
           "url": "https://github.com/TheJollyLaMa/DecentCalendar/pull/35",
           "mergedAt": "2026-11-09T00:38:57Z"
-        },
-        {
-          "number": 33,
-          "title": "Launch public invitation inbox and small-value payment beta",
-          "url": "https://github.com/TheJollyLaMa/DecentCalendar/pull/33",
-          "mergedAt": "2026-10-29T12:11:16Z"
-        },
-        {
-          "number": 32,
-          "title": "Add timebox invitations and calendar exports",
-          "url": "https://github.com/TheJollyLaMa/DecentCalendar/pull/32",
-          "mergedAt": "2026-10-29T11:07:12Z"
         }
       ],
       "issues": null,
-      "codeBytes": 670080,
+      "codeBytes": 671484,
       "versions": [
         {
           "tag": "v0.1.0",
@@ -1712,11 +1762,17 @@
     {
       "repository": "TheJollyLaMa/Decent_NDA",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T23:38:08Z",
+      "pushedAt": "2026-11-12T17:05:27Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 3,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/Decent_NDA/pull/3",
+          "mergedAt": "2026-11-12T17:05:28Z"
+        },
         {
           "number": 2,
           "title": "Add local encrypted agreement packages and verified header controls",
@@ -1725,7 +1781,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 78437,
+      "codeBytes": 81031,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -1749,11 +1805,17 @@
     {
       "repository": "TheJollyLaMa/Decent_UCAN_Play",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-08T23:38:16Z",
+      "pushedAt": "2026-11-12T17:05:28Z",
       "release": null,
       "mergedPulls": [
+        {
+          "number": 4,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/Decent_UCAN_Play/pull/4",
+          "mergedAt": "2026-11-12T17:05:28Z"
+        },
         {
           "number": 1,
           "title": "Preserve legacy app and add a Pinata-backed modern flow",
@@ -1768,7 +1830,7 @@
         }
       ],
       "issues": null,
-      "codeBytes": 73297,
+      "codeBytes": 76007,
       "versions": [],
       "versionsTruncated": false,
       "structures": [
@@ -1792,13 +1854,26 @@
     {
       "repository": "TheJollyLaMa/DLang",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-11T02:45:53Z",
+      "pushedAt": "2026-11-12T20:20:50Z",
       "release": null,
-      "mergedPulls": [],
+      "mergedPulls": [
+        {
+          "number": 8,
+          "title": "Use one paused context clock for the midnight browser gate",
+          "url": "https://github.com/TheJollyLaMa/DLang/pull/8",
+          "mergedAt": "2026-11-12T17:30:38Z"
+        },
+        {
+          "number": 7,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DLang/pull/7",
+          "mergedAt": "2026-11-12T17:07:10Z"
+        }
+      ],
       "issues": null,
-      "codeBytes": 242816,
+      "codeBytes": 764120,
       "versions": [],
       "versionsTruncated": false,
       "structures": []
@@ -1806,7 +1881,7 @@
     {
       "repository": "TheJollyLaMa/BabelBet",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
       "pushedAt": "2026-11-09T00:31:48Z",
       "release": null,
@@ -1866,15 +1941,21 @@
     {
       "repository": "TheJollyLaMa/DecentVoyager",
       "state": "available",
-      "checkedAt": "2026-11-12T12:51:19.931Z",
+      "checkedAt": "2026-11-12T20:53:12.952Z",
       "error": "",
-      "pushedAt": "2026-11-09T00:39:05Z",
+      "pushedAt": "2026-11-12T17:05:47Z",
       "release": {
         "tag": "v1.0.0",
         "url": "https://github.com/TheJollyLaMa/DecentVoyager/releases/tag/v1.0.0",
         "publishedAt": "2026-11-05T21:10:31Z"
       },
       "mergedPulls": [
+        {
+          "number": 33,
+          "title": "Add friendly website link preview images",
+          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/33",
+          "mergedAt": "2026-11-12T17:05:47Z"
+        },
         {
           "number": 32,
           "title": "Correct DCal purchase link to listing 20",
@@ -1898,16 +1979,10 @@
           "title": "Remove main-screen signed flight retry button",
           "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/29",
           "mergedAt": "2026-11-07T19:26:29Z"
-        },
-        {
-          "number": 28,
-          "title": "Keep first Supporter encounters at levels 9 and 10",
-          "url": "https://github.com/TheJollyLaMa/DecentVoyager/pull/28",
-          "mergedAt": "2026-11-07T19:18:28Z"
         }
       ],
       "issues": null,
-      "codeBytes": 1783387,
+      "codeBytes": 1784906,
       "versions": [
         {
           "tag": "v1.0.0",
