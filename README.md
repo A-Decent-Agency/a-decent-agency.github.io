@@ -882,3 +882,14 @@ unavailable states and older/malformed/failed activity-publication retention.
 [Apache License 2.0](./LICENSE). See [NOTICE](./NOTICE).
 
 Copyright 2026 **The Jolly LaMa / A Decent Agency**. Header visual language adapted from the DecentCanopy family; this is a small independent adapter, not a vendored DecentHead release. Three.js/OrbitControls and ethers are MIT-licensed third-party libraries loaded from jsDelivr; DM Sans and Space Grotesk are SIL Open Font License fonts served by Google Fonts. Their respective licenses remain applicable. No third-party library code is vendored into this repository.
+
+
+## Link previews
+
+Public entry pages include static Open Graph and Twitter large-image metadata,
+with an absolute HTTPS image URL. The 1200 x 630 JPEG at
+`assets/social-preview.jpg` previews this public website without a connected wallet.
+Keep the image in the deployed artifact when changing the build. After updating
+it, check the raw HTML and image response as a crawler; Discord and other services
+may cache earlier previews. ENS/IPFS snapshots need a separate site publication;
+metadata alone does not update an existing immutable snapshot.
