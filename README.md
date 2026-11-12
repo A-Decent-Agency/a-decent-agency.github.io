@@ -112,7 +112,7 @@ Both repositories are in the Office's explicit public observation allowlist;
 their real GitHub milestone issues form structural bays separately from the
 outlined vision levels. A failed observation stays unavailable, never completed.
 
-The **October recall** disclosure reconciles fourteen selected public repositories
+The **Project recall** disclosure covers every unique public repository in the pinned Canopy registry
 with current GitHub source evidence: October merged PRs, issue closures, open
 issues, in-flight PRs and recent release tags. Each entry records its observation
 time, exact source links and omitted/partial history. These are GitHub counts,
@@ -120,11 +120,18 @@ not effort, value, deployment, payment or completion percentages. Closed issues
 can be abandoned or superseded; merged code can still be only partially accepted.
 The new recall does not silently rewrite the older private-Project export or
 `data/progress.json`, so their different timestamps remain meaningful.
-Refresh deliberately with `node scripts/refresh-project-recall.mjs`; it refuses
+The hourly sync refreshes recall alongside progress. Refresh manually with `node scripts/refresh-project-recall.mjs`; it refuses
 non-public repository metadata and writes only after all selected queries succeed.
 It retrieves up to three 100-item pages per issue/PR list; capped history is
 explicitly partial. No private board data, issue bodies, local credentials or
 uncommitted donor findings are copied into the public recall.
+
+Every repository campus shows a separate dated public-work section, including
+open issues, independently fetched open PRs and recent merged/closed evidence.
+Sites without private-Project cards still have public signposts; they do not
+receive invented board jobs or completion statuses. Project-card notes retain
+their export date. Curated project reviews retain their own dates, and generic
+wayfinding identities explicitly say when no reviewed artwork is available.
 
 Steward direction from **31 October 2026** adds five distinct **outlined planning
 towers**, each with five proposed levels, a first acceptance test per level,
@@ -177,7 +184,7 @@ these candidates as tested integrations. No cadCAD implementation is claimed.
 Run `npm test` and, with the existing browser tooling,
 `PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node scripts/verify-revival.mjs`.
 Checks cover all five proposal towers, 25 acceptance levels, exact card/privacy
-partition, dashed-proposal semantics, fourteen-project recall, original-map
+partition, dashed-proposal semantics, pinned-catalog recall, original-map
 dialogs and navigation, mobile layout and preserved legacy flight behavior.
 
 ## Local-file planning studio and SmartHome archive
@@ -440,7 +447,7 @@ To wire a repository:
 
 1. Copy `templates/notify-planning-office.yml` to its `.github/workflows/`.
 2. Add the repository secret `OFFICE_DISPATCH_TOKEN`: a fine-grained personal access token whose resource owner is A-Decent-Agency, limited to `a-decent-agency.github.io`, with **Contents: Read and write**. Store it only as a GitHub secret.
-3. Add the repository to `REPOSITORIES` in `js/progress-feed.js` so the observer includes it.
+3. Review its public Canopy inventory entry and deliberately import the published revision with `node scripts/import-canopy-map.mjs PATH_TO_CANOPY REVISION`. Both progress and recall derive their allowlist from that pinned registry; runtime collectors never discover arbitrary repositories.
 
 Without the secret (and for fork PRs, which receive no secrets) the notifier logs a notice and skips; the hourly sync still catches up. The payload names only the repository and event type.
 

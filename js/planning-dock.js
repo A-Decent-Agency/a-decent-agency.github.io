@@ -1,4 +1,5 @@
 import { compareSnapshots, isPublishedSnapshot, summarizeChanges } from './planning-changes.js';
+import { renderRepositoryWork } from './project-recall.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -82,6 +83,7 @@ export function renderPlanningDock(options = {}) {
     <h4>Remaining actual cards (${remaining.length} / ${cards.length})</h4>
     ${remaining.length ? `<ul class="planning-dock-cards">${remaining.map(item => `<li>${itemButton(item)} <span>${esc(item.fields.Status || 'Status unset')}</span></li>`).join('')}</ul>` : '<p>All site cards are marked Done in the source; evidence still requires review.</p>'}
     <details><summary>All source cards (${cards.length})</summary><ul>${cards.map(item => `<li>${itemButton(item)}</li>`).join('')}</ul></details>`}
+    ${!cards.length && site?.project && !site.project.entityId ? renderRepositoryWork(options.recall, site.project.repository) : ''}
     <p class="planning-dock-note">Dependencies and crossovers are quoted, never resolved from prose or assumed satisfied.</p>
   </section>`;
 }

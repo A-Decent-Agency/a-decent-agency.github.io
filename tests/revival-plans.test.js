@@ -11,6 +11,7 @@ import { renderProjectRecall, validateRecall } from '../js/project-recall.js';
 import { projectMints } from '../js/version-mints.js';
 import { renderCampusDetails } from '../js/campus-details.js';
 import { CANOPY } from '../js/canopy-registry.js';
+import { REPOSITORIES } from '../js/progress-feed.js';
 
 test('five revival campuses have distinct named proposed stages, acceptance tests and original-map provenance', () => {
   assert.equal(REVIVAL_PLANS.length, 5);
@@ -92,7 +93,7 @@ test('DLang is an independent preview with launch gates, not a sandbox affiliati
   assert.ok(imported.updates.some(update => update.evidence.some(link => link.url === 'https://thejollylama.github.io/DLang/')));
   const recall = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url), 'utf8'));
   const recalled = recall.projects.find(project => project.repository === 'TheJollyLaMa/DLang');
-  assert.match(recalled.focus, /payments disabled/i);
+  assert.match(recalled.focus, /No funded round or payments enabled/);
   assert.match(recalled.focus, /1,095 reproducible/);
   assert.match(recalled.focus, /36 receiving tests/);
   assert.ok(recalled.open.some(issue => issue.number === 2 && issue.title.includes('LiveKit')));
@@ -169,16 +170,16 @@ test('supplemental proposals preserve mainline issue skeletons and sit above rat
 test('monthly recall keeps public source counts distinct from deployment and local work', async () => {
   const value = JSON.parse(await readFile(new URL('../data/project-recall.json', import.meta.url)));
   assert.equal(validateRecall(value), value);
-  assert.equal(value.projects.length, 15);
+  assert.equal(value.projects.length, REPOSITORIES.length);
   assert.equal(value.schemaVersion, 2);
   assert.ok(Date.parse(value.recentStart) < Date.parse(value.observedAt));
   const bigNuten = value.projects.find(project => project.repository === 'TheJollyLaMa/BigNuten_Vanilla');
   assert.ok(bigNuten.recentMerged.every(entry => Date.parse(entry.at) >= Date.parse(value.recentStart)));
   const html = renderProjectRecall(value);
-  assert.equal((html.match(/data-recall-repository=/g) || []).length, 15);
+  assert.equal((html.match(/data-recall-repository=/g) || []).length, REPOSITORIES.length);
   assert.match(html, /not proof of deployment/);
   assert.match(html, /not an edit of the older Project board/);
-  assert.match(html, /mint.*deferred/);
+  assert.match(html, /Curated descriptions and actual GitHub observations have separate dates/);
   const moved = structuredClone(value);
   moved.projects[0].recentClosed = [{ title: 'Moved to financial epic', url: `https://github.com/${moved.projects[0].repository}/issues/1`, stateReason: 'not_planned' }];
   assert.match(renderProjectRecall(moved), /Not planned \/ moved or declined; not delivery/);

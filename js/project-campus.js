@@ -66,8 +66,10 @@ export function projectSites(items, { includeContext = false } = {}) {
   }
   const sites = [...groups.values()].map(group => {
     const index = LANDMARKS.findIndex(project => project.repository.toLowerCase() === group.repository.toLowerCase());
-    const project = index < 0 ? { repository: group.repository, name: group.repository.split('/')[1],
-      form: 'blueprint', color: '#8ba3bd', milestone: 'Future district / plans and barriers' } : LANDMARKS[index];
+    const identity = CANOPY.projects.find(project => !project.entityId && project.repository.toLowerCase() === group.repository.toLowerCase());
+    const project = index < 0 ? { repository: group.repository, name: identity?.name || group.repository.split('/')[1],
+      form: 'blueprint', color: '#8ba3bd', milestone: 'Future district / plans and barriers' } : { ...LANDMARKS[index] };
+    if (group.repository.toLowerCase() === 'thejollylama/jolly-sim-siddhi') project.name = identity?.name || project.name;
     return { id: `project:${group.repository.toLowerCase()}`, title: project.name, type: 'repository', project,
       items: group.items, start: '', target: '', horizon: index < 0 ? 'Later' : index === 5 || index >= 7 ? 'Next' : 'Now',
       order: index < 0 ? 100 : index };

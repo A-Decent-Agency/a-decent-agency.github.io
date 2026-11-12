@@ -120,6 +120,10 @@ export function siteIdentity(site) {
   if (site?.type === 'repository' && site.project?.repository && !site.project.entityId) {
     const identity = itemIdentity({ repository: site.project.repository });
     if (identity.kind === 'repository') return identity;
+    return { ...generic('repository', site.title || site.project.name), fallback: {
+      monogram: (site.title || site.project.name || 'RE').replace(/[^a-z0-9]/gi, '').slice(0, 2).toUpperCase(),
+      color: site.project.color || '#8ba3bd', description: 'Local project wayfinding badge; no reviewed artwork on file'
+    } };
   }
   if (!Array.isArray(site?.items)) return itemIdentity(site);
   const projects = new Map();

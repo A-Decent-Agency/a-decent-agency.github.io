@@ -1,13 +1,15 @@
 import { escapeHTML as esc } from './markdown.js';
-import { campusStructure } from './project-campus.js';
+import { campusStructure, projectSites } from './project-campus.js';
+import { campusConnections } from './campus-graph.js';
 import { CANOPY } from './canopy-registry.js';
 import { canopyCity } from './canopy-city.js';
 import { ENS_ARTWORK_OBSERVATION, PROJECT_MURALS } from './site-identities.js';
 import { renderSupportCallout, renderVersionMints } from './version-mints.js';
 import { campusArt } from './campus-art.js';
 import { renderWidgetProject, widgetProject } from './widget-projects.js';
+import { renderRepositoryWork } from './project-recall.js';
 
-export function renderCampusDetails(site, feed) {
+export function renderCampusDetails(site, feed, recall = null, allSites = []) {
   if (!site?.project) return site?.type === 'milestone'
     ? '<p>Legacy planning checkpoint. Source status and tentative dates are retained, not a project-completion score. Review its original acceptance evidence before changing status.</p>'
     : '<p>Shared planning yard. Select a project offramp for its building, evidence and connections.</p>';
@@ -35,9 +37,11 @@ export function renderCampusDetails(site, feed) {
   const identity = CANOPY.projects.find(project => !project.entityId && project.repository.toLowerCase() === repository.toLowerCase());
   const avatarRecord = ENS_ARTWORK_OBSERVATION.records[identity?.ens];
   const mural = PROJECT_MURALS[repository];
-  const connections = (feed?.connections || []).filter(link => [link.from.toLowerCase(), link.to.toLowerCase()].includes(repository.toLowerCase()));
+  const sites = allSites.length ? allSites : projectSites(site.items, { includeContext: true });
+  const connections = campusConnections(sites, feed).filter(edge => edge.from === site.id || edge.to === site.id);
+  const siteName = id => sites.find(site => site.id === id)?.title || id;
   const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
-  return `${art ? `<section class="campus-art-brief"><span class="eyebrow">CITY LANDMARK</span><h4>${esc(art.name)}</h4><p>${esc(art.description)}</p><small>Art direction only / not a physical facility, feature delivery, legal protection or funding claim. Issue structures and receipt-backed floors retain their separate evidence rules.</small></section>` : ''}${spaceport}${widgetProject(site.project) ? '' : renderSupportCallout(site, feed)}${renderWidgetProject(site, feed)}${renderReviewedBrief(site.project)}<details class="campus-editions"><summary>Supporter editions / receipt-backed evidence</summary>${renderVersionMints(site, feed)}</details><div class="campus-stage">${esc(model.label)}</div><details><summary>Architecture / evidence rules</summary><p>${esc(model.basis)}</p></details>
+  return `${art ? `<section class="campus-art-brief"><span class="eyebrow">CITY LANDMARK</span><h4>${esc(art.name)}</h4><p>${esc(art.description)}</p><small>Art direction only / not a physical facility, feature delivery, legal protection or funding claim. Issue structures and receipt-backed floors retain their separate evidence rules.</small></section>` : ''}${spaceport}${widgetProject(site.project) ? '' : renderSupportCallout(site, feed)}${renderWidgetProject(site, feed)}${renderReviewedBrief(site.project)}${renderRepositoryWork(recall, repository)}<details class="campus-editions"><summary>Supporter editions / receipt-backed evidence</summary>${renderVersionMints(site, feed)}</details><div class="campus-stage">${esc(model.label)}</div><details><summary>Architecture / evidence rules</summary><p>${esc(model.basis)}</p></details>
     ${identity?.ens ? `<p>Recorded ENS identity: <b>${esc(identity.ens)}</b>.</p>` : ''}
     ${avatarRecord ? `<details><summary>ENS artwork provenance / observed ${ENS_ARTWORK_OBSERVATION.observedAt}</summary><p>${esc(avatarRecord)}. Mainnet avatar text read without a wallet connection. Project-owned, commit-pinned artwork is displayed instead of following mutable avatar-service URLs automatically.</p></details>` : ''}
     ${mural ? `<figure class="campus-mural"><img src="${esc(mural.url)}" alt="${esc(mural.alt)}" loading="lazy" referrerpolicy="no-referrer" data-project-mural><figcaption>${link(mural.source, 'Project artwork')} · The Jolly LaMa / A Decent Agency · ${link(mural.license, 'CC BY 4.0')} (unmodified)</figcaption></figure>` : ''}
@@ -59,8 +63,10 @@ export function renderCampusDetails(site, feed) {
         <ul>${observation.mergedPulls.map(pr => `<li>${link(pr.url, pr.title)} <small>${esc(pr.mergedAt)}</small></li>`).join('')}</ul>`}
     </details>
     <details><summary>Connected infrastructure (${connections.length})</summary>
-      <p>Signals illustrate recorded integration paths, not live network traffic or payments. A line does not imply every feature is compatible.</p>
-      <ul>${connections.map(connection => `<li>${link(connection.url, connection.label)}<small>${esc(connection.from)} → ${esc(connection.to)}</small></li>`).join('') || '<li>No public integration path recorded in this feed.</li>'}</ul></details>`;
+      <p>Recorded and proposed paths are labeled separately; these are not live network traffic or payments. A line does not imply compatible features.</p>
+      <ul>${connections.map(connection => `<li><b>${esc(connection.kind || 'integration')} / ${esc(connection.state || 'recorded')}</b> ${esc(connection.label)}<small>${esc(siteName(connection.from))} → ${esc(siteName(connection.to))}</small>
+        ${(connection.evidence || (connection.url ? [{ url: connection.url, label: 'Source' }] : [])).map(entry => link(entry.url, entry.label)).join(' · ')}
+        ${connection.nextTest ? `<p>Next test: ${esc(connection.nextTest)}</p>` : ''}</li>`).join('') || '<li>No public integration path recorded in this feed.</li>'}</ul></details>`;
 }
 
 function renderIssueSkeleton(model, repository, link) {
@@ -80,7 +86,7 @@ function renderIssueSkeleton(model, repository, link) {
 function renderReviewedBrief(project) {
   const identity = CANOPY.projects.find(entry => project.entityId ? entry.entityId === project.entityId
     : !entry.entityId && entry.repository.toLowerCase() === project.repository.toLowerCase());
-  if (!identity?.currentState) return '';
+  if (!identity?.currentState) return `<section class="campus-brief"><p>No reviewed implementation brief is published for this source. Repository observations below are independent evidence, not an invented product status.</p></section>`;
   return `<section class="campus-brief" aria-label="Reviewed project brief"><span class="eyebrow">CURATED REVIEW / ${esc(identity.reviewedAt)}</span>
     ${identity.updates?.length ? `<details><summary>Review context and limits</summary><p>${esc(identity.currentState)}</p></details>` : `<p>${esc(identity.currentState)}</p>`}
     <div class="campus-updates">${(identity.updates || []).map(update => `<article><small class="evidence-state" data-state="${esc(update.state)}">${update.state === 'merged' ? 'MERGED SOURCE' : update.state === 'in-flight' ? 'OPEN PR / NOT MERGED' : 'PLANNED / NOT DELIVERED'}</small><h5>${esc(update.label)}</h5>

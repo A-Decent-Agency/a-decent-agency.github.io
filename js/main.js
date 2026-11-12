@@ -17,7 +17,8 @@ const skeletonSummary = model => model.levels.length + model.grounds.length
 import { projectMints } from './version-mints.js';
 import { mountSupporterCheckout } from './supporter-checkout-ui.js';
 import { HISTORICAL_MAPS } from './historical-maps.js';
-import { renderProjectRecall } from './project-recall.js';
+import { renderProjectRecall, renderRepositoryWork, validateRecall } from './project-recall.js';
+import { publicRepository } from './project-campus.js';
 import { planningEntityKey, renderHumanPriorities } from './revival-plans.js';
 import { siteAddress, resolveSiteAddress, siteForCard } from './site-links.js';
 import { mountVoyagerTraffic } from './voyager-traffic.js';
@@ -54,6 +55,7 @@ const siteIdentityPanel = mountSiteIdentity($('#flight-site-identity'), null);
 const campusArtwork = mountSiteIdentity($('#campus-artwork'), null);
 let identitySiteId = null;
 let progressFeed = null;
+let projectRecall = null;
 let pendingSiteAddress = location.href;
 function publishedSites() {
   return constructionSites(state.project.items, { includeContext: true });
@@ -101,13 +103,13 @@ function applySiteAddress({ reset = false } = {}) {
 }
 window.addEventListener('popstate', () => { pendingSiteAddress = location.href; applySiteAddress({ reset: true }); });
 function updateSitePanels(site = flightSites[flightIndex]) {
-  $('#campus-details').innerHTML = renderCampusDetails(site, progressFeed);
+  $('#campus-details').innerHTML = renderCampusDetails(site, progressFeed, projectRecall, flightSites);
   for (const image of $('#campus-details').querySelectorAll('[data-project-mural], [data-mint-art]')) image.addEventListener('error', () => {
     image.hidden = true; notify('Project or edition artwork unavailable; source and purchase evidence links retained.');
   }, { once: true });
   $('#campus-plan').innerHTML = renderCampusPlan(site, flightSites, progressFeed);
   campusArtwork.update(site?.project ? site : null, { active: Boolean(site?.project && state.tab === 'flight') });
-  planningDock.update({ site, previous: previousPublication, current: publicationLoaded ? state.project : null });
+  planningDock.update({ site, previous: previousPublication, current: publicationLoaded ? state.project : null, recall: projectRecall });
   if (identitySiteId !== site?.id) {
     identitySiteId = site?.id;
     $('#flight-identity-panel').open = false;
@@ -123,15 +125,19 @@ $('#flight-dock-panel').addEventListener('toggle', () => {
 function notify(message) { $('#toast').textContent = message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,7500); }
 async function loadRecall() {
   try {
-    const response = await fetch(new URL('../data/project-recall.json', import.meta.url));
+    const response = await fetch(new URL('../data/project-recall.json', import.meta.url), { cache: 'no-store', signal: AbortSignal.timeout(20000) });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    $('#project-recall').innerHTML = renderProjectRecall(await response.json());
+    const next = validateRecall(await response.json());
+    if (projectRecall && Date.parse(next.observedAt) < Date.parse(projectRecall.observedAt)) throw new Error('Recall publication is older than the retained observation.');
+    projectRecall = next;
+    $('#project-recall').innerHTML = renderProjectRecall(projectRecall);
+    if (flightSites.length) updateSitePanels();
   } catch (error) {
     $('#project-recall').textContent = `Project recall unavailable: ${error.message}. The board and repository source links remain available; no new progress inferred.`;
+    console.error('[Planning Office public recall]', error);
     notify(`Could not load project recall: ${error.message}`);
   }
 }
-loadRecall();
 document.addEventListener('click', event => {
   const button = event.target.closest('[data-human-site]');
   if (!button) return;
@@ -255,6 +261,13 @@ function openDetail(item) {
   const fields=Object.entries(item.fields||{}).filter(([,value])=>value?.length);
   const url=safeURL(item.url);
   content.innerHTML=`<div class="eyebrow">${esc(state.tab==='own'?'YOUR MAP / YOUR DATA':item.fields?.Kind||'PROJECT CARD')}</div><h2 id="detail-title">${esc(item.title)}</h2>${item.private?'<p class="detail-note">Private repository: only title, kind, status, and dates are published.</p>':''}${item.bodyRedacted?'<p class="detail-note">Private portfolio: body withheld from the public snapshot.</p>':''}${url?`<a class="text-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open item on GitHub ↗</a>`:''}<dl>${fields.map(([key,value])=>`<dt>${esc(key)}</dt><dd>${esc(Array.isArray(value)?value.join(' · '):value)}</dd>`).join('')}${item.repository?`<dt>Repository</dt><dd>${esc(item.repository)}</dd>`:''}</dl><div class="markdown">${markdown(item.body|| (item.private||item.bodyRedacted?'Details are intentionally not published.':'No notes yet. A little room for possibility.'))}</div>`;
+  if (state.tab !== 'own') {
+    const notice = document.createElement('p'); notice.className = 'detail-note';
+    notice.textContent = `Project card snapshot exported ${state.project.exportedAt || 'at an unavailable time'}. Its status and tentative dates are not live GitHub issue state.`;
+    content.prepend(notice);
+    const repository = publicRepository(item);
+    if (repository) content.insertAdjacentHTML('beforeend', renderRepositoryWork(projectRecall, repository));
+  }
   if(state.tab==='own'){
     const actions=document.createElement('div');actions.className='detail-actions';
     const edit=document.createElement('button');edit.textContent='Edit node';edit.onclick=()=>editNode(item.id);
@@ -294,6 +307,7 @@ function showFlightSite(site, index = 0) {
     const button = document.createElement('button'); button.textContent = `${item.fields?.Status || 'Unknown'} / ${item.title}`;
     button.addEventListener('click', () => openDetail(item)); return button;
   }));
+  if (site && !site.items.length) $('#flight-site-items').textContent = 'No private-Project cards are mapped to this site. Its current public issue/PR signposts are shown separately above; this does not mean there is no work.';
   updateSitePanels(site);
 }
 function chartSite(index, { history: recordHistory = true, immediate = false } = {}) {
@@ -520,6 +534,7 @@ let refreshing = false;
 async function refreshProject() {
   if (refreshing) return;
   refreshing = true; $('#refresh-project').disabled = true;
+  await loadRecall();
   try {
     const response = await fetch(new URL('../data/progress.json', import.meta.url), { cache: 'no-store', signal: AbortSignal.timeout(20000) });
     if (!response.ok) throw new Error(`Public activity returned HTTP ${response.status}.`);
