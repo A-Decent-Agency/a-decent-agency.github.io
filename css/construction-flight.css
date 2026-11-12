@@ -140,7 +140,7 @@ html[data-reduced="true"] .mint-art-buy, html[data-reduced="true"] .mint-art-buy
 .flight-controls button { touch-action: none; user-select: none; padding: 9px 15px; font-size: 11px; }
 .construction-view .scene-controls #prev-page, .construction-view .scene-controls #next-page { display: none; }
 .construction-view #workspace.list-mode { display: flex; flex-direction: column; }
-.construction-view #workspace.list-mode .flight-site { position: static; width: auto; max-height: none; margin: 14px 18px; order: -1; }
+.construction-view #workspace.list-mode .flight-site { position: static; width: auto; max-height: calc(100% - 28px); margin: 14px 18px; order: -1; }
 @media (max-width: 700px) {
   .intro { gap: 10px; padding: 18px 0; }
   .intro h1 { font-size: 28px; letter-spacing: -1px; }
@@ -170,6 +170,7 @@ html[data-reduced="true"] .mint-art-buy, html[data-reduced="true"] .mint-art-buy
   .historical-map-columns { grid-template-columns: 1fr; gap: 4px; }
   .historical-map-figure img { max-height: 58dvh; }
   .construction-view #workspace.list-mode .flight-panel-drawer { position: relative; top: auto; right: auto; width: auto; margin: 12px 12px 12px 48px; height: auto; max-height: none; }
+  .construction-view #workspace.list-mode .flight-site { max-height: none; }
   .construction-view #workspace.list-mode.panel-hidden .flight-panel-drawer { position: absolute; top: 18px; right: 8px; width: calc(100% - 52px); margin: 0; }
   .flight-site h3 { font-size: 16px; }
   .flight-controls { padding: 12px; gap: 6px; }

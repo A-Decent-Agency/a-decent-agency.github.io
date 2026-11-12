@@ -13,6 +13,13 @@ export function mountSiteIdentity(container, site, { active = false } = {}) {
     const heading = document.createElement('strong');
     heading.textContent = `${identity.kind === 'milestone' ? 'Milestone · ' : identity.kind === 'workstream' ? 'Workstream · ' : ''}${identity.label}`;
     panel.append(heading);
+    if (!identity.projects.length) {
+      const note = document.createElement('p');
+      note.textContent = identity.kind === 'repository'
+        ? `${identity.fallback.monogram} · No reviewed project artwork on file. This is a local wayfinding identity, not a missing project or an official logo.`
+        : 'No public repository artwork is associated with this planning site. Private details are not inferred.';
+      panel.append(note);
+    }
     for (const project of identity.projects.slice(0, MAX_SITE_IMAGES)) {
       const card = document.createElement('div');
       card.className = 'site-identity-project';
