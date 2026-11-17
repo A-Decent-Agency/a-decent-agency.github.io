@@ -38,6 +38,23 @@ test('existing widgets reuse exact public ENS/mint evidence and validated storef
   assert.equal(widgetProject({ repository: 'A-Decent-Agency/DVert', entityId: 'other' }), null);
 });
 
+test('DHearse shows its verified prototype identity and purchase evidence without implying live audio', () => {
+  const site = constructionSites([], { includeContext: true })
+    .find(site => site.project?.repository === 'A-Decent-Agency/DHearse');
+  assert.ok(site, 'the reviewed public registry creates a real DHearse campus');
+  const widget = widgetProject(site.project);
+  assert.equal(widget.status, 'prototype');
+  assert.equal(widget.revision, 'ec7525c4de2473942709cd7b923389f24718d9d9');
+  const html = renderWidgetProject(site, null);
+  assert.match(html, /Clone &amp; adaptation guide/);
+  assert.match(html, /dhearse\.decentagency\.eth/);
+  assert.match(html, /Base token 81/);
+  assert.match(html, /listingId=21/);
+  assert.match(html, /supporter-minted\.json/);
+  assert.match(html, /live audio requires a configured service/);
+  assert.doesNotMatch(html, /data-mint-checkout=/);
+});
+
 test('both widget studios emit bounded finite instanced-box plans without inventing releases', () => {
   for (const [repository, kind] of [['A-Decent-Agency/DBuskRadio', 'radio'], ['A-Decent-Agency/DVert', 'advertising']]) {
     assert.equal(widgetLandmarkKind({ repository }), kind);
