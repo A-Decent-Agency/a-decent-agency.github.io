@@ -38,6 +38,18 @@ test('existing widgets reuse exact public ENS/mint evidence and validated storef
   assert.equal(widgetProject({ repository: 'A-Decent-Agency/DVert', entityId: 'other' }), null);
 });
 
+test('DHearse appears as a pre-release widget without asserting ENS or Supporter evidence', () => {
+  const site = constructionSites([{ id: 'DHearse', repository: 'A-Decent-Agency/DHearse', fields: { Kind: 'Task' } }])[0];
+  const widget = widgetProject(site.project);
+  assert.equal(widget.status, 'pre-release');
+  assert.equal(widget.revision, 'cff4fcfb6e8a9c4acf5d6c29d17fa9fe46c31ee8');
+  const html = renderWidgetProject(site, null);
+  assert.match(html, /Clone &amp; adaptation guide/);
+  assert.match(html, /not verified/);
+  assert.match(html, /purchase links are withheld/);
+  assert.doesNotMatch(html, /data-mint-checkout=/);
+});
+
 test('both widget studios emit bounded finite instanced-box plans without inventing releases', () => {
   for (const [repository, kind] of [['A-Decent-Agency/DBuskRadio', 'radio'], ['A-Decent-Agency/DVert', 'advertising']]) {
     assert.equal(widgetLandmarkKind({ repository }), kind);

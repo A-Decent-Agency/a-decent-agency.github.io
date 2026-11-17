@@ -7,11 +7,20 @@ const WIDGETS = [
   ['DVert', 'DVert', 'dvert.decentagency.eth', 'v0.2.1', '73', '535a5081c66018be0855a86a4a21b62fb4fb45a3'],
   ['DBuskRadio', 'DBuskRadio', 'dbusk.decentagency.eth', 'v0.2.0', '74', '6b67e0242e9377358c1d7c9196fa2a95163a1746']
 ];
+const PRE_RELEASE_WIDGETS = [
+  ['DHearse', 'DHearse', 'cff4fcfb6e8a9c4acf5d6c29d17fa9fe46c31ee8']
+];
 
 export function widgetProject(project) {
   if (!project || project.entityId || typeof project.repository !== 'string') return null;
   const row = WIDGETS.find(([repo]) => `a-decent-agency/${repo.toLowerCase()}` === project.repository.toLowerCase());
-  if (!row) return null;
+  if (!row) {
+    const planned = PRE_RELEASE_WIDGETS.find(([repo]) =>
+      `a-decent-agency/${repo.toLowerCase()}` === project.repository.toLowerCase());
+    if (!planned) return null;
+    const [repo, name, revision] = planned;
+    return { repository: `A-Decent-Agency/${repo}`, name, revision, status: 'pre-release' };
+  }
   const [repo, name, ens, version, tokenId, revision] = row;
   return { repository: `A-Decent-Agency/${repo}`, name, ens, version, tokenId, revision };
 }
@@ -20,6 +29,12 @@ export function renderWidgetProject(site, feed) {
   const widget = widgetProject(site?.project);
   if (!widget) return '';
   const source = `https://github.com/${widget.repository}`;
+  if (widget.status === 'pre-release') return `<section class="campus-widget" aria-label="Clone and support ${esc(widget.name)}"><h4>Clone it / make it yours</h4>
+    <p>DHearse is a customizable private audio rehearsal widget derived from DecentBusking's rehearsal room. Its standalone worker and host wallet bridge are available for adaptation; validate audio and lifecycle behavior in each receiving app.</p>
+    <p><a href="${source}/blob/${widget.revision}/docs/CLONE_AND_ADAPT.md" target="_blank" rel="noopener noreferrer">Clone &amp; adaptation guide</a>
+    · <a href="${source}" target="_blank" rel="noopener noreferrer">Source repository</a></p>
+    <p>Requested ENS identity: DHearse.DecentAgency.eth (not verified). No Supporter mint, listing, or checkout evidence is available yet; purchase links are withheld.</p>
+    <p>Private practice does not count as a public performance, soundcheck, booking, or payment. The host app must keep those paths separate and verify its own eligibility rules.</p></section>`;
   const release = `${source}/releases/download/${widget.version}`;
   const version = projectMints(site, feed).find(version => version.tag === widget.version && version.tokenId === widget.tokenId);
   return `<section class="campus-widget" aria-label="Clone and support ${esc(widget.name)}"><h4>Clone it / make it yours</h4>
