@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
-  "observedAt": "2026-11-17T14:34:34.871Z",
+  "observedAt": "2026-11-17T17:57:03.054Z",
   "recentStart": "2026-11-10T14:34:34.871Z",
   "periodStart": "2026-10-01T00:00:00Z",
   "periodEndExclusive": "2026-11-01T00:00:00Z",
-  "scope": "30 public repositories from the pinned Canopy inventory. Recent evidence covers the seven days before this observation, with October activity retained separately. Curated project descriptions keep their own review dates. Not the whole library; GitHub state is not deployment, payment or product acceptance.",
+  "scope": "31 public repositories from the pinned Canopy inventory. Recent evidence covers the seven days before this observation, with October activity retained separately. Curated project descriptions keep their own review dates. Not the whole library; GitHub state is not deployment, payment or product acceptance.",
   "projects": [
     {
       "repository": "A-Decent-Agency/a-decent-agency.github.io",
@@ -2068,6 +2068,56 @@
           "tag": "v1.0.0",
           "url": "https://github.com/TheJollyLaMa/DecentVoyager/releases/tag/v1.0.0",
           "at": "2026-11-05T21:10:31Z"
+        }
+      ]
+    },
+    {
+      "repository": "A-Decent-Agency/DHearse",
+      "name": "DHearse",
+      "focus": "Standalone widget and worker source are published, with automated service, iframe-wallet, and mocked audio-room tests. Real microphone/two-device/network acceptance, musician validation, and a tested second host remain outstanding. Pages/IPFS display the prototype UI; live audio requires a configured worker. Private practice does not create an official show, soundcheck, booking, eligibility, or payment.",
+      "reviewedAt": "2026-11-17",
+      "observedAt": "2026-11-17T17:57:09.662Z",
+      "partial": false,
+      "octoberMergedCount": 0,
+      "octoberClosedCount": 0,
+      "openIssueCount": 1,
+      "merged": [],
+      "closed": [],
+      "recentMerged": [
+        {
+          "number": 1,
+          "title": "Prepare DHearse prototype version release, Pages and ENS profile",
+          "url": "https://github.com/A-Decent-Agency/DHearse/pull/1",
+          "at": "2026-11-17T17:08:09Z",
+          "stateReason": "unknown"
+        }
+      ],
+      "recentClosed": [
+        {
+          "number": 2,
+          "title": "Mint Supporter DNFT for v0.1.0",
+          "url": "https://github.com/A-Decent-Agency/DHearse/issues/2",
+          "at": "2026-11-17T17:29:55Z",
+          "stateReason": "not_planned"
+        }
+      ],
+      "open": [
+        {
+          "number": 3,
+          "title": "Mint Supporter DNFT for v0.1.1",
+          "url": "https://github.com/A-Decent-Agency/DHearse/issues/3",
+          "at": "2026-11-17T17:57:06Z",
+          "stateReason": "completed"
+        }
+      ],
+      "omittedOpen": 0,
+      "openPullCount": 0,
+      "openPulls": [],
+      "releases": [
+        {
+          "tag": "v0.1.1",
+          "url": "https://github.com/A-Decent-Agency/DHearse/releases/tag/v0.1.1",
+          "at": "2026-11-17T17:23:18Z"
         }
       ]
     }
